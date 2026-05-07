@@ -1,0 +1,23 @@
+{
+  "name": "qa",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://api.qa.fleetbase.io",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "namespace",
+      "value": "v1",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    }
+  ]
+}

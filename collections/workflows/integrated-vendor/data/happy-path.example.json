@@ -1,0 +1,8 @@
+[
+  {
+    "payload_type": "parcel",
+    "payload_description": "Integrated vendor test parcel",
+    "pickup_address": "123 Origin Street",
+    "dropoff_address": "456 Destination Avenue"
+  }
+]

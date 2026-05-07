@@ -1,0 +1,10 @@
+{
+  "collectionFormat": "postman-v2.1-json",
+  "collectionsRoot": "collections",
+  "environmentsRoot": "environments",
+  "defaultEnvironment": "environments/fleetbase.local.template.json",
+  "secretPolicy": {
+    "commitTemplatesOnly": true,
+    "usePostmanVaultForSecrets": true
+  }
+}

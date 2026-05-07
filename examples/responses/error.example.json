@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "code": "validation_error",
+      "detail": "The request payload is missing a required field."
+    }
+  ]
+}

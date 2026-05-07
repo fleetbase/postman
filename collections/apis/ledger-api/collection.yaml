@@ -1,0 +1,27 @@
+type: collection
+name: Ledger API
+version: 1.0.0
+auth:
+  type: bearer
+  bearer:
+    - key: token
+      value: "{{api_key}}"
+      type: string
+variables:
+  - key: base_url
+    value: "{{base_url}}"
+  - key: ledger_account_id
+    value: "{{ledger_account_id}}"
+items:
+  - name: Accounts
+    items:
+      - name: Get Ledger Account
+        request:
+          method: GET
+          url: "{{base_url}}/ledger/accounts/{{ledger_account_id}}"
+  - name: Transactions
+    items:
+      - name: List Transactions
+        request:
+          method: GET
+          url: "{{base_url}}/ledger/accounts/{{ledger_account_id}}/transactions"

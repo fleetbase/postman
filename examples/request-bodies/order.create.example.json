@@ -1,0 +1,16 @@
+{
+  "payload": {
+    "type": "parcel",
+    "description": "Example parcel"
+  },
+  "pickup": {
+    "name": "Pickup Contact",
+    "phone": "+15555550100",
+    "address": "123 Origin Street"
+  },
+  "dropoff": {
+    "name": "Dropoff Contact",
+    "phone": "+15555550101",
+    "address": "456 Destination Avenue"
+  }
+}
