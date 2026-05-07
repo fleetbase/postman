@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: d2b00448-6784-4579-8532-f33d3895d2ac
+
+localResources:
+  collections:
+    - ../collections/apis/fleetbase-api/collection.postman_collection.json
+    - ../collections/workflows/integrated-vendor/collection.postman_collection.json
+    - ../collections/apis/storefront-api/collection.postman_collection.json
+  environments:
+    - ../environments/fleetbase.local.template.json
+    - ../environments/fleetbase.qa.template.json
+    - ../environments/fleetbase.production.template.json
