@@ -6,9 +6,10 @@ method: PATCH
 pathVariables:
   - key: id
     value: "{{order_id}}"
-    description: (Required) The id of the order to dispatch.
+    description: (Required) The id of the order to update.
   - key: placeId
     value: "{{place_id}}"
+    description: (Required) The pickup, dropoff, or waypoint place id to set as the current destination.
 body:
   type: json
   content: ""

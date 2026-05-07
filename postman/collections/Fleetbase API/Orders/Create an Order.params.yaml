@@ -1,16 +1,122 @@
 $kind: params
 fields:
-  - name: name
+  - name: payload
+    type: object
+    description: Existing payload ID or an inline payload object. If omitted, provide `pickup` and `dropoff`, or provide at least two `waypoints`.
+    fields:
+      - name: pickup
+        type: object
+        description: Pickup place data or place identifier for the payload.
+      - name: dropoff
+        type: object
+        description: Dropoff place data or place identifier for the payload.
+      - name: return
+        type: object
+        description: Optional return place data or place identifier for the payload.
+      - name: waypoints
+        type: array of objects
+        description: Ordered route stops. Required when the payload does not include both `pickup` and `dropoff`.
+      - name: entities
+        type: array of objects
+        description: Entities, packages, or items attached to the payload.
+  - name: pickup
+    type: object
+    description: Pickup place data or address used to create the order payload when `payload` is not supplied.
+  - name: dropoff
+    type: object
+    description: Dropoff place data or address used to create the order payload when `payload` is not supplied.
+  - name: return
+    type: object
+    description: Optional return place data or address used when creating the order payload.
+  - name: waypoints
+    type: array of objects
+    description: Ordered route stops used when creating the order payload without a pickup/dropoff pair. At least two waypoints are required when no pickup/dropoff pair is provided.
+  - name: entities
+    type: array of objects
+    description: Entities, packages, or items attached to the generated payload.
+  - name: type
     type: string
-    required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Order configuration key. Fleetbase resolves this with `order_config` and stores the resolved key as the order type.
+  - name: order_config
     type: string
-    description: "Human-readable description of the resource."
+    description: Order configuration identifier used to resolve the order flow.
+  - name: service_quote
+    type: string
+    description: Service quote ID to purchase and attach to the order.
+  - name: purchase_rate
+    type: string
+    description: Purchase rate ID to attach to the order.
+  - name: driver
+    type: string
+    description: Driver ID to assign to the order. Fleetbase also assigns the driver's vehicle when one is available.
+  - name: vehicle
+    type: string
+    description: Vehicle ID to assign to the order.
+  - name: facilitator
+    type: string
+    description: Contact, vendor, or integrated vendor ID responsible for facilitating the order.
+  - name: customer
+    type: object
+    description: Existing contact/vendor ID, or customer details used to find or create a customer contact.
+    fields:
+      - name: internal_id
+        type: string
+        description: Optional internal customer identifier.
+      - name: name
+        type: string
+        description: Customer display name.
+      - name: title
+        type: string
+        description: Customer title.
+      - name: email
+        type: string
+        description: Customer email address used when finding or creating the customer contact.
+      - name: phone
+        type: string
+        description: Customer phone number.
+      - name: meta
+        type: object
+        description: Additional customer metadata.
+  - name: dispatch
+    type: boolean
+    description: When `true`, Fleetbase dispatches the order after it is created. Dispatch is skipped for integrated vendor orders.
+  - name: adhoc
+    type: boolean
+    description: Marks the order as ad hoc.
+  - name: adhoc_distance
+    type: number
+    description: Ad hoc search distance for dispatching nearby drivers.
+  - name: pod_required
+    type: boolean
+    description: Whether proof of delivery is required to complete the order.
+  - name: pod_method
+    type: string
+    description: Proof of delivery method. Required when `pod_required` is true.
+  - name: scheduled_at
+    type: timestamp
+    description: Date and time when the order should be scheduled.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: Initial order status. Defaults to `created` when omitted.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier for the order.
+  - name: meta
+    type: object
+    description: Additional order metadata.
+  - name: notes
+    type: string
+    description: Free-form notes attached to the order.
+  - name: time_window_start
+    type: timestamp
+    description: Earliest time the order should be serviced by the orchestrator.
+  - name: time_window_end
+    type: timestamp
+    description: Latest time the order should be serviced by the orchestrator.
+  - name: required_skills
+    type: array of strings
+    description: Skills required for orchestrator assignment.
+  - name: orchestrator_priority
+    type: integer
+    default: 50
+    description: Orchestrator priority for assignment. Fleetbase defaults invalid or omitted values to `50`.

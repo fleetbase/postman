@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Schedules an order for a specific date and optional time. Fleetbase parses the schedule using the supplied timezone or the company timezone.
 url: "{{base_url}}/{{namespace}}/orders/:id/schedule"
 method: PATCH
 pathVariables:

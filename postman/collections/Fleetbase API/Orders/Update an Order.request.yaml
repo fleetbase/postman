@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update an Order.
+description: |-
+  Updates an order and returns the updated order resource. You can update order metadata, notes, status, assignment fields, scheduling fields, proof-of-delivery settings, and payload details.
 url: "{{base_url}}/{{namespace}}/orders/:id"
 method: PUT
 pathVariables:

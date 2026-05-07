@@ -1,5 +1,6 @@
 $kind: http-request
-description: Retrieve an Order.
+description: |-
+  Retrieves a single order by ID. The response includes the public order fields plus loaded payload, tracking, assignment, customer, and facilitator data when available.
 url: "{{base_url}}/{{namespace}}/orders/{{order_id}}"
 method: GET
 headers:

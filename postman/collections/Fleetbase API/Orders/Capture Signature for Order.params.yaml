@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: signature
+    type: string
+    required: true
+    description: Base64 PNG signature data. Fleetbase stores the image and links it to the proof record.
+  - name: remarks
+    type: string
+    default: Verified by Signature
+    description: Remarks stored on the proof record.
+  - name: data
+    type: object
+    description: Structured proof metadata stored with the signature proof.
+  - name: disk
+    type: string
+    description: Filesystem disk used to store the signature image. Defaults to the configured filesystem disk.
+  - name: bucket
+    type: string
+    description: Storage bucket used for the generated signature file.

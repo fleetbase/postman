@@ -1,15 +1,50 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this orders request."
+    type: integer
+    description: Maximum number of orders to return.
   - name: offset
-    type: string
-    description: "Offset value for this orders request."
+    type: integer
+    description: Number of orders to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this orders request."
+    description: Sort expression for the order query.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    type: string
+    description: Filters orders by lifecycle status.
+  - name: payload
+    type: string
+    description: Filters orders by payload ID.
+  - name: pickup
+    type: string
+    description: Filters orders by pickup place ID.
+  - name: dropoff
+    type: string
+    description: Filters orders by dropoff place ID.
+  - name: return
+    type: string
+    description: Filters orders by return place ID.
+  - name: facilitator
+    type: string
+    description: Filters orders by facilitator public or internal ID.
+  - name: customer
+    type: string
+    description: Filters orders by customer public or internal ID.
+  - name: entity
+    type: string
+    description: Filters orders containing the specified entity public or internal ID.
+  - name: entity_status
+    type: string
+    description: Filters orders by the tracking status code of their payload entities.
+  - name: on
+    type: date
+    description: Filters orders created or scheduled on the specified date.
+  - name: pod_required
+    type: boolean
+    description: When true, returns only orders requiring proof of delivery.
+  - name: dispatched
+    type: boolean
+    description: When true, returns only dispatched orders.
+  - name: nearby
+    type: string
+    description: Filters nearby orders using coordinates, a driver ID, or an address string.

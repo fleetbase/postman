@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: code
+    type: string
+    required: true
+    description: QR code value to verify. The code must match the resolved subject UUID.
+  - name: data
+    type: object
+    description: Structured proof metadata stored with the QR proof.
+  - name: raw_data
+    type: object
+    description: Raw QR payload stored on the proof record.

@@ -1,0 +1,16 @@
+$kind: params
+fields:
+  - name: photos
+    type: array of strings
+    required: true
+    description: One or more uploaded images or Base64 image strings. Each item must be an image no larger than 10 MB.
+  - name: remarks
+    type: string
+    default: Verified by Photo
+    description: Remarks stored on each proof record.
+  - name: data
+    type: object
+    description: Structured proof metadata stored with each photo proof.
+  - name: disk
+    type: string
+    description: Filesystem disk used to store proof photos. Defaults to the configured filesystem disk.

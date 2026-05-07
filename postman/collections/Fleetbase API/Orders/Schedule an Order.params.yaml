@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: date
+    type: date
+    required: true
+    description: Schedule date in `YYYY-MM-DD` format.
+  - name: time
+    type: string
+    description: Optional time to combine with `date`.
+  - name: timezone
+    type: string
+    description: Timezone used when parsing the schedule date and time. Defaults to the company timezone.

@@ -2,12 +2,55 @@ $kind: http-example
 request:
   url: "{{base_url}}/{{namespace}}/orders/:id/dispatch"
   method: PATCH
+  headers:
+    Accept: application/json
   pathVariables:
-    id: ""
+    id: "order_7YqM3KpL2n"
 response:
   statusCode: 200
   statusText: OK
+  headers:
+    Content-Type: application/json
   body:
-    type: text
-    content: ""
+    type: json
+    content: |-
+      {
+        "id": "order_7YqM3KpL2n",
+        "payload": {
+          "id": "payload_x9Z2Lm8QpA",
+          "waypoints": [],
+          "entities": [],
+          "meta": {}
+        },
+        "driver_assigned": {
+          "id": "driver_A1b2C3d4E5",
+          "name": "Alex Driver"
+        },
+        "vehicle_assigned": null,
+        "tracking_number": {
+          "id": "tracking_3Nf8Qw2YxM",
+          "tracking_number": "FB-1001",
+          "status": "dispatched",
+          "status_code": "dispatched",
+          "type": "order"
+        },
+        "tracking_statuses": [],
+        "files": [],
+        "purchase_rate": null,
+        "type": "transport",
+        "status": "dispatched",
+        "pod_required": false,
+        "dispatched": true,
+        "started": false,
+        "adhoc": false,
+        "adhoc_distance": 0,
+        "distance": 0,
+        "time": 0,
+        "meta": {},
+        "dispatched_at": "2026-05-07T08:50:00.000000Z",
+        "started_at": null,
+        "scheduled_at": null,
+        "updated_at": "2026-05-07T08:50:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
+      }
 order: 1000

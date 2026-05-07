@@ -6,7 +6,7 @@ method: GET
 pathVariables:
   - key: id
     value: "{{order_id}}"
-    description: (Required) The id of the order to dispatch.
+    description: (Required) The id of the order.
 body:
   type: json
   content: ""
