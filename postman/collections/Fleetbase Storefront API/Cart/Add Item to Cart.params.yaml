@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: addons
+    type: array of strings
+    description: "Addons value for this cart request."
+  - name: quantity
+    type: integer
+    description: "Quantity of the product or line item."
+  - name: scheduled_at
+    type: timestamp
+    description: "Scheduled at value for this cart request."
+  - name: store_location
+    type: string
+    description: "Store location value for this cart request."
+  - name: variants
+    type: array of strings
+    description: "Variants value for this cart request."

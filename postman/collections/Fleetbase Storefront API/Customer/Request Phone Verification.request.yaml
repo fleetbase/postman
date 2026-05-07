@@ -1,5 +1,6 @@
 $kind: http-request
-description: Request Phone Verification
+description: |-
+  Request Phone Verification for customer. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
 method: POST
 headers:

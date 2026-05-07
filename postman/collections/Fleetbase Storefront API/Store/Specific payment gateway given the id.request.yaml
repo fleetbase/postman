@@ -1,5 +1,6 @@
 $kind: http-request
-description: Specific payment gateway given the id
+description: |-
+  Specific payment gateway given the id for store. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways/{id}"
 method: GET
 headers:

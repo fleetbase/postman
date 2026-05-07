@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Order Receipt
+description: |-
+  Retrieves a order. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/receipt"
 method: POST
 headers:

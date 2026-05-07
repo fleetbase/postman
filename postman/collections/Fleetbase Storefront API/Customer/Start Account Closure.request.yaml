@@ -1,5 +1,6 @@
 $kind: http-request
-description: Start Account Closure
+description: |-
+  Start Account Closure for customer. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/account-closure"
 method: POST
 headers:

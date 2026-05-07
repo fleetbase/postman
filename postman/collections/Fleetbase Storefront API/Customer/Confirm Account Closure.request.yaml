@@ -1,5 +1,6 @@
 $kind: http-request
-description: Confirm Account Closure
+description: |-
+  Confirm Account Closure for customer. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/confirm-account-closure"
 method: POST
 headers:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Authenticate a Customer with Apple
+description: |-
+  Authenticate a Customer with Apple for customer. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-apple"
 method: POST
 headers:

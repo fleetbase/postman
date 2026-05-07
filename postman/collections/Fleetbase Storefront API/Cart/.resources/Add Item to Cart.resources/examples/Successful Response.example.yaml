@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{product_id}"
+  method: POST
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+    product_id: ""
+  body:
+    type: json
+    content: |-
+      {
+        "addons": [],
+        "quantity": 1,
+        "scheduled_at": "scheduled_at_value_here",
+        "store_location": "store_location_value_here",
+        "variants": []
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "cart_abc123",
+        "object": "cart",
+        "currency": "USD",
+        "items": [],
+        "subtotal": 0,
+        "total": 0,
+        "created_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

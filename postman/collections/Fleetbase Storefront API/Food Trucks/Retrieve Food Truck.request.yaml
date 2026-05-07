@@ -1,5 +1,6 @@
 $kind: http-request
-description: Retrieve Food Truck
+description: |-
+  Retrieves a food truck. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/food-trucks/{{food_truck_id}}"
 method: GET
 headers:

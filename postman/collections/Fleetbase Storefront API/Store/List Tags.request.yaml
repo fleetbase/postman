@@ -1,5 +1,6 @@
 $kind: http-request
-description: List Tags
+description: |-
+  Returns store matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/tags"
 method: GET
 headers:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Capture QPay Callback via GET
+description: |-
+  Capture QPay Callback via GET for checkout. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: GET
 headers:

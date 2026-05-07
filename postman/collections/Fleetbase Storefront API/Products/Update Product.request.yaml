@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update Product
+description: |-
+  Updates a product. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{product_id}}"
 method: PUT
 headers:

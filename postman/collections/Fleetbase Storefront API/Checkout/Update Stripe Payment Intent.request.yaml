@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update Stripe Payment Intent
+description: |-
+  Updates a checkout resource. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-update-payment-intent"
 method: PUT
 headers:

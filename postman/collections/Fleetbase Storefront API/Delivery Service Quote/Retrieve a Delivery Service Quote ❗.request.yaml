@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns a delivery service quote for the supplied cart, origin, and destination. Use the quote during checkout to include delivery pricing.
+  Retrieves a delivery service quote. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/service-quotes/from-cart"
 method: GET
 headers:

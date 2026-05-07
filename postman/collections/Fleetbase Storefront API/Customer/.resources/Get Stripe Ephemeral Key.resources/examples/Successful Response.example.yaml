@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-ephemeral-key"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {}
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "customer_abc123",
+        "object": "customer",
+        "name": "Jane Customer",
+        "email": "jane@example.com",
+        "phone": "+15555550102",
+        "created_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

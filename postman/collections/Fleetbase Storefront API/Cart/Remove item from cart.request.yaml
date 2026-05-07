@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Removes a line item or product from a cart. The response returns the updated cart after the item is removed.
+  Deletes a cart resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
 method: DELETE
 headers:

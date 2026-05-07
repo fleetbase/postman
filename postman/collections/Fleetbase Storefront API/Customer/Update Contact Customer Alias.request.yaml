@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update Contact Customer Alias
+description: |-
+  Updates a customer resource. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/contacts/{{customer_id}}"
 method: PUT
 headers:

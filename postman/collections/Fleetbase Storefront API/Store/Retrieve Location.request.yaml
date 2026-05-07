@@ -1,5 +1,6 @@
 $kind: http-request
-description: Retrieve Location
+description: |-
+  Retrieves a store. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/locations/{{location_id}}"
 method: GET
 headers:

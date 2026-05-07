@@ -1,5 +1,6 @@
 $kind: http-request
-description: Counts the number of ratings for a store
+description: |-
+  Counts the number of ratings for a store for reviews. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/count"
 method: GET
 headers:

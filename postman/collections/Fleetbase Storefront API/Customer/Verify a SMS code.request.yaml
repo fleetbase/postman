@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Verifies a storefront SMS or creation code. The response includes the customer profile and auth token when verification succeeds.
+  Verify a SMS code for customer. The response returns the result of the operation.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-code"
 method: POST
 headers:
