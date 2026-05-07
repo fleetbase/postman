@@ -1,13 +1,12 @@
 $kind: http-request
 description: "Get Driver Geofence History"
-url: "{{base_url}}/{{namespace}}/geofences/driver/:driverUuid/history?per_page=50"
+url: "{{base_url}}/{{namespace}}/geofences/driver/:driverUuid/history"
 method: GET
-queryParams:
-  - key: per_page
-    value: "50"
 
 pathVariables:
   - key: driverUuid
     value: "{{driver_uuid}}"
 
+queryParams:
+  per_page: "50"
 order: 4000

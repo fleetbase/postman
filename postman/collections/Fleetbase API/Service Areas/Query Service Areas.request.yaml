@@ -1,7 +1,7 @@
 $kind: http-request
 description: |-
   Returns service areas matching the supplied filters. Use this to find configured operating regions by name or other query parameters.
-url: "{{base_url}}/{{namespace}}/service-areas?name={{service_area_name}}"
+url: "{{base_url}}/{{namespace}}/service-areas"
 method: GET
 queryParams:
   name: "{{service_area_name}}"

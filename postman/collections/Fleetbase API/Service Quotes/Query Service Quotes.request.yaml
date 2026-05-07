@@ -3,24 +3,12 @@ description: |-
   This endpoint is used to get the ServiceRate quotes based on pickup point location and drop off point location, or payload.
 
   For some quotes such as parcel based, the payload must be included for calculation of the payload cost.
-url: "{{base_url}}/{{namespace}}/service-quotes?payload={{payload_id}}"
+url: "{{base_url}}/{{namespace}}/service-quotes"
 method: GET
 headers:
   Accept: application/json
 queryParams:
-  - key: payload
-    value: "{{payload_id}}"
-    description: The id of a Payload object, the payload type should match the service_type of the rates being retrieved. When the payload is supplied the other parameters are not required.
-  - key: service_type
-    value: food_delivery
-    disabled: true
-    description: The service_type to calculate the rates for. This required field is defined in all ServiceRate objects. Required when payload is not supplied.
-  - key: pickup
-    value: 10 Bayfront Avenue, Singapore 018956
-    disabled: true
-  - key: dropoff
-    value: 18 Marina Gardens Drive, Singapore 018953
-    disabled: true
+  payload: "{{payload_id}}"
 body:
   type: json
   content: ""

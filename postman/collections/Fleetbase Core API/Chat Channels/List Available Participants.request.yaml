@@ -1,5 +1,7 @@
 $kind: http-request
 description: "List Available Participants"
-url: "{{base_url}}/{{namespace}}/chat-channels/available-participants?channel={{chat_channel_id}}"
+url: "{{base_url}}/{{namespace}}/chat-channels/available-participants"
 method: GET
+queryParams:
+  channel: "{{chat_channel_id}}"
 order: 1000

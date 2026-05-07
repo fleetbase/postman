@@ -1,6 +1,6 @@
 $kind: http-request
 description: Capture QPay Callback via GET
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay?checkout={{checkout_id}}&respond=true&test=success"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: GET
 headers:
   - key: Authorization
@@ -9,5 +9,5 @@ headers:
 queryParams:
   checkout: "{{checkout_id}}"
   respond: "true"
-  test: success
+  test: "success"
 order: 4100

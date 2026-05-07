@@ -1,10 +1,10 @@
 $kind: http-request
-url: "{{base_url}}/{{namespace}}/places/search?ll=25.0147912108003,121.46998215767363&locale=zh-TW&query=臺北市中山區忠孝東歐物"
+url: "{{base_url}}/{{namespace}}/places/search"
 method: GET
 headers:
   Authorization: Bearer {{api_key}}
 queryParams:
-  ll: 25.0147912108003,121.46998215767363
-  locale: zh-TW
-  query: 臺北市中山區忠孝東歐物
+  ll: "25.0147912108003,121.46998215767363"
+  locale: "zh-TW"
+  query: "臺北市中山區忠孝東歐物"
 order: 1000

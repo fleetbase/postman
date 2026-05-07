@@ -1,5 +1,9 @@
 $kind: http-request
 description: "Query Issues"
-url: "{{base_url}}/{{namespace}}/issues?limit=25&offset=0&sort=created_at"
+url: "{{base_url}}/{{namespace}}/issues"
 method: GET
+queryParams:
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
 order: 2000

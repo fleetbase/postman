@@ -1,5 +1,9 @@
 $kind: http-request
 description: "Query Files"
-url: "{{base_url}}/{{namespace}}/files?limit=25&offset=0&sort=created_at"
+url: "{{base_url}}/{{namespace}}/files"
 method: GET
+queryParams:
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
 order: 5000

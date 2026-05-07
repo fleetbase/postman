@@ -1,6 +1,6 @@
 $kind: http-request
 description: Payment gateways for the current store
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways?limit=&offset="
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways"
 method: GET
 headers:
   - key: Authorization

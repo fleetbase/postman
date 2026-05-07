@@ -1,17 +1,10 @@
 $kind: http-request
 description: List all orders.
-url: "{{base_url}}/{{namespace}}/orders?limit=25&offset=0&sort=created_at&status=active"
+url: "{{base_url}}/{{namespace}}/orders"
 method: GET
 queryParams:
-  - key: query
-    value: ""
-    disabled: true
-  - key: limit
-    value: "25"
-  - key: offset
-    value: "0"
-  - key: sort
-    value: created_at
-  - key: status
-    value: active
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
+  status: "active"
 order: 2000

@@ -1,15 +1,10 @@
 $kind: http-request
 description: "Searches places by free-form query and optional lat/lng locale context."
-url: "{{base_url}}/{{namespace}}/places/search?query={{place_query}}&ll={{place_ll}}&locale={{locale}}"
+url: "{{base_url}}/{{namespace}}/places/search"
 method: GET
-queryParams:
-  - key: query
-    value: "{{place_query}}"
-  - key: ll
-    value: "{{place_ll}}"
-    description: "Optional latitude,longitude search context."
-  - key: locale
-    value: "{{locale}}"
-    description: "Optional locale such as en-US."
 
+queryParams:
+  query: "{{place_query}}"
+  ll: "{{place_ll}}"
+  locale: "{{locale}}"
 order: 2500

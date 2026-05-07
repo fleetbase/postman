@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{base_url}}/{{namespace}}/orders?limit=5"
+url: "{{base_url}}/{{namespace}}/orders"
 method: GET
 headers:
   Authorization: Bearer {{api_key}}

@@ -1,22 +1,14 @@
 $kind: http-request
 description: |-
   Returns a paginated list of contacts for the current organization. Use filters such as `query`, `limit`, `offset`, and `sort` to narrow and order the results.
-url: "{{base_url}}/{{namespace}}/contacts?query={{contact_name}}&limit=25&offset=0&sort=created_at"
+url: "{{base_url}}/{{namespace}}/contacts"
 method: GET
 headers:
   Accept: application/json
-queryParams:
-  - key: query
-    value: "{{contact_name}}"
-    description: This parameter allows you to filter the results by their name.
-  - key: limit
-    value: "25"
-    description: A cursor for use in pagination. A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-  - key: offset
-    value: "0"
-    description: A cursor for use in pagination. A offset for the results, when the offset is supplied the results will start from the offset.
-  - key: sort
-    value: created_at
-    description: A cursor used to sort results. Sort can be any property of the object, to sort descending sort must append the minus symbol. To sort by created date descending sort would be `-created_at` to sort in ascending order the sort would be `created_at`.
 examples: ./.resources/Query Contacts.resources/examples
+queryParams:
+  query: "{{contact_name}}"
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
 order: 2000
