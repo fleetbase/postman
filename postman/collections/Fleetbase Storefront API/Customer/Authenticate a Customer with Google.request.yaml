@@ -1,0 +1,18 @@
+$kind: http-request
+description: Authenticate a Customer with Google
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-google"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "idToken": "{{google_id_token}}",
+      "clientId": "{{google_client_id}}"
+    }
+order: 5400

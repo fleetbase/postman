@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: service_quote
+    type: string
+    description: "Service quote ID used by the request."

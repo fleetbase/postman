@@ -1,0 +1,19 @@
+$kind: http-request
+description: Update Contact Customer Alias
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/contacts/{{customer_id}}"
+method: PUT
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "{{customer_name}}",
+      "email": "{{customer_email}}",
+      "phone": "{{customer_phone}}"
+    }
+order: 9000

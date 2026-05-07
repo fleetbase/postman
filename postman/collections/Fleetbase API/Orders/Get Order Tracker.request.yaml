@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Get Order Tracker"
+description: "Returns public tracking data for an order."
+url: "{{base_url}}/{{namespace}}/orders/:id/tracker"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+
+order: 14200

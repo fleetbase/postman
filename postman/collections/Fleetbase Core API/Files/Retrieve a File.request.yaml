@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieve a File"
+url: "{{base_url}}/{{namespace}}/files/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{file_id}}"
+
+order: 6000

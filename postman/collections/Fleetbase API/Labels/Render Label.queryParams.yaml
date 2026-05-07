@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: format
+    type: enum
+    values: ["stream", "base64", "url"]
+    description: "Format value for this labels request."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."

@@ -1,0 +1,21 @@
+$kind: http-request
+description: "Create an Issue"
+url: "{{base_url}}/{{namespace}}/issues"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "driver": "{{driver_id}}",
+      "location": {
+        "latitude": 1.3521,
+        "longitude": 103.8198
+      },
+      "report": "Vehicle tire pressure warning",
+      "category": "vehicle",
+      "type": "maintenance",
+      "priority": "medium",
+      "status": "open"
+    }
+
+order: 1000

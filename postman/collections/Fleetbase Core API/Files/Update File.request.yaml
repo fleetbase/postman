@@ -1,0 +1,17 @@
+$kind: http-request
+description: "Update File"
+url: "{{base_url}}/{{namespace}}/files/:id"
+method: PUT
+pathVariables:
+  - key: id
+    value: "{{file_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "caption": "Updated caption",
+      "meta": {}
+    }
+
+order: 3000

@@ -1,6 +1,7 @@
 $kind: http-request
-description: There is two primary ways to create a zone. The first method you can supply the boundary coordinates for the zone. The second method is you cann supply center coordinates and a radius in meters, and Fleetbase will automatically create a zone around the center coordinates.
-url: "{{base_url}}/{{namespace}}/customers/login"
+description: |-
+  Authenticates a storefront customer with an email or phone identity and password. The response includes the customer profile and an auth token.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login"
 method: POST
 headers:
   - key: Authorization

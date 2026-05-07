@@ -1,0 +1,15 @@
+$kind: http-request
+description: "Create Chat Channel"
+url: "{{base_url}}/{{namespace}}/chat-channels"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "Dispatch",
+      "participants": [
+        "{{user_id}}"
+      ]
+    }
+
+order: 5000

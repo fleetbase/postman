@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Complete an Order"
+description: "Completes an order after all waypoints are complete."
+url: "{{base_url}}/{{namespace}}/orders/:id/complete"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+
+order: 14100

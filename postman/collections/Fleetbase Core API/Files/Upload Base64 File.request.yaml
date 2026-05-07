@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Upload Base64 File"
+url: "{{base_url}}/{{namespace}}/files/base64"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "data": "{{base64_file_data}}",
+      "file_name": "example.png",
+      "file_type": "image",
+      "content_type": "image/png",
+      "path": "uploads"
+    }
+
+order: 2000

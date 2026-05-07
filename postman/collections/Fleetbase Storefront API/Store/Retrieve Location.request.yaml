@@ -1,0 +1,9 @@
+$kind: http-request
+description: Retrieve Location
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/locations/{{location_id}}"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+order: 2500

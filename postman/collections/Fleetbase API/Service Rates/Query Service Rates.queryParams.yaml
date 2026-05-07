@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: limit
+    type: string
+    description: "Limit value for this service rates request."
+  - name: offset
+    type: string
+    description: "Offset value for this service rates request."
+  - name: currency
+    type: currency
+    description: "Three-letter currency code for monetary values."

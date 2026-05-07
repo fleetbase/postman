@@ -1,11 +1,11 @@
 $kind: http-request
-description: Capture checkout as order ❗
-url: "{{base_url}}/{{namespace}}/checkouts/capture?token="
+description: Get Wallet
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet"
 method: GET
 headers:
   - key: Authorization
     value: ""
     description: Authentication header
 queryParams:
-  token: ""
-order: 2000
+  currency: "USD"
+order: 1000

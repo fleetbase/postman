@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Delete Comment"
+url: "{{base_url}}/{{namespace}}/comments/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{comment_id}}"
+
+order: 5000

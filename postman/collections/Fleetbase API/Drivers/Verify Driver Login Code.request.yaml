@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Verify Driver Login Code"
+description: "Verifies driver login code and returns a driver token."
+url: "{{base_url}}/{{namespace}}/drivers/verify-code"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{driver_identity}}",
+      "code": "{{verification_code}}"
+    }
+
+order: 12200

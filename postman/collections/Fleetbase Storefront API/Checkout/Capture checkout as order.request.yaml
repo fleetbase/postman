@@ -1,0 +1,18 @@
+$kind: http-request
+description: |-
+  Captures a checkout token and creates the corresponding order. The response returns the completed order or the existing order when the checkout was already captured.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{checkout_token}}"
+    }
+order: 3000

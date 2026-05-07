@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: offset
+    type: string
+    description: "Offset value for this products request."

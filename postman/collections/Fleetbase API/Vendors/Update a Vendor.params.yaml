@@ -1,0 +1,18 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: "Display name for the resource."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: internal_id
+    type: string
+    description: "External or internal identifier supplied by your system."
+  - name: email
+    type: string
+    description: "Email address for the person or customer."
+  - name: phone
+    type: string
+    description: "Phone number for the person or customer."

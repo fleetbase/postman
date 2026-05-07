@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: quantity
+    type: integer
+    description: "Number of units to add or update."
+  - name: variants
+    type: string
+    description: "Selected product variant IDs or option values."
+  - name: addons
+    type: string
+    description: "Selected addon IDs or addon option values."
+  - name: scheduled_at
+    type: timestamp
+    description: "ISO8601 timestamp for scheduled fulfillment."
+  - name: store_location
+    type: string
+    description: "Store location ID used for fulfillment."

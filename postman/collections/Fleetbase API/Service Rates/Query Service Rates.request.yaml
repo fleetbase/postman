@@ -1,23 +1,11 @@
 $kind: http-request
 description: List all service rates.
-url: "{{base_url}}/{{namespace}}/service-rates?limit=25&offset=0&currency=USD"
+url: "{{base_url}}/{{namespace}}/service-rates"
 method: GET
 queryParams:
-  - key: limit
-    value: "25"
-  - key: sort
-    value: created_at
-    disabled: true
-  - key: offset
-    value: "0"
-  - key: query
-    value: test
-    disabled: true
-  - key: service_type
-    value: parcel
-    disabled: true
-  - key: currency
-    value: USD
+  limit: "25"
+  offset: "0"
+  currency: "USD"
 body:
   type: json
   content: ""

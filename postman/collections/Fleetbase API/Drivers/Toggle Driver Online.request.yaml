@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Toggle Driver Online"
+description: "Toggles or sets driver online status."
+url: "{{base_url}}/{{namespace}}/drivers/:id/toggle-online"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "online": true
+    }
+
+order: 12600

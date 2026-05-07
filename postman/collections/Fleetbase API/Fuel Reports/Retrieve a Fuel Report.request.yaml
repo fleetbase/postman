@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieve a Fuel Report"
+url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{fuel_report_id}}"
+
+order: 3000

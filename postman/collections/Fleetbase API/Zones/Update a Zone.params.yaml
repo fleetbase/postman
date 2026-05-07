@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: color
+    type: string
+    description: "Fill color used when rendering the zone."

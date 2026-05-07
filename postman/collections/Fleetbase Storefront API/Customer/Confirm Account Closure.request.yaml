@@ -1,0 +1,17 @@
+$kind: http-request
+description: Confirm Account Closure
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/confirm-account-closure"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "code": "{{verification_code}}"
+    }
+order: 8100

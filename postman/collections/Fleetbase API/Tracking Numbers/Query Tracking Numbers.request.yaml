@@ -1,25 +1,13 @@
 $kind: http-request
 description: This endpoint allows you to query tracking-numbers you have created, it also provides paginated results on all the tracking-numbers in your Fleetbase.
-url: "{{base_url}}/{{namespace}}/tracking-numbers?query=SG&limit=25&offset=0&sort=created_at"
+url: "{{base_url}}/{{namespace}}/tracking-numbers"
 method: GET
 headers:
   Accept: application/json
-queryParams:
-  - key: query
-    value: SG
-    description: This parameter allows you to filter the results by their name.
-  - key: status
-    value: created
-    disabled: true
-    description: Filter the tracking-numbers by their status.
-  - key: limit
-    value: "25"
-    description: A cursor for use in pagination. A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-  - key: offset
-    value: "0"
-    description: A cursor for use in pagination. A offset for the results, when the offset is supplied the results will start from the offset.
-  - key: sort
-    value: created_at
-    description: You can order the results by any property of the Tracking Number object.
 examples: ./.resources/Query Tracking Numbers.resources/examples
+queryParams:
+  query: "SG"
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
 order: 3000

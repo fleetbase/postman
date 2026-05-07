@@ -1,0 +1,15 @@
+$kind: http-request
+description: Get Stripe Ephemeral Key
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-ephemeral-key"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {}
+order: 7000

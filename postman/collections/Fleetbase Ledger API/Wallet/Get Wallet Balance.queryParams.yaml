@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: currency
+    type: currency
+    description: "Three-letter currency code for monetary values."

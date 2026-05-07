@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: speed
+    type: integer
+    description: "Current speed for the tracked subject."
+  - name: bearing
+    type: number
+    description: "Current heading or bearing in degrees."
+  - name: latitude
+    type: number
+    description: "Decimal latitude coordinate."
+  - name: longitude
+    type: number
+    description: "Decimal longitude coordinate."

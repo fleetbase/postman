@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Display name for the resource."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: title
+    type: string
+    description: "Optional title associated with the contact or person."
+  - name: email
+    type: string
+    description: "Email address for the person or customer."
+  - name: phone
+    type: string
+    description: "Phone number for the person or customer."

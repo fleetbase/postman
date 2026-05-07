@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/categories"
+description: |-
+  Returns product categories available to the current storefront. Use this list to organize product browsing and filtering.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
 headers:
   - key: Authorization

@@ -1,0 +1,24 @@
+$kind: http-request
+name: "Simulate Driver Route"
+description: "Simulates driver movement between two resolvable points, or pass order to simulate an order route."
+url: "{{base_url}}/{{namespace}}/drivers/:id/simulate"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "start": {
+        "latitude": 1.3521,
+        "longitude": 103.8198
+      },
+      "end": {
+        "latitude": 1.2903,
+        "longitude": 103.8519
+      }
+    }
+
+order: 12900

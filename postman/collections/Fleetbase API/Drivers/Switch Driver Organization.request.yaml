@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Switch Driver Organization"
+description: "Switches the driver session to another organization."
+url: "{{base_url}}/{{namespace}}/drivers/:id/switch-organization"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "next": "{{organization_id}}"
+    }
+
+order: 12500

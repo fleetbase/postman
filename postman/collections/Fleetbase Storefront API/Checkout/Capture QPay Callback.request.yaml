@@ -1,0 +1,19 @@
+$kind: http-request
+description: Capture QPay Callback
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "checkout": "{{checkout_id}}",
+      "respond": true,
+      "test": "success"
+    }
+order: 4000

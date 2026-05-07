@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: country
+    type: string
+    description: "ISO country code for the address."

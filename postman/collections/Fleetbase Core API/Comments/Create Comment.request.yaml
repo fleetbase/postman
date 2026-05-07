@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Create Comment"
+url: "{{base_url}}/{{namespace}}/comments"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "content": "Example comment",
+      "subject": {
+        "id": "{{subject_id}}",
+        "type": "{{subject_type}}"
+      }
+    }
+
+order: 1000

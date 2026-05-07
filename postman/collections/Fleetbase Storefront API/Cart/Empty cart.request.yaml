@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/carts/{id}/empty"
+description: |-
+  Removes all line items from a cart. The response returns the emptied cart resource.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/empty"
 method: PUT
 headers:
   - key: Authorization

@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: from
+    type: string
+    description: "From value for this geofences request."
+  - name: to
+    type: string
+    description: "To value for this geofences request."

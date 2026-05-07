@@ -1,5 +1,6 @@
 $kind: http-request
-description: Dispatches order to Driver.
+description: |-
+  Starts an order and transitions it into active execution. Use this when a driver or dispatcher begins fulfillment.
 url: "{{base_url}}/{{namespace}}/orders/:id/start"
 method: POST
 pathVariables:

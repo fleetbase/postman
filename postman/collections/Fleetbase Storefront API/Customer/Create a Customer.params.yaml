@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Display name for the resource."
+  - name: email
+    type: string
+    description: "Email address for the person or customer."
+  - name: phone
+    type: string
+    description: "Phone number for the person or customer."
+  - name: identity
+    type: string
+    required: true
+    description: "Email address or phone number used for authentication."
+  - name: password
+    type: string
+    description: "Password used to authenticate the customer."
+  - name: code
+    type: string
+    required: true
+    description: "Verification or status code."

@@ -1,0 +1,18 @@
+$kind: http-request
+description: Pay Public Invoice
+url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/pay"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "gateway_id": "{{gateway_id}}",
+      "reference": "{{payment_reference}}"
+    }
+order: 3000

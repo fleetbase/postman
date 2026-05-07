@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Returns the organization associated with the API credential."
+url: "{{base_url}}/{{namespace}}/organizations/current"
+method: GET
+order: 1000

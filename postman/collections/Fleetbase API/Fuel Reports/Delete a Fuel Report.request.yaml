@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Delete a Fuel Report"
+url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{fuel_report_id}}"
+
+order: 5000

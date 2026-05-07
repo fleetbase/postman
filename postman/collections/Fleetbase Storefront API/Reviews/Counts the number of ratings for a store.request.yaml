@@ -1,6 +1,6 @@
 $kind: http-request
 description: Counts the number of ratings for a store
-url: "{{base_url}}/{{namespace}}/reviews/count"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/count"
 method: GET
 headers:
   - key: Authorization

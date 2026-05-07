@@ -1,0 +1,15 @@
+$kind: http-request
+description: Start Account Closure
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/account-closure"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {}
+order: 8000

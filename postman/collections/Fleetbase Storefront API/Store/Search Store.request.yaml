@@ -1,6 +1,6 @@
 $kind: http-request
-description: Search Store
-url: "{{base_url}}/{{namespace}}/stores?query=&limit=&store="
+description: Search Storefront
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/search"
 method: GET
 headers:
   - key: Authorization
@@ -9,5 +9,5 @@ headers:
 queryParams:
   query: ""
   limit: ""
-  store: ""
+  offset: ""
 order: 1000

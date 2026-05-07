@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Get Driver Current Organization"
+description: "Returns the driver current organization."
+url: "{{base_url}}/{{namespace}}/drivers/:id/current-organization"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+order: 12800

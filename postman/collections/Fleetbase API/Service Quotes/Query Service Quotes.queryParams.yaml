@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: payload
+    type: string
+    description: "Payload ID or embedded payload object associated with the resource."

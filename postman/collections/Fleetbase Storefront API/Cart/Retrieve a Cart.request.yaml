@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/carts/{id}"
+description: |-
+  Retrieves an existing cart by its unique identifier. If the cart is still active, the response includes its current line items and totals.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}"
 method: GET
 headers:
   - key: Authorization

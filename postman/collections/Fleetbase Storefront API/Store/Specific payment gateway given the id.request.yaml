@@ -1,6 +1,6 @@
 $kind: http-request
 description: Specific payment gateway given the id
-url: "{{base_url}}/{{namespace}}/gateways/{id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways/{id}"
 method: GET
 headers:
   - key: Authorization

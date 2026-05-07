@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Queries payload resources."
+url: "{{base_url}}/{{namespace}}/payloads"
+method: GET
+queryParams:
+  limit: "25"
+  offset: "0"
+  sort: "created_at"
+order: 2500

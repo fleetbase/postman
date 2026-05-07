@@ -1,0 +1,9 @@
+$kind: http-request
+description: List Locations
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/locations"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+order: 2400

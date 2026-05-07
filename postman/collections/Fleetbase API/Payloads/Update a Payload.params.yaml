@@ -1,0 +1,18 @@
+$kind: params
+fields:
+  - name: entities
+    type: array of objects
+    description: "Entities included in the payload or order."
+    fields:
+      - name: name
+        type: string
+        description: "Display name for the resource."
+      - name: description
+        type: string
+        description: "Human-readable description of the resource."
+      - name: currency
+        type: currency
+        description: "Three-letter currency code for monetary values."
+      - name: price
+        type: integer
+        description: "Price for the item or entity."

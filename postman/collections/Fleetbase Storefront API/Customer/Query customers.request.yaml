@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/customers"
+description: |-
+  Returns storefront customers for the current company. Use query and pagination parameters to find matching customer records.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers"
 method: GET
 headers:
   - key: Authorization

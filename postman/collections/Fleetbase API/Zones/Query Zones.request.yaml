@@ -1,12 +1,11 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/zones?name={{zone_name}}"
+description: |-
+  Returns zones matching the supplied filters. Use this to find configured geofences by name or other query parameters.
+url: "{{base_url}}/{{namespace}}/zones"
 method: GET
 headers:
   Accept: application/json
-queryParams:
-  - key: name
-    value: "{{zone_name}}"
-    description: The id of the zone you want to retrieve.
 examples: ./.resources/Query Zones.resources/examples
+queryParams:
+  name: "{{zone_name}}"
 order: 3000

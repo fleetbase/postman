@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: content
+    type: string
+    description: "Text content for the comment or message."

@@ -1,0 +1,17 @@
+$kind: http-request
+description: Complete Order Pickup
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/picked-up"
+method: PUT
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "order": "{{order_id}}"
+    }
+order: 1000

@@ -1,0 +1,13 @@
+$kind: http-request
+description: "Renders a PDF, text, or base64 label for an order, waypoint, or entity id."
+url: "{{base_url}}/{{namespace}}/labels/:id"
+method: GET
+
+pathVariables:
+  - key: id
+    value: "{{label_subject_id}}"
+
+queryParams:
+  format: "stream"
+  type: "order"
+order: 1000

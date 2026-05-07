@@ -1,6 +1,7 @@
 $kind: http-request
-description: Use this endpoint to delete a zone.
-url: "{{base_url}}/{{namespace}}/carts/{id}/{line_item_id}"
+description: |-
+  Removes a line item or product from a cart. The response returns the updated cart after the item is removed.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
 method: DELETE
 headers:
   - key: Authorization

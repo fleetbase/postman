@@ -1,8 +1,8 @@
 {
-  "collectionFormat": "postman-v2.1-json",
+  "collectionFormat": "postman-v3-yaml-native-git",
   "collectionsRoot": "postman/collections",
   "environmentsRoot": "postman/environments",
-  "defaultEnvironment": "postman/environments/local.postman_environment.json",
+  "defaultEnvironment": "postman/environments/local.environment.yaml",
   "secretPolicy": {
     "commitTemplatesOnly": true,
     "usePostmanVaultForSecrets": true

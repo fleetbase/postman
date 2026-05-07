@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: checkout
+    type: string
+    description: "Checkout value for this checkout request."
+  - name: token
+    type: string
+    description: "Token used to authenticate or capture the checkout."

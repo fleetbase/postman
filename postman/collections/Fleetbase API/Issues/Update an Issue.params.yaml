@@ -1,0 +1,20 @@
+$kind: params
+fields:
+  - name: report
+    type: string
+    description: "Issue report text submitted by the caller."
+  - name: category
+    type: enum
+    description: "Category used to classify the issue or resource."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: priority
+    type: enum
+    values: ["low", "medium", "high"]
+    description: "Priority level for the issue."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."

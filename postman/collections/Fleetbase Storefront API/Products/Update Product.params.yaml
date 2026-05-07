@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: "Display name for the resource."
+  - name: description
+    type: string
+    description: "Human-readable description of the resource."
+  - name: price
+    type: integer
+    description: "Price for the item or entity."

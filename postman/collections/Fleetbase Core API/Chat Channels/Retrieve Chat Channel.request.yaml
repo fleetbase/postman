@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieve Chat Channel"
+url: "{{base_url}}/{{namespace}}/chat-channels/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{chat_channel_id}}"
+
+order: 8000

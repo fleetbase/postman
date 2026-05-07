@@ -77,7 +77,7 @@ for (const file of environmentFiles) {
   }
 }
 
-assert(collectionFiles.length === 3, `Expected 3 Postman collections, found ${collectionFiles.length}`);
+assert(collectionFiles.length === 5, `Expected 5 Postman collections, found ${collectionFiles.length}`);
 assert(environmentFiles.length === 3, `Expected 3 environment templates, found ${environmentFiles.length}`);
 
 console.log(`Validated ${collectionFiles.length} Postman Native Git collections and ${environmentFiles.length} environments.`);

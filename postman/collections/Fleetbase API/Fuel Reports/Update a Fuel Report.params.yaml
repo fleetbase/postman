@@ -1,0 +1,21 @@
+$kind: params
+fields:
+  - name: odometer
+    type: integer
+    description: "Vehicle odometer reading at the time of the report."
+  - name: volume
+    type: number
+    description: "Fuel volume purchased or reported."
+  - name: metric_unit
+    type: string
+    description: "Unit used for the fuel volume."
+  - name: amount
+    type: number
+    description: "Monetary amount for the request."
+  - name: currency
+    type: currency
+    description: "Three-letter currency code for monetary values."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."

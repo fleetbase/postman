@@ -1,13 +1,14 @@
 $kind: http-request
-description: Dispatches order to Driver.
-url: "{{base_url}}/{{namespace}}/orders/:id/set-destination/:waypoint-id"
+description: |-
+  Sets the destination waypoint or place for an order. The response returns the updated order after the destination is changed.
+url: "{{base_url}}/{{namespace}}/orders/:id/set-destination/:placeId"
 method: PATCH
 pathVariables:
   - key: id
     value: "{{order_id}}"
     description: (Required) The id of the order to dispatch.
-  - key: waypoint-id
-    value: "{{waypoint_id}}"
+  - key: placeId
+    value: "{{place_id}}"
 body:
   type: json
   content: ""

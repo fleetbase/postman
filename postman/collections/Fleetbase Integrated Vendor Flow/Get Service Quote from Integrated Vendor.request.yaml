@@ -1,22 +1,22 @@
 $kind: http-request
-url: "{{base_url}}/{{namespace}}/service-quotes?service_type=MOTORCYCLE&facilitator=integrated_vendor_wD5EJ7g&is_route_optimized=true&waypoints[0][name]=Stop 1&waypoints[0][phone]=+6596379222&waypoints[0][location][type]=Point&waypoints[0][location][coordinates]=103.8835179,1.3132044&waypoints[1][name]=Stop 2&waypoints[1][phone]=+6596379222&waypoints[1][remarks]=Testing remarks 1&waypoints[1][location][type]=Point&waypoints[1][location][coordinates]=103.8384048,1.3081903&waypoints[2][name]=Stop 3&waypoints[2][phone]=+6596379222&waypoints[2][remarks]=Testing remarks 2&waypoints[2][location][type]=Point&waypoints[2][location][coordinates]=103.8722585,1.3507723"
+url: "{{base_url}}/{{namespace}}/service-quotes"
 method: GET
 queryParams:
-  service_type: MOTORCYCLE
-  facilitator: integrated_vendor_wD5EJ7g
+  service_type: "MOTORCYCLE"
+  facilitator: "integrated_vendor_wD5EJ7g"
   is_route_optimized: "true"
-  waypoints[0][name]: Stop 1
+  waypoints[0][name]: "Stop 1"
   waypoints[0][phone]: "+6596379222"
-  waypoints[0][location][type]: Point
-  waypoints[0][location][coordinates]: 103.8835179,1.3132044
-  waypoints[1][name]: Stop 2
+  waypoints[0][location][type]: "Point"
+  waypoints[0][location][coordinates]: "103.8835179,1.3132044"
+  waypoints[1][name]: "Stop 2"
   waypoints[1][phone]: "+6596379222"
-  waypoints[1][remarks]: Testing remarks 1
-  waypoints[1][location][type]: Point
-  waypoints[1][location][coordinates]: 103.8384048,1.3081903
-  waypoints[2][name]: Stop 3
+  waypoints[1][remarks]: "Testing remarks 1"
+  waypoints[1][location][type]: "Point"
+  waypoints[1][location][coordinates]: "103.8384048,1.3081903"
+  waypoints[2][name]: "Stop 3"
   waypoints[2][phone]: "+6596379222"
-  waypoints[2][remarks]: Testing remarks 2
-  waypoints[2][location][type]: Point
-  waypoints[2][location][coordinates]: 103.8722585,1.3507723
+  waypoints[2][remarks]: "Testing remarks 2"
+  waypoints[2][location][type]: "Point"
+  waypoints[2][location][coordinates]: "103.8722585,1.3507723"
 order: 5000

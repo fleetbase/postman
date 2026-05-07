@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: direction
+    type: enum
+    values: ["credit", "debit"]
+    description: "Direction value for this wallet request."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."
+  - name: date_from
+    type: timestamp
+    description: "Date from value for this wallet request."
+  - name: date_to
+    type: timestamp
+    description: "Date to value for this wallet request."
+  - name: limit
+    type: string
+    description: "Limit value for this wallet request."

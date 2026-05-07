@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Lists organizations available for driver onboarding and organization selection."
+url: "{{base_url}}/{{namespace}}/organizations"
+method: GET
+
+queryParams:
+  limit: "10"
+  with_driver_onboard: "false"
+order: 1000

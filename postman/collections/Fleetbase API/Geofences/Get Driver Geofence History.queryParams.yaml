@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: per_page
+    type: string
+    description: "Per page value for this geofences request."

@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieve an Issue"
+url: "{{base_url}}/{{namespace}}/issues/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{issue_id}}"
+
+order: 3000

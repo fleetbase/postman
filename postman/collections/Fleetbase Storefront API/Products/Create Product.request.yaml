@@ -1,0 +1,19 @@
+$kind: http-request
+description: Create Product
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Example Product",
+      "description": "Example storefront product",
+      "price": 1000
+    }
+order: 3000

@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: "Query value for this store request."
+  - name: limit
+    type: string
+    description: "Limit value for this store request."
+  - name: offset
+    type: string
+    description: "Offset value for this store request."
+  - name: store
+    type: string
+    description: "Store value for this store request."
