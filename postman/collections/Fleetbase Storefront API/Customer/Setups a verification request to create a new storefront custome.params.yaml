@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: mode
+    type: enum
+    values: ["email", "sms"]
+    required: true
+    description: "Verification delivery mode."
+  - name: identity
+    type: string
+    required: true
+    description: "Email address or phone number receiving the customer creation code."

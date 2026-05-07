@@ -1,5 +1,6 @@
 $kind: http-request
-description: Authenticate a Customer with Facebook
+description: |-
+  Authenticates a storefront customer with Facebook account data. Fleetbase creates or updates the matching user and returns the storefront customer with an auth token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-facebook"
 method: POST
 headers:

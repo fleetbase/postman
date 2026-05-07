@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: phone
+    type: string
+    required: true
+    description: "Customer phone number to receive the storefront login verification code."

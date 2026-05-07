@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: order
+    type: string
+    required: true
+    description: "Public ID of the pickup order to mark completed."

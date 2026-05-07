@@ -1,0 +1,22 @@
+$kind: params
+fields:
+  - name: identityToken
+    type: string
+    required: true
+    description: "Apple identity token to verify."
+  - name: authorizationCode
+    type: string
+    required: true
+    description: "Apple authorization code issued during sign-in."
+  - name: email
+    type: string
+    description: "Customer email address provided by Apple."
+  - name: phone
+    type: string
+    description: "Customer phone number."
+  - name: name
+    type: string
+    description: "Customer display name."
+  - name: appleUserId
+    type: string
+    description: "Stable Apple user identifier."

@@ -1,0 +1,39 @@
+$kind: object
+name: Store Location
+description: |-
+  A store location links a storefront to a FleetOps place and operating hours.
+example: |
+  {
+    "id": "store_location_7Lk2mQ1",
+    "store": "store_3Xb9kL2",
+    "name": "Downtown",
+    "place": null,
+    "hours": [],
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the store location."
+  - name: store
+    type: string
+    description: "Public ID of the store."
+  - name: store_data
+    type: object
+    description: "Store resource when requested."
+  - name: name
+    type: string
+    description: "Location name."
+  - name: place
+    type: object
+    description: "FleetOps place for the store location."
+  - name: hours
+    type: array of objects
+    description: "Operating hours for the location."
+  - name: created_at
+    type: timestamp
+    description: "Time the store location was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the store location was last updated."

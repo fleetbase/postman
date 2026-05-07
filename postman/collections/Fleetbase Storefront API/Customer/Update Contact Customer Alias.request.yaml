@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update Contact Customer Alias
+description: |-
+  Updates a storefront customer through the legacy contact alias route. The request is handled by the same customer update controller as `/customers/{id}`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/contacts/{{customer_id}}"
 method: PUT
 headers:

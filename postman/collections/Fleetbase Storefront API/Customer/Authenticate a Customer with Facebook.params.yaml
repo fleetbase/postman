@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: email
+    type: string
+    description: "Customer email address from Facebook."
+  - name: name
+    type: string
+    description: "Customer display name from Facebook."
+  - name: facebookUserId
+    type: string
+    required: true
+    description: "Stable Facebook user identifier."

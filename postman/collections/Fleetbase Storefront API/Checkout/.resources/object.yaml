@@ -1,0 +1,34 @@
+$kind: object
+name: Checkout
+description: |-
+  A checkout token represents a prepared storefront checkout session for a cart, customer, gateway, and delivery or pickup option.
+example: |
+  {
+    "token": "checkout-token",
+    "paymentIntent": "pi_123",
+    "clientSecret": "pi_123_secret_456",
+    "ephemeralKey": "ek_test_123",
+    "customerId": "cus_123"
+  }
+fields:
+  - name: token
+    type: string
+    description: "Checkout token used to capture the order."
+  - name: paymentIntent
+    type: string
+    description: "Stripe PaymentIntent ID when using Stripe checkout."
+  - name: clientSecret
+    type: string
+    description: "Stripe client secret when using Stripe checkout."
+  - name: ephemeralKey
+    type: string
+    description: "Stripe ephemeral key when returned for mobile checkout."
+  - name: customerId
+    type: string
+    description: "Gateway customer ID."
+  - name: invoice
+    type: object
+    description: "QPay invoice payload when using QPay checkout."
+  - name: checkout
+    type: string
+    description: "Public checkout ID returned by QPay checkout initialization."

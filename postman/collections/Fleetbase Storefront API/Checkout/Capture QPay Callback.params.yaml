@@ -1,0 +1,13 @@
+$kind: params
+fields:
+  - name: checkout
+    type: string
+    required: true
+    description: "Public checkout ID being confirmed by QPay."
+  - name: respond
+    type: boolean
+    description: "Whether Fleetbase should return the payment check payload in the HTTP response."
+  - name: test
+    type: enum
+    values: ["success", "error"]
+    description: "Sandbox-only test scenario to simulate."

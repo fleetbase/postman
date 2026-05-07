@@ -1,0 +1,48 @@
+$kind: object
+name: Food Truck
+description: |-
+  A food truck connects a storefront to a FleetOps vehicle, service area, zone, and catalogs for mobile ordering.
+example: |
+  {
+    "id": "food_truck_8Fq2mL1",
+    "vehicle": null,
+    "service_area": null,
+    "zone": null,
+    "catalogs": [],
+    "location": null,
+    "online": false,
+    "status": "active",
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the food truck."
+  - name: vehicle
+    type: object
+    description: "FleetOps vehicle assigned to the food truck."
+  - name: service_area
+    type: object
+    description: "Service area assigned to the food truck."
+  - name: zone
+    type: object
+    description: "Zone assigned to the food truck."
+  - name: catalogs
+    type: array of objects
+    description: "Catalogs available for the food truck."
+  - name: location
+    type: object
+    description: "Current vehicle location."
+  - name: online
+    type: boolean
+    description: "Whether the assigned vehicle is online."
+  - name: status
+    type: string
+    description: "Food truck status."
+  - name: created_at
+    type: timestamp
+    description: "Time the food truck was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the food truck was last updated."

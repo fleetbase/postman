@@ -1,0 +1,91 @@
+$kind: object
+name: Product
+description: |-
+  A product is an item or service sold through a storefront, including pricing, availability, media, variants, addons, and tags.
+example: |
+  {
+    "id": "product_9Lb2mQ1",
+    "name": "Cold Brew",
+    "description": "Bottled cold brew coffee.",
+    "sku": "CB-12",
+    "primary_image_url": "https://files.example.com/cold-brew.png",
+    "price": 450,
+    "sale_price": null,
+    "currency": "USD",
+    "is_on_sale": false,
+    "is_recommended": true,
+    "is_service": false,
+    "is_bookable": false,
+    "is_available": true,
+    "tags": ["coffee"],
+    "status": "active",
+    "meta": {},
+    "slug": "cold-brew",
+    "translations": [],
+    "addon_categories": [],
+    "variants": [],
+    "images": [],
+    "videos": [],
+    "hours": [],
+    "youtube_urls": [],
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the product."
+  - name: name
+    type: string
+    description: "Product name."
+  - name: description
+    type: string
+    description: "Product description."
+  - name: sku
+    type: string
+    description: "Stock keeping unit."
+  - name: primary_image_url
+    type: string
+    description: "Primary product image URL."
+  - name: price
+    type: integer
+    description: "Product price."
+  - name: sale_price
+    type: integer
+    description: "Sale price when the product is on sale."
+  - name: currency
+    type: currency
+    description: "Product currency code."
+  - name: is_available
+    type: boolean
+    description: "Whether the product is available for purchase."
+  - name: tags
+    type: array of strings
+    description: "Product tags."
+  - name: status
+    type: string
+    description: "Product status."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the product."
+  - name: addon_categories
+    type: array of objects
+    description: "Addon categories available for the product."
+  - name: variants
+    type: array of objects
+    description: "Product variants and options."
+  - name: images
+    type: array of strings
+    description: "Product image URLs."
+  - name: videos
+    type: array of strings
+    description: "Product video URLs."
+  - name: hours
+    type: array of objects
+    description: "Product availability hours."
+  - name: created_at
+    type: timestamp
+    description: "Time the product was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the product was last updated."

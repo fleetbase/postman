@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: "Customer email address or phone number."
+  - name: password
+    type: string
+    required: true
+    description: "Customer password."
+  - name: name
+    type: string
+    description: "Customer name used when a contact record must be created for the storefront."
+  - name: phone
+    type: string
+    description: "Customer phone used when a contact record must be created for the storefront."
+  - name: email
+    type: string
+    description: "Customer email used when a contact record must be created for the storefront."

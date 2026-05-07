@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create Stripe Setup Intent
+description: |-
+  Creates a Stripe SetupIntent for a storefront customer. The response includes Stripe client data for saving a payment method.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-setup-intent"
 method: POST
 headers:

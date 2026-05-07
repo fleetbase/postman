@@ -1,0 +1,27 @@
+$kind: object
+name: Delivery Service Quote
+description: |-
+  A delivery service quote prices delivery for a storefront cart and is consumed during checkout capture.
+example: |
+  {
+    "id": "service_quote_4fK2mQ8",
+    "amount": 950,
+    "currency": "USD",
+    "meta": {
+      "origin": "place_123",
+      "destination": "place_456"
+    }
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the service quote."
+  - name: amount
+    type: integer
+    description: "Quoted delivery amount."
+  - name: currency
+    type: currency
+    description: "Quote currency code."
+  - name: meta
+    type: object
+    description: "Quote metadata, including origin and destination used by checkout."

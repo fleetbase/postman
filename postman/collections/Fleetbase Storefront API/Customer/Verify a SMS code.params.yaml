@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: "Customer email address or phone number being verified."
+  - name: code
+    type: string
+    required: true
+    description: "Verification code submitted by the customer."
+  - name: for
+    type: string
+    default: storefront_login
+    description: "Verification purpose. Use `storefront_create_customer` to continue customer creation."
+  - name: name
+    type: string
+    description: "Customer name used when a contact record must be created."
+  - name: phone
+    type: string
+    description: "Customer phone used when a contact record must be created."
+  - name: email
+    type: string
+    description: "Customer email used when a contact record must be created."

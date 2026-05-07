@@ -1,5 +1,6 @@
 $kind: http-request
-description: Confirm Account Closure
+description: |-
+  Confirms storefront account closure using the verification code sent to the customer. Fleetbase deletes the customer contact and, for customer users, the linked user account.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/confirm-account-closure"
 method: POST
 headers:

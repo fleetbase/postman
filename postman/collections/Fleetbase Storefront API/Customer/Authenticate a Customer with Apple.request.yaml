@@ -1,5 +1,6 @@
 $kind: http-request
-description: Authenticate a Customer with Apple
+description: |-
+  Authenticates a storefront customer with Apple Sign-In. Fleetbase verifies the Apple identity token, creates or updates the user, and returns the storefront customer with an auth token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-apple"
 method: POST
 headers:

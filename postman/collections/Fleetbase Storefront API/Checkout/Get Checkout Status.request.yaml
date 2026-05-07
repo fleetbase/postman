@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Checkout Status
+description: |-
+  Returns the status of a checkout by checkout ID or token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/status"
 method: GET
 headers:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Before ❗
+description: |-
+  Initializes a checkout preview for a cart, customer, gateway, and delivery or pickup option. The response prepares gateway-specific client data or a checkout token before the order is captured.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
 headers:

@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: "Checkout token returned by checkout initialization."
+  - name: transactionDetails
+    type: object
+    description: "Optional gateway transaction details to store with the resulting transaction and order metadata."
+  - name: notes
+    type: string
+    description: "Optional notes stored on the created order."
