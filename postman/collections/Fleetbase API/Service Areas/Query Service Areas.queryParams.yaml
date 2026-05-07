@@ -1,5 +1,17 @@
 $kind: params
 fields:
-  - name: name
+  - name: query
     type: string
-    description: "Display name for the resource."
+    description: Search term matched against service area fields.
+  - name: limit
+    type: integer
+    description: Maximum number of service areas to return.
+  - name: offset
+    type: integer
+    description: Number of service areas to skip before returning results.
+  - name: sort
+    type: string
+    description: Sort expression for the service area query.
+  - name: country
+    type: string
+    description: Filters service areas by country.

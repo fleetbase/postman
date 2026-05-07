@@ -1,11 +1,17 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this fuel reports request."
+    type: integer
+    description: Maximum number of fuel reports to return.
   - name: offset
-    type: string
-    description: "Offset value for this fuel reports request."
+    type: integer
+    description: Number of fuel reports to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this fuel reports request."
+    description: Sort expression for the fuel report query.
+  - name: driver
+    type: string
+    description: Filters fuel reports by driver ID.
+  - name: vehicle
+    type: string
+    description: Filters fuel reports by vehicle ID.

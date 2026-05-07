@@ -1,0 +1,48 @@
+$kind: object
+name: Purchase Rate
+description: |-
+  A purchase rate records a purchased service quote and links it to an order, customer, transaction, amount, currency, and status.
+example: |
+  {
+    "id": "purchase_rate_7YqM3KpL2n",
+    "service_quote": "service_quote_6zV1KqN9pR",
+    "order": "order_7YqM3KpL2n",
+    "customer": "contact_6zV1KqN9pR",
+    "transaction": null,
+    "amount": 2500,
+    "currency": "USD",
+    "status": "created",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public purchase rate identifier.
+  - name: service_quote
+    type: string
+    description: Service quote associated with the purchase.
+  - name: order
+    type: string
+    description: Order associated with the purchase.
+  - name: customer
+    type: string
+    description: Customer associated with the purchase.
+  - name: transaction
+    type: string
+    description: Transaction associated with the purchase.
+  - name: amount
+    type: currency
+    description: Purchased amount.
+  - name: currency
+    type: currency
+    description: Three-letter currency code.
+  - name: status
+    type: string
+    description: Purchase rate status.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the purchase rate was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the purchase rate was created.

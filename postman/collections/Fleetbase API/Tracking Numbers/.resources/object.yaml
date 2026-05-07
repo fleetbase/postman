@@ -1,0 +1,56 @@
+$kind: object
+name: Tracking Number
+description: |-
+  A tracking number links a generated tracking code to an order or entity. It exposes the current tracking status, QR and barcode assets, console tracking URL, and owner type.
+example: |
+  {
+    "id": "tracking_3Nf8Qw2YxM",
+    "tracking_number": "FB-1001",
+    "subject": "order_7YqM3KpL2n",
+    "region": "US",
+    "status": "Created",
+    "status_code": "created",
+    "qr_code": "https://api.fleetbase.io/qr/FB-1001",
+    "barcode": "https://api.fleetbase.io/barcode/FB-1001",
+    "url": "https://console.fleetbase.io/track-order/FB-1001",
+    "type": "order",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public tracking number identifier.
+  - name: tracking_number
+    type: string
+    description: Generated tracking code.
+  - name: subject
+    type: string
+    description: Public ID of the owning order or entity.
+  - name: region
+    type: string
+    description: Region used for the tracking number.
+  - name: status
+    type: string
+    description: Latest human-readable status.
+  - name: status_code
+    type: string
+    description: Latest machine-readable status code.
+  - name: qr_code
+    type: string
+    description: QR code asset URL or data.
+  - name: barcode
+    type: string
+    description: Barcode asset URL or data.
+  - name: url
+    type: string
+    description: Tracking URL.
+  - name: type
+    type: string
+    description: Owner resource type.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the tracking number was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the tracking number was created.

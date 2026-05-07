@@ -1,19 +1,11 @@
 $kind: http-request
-description: |
-  This endpoint allows you to retrieve a tracking-number object to view it's details.
+description: |-
+  Deletes a tracking number by ID.
 url: "{{base_url}}/{{namespace}}/tracking-numbers/:id"
 method: DELETE
 headers:
   Accept: application/json
 pathVariables:
   id: "{{tracking_number_id}}"
-body:
-  type: json
-  content: |-
-    {
-        "name": "1",
-        "region": "US",
-        "owner": {{contact_id}}
-    }
 examples: ./.resources/Delete a Tracking Number.resources/examples
 order: 4000

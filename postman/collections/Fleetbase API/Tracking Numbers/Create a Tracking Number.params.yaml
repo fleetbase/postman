@@ -1,16 +1,18 @@
 $kind: params
 fields:
-  - name: name
+  - name: region
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Region code used when generating the tracking number.
+  - name: owner
     type: string
-    description: "Human-readable description of the resource."
+    required: true
+    description: Order or entity ID that owns the tracking number.
+  - name: type
+    type: enum
+    values: ["city", "province", "country"]
+    description: Region granularity used when generating the tracking number.
   - name: status
     type: enum
     values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
-    type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: Initial tracking number status.

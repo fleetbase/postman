@@ -1,8 +1,8 @@
 $kind: params
 fields:
   - name: from
-    type: string
-    description: "From value for this geofences request."
+    type: timestamp
+    description: Start of the dwell report time range.
   - name: to
-    type: string
-    description: "To value for this geofences request."
+    type: timestamp
+    description: End of the dwell report time range.

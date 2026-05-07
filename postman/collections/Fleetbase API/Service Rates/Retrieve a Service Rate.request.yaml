@@ -1,14 +1,8 @@
 $kind: http-request
-description: Retrieve a Service Rate.
+description: |-
+  Retrieves a service rate by ID.
 url: "{{base_url}}/{{namespace}}/service-rates/:id"
 method: GET
 pathVariables:
   id: "{{service_rate_id}}"
-body:
-  type: json
-  content: "{\r
-
-    \  \"id\": \"{{service_54k3175}}\"\r
-
-    }\r\n"
 order: 3000

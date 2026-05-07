@@ -1,6 +1,52 @@
 $kind: params
 fields:
+  - name: name
+    type: string
+    description: Service area display name.
+  - name: country
+    type: string
+    description: Country code or country name for the service area.
+  - name: type
+    type: string
+    description: Service area type.
   - name: status
     type: enum
     values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    description: Service area status.
+  - name: border
+    type: object
+    description: Service area polygon border.
+  - name: location
+    type: object
+    description: Resolvable point used to create a circular service area.
+  - name: latitude
+    type: number
+    description: Decimal latitude for a circular service area. Required with `longitude`.
+  - name: longitude
+    type: number
+    description: Decimal longitude for a circular service area. Required with `latitude`.
+  - name: radius
+    type: number
+    default: 500
+    description: Radius in meters when updating a circular service area.
+  - name: parent
+    type: string
+    description: Parent service area ID.
+  - name: color
+    type: string
+    description: Fill color used when rendering the service area.
+  - name: stroke_color
+    type: string
+    description: Stroke color used when rendering the service area.
+  - name: trigger_on_entry
+    type: boolean
+    description: Whether entering this service area should trigger geofence events.
+  - name: trigger_on_exit
+    type: boolean
+    description: Whether exiting this service area should trigger geofence events.
+  - name: dwell_threshold_minutes
+    type: integer
+    description: Minutes inside the service area before dwell behavior is triggered.
+  - name: speed_limit_kmh
+    type: integer
+    description: Speed limit in kilometers per hour for geofence events.

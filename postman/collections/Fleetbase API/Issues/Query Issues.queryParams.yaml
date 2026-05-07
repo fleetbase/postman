@@ -1,11 +1,20 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this issues request."
+    type: integer
+    description: Maximum number of issues to return.
   - name: offset
-    type: string
-    description: "Offset value for this issues request."
+    type: integer
+    description: Number of issues to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this issues request."
+    description: Sort expression for the issue query.
+  - name: driver
+    type: string
+    description: Filters issues by driver ID.
+  - name: vehicle
+    type: string
+    description: Filters issues by vehicle ID.
+  - name: status
+    type: string
+    description: Filters issues by status.

@@ -1,8 +1,8 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this organizations request."
+    type: integer
+    description: Maximum number of organizations to return.
   - name: with_driver_onboard
-    type: string
-    description: "With driver onboard value for this organizations request."
+    type: boolean
+    description: Includes organization driver-onboarding data when available.

@@ -1,0 +1,60 @@
+$kind: object
+name: Tracking Status
+description: |-
+  A tracking status is a timeline event for a tracking number. It stores status text, details, a code, location, and address context.
+example: |
+  {
+    "id": "tracking_status_6zV1KqN9pR",
+    "status": "Created",
+    "details": "Order was created.",
+    "code": "created",
+    "complete": false,
+    "tracking_number": "tracking_3Nf8Qw2YxM",
+    "city": "Singapore",
+    "province": null,
+    "postal_code": null,
+    "country": "SG",
+    "location": { "latitude": 1.3521, "longitude": 103.8198 },
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public tracking status identifier.
+  - name: status
+    type: string
+    description: Human-readable status.
+  - name: details
+    type: string
+    description: Status details.
+  - name: code
+    type: string
+    description: Machine-readable status code.
+  - name: complete
+    type: boolean
+    description: Whether this status marks the tracked workflow complete.
+  - name: tracking_number
+    type: object
+    description: Tracking number associated with the status.
+  - name: city
+    type: string
+    description: City where the status occurred.
+  - name: province
+    type: string
+    description: Province or region where the status occurred.
+  - name: postal_code
+    type: string
+    description: Postal code where the status occurred.
+  - name: country
+    type: string
+    description: Country code where the status occurred.
+  - name: location
+    type: object
+    description: Location where the status occurred.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the tracking status was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the tracking status was created.

@@ -1,5 +1,17 @@
 $kind: params
 fields:
-  - name: name
+  - name: query
     type: string
-    description: "Display name for the resource."
+    description: Search term matched against zone fields.
+  - name: limit
+    type: integer
+    description: Maximum number of zones to return.
+  - name: offset
+    type: integer
+    description: Number of zones to skip before returning results.
+  - name: sort
+    type: string
+    description: Sort expression for the zone query.
+  - name: service_area
+    type: string
+    description: Filters zones by service area ID.

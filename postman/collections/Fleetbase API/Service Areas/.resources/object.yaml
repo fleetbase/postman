@@ -1,0 +1,44 @@
+$kind: object
+name: Service Area
+description: |-
+  A service area defines an operating region. It stores a center point, border geometry, type, status, and optional loaded zones.
+example: |
+  {
+    "id": "service_area_4Mnp8Qx2Vz",
+    "name": "Singapore",
+    "type": "country",
+    "center": { "latitude": 1.3521, "longitude": 103.8198 },
+    "border": [],
+    "zones": [],
+    "status": "active",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public service area identifier.
+  - name: name
+    type: string
+    description: Service area display name.
+  - name: type
+    type: string
+    description: Service area type.
+  - name: center
+    type: object
+    description: Center point for the service area.
+  - name: border
+    type: object
+    description: Service area border geometry.
+  - name: zones
+    type: array of objects
+    description: Zones loaded with the service area.
+  - name: status
+    type: string
+    description: Service area status.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the service area was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the service area was created.

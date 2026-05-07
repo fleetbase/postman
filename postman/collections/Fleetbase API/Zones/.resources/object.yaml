@@ -1,0 +1,48 @@
+$kind: object
+name: Zone
+description: |-
+  A zone represents a geofenced area inside a service area. It stores a center point, border geometry, display colors, geofence trigger settings, and lifecycle status.
+example: |
+  {
+    "id": "zone_7YqM3KpL2n",
+    "name": "Downtown",
+    "description": "Downtown delivery zone",
+    "center": { "latitude": 1.3521, "longitude": 103.8198 },
+    "border": [],
+    "color": "#1f78ff",
+    "stroke_color": "#0b4fc4",
+    "status": "active",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public zone identifier.
+  - name: name
+    type: string
+    description: Zone display name.
+  - name: description
+    type: string
+    description: Zone description.
+  - name: center
+    type: object
+    description: Center point for the zone.
+  - name: border
+    type: object
+    description: Zone border geometry.
+  - name: color
+    type: string
+    description: Fill color used when rendering the zone.
+  - name: stroke_color
+    type: string
+    description: Stroke color used when rendering the zone.
+  - name: status
+    type: string
+    description: Zone status.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the zone was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the zone was created.

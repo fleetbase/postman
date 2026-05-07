@@ -1,15 +1,75 @@
 $kind: params
 fields:
-  - name: name
+  - name: service_name
     type: string
-    description: "Display name for the resource."
-  - name: description
+    description: Display name for the service rate.
+  - name: service_type
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
+    description: Service type this rate applies to.
+  - name: service_area
+    type: string
+    description: Service area ID this rate applies to.
+  - name: zone
+    type: string
+    description: Zone ID this rate applies to.
+  - name: rate_calculation_method
     type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
+    values: ["fixed_meter", "fixed_rate", "per_meter", "per_drop", "algo", "parcel"]
+    description: Method used to calculate the rate.
+  - name: currency
+    type: currency
+    description: Three-letter currency code.
+  - name: base_fee
+    type: currency
+    description: Base fee applied to the rate.
+  - name: per_meter_unit
+    type: enum
+    values: ["km", "m", "ft", "yd", "mi"]
+    description: Distance unit for `per_meter` rates.
+  - name: per_meter_flat_rate_fee
+    type: currency
+    description: Flat fee per distance unit for `per_meter` rates.
+  - name: meter_fees
+    type: array of objects
+    description: Distance fee tiers for `fixed_meter` or `fixed_rate` methods.
+  - name: algorithm
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: Computable algorithm used when `rate_calculation_method` is `algo`.
+  - name: has_cod_fee
+    type: boolean
+    description: Whether the rate includes a cash-on-delivery fee.
+  - name: cod_calculation_method
+    type: enum
+    values: ["percentage", "flat"]
+    description: Cash-on-delivery fee calculation method.
+  - name: cod_flat_fee
+    type: currency
+    description: Flat cash-on-delivery fee.
+  - name: cod_percent
+    type: integer
+    description: Percentage cash-on-delivery fee.
+  - name: has_peak_hours_fee
+    type: boolean
+    description: Whether the rate includes a peak-hours fee.
+  - name: peak_hours_calculation_method
+    type: enum
+    values: ["percentage", "flat"]
+    description: Peak-hours fee calculation method.
+  - name: peak_hours_flat_fee
+    type: currency
+    description: Flat peak-hours fee.
+  - name: peak_hours_percent
+    type: integer
+    description: Percentage peak-hours fee.
+  - name: peak_hours_start
+    type: string
+    description: Peak-hours start time in `HH:mm` format.
+  - name: peak_hours_end
+    type: string
+    description: Peak-hours end time in `HH:mm` format.
+  - name: duration_terms
+    type: string
+    description: Human-readable duration terms.
+  - name: estimated_days
+    type: integer
+    description: Estimated service duration in days.

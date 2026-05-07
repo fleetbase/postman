@@ -1,8 +1,14 @@
 $kind: params
 fields:
   - name: limit
+    type: integer
+    description: Maximum number of tracking statuses to return.
+  - name: offset
+    type: integer
+    description: Number of tracking statuses to skip before returning results.
+  - name: sort
     type: string
-    description: "Limit value for this tracking statuses request."
+    description: Sort expression for the tracking status query.
   - name: tracking_number
     type: string
-    description: "Tracking number ID associated with the status."
+    description: Filters statuses by tracking number ID.
