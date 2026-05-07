@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: caption
+    type: string
+    description: "Caption displayed with the file."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the resource."

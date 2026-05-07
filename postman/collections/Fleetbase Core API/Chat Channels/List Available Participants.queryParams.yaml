@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: channel
+    type: string
+    description: "Channel value for this chat channels request."
