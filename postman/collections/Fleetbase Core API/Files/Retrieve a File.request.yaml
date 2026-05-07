@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Retrieve a File"
+description: |-
+  Retrieves a file record by ID, including its URL, original filename, content type, size, caption, and metadata.
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: GET
 pathVariables:

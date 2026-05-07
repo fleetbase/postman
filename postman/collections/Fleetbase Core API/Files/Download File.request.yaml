@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Download File"
+description: |-
+  Downloads the binary contents of a file by ID. The API streams the stored file using its original filename.
 url: "{{base_url}}/{{namespace}}/files/:id/download"
 method: GET
 pathVariables:

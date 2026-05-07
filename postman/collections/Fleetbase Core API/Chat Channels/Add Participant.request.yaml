@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Add Participant"
+description: |-
+  Adds a user in the current organization to an existing chat channel. The response returns the created chat participant resource.
 url: "{{base_url}}/{{namespace}}/chat-channels/:id/add-participant"
 method: POST
 pathVariables:

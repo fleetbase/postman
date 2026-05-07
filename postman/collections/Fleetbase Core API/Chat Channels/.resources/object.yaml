@@ -1,0 +1,59 @@
+$kind: object
+name: Chat Channel
+description: |-
+  A chat channel groups participants and messages for organization-scoped conversations.
+example: |
+  {
+    "id": "chat_channel_5VUl2v4",
+    "created_by": "user_8xP2L1d",
+    "name": "Dispatch updates",
+    "title": "Dispatch updates",
+    "last_message": null,
+    "slug": "dispatch-updates",
+    "feed": [],
+    "participants": [],
+    "meta": {},
+    "updated_at": "2026-05-07T09:30:00Z",
+    "created_at": "2026-05-07T09:30:00Z",
+    "deleted_at": null
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the chat channel."
+  - name: created_by
+    type: string
+    description: "Public user ID of the user that created the channel."
+  - name: name
+    type: string
+    description: "Channel name."
+  - name: title
+    type: string
+    description: "Display title for the channel."
+  - name: last_message
+    type: object
+    description: "Most recent chat message for the channel, when available."
+  - name: unread_count
+    type: integer
+    description: "Unread message count for the current session user when session context is available."
+  - name: slug
+    type: string
+    description: "URL-friendly channel slug."
+  - name: feed
+    type: array of objects
+    description: "Messages and feed entries returned for the channel."
+  - name: participants
+    type: array of objects
+    description: "Chat participants in the channel."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the channel."
+  - name: updated_at
+    type: timestamp
+    description: "Time the channel was last updated."
+  - name: created_at
+    type: timestamp
+    description: "Time the channel was created."
+  - name: deleted_at
+    type: timestamp
+    description: "Time the channel was deleted, when soft deleted."

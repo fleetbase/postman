@@ -1,0 +1,72 @@
+$kind: object
+name: Organization
+description: |-
+  An organization is the company context associated with the current API credential.
+example: |
+  {
+    "id": "org_9W2KxA1",
+    "name": "Acme Logistics",
+    "description": "Regional logistics operations",
+    "phone": "+15555550100",
+    "timezone": "America/New_York",
+    "country": "US",
+    "currency": "USD",
+    "logo_url": "https://files.example.com/logos/acme.png",
+    "backdrop_url": null,
+    "branding": {},
+    "options": {},
+    "owner": null,
+    "slug": "acme-logistics",
+    "status": "active",
+    "updated_at": "2026-05-07T09:30:00Z",
+    "created_at": "2026-05-07T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the organization."
+  - name: name
+    type: string
+    description: "Organization name."
+  - name: description
+    type: string
+    description: "Organization description."
+  - name: phone
+    type: string
+    description: "Organization phone number."
+  - name: timezone
+    type: string
+    description: "Default timezone for the organization."
+  - name: country
+    type: string
+    description: "Organization country code."
+  - name: currency
+    type: currency
+    description: "Default currency code for the organization."
+  - name: logo_url
+    type: string
+    description: "URL of the organization logo."
+  - name: backdrop_url
+    type: string
+    description: "URL of the organization backdrop image."
+  - name: branding
+    type: object
+    description: "Branding settings returned with the organization."
+  - name: options
+    type: object
+    description: "Organization option values."
+  - name: owner
+    type: object
+    description: "Owner user for the organization, when included."
+  - name: slug
+    type: string
+    description: "URL-friendly organization slug."
+  - name: status
+    type: string
+    description: "Organization status."
+  - name: updated_at
+    type: timestamp
+    description: "Time the organization was last updated."
+  - name: created_at
+    type: timestamp
+    description: "Time the organization was created."

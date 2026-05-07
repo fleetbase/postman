@@ -1,0 +1,51 @@
+$kind: object
+name: Comment
+description: |-
+  A comment stores authored text against a subject resource or as a reply to another comment.
+example: |
+  {
+    "id": "comment_8JVZr4q",
+    "content": "Please confirm the delivery window.",
+    "tags": [],
+    "meta": {},
+    "author": {
+      "id": "user_8xP2L1d",
+      "name": "Alex Rivera"
+    },
+    "replies": [],
+    "editable": true,
+    "updated_at": "2026-05-07T09:30:00Z",
+    "created_at": "2026-05-07T09:30:00Z",
+    "deleted_at": null
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the comment."
+  - name: content
+    type: string
+    description: "Comment body."
+  - name: tags
+    type: array of strings
+    description: "Tags associated with the comment."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the comment."
+  - name: author
+    type: object
+    description: "User that authored the comment."
+  - name: replies
+    type: array of objects
+    description: "Nested replies to the comment."
+  - name: editable
+    type: boolean
+    description: "Whether the current session user can edit the comment."
+  - name: updated_at
+    type: timestamp
+    description: "Time the comment was last updated."
+  - name: created_at
+    type: timestamp
+    description: "Time the comment was created."
+  - name: deleted_at
+    type: timestamp
+    description: "Time the comment was deleted, when soft deleted."

@@ -1,16 +1,27 @@
 $kind: params
 fields:
-  - name: name
+  - name: content
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: "Comment body."
+  - name: subject
+    type: object
+    description: "Subject resource receiving the comment. Provide this object when creating a top-level comment."
+    fields:
+      - name: id
+        type: string
+        required: true
+        description: "Public ID of the subject resource."
+      - name: type
+        type: string
+        required: true
+        description: "Mutation type or resource type used to resolve the subject model."
+  - name: subject_id
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
+    description: "Public ID of the subject resource. Use with `subject_type` as an alternative to `subject`."
+  - name: subject_type
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: "Mutation type or resource type used to resolve the subject model. Use with `subject_id`."
+  - name: parent
+    type: string
+    description: "Public ID of the parent comment when creating a reply."

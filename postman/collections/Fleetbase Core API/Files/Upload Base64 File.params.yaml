@@ -1,0 +1,46 @@
+$kind: params
+fields:
+  - name: data
+    type: string
+    required: true
+    description: "Base64-encoded file contents."
+  - name: file_name
+    type: string
+    required: true
+    description: "Filename to use when storing the decoded file."
+  - name: file_type
+    type: string
+    description: "Logical file type stored on the file record. Defaults to `image`."
+  - name: content_type
+    type: string
+    description: "MIME content type stored on the file record. Defaults to `image/png`."
+  - name: subject_uuid
+    type: string
+    description: "UUID of a subject resource to associate with the file."
+  - name: subject_type
+    type: string
+    description: "Model class or subject type for the associated resource."
+  - name: resize
+    type: enum
+    values: ["thumb", "sm", "md", "lg", "xl", "2xl"]
+    description: "Optional image resize preset."
+  - name: resize_width
+    type: integer
+    description: "Target resize width in pixels. Must be between 1 and 10000."
+  - name: resize_height
+    type: integer
+    description: "Target resize height in pixels. Must be between 1 and 10000."
+  - name: resize_mode
+    type: enum
+    values: ["fit", "crop", "stretch", "contain"]
+    description: "Resize mode used when transforming the image."
+  - name: resize_quality
+    type: integer
+    description: "Resize output quality from 1 to 100."
+  - name: resize_format
+    type: enum
+    values: ["jpg", "jpeg", "png", "webp", "gif", "bmp", "avif"]
+    description: "Output image format for the resized file."
+  - name: resize_upscale
+    type: boolean
+    description: "Whether smaller images may be upscaled during resizing."

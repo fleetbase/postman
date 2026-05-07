@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Retrieve Comment"
+description: |-
+  Retrieves a comment by ID, including its author and any nested replies returned by the API resource.
 url: "{{base_url}}/{{namespace}}/comments/:id"
 method: GET
 pathVariables:

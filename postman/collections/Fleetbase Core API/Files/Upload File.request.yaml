@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Upload File"
+description: |-
+  Uploads a multipart file and creates a file record. The response includes the stored file URL and metadata captured from the upload.
 url: "{{base_url}}/{{namespace}}/files"
 method: POST
 body:

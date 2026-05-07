@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Delete a File"
+description: |-
+  Deletes a file record by ID. The response returns a deleted-resource envelope for the removed file.
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: DELETE
 pathVariables:

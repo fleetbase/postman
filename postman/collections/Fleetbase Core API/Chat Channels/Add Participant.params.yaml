@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: user
+    type: string
+    required: true
+    description: "Public ID of the user to add to the chat channel."

@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Upload Base64 File"
+description: |-
+  Creates a file from base64-encoded data. Fleetbase stores the decoded file, creates a file record, and optionally associates it with a subject resource.
 url: "{{base_url}}/{{namespace}}/files/base64"
 method: POST
 body:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Retrieve Chat Channel"
+description: |-
+  Retrieves a chat channel by ID, including its participants, feed, and latest message metadata.
 url: "{{base_url}}/{{namespace}}/chat-channels/:id"
 method: GET
 pathVariables:

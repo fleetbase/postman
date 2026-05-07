@@ -3,14 +3,7 @@ fields:
   - name: name
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
-    type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
-    type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: "Name of the chat channel."
+  - name: participants
+    type: array of strings
+    description: "Public user IDs to add as participants after the channel is created."

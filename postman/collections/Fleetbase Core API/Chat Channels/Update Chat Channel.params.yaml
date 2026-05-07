@@ -2,4 +2,5 @@ $kind: params
 fields:
   - name: name
     type: string
-    description: "Display name for the resource."
+    required: true
+    description: "Updated channel name."

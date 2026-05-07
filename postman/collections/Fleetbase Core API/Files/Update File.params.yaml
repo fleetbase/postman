@@ -3,6 +3,9 @@ fields:
   - name: caption
     type: string
     description: "Caption displayed with the file."
+  - name: filename
+    type: string
+    description: "New original filename to store on the file record."
   - name: meta
     type: object
-    description: "Arbitrary metadata stored with the resource."
+    description: "Arbitrary metadata stored with the file record."

@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Query Chat Channels"
+description: |-
+  Returns chat channels visible to the current organization. Use query parameters to filter, sort, and paginate the result set.
 url: "{{base_url}}/{{namespace}}/chat-channels"
 method: GET
 queryParams:
