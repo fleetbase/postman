@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places/search"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    ll: "25.0147912108003,121.46998215767363"
+    locale: "zh-TW"
+    query: "臺北市中山區忠孝東歐物"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "search-places-request-yaml_abc123",
+        "object": "search-places-request-yaml",
+        "status": "active",
+        "created_at": "2026-05-07T12:00:00Z",
+        "updated_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000
