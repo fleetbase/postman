@@ -1,0 +1,12 @@
+$kind: object
+name: Gateway Webhook
+description: |-
+  A gateway webhook is an inbound provider event handled by a Ledger payment gateway driver.
+example: |
+  {
+    "message": "Webhook received."
+  }
+fields:
+  - name: message
+    type: string
+    description: "Processing result returned to the gateway provider."

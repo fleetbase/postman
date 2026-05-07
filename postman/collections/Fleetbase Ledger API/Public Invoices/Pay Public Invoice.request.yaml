@@ -1,5 +1,6 @@
 $kind: http-request
-description: Pay Public Invoice
+description: |-
+  Initiates or records payment for a public invoice. Stripe gateways return a checkout URL, while non-redirect gateways record the invoice payment immediately.
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/pay"
 method: POST
 headers:

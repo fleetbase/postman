@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: company_uuid
+    type: string
+    description: "Organization UUID used to resolve the active gateway when the gateway driver supports multi-company callbacks."
+  - name: id
+    type: string
+    description: "Gateway event or transaction identifier from the provider payload."
+  - name: type
+    type: string
+    description: "Gateway event type, such as a payment succeeded or payment failed event."
+  - name: data
+    type: object
+    description: "Provider-specific webhook data passed to the gateway driver for parsing."

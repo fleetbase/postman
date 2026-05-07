@@ -1,0 +1,108 @@
+$kind: object
+name: Public Invoice
+description: |-
+  A public invoice is the customer-facing representation of a Ledger invoice. It includes invoice totals, dates, line items, customer data when available, and payment state.
+example: |
+  {
+    "id": "invoice_7fJ3kQ9",
+    "public_id": "invoice_7fJ3kQ9",
+    "customer": null,
+    "order": null,
+    "transaction": null,
+    "template": null,
+    "number": "INV-1007",
+    "status": "sent",
+    "date": "2026-05-07",
+    "due_date": "2026-05-21",
+    "currency": "USD",
+    "subtotal": 12500,
+    "tax": 0,
+    "total_amount": 12500,
+    "amount_paid": 0,
+    "balance": 12500,
+    "notes": "Thank you for your business.",
+    "terms": "Due on receipt.",
+    "items": [],
+    "meta": {},
+    "sent_at": "2026-05-07T09:30:00Z",
+    "viewed_at": null,
+    "paid_at": null,
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the invoice."
+  - name: public_id
+    type: string
+    description: "Public identifier of the invoice."
+  - name: customer
+    type: object
+    description: "Customer associated with the invoice, when loaded."
+  - name: order
+    type: object
+    description: "Related order, when loaded."
+  - name: transaction
+    type: object
+    description: "Related transaction, when loaded."
+  - name: template
+    type: object
+    description: "Invoice template, when loaded."
+  - name: number
+    type: string
+    description: "Invoice number."
+  - name: status
+    type: string
+    description: "Invoice status."
+  - name: date
+    type: date
+    description: "Invoice issue date."
+  - name: due_date
+    type: date
+    description: "Invoice due date."
+  - name: currency
+    type: currency
+    description: "Invoice currency code."
+  - name: subtotal
+    type: integer
+    description: "Subtotal in the smallest currency unit."
+  - name: tax
+    type: integer
+    description: "Tax amount in the smallest currency unit."
+  - name: total_amount
+    type: integer
+    description: "Total invoice amount in the smallest currency unit."
+  - name: amount_paid
+    type: integer
+    description: "Amount paid in the smallest currency unit."
+  - name: balance
+    type: integer
+    description: "Remaining balance in the smallest currency unit."
+  - name: notes
+    type: string
+    description: "Invoice notes."
+  - name: terms
+    type: string
+    description: "Invoice payment terms."
+  - name: items
+    type: array of objects
+    description: "Invoice line items."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the invoice."
+  - name: sent_at
+    type: timestamp
+    description: "Time the invoice was sent."
+  - name: viewed_at
+    type: timestamp
+    description: "Time the invoice was first viewed publicly."
+  - name: paid_at
+    type: timestamp
+    description: "Time the invoice was paid."
+  - name: created_at
+    type: timestamp
+    description: "Time the invoice was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the invoice was last updated."

@@ -1,5 +1,6 @@
 $kind: http-request
-description: List Wallet Transactions
+description: |-
+  Lists transactions for the authenticated subject's wallet. Results can be filtered by transaction type, direction, status, and creation date range.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/transactions"
 method: GET
 headers:

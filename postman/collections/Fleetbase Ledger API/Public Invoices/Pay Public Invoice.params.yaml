@@ -1,0 +1,9 @@
+$kind: params
+fields:
+  - name: gateway_id
+    type: string
+    required: true
+    description: "Public ID of the payment gateway to use for the invoice payment."
+  - name: reference
+    type: string
+    description: "Customer-provided payment reference or note."

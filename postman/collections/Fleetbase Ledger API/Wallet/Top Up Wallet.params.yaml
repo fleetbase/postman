@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: gateway
+    type: string
+    required: true
+    description: "Public ID or UUID of the payment gateway to charge."
+  - name: amount
+    type: integer
+    required: true
+    description: "Top-up amount in the smallest currency unit. Must be at least 100."
+  - name: payment_method_token
+    type: string
+    description: "Gateway payment method token, such as a Stripe `pm_` token."
+  - name: customer_id
+    type: string
+    description: "Customer ID from the payment gateway."
+  - name: description
+    type: string
+    description: "Description stored with the top-up payment. Maximum length is 500 characters."

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Top Up Wallet
+description: |-
+  Tops up the authenticated subject's wallet through a configured payment gateway. Amounts are submitted in the smallest currency unit.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/topup"
 method: POST
 headers:
