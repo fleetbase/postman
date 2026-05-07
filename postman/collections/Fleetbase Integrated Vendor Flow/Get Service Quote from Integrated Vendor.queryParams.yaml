@@ -1,0 +1,53 @@
+$kind: params
+fields:
+  - name: service_type
+    type: string
+    description: "Service type code used for rating and dispatch logic."
+  - name: facilitator
+    type: string
+    description: "Vendor or contact ID that facilitates the order."
+  - name: is_route_optimized
+    type: boolean
+    description: "Is route optimized value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[0][name]
+    type: string
+    description: "Waypoints[0][name] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[0][phone]
+    type: string
+    description: "Waypoints[0][phone] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[0][location][type]
+    type: string
+    description: "Waypoints[0][location][type] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[0][location][coordinates]
+    type: string
+    description: "Waypoints[0][location][coordinates] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[1][name]
+    type: string
+    description: "Waypoints[1][name] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[1][phone]
+    type: string
+    description: "Waypoints[1][phone] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[1][remarks]
+    type: string
+    description: "Waypoints[1][remarks] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[1][location][type]
+    type: string
+    description: "Waypoints[1][location][type] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[1][location][coordinates]
+    type: string
+    description: "Waypoints[1][location][coordinates] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[2][name]
+    type: string
+    description: "Waypoints[2][name] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[2][phone]
+    type: string
+    description: "Waypoints[2][phone] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[2][remarks]
+    type: string
+    description: "Waypoints[2][remarks] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[2][location][type]
+    type: string
+    description: "Waypoints[2][location][type] value for this get service quote from integrated vendor.request.yaml request."
+  - name: waypoints[2][location][coordinates]
+    type: string
+    description: "Waypoints[2][location][coordinates] value for this get service quote from integrated vendor.request.yaml request."
