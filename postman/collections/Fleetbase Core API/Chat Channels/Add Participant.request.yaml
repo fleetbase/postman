@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Add Participant"
+description: |-
+  Add Participant for chat channels. The response returns the result of the operation.
 url: "{{base_url}}/{{namespace}}/chat-channels/:id/add-participant"
 method: POST
 pathVariables:

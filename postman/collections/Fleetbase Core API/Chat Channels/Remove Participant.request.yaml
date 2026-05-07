@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Remove Participant"
+description: |-
+  Deletes a chat channels resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{namespace}}/chat-channels/remove-participant/:participantId"
 method: DELETE
 pathVariables:

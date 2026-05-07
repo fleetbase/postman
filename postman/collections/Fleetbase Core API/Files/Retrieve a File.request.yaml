@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Retrieve a File"
+description: |-
+  Retrieves a file. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: GET
 pathVariables:

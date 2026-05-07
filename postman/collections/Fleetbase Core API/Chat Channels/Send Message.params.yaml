@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: sender
+    type: string
+    description: "Sender value for this chat channels request."
+  - name: content
+    type: string
+    description: "Content value for this chat channels request."
+  - name: files
+    type: array of strings
+    description: "Files value for this chat channels request."
