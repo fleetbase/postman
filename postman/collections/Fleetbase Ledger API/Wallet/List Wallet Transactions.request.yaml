@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns wallet matching the supplied filters. Use pagination and query parameters to control the result set.
+description: List Wallet Transactions
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/transactions"
 method: GET
 headers:

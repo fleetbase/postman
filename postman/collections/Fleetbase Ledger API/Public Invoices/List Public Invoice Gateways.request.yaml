@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns public invoices matching the supplied filters. Use pagination and query parameters to control the result set.
+description: List Public Invoice Gateways
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/gateways"
 method: GET
 headers:

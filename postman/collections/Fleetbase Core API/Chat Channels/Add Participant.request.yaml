@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Adds a participant to a chat channel. The response returns the updated channel membership.
+description: "Add Participant"
 url: "{{base_url}}/{{namespace}}/chat-channels/:id/add-participant"
 method: POST
 pathVariables:

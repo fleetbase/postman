@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Authenticates a storefront customer with Facebook account details. The response returns the customer profile and an access token when authentication succeeds.
+description: Authenticate a Customer with Facebook
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-facebook"
 method: POST
 headers:

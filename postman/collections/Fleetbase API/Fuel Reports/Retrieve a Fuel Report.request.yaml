@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a fuel report. The response includes the current API representation of the resource.
+description: "Retrieve a Fuel Report"
 url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
 method: GET
 pathVariables:

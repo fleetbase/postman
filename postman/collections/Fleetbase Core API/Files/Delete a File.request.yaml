@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Deletes a files resource. The response confirms the resource that was removed.
+description: "Delete a File"
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: DELETE
 pathVariables:

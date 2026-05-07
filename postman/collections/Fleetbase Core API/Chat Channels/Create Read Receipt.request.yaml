@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates a chat channels resource. The response returns the created resource with its generated identifier.
+description: "Create Read Receipt"
 url: "{{base_url}}/{{namespace}}/chat-channels/read-message/:chatMessageId"
 method: POST
 pathVariables:

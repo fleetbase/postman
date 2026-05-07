@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a wallet. The response includes the current API representation of the resource.
+description: Get Wallet
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet"
 method: GET
 headers:

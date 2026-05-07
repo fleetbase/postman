@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a driver. The response includes the current API representation of the resource.
+description: This endpoint allows you to retrieve a driver object to view it's details.
 url: "{{base_url}}/{{namespace}}/drivers/:id"
 method: GET
 headers:

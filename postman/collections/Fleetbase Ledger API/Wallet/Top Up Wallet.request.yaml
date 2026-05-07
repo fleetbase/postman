@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Tops up the authenticated subject wallet through a payment gateway. The response returns the updated wallet and gateway transaction details.
+description: Top Up Wallet
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/topup"
 method: POST
 headers:

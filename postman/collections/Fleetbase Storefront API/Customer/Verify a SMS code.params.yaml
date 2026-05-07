@@ -1,6 +1,0 @@
-$kind: params
-fields:
-  - name: code
-    type: string
-    required: true
-    description: "Verification or status code."

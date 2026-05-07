@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a tracking statuses resource. Parameters not supplied remain unchanged.
+  Updates an existing tracking status. The response returns the tracking status with the new values applied.
 url: "{{base_url}}/{{namespace}}/tracking-statuses/:id"
 method: PUT
 headers:

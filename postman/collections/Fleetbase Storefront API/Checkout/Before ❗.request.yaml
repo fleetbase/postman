@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Initializes checkout for a cart, customer, gateway, and service quote. The response returns the checkout token or payment intent details required to complete payment.
+description: Before ❗
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
 headers:

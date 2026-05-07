@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Returns service quotes matching the supplied filters. Use pagination and query parameters to control the result set.
+  This endpoint is used to get the ServiceRate quotes based on pickup point location and drop off point location, or payload.
+
+  For some quotes such as parcel based, the payload must be included for calculation of the payload cost.
 url: "{{base_url}}/{{namespace}}/service-quotes"
 method: GET
 headers:

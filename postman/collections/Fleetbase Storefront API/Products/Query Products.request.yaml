@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns products matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns products available in the current storefront. Use pagination and filters to browse the catalog.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
 method: GET
 headers:

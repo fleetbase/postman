@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a purchase rate. The response includes the current API representation of the resource.
+description: This endpoint allows you to retrieve a purchase-rate object to view it's details.
 url: "{{base_url}}/{{namespace}}/purchase-rates/:id"
 method: GET
 headers:

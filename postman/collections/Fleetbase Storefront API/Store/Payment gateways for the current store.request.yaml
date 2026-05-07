@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Lists payment gateways available to the current storefront. Use the response to decide which payment methods can be offered at checkout.
+description: Payment gateways for the current store
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways"
 method: GET
 headers:

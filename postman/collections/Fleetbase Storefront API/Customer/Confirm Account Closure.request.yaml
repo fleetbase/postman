@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Confirms account closure with the verification code sent to the customer. The response returns the closure result.
+description: Confirm Account Closure
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/confirm-account-closure"
 method: POST
 headers:

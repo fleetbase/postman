@@ -1,9 +1,0 @@
-$kind: params
-fields:
-  - name: token
-    type: string
-    required: true
-    description: "Token used to authorize or capture the operation."
-  - name: platform
-    type: string
-    description: "Platform value for this drivers request."

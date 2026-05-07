@@ -1,8 +1,0 @@
-$kind: params
-fields:
-  - name: idToken
-    type: string
-    description: "IdToken value for this customer request."
-  - name: clientId
-    type: string
-    description: "ClientId value for this customer request."

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates a tracking numbers resource. The response returns the created resource with its generated identifier.
+description: |
   This endpoint allows you to retrieve a tracking-number object to view it's details.
 url: "{{base_url}}/{{namespace}}/tracking-numbers"
 method: POST

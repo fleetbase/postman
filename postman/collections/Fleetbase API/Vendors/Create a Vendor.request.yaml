@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates a vendor. The response returns the created resource with its generated identifier.
+description: Create a vendor
 url: "{{base_url}}/{{namespace}}/vendors"
 method: POST
 headers:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a cart. The response includes the current API representation of the resource.
+  Retrieves the current cart or creates a new cart when no cart identifier is supplied. Use the returned cart ID for subsequent cart operations.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts"
 method: GET
 headers:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns customer matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns orders that belong to the authenticated storefront customer. Use pagination and filters to browse the customer order history.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/orders"
 method: GET
 headers:

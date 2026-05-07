@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Deletes a fleets resource. The response confirms the resource that was removed.
+description: Deletes a fleet.
 url: "{{base_url}}/{{namespace}}/fleets/:id"
 method: DELETE
 headers:

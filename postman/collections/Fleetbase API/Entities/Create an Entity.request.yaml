@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates an entities resource. The response returns the created resource with its generated identifier.
+description: Create an Entity.
 url: "{{base_url}}/{{namespace}}/entities"
 method: POST
 headers:

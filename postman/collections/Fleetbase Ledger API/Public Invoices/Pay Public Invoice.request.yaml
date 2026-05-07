@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Pays a public invoice with the selected payment gateway. The response returns either a hosted checkout URL or the updated invoice payment state.
+description: Pay Public Invoice
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/pay"
 method: POST
 headers:

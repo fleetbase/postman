@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns food trucks matching the supplied filters. Use pagination and query parameters to control the result set.
+description: Query Food Trucks
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/food-trucks"
 method: GET
 headers:

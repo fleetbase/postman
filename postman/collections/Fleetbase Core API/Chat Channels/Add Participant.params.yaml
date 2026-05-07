@@ -1,5 +1,0 @@
-$kind: params
-fields:
-  - name: user
-    type: string
-    description: "User value for this chat channels request."

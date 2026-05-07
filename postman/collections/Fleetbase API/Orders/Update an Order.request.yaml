@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Updates an orders resource. Parameters not supplied remain unchanged.
+description: Update an Order.
 url: "{{base_url}}/{{namespace}}/orders/:id"
 method: PUT
 pathVariables:

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates a review. The response returns the created resource with its generated identifier.
+description: Create a review
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: POST
 headers:

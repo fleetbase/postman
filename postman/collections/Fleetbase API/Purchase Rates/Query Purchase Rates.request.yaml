@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns purchase rates matching the supplied filters. Use pagination and query parameters to control the result set.
+description: This endpoint allows you to query purchase-rates you have created, it also provides paginated results on all the purchase-rates in your Fleetbase.
 url: "{{base_url}}/{{namespace}}/purchase-rates"
 method: GET
 queryParams:

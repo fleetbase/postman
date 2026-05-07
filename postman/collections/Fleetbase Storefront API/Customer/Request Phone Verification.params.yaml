@@ -1,5 +1,0 @@
-$kind: params
-fields:
-  - name: phone
-    type: string
-    description: "Phone number for the person or customer."

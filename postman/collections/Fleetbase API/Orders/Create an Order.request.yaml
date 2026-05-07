@@ -1,6 +1,12 @@
 $kind: http-request
 description: |-
-  Creates an orders resource. The response returns the created resource with its generated identifier.
+  To create a new `Order` in Fleetbase, the `Order` requires a payload which describres each `Entity` in the order as well as the geolocational waypoints. The payload can be created previously or created by sending a `Payload` object embedded within the Order request.
+
+  Orders can also be subcontracted to a facilitator which can be either a `Contact` or `Vendor`. Like facilitator, the Order can also be assigned a customer which can also be either a `Contact` or `Vendor`.
+
+  To schedule an order upon creation use the `scheduled_at` parameter to send a date and time to schedule the order.
+
+  To assign a driver to the order the send the id of the driver to assign using the `driver` parameter.
 url: "{{base_url}}/{{namespace}}/orders"
 method: POST
 headers:

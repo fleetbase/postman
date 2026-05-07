@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a service area. The response includes the current API representation of the resource.
+description: This endpoint allows you to retrieve a service area object to view it's details.
 url: "{{base_url}}/{{namespace}}/service-areas/:id"
 method: GET
 headers:

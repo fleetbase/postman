@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Starts an order and moves it into active fulfillment. Use this when a driver or dispatcher begins work on the order.
+  Starts an order and transitions it into active execution. Use this when a driver or dispatcher begins fulfillment.
 url: "{{base_url}}/{{namespace}}/orders/:id/start"
 method: POST
 pathVariables:

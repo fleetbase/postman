@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a vendor. The response includes the current API representation of the resource.
+description: This endpoint allows you to retrieve a vendor object to view it's details.
 url: "{{base_url}}/{{namespace}}/vendors/:id"
 method: GET
 headers:

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a comment. The response includes the current API representation of the resource.
+description: "Retrieve Comment"
 url: "{{base_url}}/{{namespace}}/comments/:id"
 method: GET
 pathVariables:

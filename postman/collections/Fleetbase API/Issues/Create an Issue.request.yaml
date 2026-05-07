@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates an issues resource. The response returns the created resource with its generated identifier.
+description: "Create an Issue"
 url: "{{base_url}}/{{namespace}}/issues"
 method: POST
 body:

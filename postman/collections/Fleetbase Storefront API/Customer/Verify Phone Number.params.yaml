@@ -1,9 +1,0 @@
-$kind: params
-fields:
-  - name: phone
-    type: string
-    description: "Phone number for the person or customer."
-  - name: code
-    type: string
-    required: true
-    description: "Verification or status code."

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns drivers matching the supplied filters. Use pagination and query parameters to control the result set.
+description: This endpoint allows you to retrieve a driver object to view it's details.
 url: "{{base_url}}/{{namespace}}/drivers"
 method: GET
 headers:

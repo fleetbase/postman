@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Deletes an issues resource. The response confirms the resource that was removed.
+description: "Delete an Issue"
 url: "{{base_url}}/{{namespace}}/issues/:id"
 method: DELETE
 pathVariables:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a customer resource. The response returns the created resource with its generated identifier.
+  Creates a storefront customer after verifying the supplied creation code. The response includes the customer profile and an auth token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers"
 method: POST
 headers:

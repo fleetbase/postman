@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Deletes a comments resource. The response confirms the resource that was removed.
+description: "Delete Comment"
 url: "{{base_url}}/{{namespace}}/comments/:id"
 method: DELETE
 pathVariables:

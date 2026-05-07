@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns files matching the supplied filters. Use pagination and query parameters to control the result set.
+description: "Query Files"
 url: "{{base_url}}/{{namespace}}/files"
 method: GET
 queryParams:

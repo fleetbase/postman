@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Uploads a file using multipart form data. The response returns the created file resource.
+description: "Upload File"
 url: "{{base_url}}/{{namespace}}/files"
 method: POST
 body:

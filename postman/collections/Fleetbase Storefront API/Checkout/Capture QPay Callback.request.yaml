@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Processes a QPay checkout callback and publishes the payment result for the checkout session. The response returns payment status details when a response is requested.
+description: Capture QPay Callback
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: POST
 headers:

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a chat channel. The response includes the current API representation of the resource.
+description: "Retrieve Chat Channel"
 url: "{{base_url}}/{{namespace}}/chat-channels/:id"
 method: GET
 pathVariables:

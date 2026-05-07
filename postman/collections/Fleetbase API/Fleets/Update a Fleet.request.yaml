@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Updates a fleet. Parameters not supplied remain unchanged.
+description: Updates a fleet.
 url: "{{base_url}}/{{namespace}}/fleets/:id"
 method: PUT
 headers:

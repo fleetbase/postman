@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a customer resource. Parameters not supplied remain unchanged.
+  Updates a storefront customer profile. The response returns the customer with the new values applied.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{id}"
 method: PUT
 headers:
