@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/distance-and-time"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "distance": 4830,
+        "time": 875
+      }
+order: 1000

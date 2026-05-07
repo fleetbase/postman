@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/eta"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "9b14b5c4-4669-4f1b-8d52-ef5d9317ad6b": 720,
+        "2c44c9f7-4e50-463a-bd0f-f50ab6d2f5e1": 1540
+      }
+order: 1000

@@ -1,0 +1,33 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/proofs/:subjectId"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+    subjectId: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": "proof_8pQ3mN7xYa",
+          "subject_id": "order_7YqM3KpL2n",
+          "order_id": "order_7YqM3KpL2n",
+          "url": "https://files.example.com/uploads/company_123/signatures/proof_8pQ3mN7xYa.png",
+          "remarks": "Verified by Signature",
+          "raw": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
+          "data": {
+            "recipient_name": "Alex Receiver"
+          },
+          "updated_at": "2026-05-07T09:10:00.000000Z",
+          "created_at": "2026-05-07T09:10:00.000000Z"
+        }
+      ]
+order: 1000
