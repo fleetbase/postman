@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  Updates the specified place by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the location parameter, that becomes the place's new location to be used for all spatial queries in the future.
-
-  This request accepts mostly the same arguments as the place creation call.
+  Updates a place. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/places/:id"
 method: PUT
 headers:

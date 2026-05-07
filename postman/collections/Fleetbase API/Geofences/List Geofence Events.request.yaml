@@ -1,5 +1,6 @@
 $kind: http-request
-description: "List Geofence Events"
+description: |-
+  Returns geofences matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/geofences/events"
 method: GET
 

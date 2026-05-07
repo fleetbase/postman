@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: skip_dispatch
+    type: string
+    description: "Skip dispatch value for this orders request."

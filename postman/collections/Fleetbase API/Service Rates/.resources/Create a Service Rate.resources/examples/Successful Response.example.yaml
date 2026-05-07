@@ -1,0 +1,65 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-rates"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: "{\r
+  
+      \    \"service_name\": \"Food Delivery\",\r
+  
+      \    \"service_type\": \"food_delivery\",\r
+  
+      \    \"rate_calculation_method\": \"per_meter\",\r
+  
+      \    \"currency\": \"USD\",\r
+  
+      \    \"base_fee\": 10.00,\r
+  
+      \    \"per_meter_unit\": \"km\",\r
+  
+      \    \"per_meter_flat_rate_fee\": 25,\r
+  
+      \    \"has_cod_fee\": true,\r
+  
+      \    \"cod_calculation_method\": \"percentage\",\r
+  
+      \    \"cod_flat_fee\": 1.00,\r
+  
+      \    \"cod_percent\": 0,\r
+  
+      \    \"has_peak_hours_fee\": true,\r
+  
+      \    \"peak_hours_calculation_method\": \"percentage\",\r
+  
+      \    \"peak_hours_flat_fee\": 3.00,\r
+  
+      \    \"peak_hours_percent\": 0,\r
+  
+      \    \"peak_hours_start\": \"17:00\",\r
+  
+      \    \"peak_hours_end\": \"18:45\",\r
+  
+      \    \"duration_terms\": \"Standard\",\r
+  
+      \    \"estimated_days\": 3\r
+  
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "service-rate_abc123",
+        "object": "service-rate",
+        "status": "active",
+        "created_at": "2026-05-07T12:00:00Z",
+        "updated_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

@@ -1,5 +1,6 @@
 $kind: http-request
-description: This endpoint allows you to query vehicles you have created, it also provides paginated results on all the vehicles in your Fleetbase.
+description: |-
+  Returns vehicles matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/vehicles"
 method: GET
 headers:

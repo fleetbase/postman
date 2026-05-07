@@ -1,6 +1,6 @@
 $kind: http-request
-description: |
-  This endpoint allows you to retrieve a tracking-number object to view it's details.
+description: |-
+  Retrieves a tracking number. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{namespace}}/tracking-numbers/:id"
 method: GET
 headers:

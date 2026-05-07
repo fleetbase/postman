@@ -1,5 +1,6 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a vendor object to view it's details.
+description: |-
+  Returns vendors matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/vendors"
 method: GET
 headers:

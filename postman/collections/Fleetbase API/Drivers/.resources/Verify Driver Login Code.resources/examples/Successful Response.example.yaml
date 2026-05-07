@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/drivers/verify-code"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "identity": "{{driver_identity}}",
+        "code": "{{verification_code}}"
+      }
+  
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "driver_abc123",
+        "object": "driver",
+        "name": "Alex Driver",
+        "status": "active",
+        "phone": "+15555550101",
+        "online": false,
+        "created_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

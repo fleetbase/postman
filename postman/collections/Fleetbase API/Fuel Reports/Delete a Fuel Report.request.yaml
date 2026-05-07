@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Delete a Fuel Report"
+description: |-
+  Deletes a fuel reports resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
 method: DELETE
 pathVariables:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Create a Fuel Report"
+description: |-
+  Creates a fuel reports resource. The response returns the created resource with its generated identifier.
 url: "{{base_url}}/{{namespace}}/fuel-reports"
 method: POST
 body:

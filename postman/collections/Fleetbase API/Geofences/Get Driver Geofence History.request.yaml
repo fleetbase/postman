@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Get Driver Geofence History"
+description: |-
+  Retrieves a geofence. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{namespace}}/geofences/driver/:driverUuid/history"
 method: GET
 

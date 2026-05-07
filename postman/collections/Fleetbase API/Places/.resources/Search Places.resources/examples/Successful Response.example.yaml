@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places/search"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    query: "{{place_query}}"
+    ll: "{{place_ll}}"
+    locale: "{{locale}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "place_abc123",
+        "object": "place",
+        "name": "Central Park",
+        "latitude": 40.7829,
+        "longitude": -73.9654,
+        "city": "New York",
+        "country": "US",
+        "created_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

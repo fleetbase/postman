@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: "Display name for the resource."
+  - name: region
+    type: string
+    description: "Region value for this tracking numbers request."
+  - name: owner
+    type: string
+    description: "Owner value for this tracking numbers request."

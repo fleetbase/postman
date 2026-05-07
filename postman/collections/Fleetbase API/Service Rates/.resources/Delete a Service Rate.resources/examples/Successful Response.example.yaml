@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-rates/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "service-rate_abc123",
+        "object": "service-rate",
+        "deleted": true
+      }
+order: 1000

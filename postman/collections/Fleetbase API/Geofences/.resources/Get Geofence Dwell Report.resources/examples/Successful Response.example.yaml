@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/geofences/dwell-report"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    from: "{{from_datetime}}"
+    to: "{{to_datetime}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "geofence_abc123",
+        "object": "geofence",
+        "status": "active",
+        "created_at": "2026-05-07T12:00:00Z",
+        "updated_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

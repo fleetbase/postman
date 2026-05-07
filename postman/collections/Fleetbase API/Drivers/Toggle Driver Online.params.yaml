@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: online
+    type: boolean
+    description: "Online value for this drivers request."

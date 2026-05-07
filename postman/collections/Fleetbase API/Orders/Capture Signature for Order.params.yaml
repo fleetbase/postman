@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: signature
+    type: string
+    description: "Signature value for this orders request."
+  - name: data
+    type: array of strings
+    description: "Data value for this orders request."

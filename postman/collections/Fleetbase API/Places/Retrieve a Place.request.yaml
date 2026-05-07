@@ -1,5 +1,6 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a place object to view it's details.
+description: |-
+  Retrieves a place. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{namespace}}/places/:id"
 method: GET
 headers:

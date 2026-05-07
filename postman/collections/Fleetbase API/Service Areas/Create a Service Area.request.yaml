@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  A service area is created by simply providing a city, province or country in which Fleetbase will reverse geocode into a service area.
-
-  If the service area cannot be reverse geocoded, Fleetbase will return an error.
+  Creates a service areas resource. The response returns the created resource with its generated identifier.
 url: "{{base_url}}/{{namespace}}/service-areas"
 method: POST
 body:

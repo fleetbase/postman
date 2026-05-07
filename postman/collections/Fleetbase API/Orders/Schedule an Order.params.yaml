@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: date
+    type: date
+    description: "Date value for this orders request."
+  - name: time
+    type: string
+    description: "Time value for this orders request."
+  - name: timezone
+    type: string
+    description: "Timezone value for this orders request."

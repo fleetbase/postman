@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Sets the destination waypoint or place for an order. The response returns the updated order after the destination is changed.
+  Set Order Destination for orders. The response returns the result of the operation.
 url: "{{base_url}}/{{namespace}}/orders/:id/set-destination/:placeId"
 method: PATCH
 pathVariables:

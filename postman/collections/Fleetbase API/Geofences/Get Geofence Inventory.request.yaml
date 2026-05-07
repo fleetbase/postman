@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Get Geofence Inventory"
+description: |-
+  Retrieves a geofence. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{namespace}}/geofences/inventory"
 method: GET
 order: 2000

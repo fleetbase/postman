@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |
+      {
+        "name": "Central Park",
+        "street1": "830 5th Ave",
+        "city": "New York",
+        "province": "New York",
+        "postal_code": "10065",
+        "neighborhood": "Manhattan",
+        "district": "Midtown",
+        "building": "Park Area",
+        "country": "US",
+        "phone_number": "212-310-6600",
+        "phone_country_code": "+1",
+        "type": "Park"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "place_abc123",
+        "object": "place",
+        "name": "Central Park",
+        "latitude": 40.7829,
+        "longitude": -73.9654,
+        "city": "New York",
+        "country": "US",
+        "created_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

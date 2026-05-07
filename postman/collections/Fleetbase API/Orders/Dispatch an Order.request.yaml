@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Dispatches an order to an assigned or eligible driver. The response returns the order after dispatch state has been applied.
+  Dispatch an Order for orders. The response returns the result of the operation.
 url: "{{base_url}}/{{namespace}}/orders/:id/dispatch"
 method: PATCH
 pathVariables:

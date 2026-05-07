@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns a paginated list of contacts for the current organization. Use filters such as `query`, `limit`, `offset`, and `sort` to narrow and order the results.
+  Returns contacts matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/contacts"
 method: GET
 headers:

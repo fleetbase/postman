@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-areas"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    name: "{{service_area_name}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "data": [
+          {
+            "id": "service-area_abc123",
+            "object": "service-area",
+            "status": "active",
+            "created_at": "2026-05-07T12:00:00Z",
+            "updated_at": "2026-05-07T12:00:00Z"
+          }
+        ],
+        "meta": {
+          "limit": 25,
+          "offset": 0
+        }
+      }
+order: 1000
