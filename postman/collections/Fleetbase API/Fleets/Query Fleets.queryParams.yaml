@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: limit
+    type: string
+    description: "Limit value for this fleets request."
+  - name: offset
+    type: string
+    description: "Offset value for this fleets request."
+  - name: sort
+    type: string
+    description: "Sort value for this fleets request."

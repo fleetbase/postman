@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."

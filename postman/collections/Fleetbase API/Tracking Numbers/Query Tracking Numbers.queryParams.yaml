@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: "Query value for this tracking numbers request."
+  - name: limit
+    type: string
+    description: "Limit value for this tracking numbers request."
+  - name: offset
+    type: string
+    description: "Offset value for this tracking numbers request."
+  - name: sort
+    type: string
+    description: "Sort value for this tracking numbers request."

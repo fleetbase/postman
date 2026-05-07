@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: internal_id
+    type: string
+    description: "External or internal identifier supplied by your system."
+  - name: description
+    type: string
+    description: "Human-readable description of the resource."
+  - name: destination
+    type: string
+    description: "Destination value for this entities request."
+  - name: sku
+    type: string
+    description: "Sku value for this entities request."
+  - name: currency
+    type: currency
+    description: "Three-letter currency code for monetary values."

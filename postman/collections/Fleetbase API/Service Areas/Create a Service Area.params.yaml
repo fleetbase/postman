@@ -1,0 +1,26 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Display name for the resource."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: latitude
+    type: number
+    description: "Decimal latitude coordinate."
+  - name: longitude
+    type: number
+    description: "Decimal longitude coordinate."
+  - name: radius
+    type: number
+    description: "Radius in meters when creating a circular zone."
+  - name: country
+    type: string
+    description: "ISO country code for the address."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."

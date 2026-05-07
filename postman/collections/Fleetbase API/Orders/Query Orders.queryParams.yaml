@@ -1,0 +1,15 @@
+$kind: params
+fields:
+  - name: limit
+    type: string
+    description: "Limit value for this orders request."
+  - name: offset
+    type: string
+    description: "Offset value for this orders request."
+  - name: sort
+    type: string
+    description: "Sort value for this orders request."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status to apply to the resource."

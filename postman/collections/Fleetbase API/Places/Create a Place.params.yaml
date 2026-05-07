@@ -1,0 +1,40 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Display name for the resource."
+  - name: street1
+    type: string
+    description: "Primary street address."
+  - name: city
+    type: string
+    description: "City or locality for the address."
+  - name: province
+    type: string
+    description: "State, province, or region for the address."
+  - name: postal_code
+    type: string
+    description: "Postal or ZIP code for the address."
+  - name: neighborhood
+    type: string
+    description: "Neighborhood or local area for the address."
+  - name: district
+    type: string
+    description: "District or administrative subdivision for the address."
+  - name: building
+    type: string
+    description: "Building name, number, or additional address detail."
+  - name: country
+    type: string
+    description: "ISO country code for the address."
+  - name: phone_number
+    type: string
+    description: "Local phone number for the place or contact."
+  - name: phone_country_code
+    type: string
+    description: "International dialing code for the phone number."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."

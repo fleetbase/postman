@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: "Query value for this places request."
+  - name: ll
+    type: string
+    description: "Ll value for this places request."
+  - name: locale
+    type: string
+    description: "Locale value for this places request."

@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: limit
+    type: string
+    description: "Limit value for this issues request."
+  - name: offset
+    type: string
+    description: "Offset value for this issues request."
+  - name: sort
+    type: string
+    description: "Sort value for this issues request."

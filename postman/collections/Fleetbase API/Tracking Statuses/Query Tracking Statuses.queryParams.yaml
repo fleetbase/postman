@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: limit
+    type: string
+    description: "Limit value for this tracking statuses request."
+  - name: tracking_number
+    type: string
+    description: "Tracking number ID associated with the status."
