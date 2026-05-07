@@ -1,0 +1,21 @@
+$kind: http-request
+description: Only ServiceQuote objects generated using a Payload object may be used to create PurchaseRate objects.
+url: "{{base_url}}/{{namespace}}/purchase-rates"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "service_quote": "{{service_quote_id}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("purchase_rate_id", json_response.id);
+    language: text/javascript
+examples: ./.resources/Create a Purchase Rate.resources/examples
+order: 1000

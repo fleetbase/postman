@@ -1,0 +1,15 @@
+$kind: http-request
+description: Dispatches order to Driver.
+url: "{{base_url}}/{{namespace}}/orders/:id/set-destination/:waypoint-id"
+method: PATCH
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the order to dispatch.
+  - key: waypoint-id
+    value: "{{waypoint_id}}"
+body:
+  type: json
+  content: ""
+examples: ./.resources/Set Order Destination.resources/examples
+order: 8000

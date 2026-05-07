@@ -1,0 +1,11 @@
+$kind: http-request
+description: Delete a Review
+url: "{{base_url}}/{{namespace}}/reviews/{id}"
+method: DELETE
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+pathVariables:
+  id: ""
+order: 5000

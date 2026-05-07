@@ -1,0 +1,32 @@
+$kind: http-request
+description: |-
+  Updates the specified place by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the location parameter, that becomes the place's new location to be used for all spatial queries in the future.
+
+  This request accepts mostly the same arguments as the place creation call.
+url: "{{base_url}}/{{namespace}}/places/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{place_id}}"
+    description: (Required) The id of the `Place`.
+body:
+  type: json
+  content: |-
+    {
+        "name": "Central Park Edit",
+        "street1": "830 5th Ave a ",
+        "city": "New York",
+        "province": "New York",
+        "postal_code": "10065",
+        "neighborhood": "Manhattan",
+        "district": "Midtown",
+        "building": "Park Area",
+        "country": "US",
+        "phone_number": "212-310-6600",
+        "phone_country_code": "+1",
+        "type": "Park"
+    }
+examples: ./.resources/Update a Place.resources/examples
+order: 5000

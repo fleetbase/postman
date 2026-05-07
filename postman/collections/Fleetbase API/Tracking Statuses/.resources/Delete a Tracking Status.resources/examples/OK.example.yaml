@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/tracking-statuses/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "status": "<string>",
+        "details": "<string>",
+        "code": "<string>",
+        "tracking_number": "<string>",
+        "city": "<string>",
+        "province": "<string>",
+        "postal_code": "<string>",
+        "country": "<string>",
+        "location": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

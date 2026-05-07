@@ -1,0 +1,12 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a vendor object to view it's details.
+url: "{{base_url}}/{{namespace}}/vendors?id={{vendor_id}}"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: id
+    value: "{{vendor_id}}"
+    description: The id of the vendor you want to retrieve.
+examples: ./.resources/Query Vendors.resources/examples
+order: 4000

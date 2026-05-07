@@ -31,40 +31,53 @@ function assert(condition, message) {
   }
 }
 
-const jsonFiles = walk('.', (file) => file.endsWith('.json'));
+const checkedFiles = walk('.', (file) => {
+  if (file === 'scripts/validate-collections.js') {
+    return false;
+  }
 
-for (const file of jsonFiles) {
+  return ['.json', '.yaml', '.yml', '.md', '.js'].includes(path.extname(file));
+});
+
+for (const file of checkedFiles) {
   const text = fs.readFileSync(file, 'utf8');
-  JSON.parse(text);
+  if (file.endsWith('.json')) {
+    JSON.parse(text);
+  }
 
   for (const forbidden of forbiddenPatterns) {
     assert(!forbidden.pattern.test(text), `${file} contains forbidden ${forbidden.name} variable or secret`);
   }
 }
 
-const collectionFiles = walk('collections', (file) => file.endsWith('.postman_collection.json'));
+const collectionFiles = walk('postman/collections', (file) => {
+  if (!file.endsWith('/.resources/definition.yaml')) {
+    return false;
+  }
+
+  return path.dirname(path.dirname(path.dirname(file))) === 'postman/collections';
+});
 
 for (const file of collectionFiles) {
-  const collection = JSON.parse(fs.readFileSync(file, 'utf8'));
-  assert(collection.info, `${file} is missing collection info`);
-  assert(collection.info.schema === 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json', `${file} must be Postman collection v2.1 JSON`);
+  const collection = fs.readFileSync(file, 'utf8');
+  assert(collection.includes('$kind: collection'), `${file} is missing a Native Git collection marker`);
 
-  const variableKeys = new Set((collection.variable || []).map((variable) => variable.key));
   for (const key of requiredEnvironmentKeys) {
-    assert(variableKeys.has(key), `${file} is missing collection variable ${key}`);
+    assert(collection.includes(`${key}:`), `${file} is missing collection variable ${key}`);
   }
 }
 
-const environmentFiles = walk('environments', (file) => file.endsWith('.template.json'));
+const environmentFiles = walk('postman/environments', (file) => file.endsWith('.environment.yaml'));
 
 for (const file of environmentFiles) {
-  const environment = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const keys = (environment.values || []).map((variable) => variable.key);
-  assert(keys.length === requiredEnvironmentKeys.length, `${file} should only define ${requiredEnvironmentKeys.join(', ')}`);
+  const environment = fs.readFileSync(file, 'utf8');
 
   for (const key of requiredEnvironmentKeys) {
-    assert(keys.includes(key), `${file} is missing environment variable ${key}`);
+    assert(environment.includes(`key: ${key}`), `${file} is missing environment variable ${key}`);
   }
 }
 
-console.log(`Validated ${collectionFiles.length} Postman collections and ${environmentFiles.length} environment templates.`);
+assert(collectionFiles.length === 3, `Expected 3 Postman collections, found ${collectionFiles.length}`);
+assert(environmentFiles.length === 3, `Expected 3 environment templates, found ${environmentFiles.length}`);
+
+console.log(`Validated ${collectionFiles.length} Postman Native Git collections and ${environmentFiles.length} environments.`);

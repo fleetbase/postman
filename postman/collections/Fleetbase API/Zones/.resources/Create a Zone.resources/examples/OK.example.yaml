@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/zones?name=<string>&boundary=<string>&service_area=<string>&description=<string>&color=<string>&stroke_color=<string>&status=<string>"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: (Required) The name of the zone.
+    - key: boundary
+      value: <string>
+      description: '(Required) The boundary can either be an array of coordinates that make up the zone, or a key value array with three elements: "latitude", "longitude", and "radius". Supplying the key value array creates a zone with a radius in meters around the supplied latitude and longitude.'
+    - key: service_area
+      value: <string>
+      description: The ID of the service area the zone belongs to. The zone boundaries must be within the service area.
+    - key: description
+      value: <string>
+      description: A description, usually describing the purpose of the zone.
+    - key: color
+      value: <string>
+      description: The color of the zone when being displayed on a map. This is typically a hexedecimal color code, but not limited to rgba, hexa, rgb, hsl, hsla, or hsv color codes. If no color is supplied the color will default to black.
+    - key: stroke_color
+      value: <string>
+      description: The outline color of the zone when being displayed on the map. This is typically a hexedecimal color code, but not limited to rgba, hexa, rgb, hsl, hsla, or hsv color codes. If no stroke_color is supplied it will default to black.
+    - key: status
+      value: <string>
+      description: The operational status of the zone. This can be "active" or "inactive".
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "service_area": "<string>",
+        "name": "<string>",
+        "description": "<string>",
+        "coordinates": "<string>",
+        "color": "<string>",
+        "stroke_color": "<string>",
+        "status": "<string>",
+        "created_at": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

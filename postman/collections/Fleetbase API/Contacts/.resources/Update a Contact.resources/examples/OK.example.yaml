@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/contacts/:id?name=<string>&type=<string>&title=<string>&email=<string>&phone_number=<string>&phone_country_code=<string>"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: The name of the contact.
+    - key: type
+      value: <string>
+      description: 'The type of contact, for example: "customer", "assosciate", "technician"'
+    - key: title
+      value: <string>
+      description: "The title or salutation of the contact. For example: Cheif Technology Officer, Mr"
+    - key: email
+      value: <string>
+      description: The email of the contact.
+    - key: phone_number
+      value: <string>
+      description: The phone number of the contact.
+    - key: phone_country_code
+      value: <string>
+      description: The international calling code of the phone number of the contact.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "name": "<string>",
+        "title": "<string>",
+        "email": "<string>",
+        "phone_number": "<string>",
+        "phone_country_code": "<string>",
+        "type": "<string>",
+        "slug": "<string>",
+        "created_at": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

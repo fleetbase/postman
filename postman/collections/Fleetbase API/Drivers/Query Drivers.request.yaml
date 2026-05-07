@@ -1,0 +1,12 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a driver object to view it's details.
+url: "{{base_url}}/{{namespace}}/drivers?id={{driver_id}}"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: id
+    value: "{{driver_id}}"
+    description: The id of the driver you want to retrieve.
+examples: ./.resources/Query Drivers.resources/examples
+order: 2000

@@ -1,0 +1,33 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "customer": "<string>",
+        "facilitator": "<string>",
+        "driver": "<string>",
+        "tracking_number": "<string>",
+        "purchase_rate": "<string>",
+        "payload": "<string>",
+        "meta": [],
+        "notes": "<string>",
+        "type": "<string>",
+        "status": "<string>",
+        "scheduled_at": "<boolean>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{base_url}}/{{namespace}}/orders?limit=5"
+method: GET
+headers:
+  Authorization: Bearer {{api_key}}
+queryParams:
+  limit: "5"
+order: 2000

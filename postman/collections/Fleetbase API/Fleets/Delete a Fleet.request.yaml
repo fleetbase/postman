@@ -1,0 +1,12 @@
+$kind: http-request
+description: Deletes a fleet.
+url: "{{base_url}}/{{namespace}}/fleets/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{fleet_id}}"
+    description: (Required) The id of the `Fleet`.
+examples: ./.resources/Delete a Fleet.resources/examples
+order: 5000

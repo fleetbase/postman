@@ -4,10 +4,17 @@ workspace:
 
 localResources:
   collections:
-    - ../collections/apis/fleetbase-api/collection.postman_collection.json
-    - ../collections/workflows/integrated-vendor/collection.postman_collection.json
-    - ../collections/apis/storefront-api/collection.postman_collection.json
+    - ../postman/collections/Fleetbase API
+    - ../postman/collections/Fleetbase Storefront API
+    - ../postman/collections/Fleetbase Integrated Vendor Flow
   environments:
-    - ../environments/fleetbase.local.template.json
-    - ../environments/fleetbase.qa.template.json
-    - ../environments/fleetbase.production.template.json
+    - ../postman/environments/local.environment.yaml
+    - ../postman/environments/qa.environment.yaml
+    - ../postman/environments/production.environment.yaml
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud.
+cloudResources:
+  collections:
+    ../postman/collections/Fleetbase API: 6866273-6cfab8b5-6c47-4bca-8ea0-1e565751624f
+    ../postman/collections/Fleetbase Storefront API: 6866273-4d7e0747-d3ed-4553-b7d8-fdfb33bb285f
+    ../postman/collections/Fleetbase Integrated Vendor Flow: 6866273-37a7e02d-ebbc-4223-b057-80f7ba14567c

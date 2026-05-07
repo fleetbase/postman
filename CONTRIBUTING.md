@@ -2,8 +2,8 @@
 
 ## Collection Organization
 
-- Add product API requests under `collections/apis/<api-name>/`.
-- Add end-to-end business flows under `collections/workflows/<workflow-name>/`.
+- Add product API requests under `postman/collections/`.
+- Add end-to-end business flows under `postman/collections/`.
 - Keep request names stable and descriptive so CI and docs can reference them.
 - Put workflow-specific iteration data under the workflow's `data/` directory.
 
@@ -25,7 +25,7 @@ npm run postman:lint
 Run the specific collection you changed when a safe local or QA environment is available:
 
 ```sh
-npm run postman:run:fleetbase -- --environment environments/fleetbase.local.template.json
+npm run postman:run:fleetbase -- --environment postman/environments/local.postman_environment.json
 ```
 
 ## Collection Variables

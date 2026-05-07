@@ -1,0 +1,24 @@
+$kind: http-request
+description: There is two primary ways to create a zone. The first method you can supply the boundary coordinates for the zone. The second method is you cann supply center coordinates and a radius in meters, and Fleetbase will automatically create a zone around the center coordinates.
+url: "{{base_url}}/{{namespace}}/carts/{id}/{product_id}"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+pathVariables:
+  id: ""
+  product_id: ""
+body:
+  type: json
+  content: |-
+    {
+      "addons": [],
+      "quantity": 1,
+      "scheduled_at": "scheduled_at_value_here",
+      "store_location": "store_location_value_here",
+      "variants": []
+    }
+order: 1000

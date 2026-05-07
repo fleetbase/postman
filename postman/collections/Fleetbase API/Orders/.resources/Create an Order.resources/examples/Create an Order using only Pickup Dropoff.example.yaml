@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |
+      {
+        "pickup": "Singapore 018971",
+        "dropoff": "321 Orchard Rd, Singapore"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

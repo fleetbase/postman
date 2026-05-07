@@ -1,0 +1,13 @@
+$kind: http-request
+description: |
+  This endpoint allows you to retrieve a tracking-number object to view it's details.
+url: "{{base_url}}/{{namespace}}/tracking-numbers/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{tracking_number_id}}"
+    description: (Required) The id of the tracking number.
+examples: ./.resources/Retrieve a Tracking Number.resources/examples
+order: 2000

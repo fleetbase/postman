@@ -1,0 +1,11 @@
+name: qa
+values:
+  - key: base_url
+    value: 'https://api.qa.fleetbase.io'
+    enabled: true
+  - key: namespace
+    value: v1
+    enabled: true
+  - key: api_key
+    value: ''
+    enabled: true

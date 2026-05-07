@@ -1,0 +1,16 @@
+$kind: http-request
+description: Dispatches order to Driver.
+url: "{{base_url}}/{{namespace}}/orders/:id/start"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the order to dispatch.
+body:
+  type: json
+  content: |-
+    {
+        "skip_dispatch": false
+    }
+examples: ./.resources/Start an Order.resources/examples
+order: 5000

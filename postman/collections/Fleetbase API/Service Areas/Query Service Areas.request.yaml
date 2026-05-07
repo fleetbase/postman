@@ -1,0 +1,7 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a service area object to view it's details.
+url: "{{base_url}}/{{namespace}}/service-areas?name={{service_area_name}}"
+method: GET
+queryParams:
+  name: "{{service_area_name}}"
+order: 3000

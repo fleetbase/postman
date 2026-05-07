@@ -1,0 +1,11 @@
+$kind: http-request
+name: Cancel an Order.
+description: Cancel an Order.
+url: "{{base_url}}/{{namespace}}/orders/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the `Order`.
+examples: ./.resources/Cancel an Order-.resources/examples
+order: 13000

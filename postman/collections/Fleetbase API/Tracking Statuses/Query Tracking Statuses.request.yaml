@@ -1,0 +1,11 @@
+$kind: http-request
+description: List all Tracking Statuses
+url: "{{base_url}}/{{namespace}}/tracking-statuses?limit=25&tracking_number={{tracking_number_id}}"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  limit: "25"
+  tracking_number: "{{tracking_number_id}}"
+examples: ./.resources/Query Tracking Statuses.resources/examples
+order: 4000

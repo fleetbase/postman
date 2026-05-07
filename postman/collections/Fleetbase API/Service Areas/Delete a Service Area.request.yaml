@@ -1,0 +1,12 @@
+$kind: http-request
+description: Use this endpoint to delete a service area, deleting a service area will also delete all of the zones within the service area.
+url: "{{base_url}}/{{namespace}}/service-areas/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{service_area_id}}"
+    description: (Required) The id of the service area you want to delete.
+examples: ./.resources/Delete a Service Area.resources/examples
+order: 5000

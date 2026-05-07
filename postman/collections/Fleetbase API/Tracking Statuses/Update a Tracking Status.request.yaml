@@ -1,0 +1,16 @@
+$kind: http-request
+description: Create a new Tracking Status.
+url: "{{base_url}}/{{namespace}}/tracking-statuses/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{tracking_status_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "country": "SG"
+    }
+examples: ./.resources/Update a Tracking Status.resources/examples
+order: 2000

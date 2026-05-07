@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/vendors/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "internal_id": "<string>",
+        "name": "<string>",
+        "email": "<string>",
+        "phone_number": "<string>",
+        "phone_country_code": "<string>",
+        "address": "<string>",
+        "type": "<string>",
+        "slug": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

@@ -1,0 +1,19 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |
+      {
+        "street1": "830 5th Ave, NY, NY"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 4000

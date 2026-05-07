@@ -1,0 +1,55 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "payload": {
+              "waypoints": [
+                  "Singapore 018971",
+                  "321 Orchard Rd, Singapore"
+              ],
+              "entities": [
+                  {
+                      "destination": 0,
+                      "name": "UltraHD 4K Smart TV",
+                      "description": "65-inch high-definition smart TV with vibrant colors and a sleek design.",
+                      "currency": "USD",
+                      "price": 1200.00,
+                      "photo": "https://cdn.thewirecutter.com/wp-content/media/2025/07/BEST-BUDGET-4K-TV-2048px-3185-2x1-1.jpg?width=1024&quality=75&crop=2:1&auto=webp"
+                  },
+                  {
+                      "destination": 0,
+                      "name": "Bluetooth Wireless Headphones",
+                      "description": "Noise-cancelling, over-ear headphones with long-lasting battery life.",
+                      "currency": "USD",
+                      "price": 250.00,
+                      "photo": "https://cdn.thewirecutter.com/wp-content/media/2025/07/BEST-BUDGET-4K-TV-2048px-3185-2x1-1.jpg?width=1024&quality=75&crop=2:1&auto=webp"
+                  },
+                  {
+                      "destination": 1,
+                      "name": "Smart Fitness Watch",
+                      "description": "Water-resistant fitness watch with heart rate monitor and GPS tracking.",
+                      "currency": "USD",
+                      "price": 199.99,
+                      "photo": "https://cdn.thewirecutter.com/wp-content/media/2025/07/BEST-BUDGET-4K-TV-2048px-3185-2x1-1.jpg?width=1024&quality=75&crop=2:1&auto=webp"
+                  }
+              ]
+          },
+          "meta": {
+              "Warehouse": "WAREHOUSE-123"
+          },
+          "notes": "Order notes"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 6000

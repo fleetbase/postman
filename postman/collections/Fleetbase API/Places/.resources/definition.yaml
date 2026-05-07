@@ -1,0 +1,3 @@
+$kind: collection
+description: Place represents a location, places are typically addresses, but can also be objects or landmarks as long as the `Place` has coordinates.
+order: 1000

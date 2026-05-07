@@ -1,0 +1,70 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/entities?name=<string>&type=<string>&payload=<string>&customer=<string>&internal_id=<string>&description=<string>&meta=<string>&weight=<string>&weight_unit=<string>&length=<string>&width=<string>&height=<string>&dimensions_unit=<string>&declared_value=<string>&price=<string>&sale_price=<string>&sku=<string>&currency=<string>"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: The name of the entity.
+    - key: type
+      value: <string>
+      description: The type of entity. The type can be anything to accomadate all types of operations. Standard entity types used in most operations would be parcel, passenger, fcl, or food.
+    - key: payload
+      value: <string>
+      description: The id of Payload object the entity should be attached to.
+    - key: customer
+      value: <string>
+      description: The id of the Vendor or Contact object you want to assign to the entity.
+    - key: internal_id
+      value: <string>
+      description: The internal unique identifier for the entity.
+    - key: description
+      value: <string>
+      description: Additional information and details on the entity.
+    - key: meta
+      value: <string>
+      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    - key: weight
+      value: <string>
+      description: The weight of the entity.
+    - key: weight_unit
+      value: <string>
+      description: The unit of measurement of the weight. The weight unit can either be g, oz, lb, kg. This property will be required if the weight is set.
+    - key: length
+      value: <string>
+      description: The length of the entity.
+    - key: width
+      value: <string>
+      description: The width of the entity.
+    - key: height
+      value: <string>
+      description: The height of the entity.
+    - key: dimensions_unit
+      value: <string>
+      description: l The unit of measurement to use for the entity dimensions. The dimensions unit can either be cm, in, ft, mm, m, yd. This property will be required if any of the dimensions (length, width, height) is set.
+    - key: declared_value
+      value: <string>
+      description: The value of the entity defined by the sender.
+    - key: price
+      value: <string>
+      description: The price of the entity if applicable.
+    - key: sale_price
+      value: <string>
+      description: The sale price of the entity if applicable.
+    - key: sku
+      value: <string>
+      description: The SKU of the entity if applicable.
+    - key: currency
+      value: <string>
+      description: The 3-letter ISO code currency that the entity uses for it's declared_value, price, or sale_price. This property will be required if declared_value, price, or sale_price is set.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: "{}"
+order: 1000

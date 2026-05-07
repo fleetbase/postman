@@ -1,0 +1,59 @@
+$kind: collection
+description: |-
+  # Introduction
+
+  The Fleetbase API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients. We support cross-origin resource sharing, allowing you to interact securely with our API from a client-side web application (though you should never expose your secret API key in any public website's client-side code). JSON is returned by all API responses, including errors, although our API libraries convert responses to appropriate language-specific objects.
+
+  To make the API as explorable as possible, accounts have test mode and live mode API keys. There is no "switch" for changing between modes, just use the appropriate key to perform a live or test transaction. Requests made with test mode credentials never hit the banking networks and incur no cost.
+
+  # Authentication
+
+  The Fleetbase API uses API keys to authenticate requests. You can view and manage your API keys in the Fleetbase Developers Console.
+
+  Test mode secret keys have the prefix `flb_test_` and live mode secret keys have the prefix `flb_live_`. Alternatively, you can use restricted API keys for granular permissions.
+
+  Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth. Authentication to the API is performed via HTTP Basic Auth. Provide your API key as the basic auth username value. You do not need to provide a password. Or use your API key by setting it in the initial configuration of a Fleetbase SDK Client. The SDK will then automatically send this key in each request.
+
+  All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
+
+  # Errors
+
+  Fleetbase uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a order failed, etc.). Codes in the `5xx` range indicate an error with Fleetbase's servers (these are rare).
+
+  Some `4xx` errors that could be handled programmatically (e.g., route automation fails) include an error code that briefly explains the error reported.
+
+  ## Handling Errors
+
+  Our Client libraries raise exceptions for many reasons, such as a route automation failed, invalid parameters, authentication errors, and network unavailability. We recommend writing code that gracefully handles all possible API exceptions.
+
+  Contact Support:
+  Name: Fleetbase Pte Ltd.
+  Email: [hello@fleetbase.io](https://mailto:hello@fleetbase.io)
+variables:
+  base_url: ""
+  namespace: v1
+  api_key: ""
+scripts:
+  - type: http:afterResponse
+    code: |
+      // Check request method and perform appropriate tests
+      if (pm.request.method === "POST") {
+          pm.test(`Successful ${pm.info.requestName} request`, function () {
+              pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);
+              pm.expect(pm.response).to.be.withBody;
+              pm.expect(pm.response).to.be.json;
+          });
+      } else if (pm.request.method != "POST") {
+          pm.test(`Successful ${pm.info.requestName} request and response must be valid and have a body`, function () {
+              pm.expect(pm.response).to.be.ok;
+              pm.expect(pm.response).to.be.withBody;
+              pm.expect(pm.response).to.be.json;
+          });
+      }
+    language: text/javascript
+auth:
+  - id: e884558b-26bc-41ee-8f0f-9510f820506f
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

@@ -1,0 +1,12 @@
+$kind: http-request
+description: Retrieve a Contact.
+url: "{{base_url}}/{{namespace}}/contacts/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{contact_id}}"
+    description: (Required) The id of the contact.
+examples: ./.resources/Retrieve a Contact.resources/examples
+order: 3000

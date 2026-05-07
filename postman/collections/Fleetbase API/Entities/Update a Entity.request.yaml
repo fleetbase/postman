@@ -1,0 +1,22 @@
+$kind: http-request
+description: Update an Entity.
+url: "{{base_url}}/{{namespace}}/entities/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{entity_id}}"
+    description: (Required) The id of the `Entity`.
+body:
+  type: json
+  content: |-
+    {
+        "internal_id": "ENTITY001-1",
+        "description": "New entity description",
+        "destination": "",
+        "sku": "SKUABC123",
+        "currency": "SGD"
+    }
+examples: ./.resources/Update a Entity.resources/examples
+order: 4000

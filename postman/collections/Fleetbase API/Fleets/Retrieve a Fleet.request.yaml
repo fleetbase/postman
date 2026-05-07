@@ -1,0 +1,12 @@
+$kind: http-request
+description: Retrieves a fleet.
+url: "{{base_url}}/{{namespace}}/fleets/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{fleet_id}}"
+    description: (Required) The id of the `Fleet`.
+examples: ./.resources/Retrieve a Fleet.resources/examples
+order: 3000

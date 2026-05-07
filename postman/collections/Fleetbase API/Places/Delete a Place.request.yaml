@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Permanently deletes a place. It cannot be undone. "
+url: "{{base_url}}/{{namespace}}/places/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{place_id}}"
+    description: (Required) The id of the `Place`.
+examples: ./.resources/Delete a Place.resources/examples
+order: 6000

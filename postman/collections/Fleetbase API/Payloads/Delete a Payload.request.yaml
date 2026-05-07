@@ -1,0 +1,10 @@
+$kind: http-request
+description: Delete a Payload.
+url: "{{base_url}}/{{namespace}}/payloads/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{payload_id}}"
+    description: (Required) The id of the `Payload`.
+examples: ./.resources/Delete a Payload.resources/examples
+order: 4000

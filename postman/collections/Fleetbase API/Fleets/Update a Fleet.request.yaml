@@ -1,0 +1,17 @@
+$kind: http-request
+description: Updates a fleet.
+url: "{{base_url}}/{{namespace}}/fleets/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{fleet_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "name": "Haulers",
+        "status": "active"
+    }
+examples: ./.resources/Update a Fleet.resources/examples
+order: 4000

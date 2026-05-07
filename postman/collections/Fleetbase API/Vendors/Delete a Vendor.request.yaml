@@ -1,0 +1,10 @@
+$kind: http-request
+description: Use this endpoint to delete a vendor.
+url: "{{base_url}}/{{namespace}}/vendors/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{vendor_id}}"
+examples: ./.resources/Delete a Vendor.resources/examples
+order: 5000

@@ -1,0 +1,12 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a purchase-rate object to view it's details.
+url: "{{base_url}}/{{namespace}}/purchase-rates/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{purchase_rate_id}}"
+    description: (Required) The id of the `PurchaseRate`.
+examples: ./.resources/Retrieve a Purchase Rate.resources/examples
+order: 2000

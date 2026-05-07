@@ -1,0 +1,12 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a zone object to view it's details.
+url: "{{base_url}}/{{namespace}}/zones/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{zone_id}}"
+    description: (Required) The id of the zone you want to delete.
+examples: ./.resources/Retrieve a zone.resources/examples
+order: 2000

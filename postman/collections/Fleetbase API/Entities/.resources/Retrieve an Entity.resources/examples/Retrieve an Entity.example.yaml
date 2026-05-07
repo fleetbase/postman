@@ -1,0 +1,70 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/entities/:id"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: "{{entity_id}}"
+      description: (Required) The id of the `Entity`.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Wed, 03 Jan 2024 05:56:16 GMT
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    Cache-Control: no-cache, private
+    X-Frame-Options: DENY
+    X-RateLimit-Limit: "60"
+    X-RateLimit-Remaining: "59"
+    Access-Control-Allow-Methods: GET, OPTIONS
+    Access-Control-Allow-Credentials: "true"
+    Access-Control-Allow-Headers: Content-Type, Authorization, Referer, User-Agent, Signature, Customer-Token, Access-Control-Request-Headers, Access-Control-Request-Method, Origin
+    Access-Control-Max-Age: "600"
+    Invalid: "1"
+    Set-Cookie: fleetbase_session=BZTQN5le6WBpsdEIXN5x9dJuLqtxL3hHlFoV8WTH; expires=Wed, 31-Jan-2024 05:56:16 GMT; Max-Age=2419200; path=/; domain=.fleetbase.io; httponly; samesite=lax
+  body:
+    type: json
+    content: |-
+      {
+          "id": "entity_va890n0",
+          "internal_id": "ENTITY001",
+          "name": "SampleEntity",
+          "type": "parcel",
+          "destination": null,
+          "customer": null,
+          "tracking_number": {
+              "id": "track_ddL4nJn",
+              "tracking_number": "FLE7017498048SG",
+              "subject": "entity_va890n0",
+              "region": "SG",
+              "status": "Entity Created",
+              "status_code": "CREATED",
+              "qr_code": "iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQMAAABLBksvAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAWxJREFUOI2F0zGOhDAMBVCPKOjgBuEikbgWNARp7gFXgQssV6BLi5QGJJS/dmBGm4HdpXqF5TjOh4Bd5btbS3j6wwVweCGdoGwrTVlkBw1gMRpfwROW/M4/aooN7S/ucToZylsXI3cS8wzqYdnHPG/zzHwucM7vJu2mG0tNMH/sfqDjezs04Zo9GcRu1TfGYTy/SJn0KS7bLDJP0m+7nMXzDzznTPRp7uBr26/iYrJLlbKXLLIs06Tcjc23aHM6+kfmRzEzV3YZJSAys7tY9iCrQDh3l/WO9mK5eg8b9pz6HJ0hRZGxSU1ntGrYe7FqdWe8rOp5qbQiTbF9vXOZekAy9tgxzlf7GtisN2JVpbwTb2xHkX1VOrDhG8mDm0jlNwZm9vHu3rDpw5INib0+M8ORu3fIavgvlpxNSxX5yHzPsW+CV11M/1hVWl78Ylnjy26cxdmneT+APe+4ck54OZHDvdi2a45/ga9s28jfC11spCPuMfEAAAAASUVORK5CYII=",
+              "barcode": "iVBORw0KGgoAAAANSUhEUgAAAXQAAACoAQMAAADKJofwAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAidJREFUWIXtmLGttDAQhBcROHQH0IgltwURSNcHtMJVQAvOnFpyApLl/Wf9Ti951l/AYQcnw31AMpqdMVFb/109c579uqT45qANXzZ3juZEi83ajKz49js75oR/h8Y3vs4z3+BZ1g2Yg/BpZF9uVfhtUuA3MOC1DZMNHfbgTVga/zh+Zy98EVI8LYQHIRX9mIp+Zv9iR9oNk+W3jwfxYfChnlU8iZka/yxe9APZQHXgOcKmDlP0Ax7+kyr6XD587uBXaiMTOjeQ8K/GP4/nop8f28H84uPXr6q84UOtmuNh+hvzEZsPn2del7/6bPx386KfLPkHtuNFe4cV2yn6yXhbRZ8pa5XxqrffNK+EcOVy5/m0mRr/OH4X/SiJOm/xrlXCtheebW1+mRHJXFN/uh9/Az8sKpDKk42NfxwPq+HC4xL6kTdkaWFQIFf5MCNfCb+C144mxHI4m9rkqUofbPxX8xzvNGjTS39nxlMITqWUSSOr9ff4Fh7KLH1N+E0TLAvfGhv/PB4Yyn4s+sHvftlNYpKXE4BKf3fjjRmX4pmoS2Gh8cK3CBNwE7v72wcb/9X8kgovKTp0MCjiC/MOyVlhnIVaPh8vzESUNS/8RAjqg2xkPjb+kbxFtJbhdQsmMXvGXvpa7bzI9ChoJ423CO/DTyTdrUuNfx6feok9qXR22A5L7ZKzII86VulfCFeSr3AT/c4NsC+2r8Pul4oHInfjG1/nH7b+Acno2xQu9DztAAAAAElFTkSuQmCC",
+              "type": "entity",
+              "updated_at": "2024-01-03T05:56:04.000000Z",
+              "created_at": "2024-01-03T05:56:04.000000Z"
+          },
+          "description": "Sample description",
+          "photo_url": "https://s3.ap-southeast-1.amazonaws.com/flb-assets/static/parcels/medium.png",
+          "length": "10",
+          "width": "5",
+          "height": "8",
+          "dimensions_unit": "mm",
+          "weight": "2.5",
+          "weight_unit": "kg",
+          "declared_value": 100,
+          "price": "120",
+          "sale_price": null,
+          "sku": "SKU123",
+          "currency": "USD",
+          "meta": [],
+          "updated_at": "2024-01-03T05:56:04.000000Z",
+          "created_at": "2024-01-03T05:56:04.000000Z"
+      }
+order: 2000

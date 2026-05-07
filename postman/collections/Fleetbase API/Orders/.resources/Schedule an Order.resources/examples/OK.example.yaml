@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/schedule?date=<string>&time=<string>"
+  method: PATCH
+  queryParams:
+    - key: date
+      value: <string>
+      description: Date to schedule Order.
+    - key: time
+      value: <string>
+      description: Time to dispatch Order.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets?name=<string>&service_area=<string>&task=<string>&status=<string>"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: (Required) The name of the fleet.
+    - key: service_area
+      value: <string>
+      description: The id of the ServiceArea you want to assign to the fleet.
+    - key: task
+      value: <string>
+      description: Specification of the fleet's misssion.
+    - key: status
+      value: <string>
+      description: 'The status of the fleet. Valid opetions: "active", "inactive", "disabled"'
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "service_area": "<string>",
+        "name": "<string>",
+        "task": "<string>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

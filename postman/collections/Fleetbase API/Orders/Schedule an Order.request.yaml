@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{base_url}}/{{namespace}}/orders/:id/schedule"
+method: PATCH
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the order to schedule.
+body:
+  type: json
+  content: |-
+    {
+        "date": "2024-02-11",
+        "time": "8am",
+        "timezone": "Asia/Singapore"
+    }
+examples: ./.resources/Schedule an Order.resources/examples
+order: 3000

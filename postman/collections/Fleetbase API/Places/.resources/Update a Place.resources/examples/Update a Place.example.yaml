@@ -1,0 +1,80 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places/:id?name=Central Park Edited&street1=830 5th Ave&city=New York&province=New York&postal_code=10065&neighborhood=Manhattan&district=Midtown&building=Park Area&country=US&phone_number=212-310-6600&phone_country_code=+1&type=Park&latitude=40.78509"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: Central Park Edited
+    - key: street1
+      value: 830 5th Ave
+    - key: city
+      value: New York
+    - key: province
+      value: New York
+    - key: postal_code
+      value: "10065"
+    - key: neighborhood
+      value: Manhattan
+    - key: district
+      value: Midtown
+    - key: building
+      value: Park Area
+      description: The building name you want to add, or update on the place.
+    - key: country
+      value: US
+    - key: phone_number
+      value: 212-310-6600
+    - key: phone_country_code
+      value: "+1"
+    - key: type
+      value: Park
+    - key: latitude
+      value: "40.78509"
+  pathVariables:
+    - key: id
+      value: "{{place_id}}"
+      description: (Required) The id of the `Place`.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Wed, 27 Dec 2023 07:43:57 GMT
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    Cache-Control: no-cache, private
+  body:
+    type: json
+    content: |-
+      {
+          "id": "place_n0voYdE",
+          "name": "Central Park Edited",
+          "location": {
+              "type": "Point",
+              "coordinates": [
+                  -73.9712519,
+                  40.7676307
+              ]
+          },
+          "address": "CENTRAL PARK EDITED - 830 5TH AVE, NEW YORK, 10065, UNITED STATES",
+          "street1": "830 5th Ave",
+          "street2": null,
+          "city": "New York",
+          "province": "New York",
+          "postal_code": "10065",
+          "neighborhood": "Manhattan",
+          "district": "Midtown",
+          "building": "Park Area",
+          "security_access_code": null,
+          "country": "US",
+          "phone": null,
+          "owner": null,
+          "type": "Park",
+          "meta": [],
+          "updated_at": "2023-12-27T07:43:57.000000Z",
+          "created_at": "2023-12-27T07:25:36.000000Z"
+      }
+order: 1000

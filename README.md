@@ -4,9 +4,9 @@ Official Git-first Postman workspace for Fleetbase API collections and workflow 
 
 ## Repository Layout
 
-- `collections/apis/` contains canonical API reference collections.
-- `collections/workflows/` contains scenario and integration workflow collections.
-- `environments/` contains importable environment templates only.
+- `postman/collections/` contains Postman Native Git collection files.
+- `postman/environments/` contains Postman Native Git environment files with empty secret values.
+- `collections/` contains repo-level notes and placeholders for future API groups.
 - `examples/` contains reusable sample request and response payloads.
 - `scripts/` contains local helper commands used by npm scripts and CI.
 
@@ -14,10 +14,10 @@ Official Git-first Postman workspace for Fleetbase API collections and workflow 
 
 | Collection | Path | Purpose |
 | --- | --- | --- |
-| Fleetbase API | `collections/apis/fleetbase-api/collection.postman_collection.json` | Core Fleetbase platform API requests. |
-| Storefront API | `collections/apis/storefront-api/collection.postman_collection.json` | Storefront and customer-facing commerce API requests. |
+| Fleetbase API | `postman/collections/fleetbase-api.postman_collection.json` | Core Fleetbase platform API requests. |
+| Storefront API | `postman/collections/storefront-api.postman_collection.json` | Storefront and customer-facing commerce API requests. |
 | Ledger API | `collections/apis/ledger-api/collection.yaml` | Ledger, balances, accounts, and transaction API requests. |
-| Integrated Vendor | `collections/workflows/integrated-vendor/collection.postman_collection.json` | End-to-end vendor integration workflow examples. |
+| Integrated Vendor | `postman/collections/integrated-vendor-flow.postman_collection.json` | End-to-end vendor integration workflow examples. |
 
 ## Getting Started
 
@@ -33,14 +33,14 @@ npm run postman:lint
 Run a collection with an environment template or local environment copy:
 
 ```sh
-npm run postman:run:fleetbase -- --environment environments/fleetbase.local.template.json
+npm run postman:run:fleetbase -- --environment postman/environments/local.postman_environment.json
 ```
 
 Workflow collections can also use iteration data:
 
 ```sh
 npm run postman:run:integrated-vendor -- \
-  --environment environments/fleetbase.local.template.json \
+  --environment postman/environments/local.postman_environment.json \
   --iteration-data collections/workflows/integrated-vendor/data/happy-path.example.json
 ```
 

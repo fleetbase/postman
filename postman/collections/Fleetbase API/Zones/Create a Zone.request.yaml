@@ -1,0 +1,46 @@
+$kind: http-request
+description: There is two primary ways to create a zone. The first method you can supply the boundary coordinates for the zone. The second method is you cann supply center coordinates and a radius in meters, and Fleetbase will automatically create a zone around the center coordinates.
+url: "{{base_url}}/{{namespace}}/zones"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Center of Singapore",
+        "service_area": "{{service_area_id}}",
+        "color":"#66e0ff",
+        "stroke_color":"#00bfff",
+        "border": {
+            "type":"Polygon",
+            "bbox":[103.867493,1.35085,103.912125,1.383113],
+            "coordinates":[
+                [
+                    [103.907661,1.362863],
+                    [103.892555,1.357714],
+                    [103.891525,1.353252],
+                    [103.883629,1.35085],
+                    [103.874702,1.351193],
+                    [103.870583,1.358744],
+                    [103.867493,1.368354],
+                    [103.870926,1.377621],
+                    [103.875732,1.38174],
+                    [103.886032,1.383113],
+                    [103.900452,1.383113],
+                    [103.909721,1.381397],
+                    [103.912125,1.374189],
+                    [103.907661,1.362863]
+                ]
+            ]
+        }
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("zone_id", json_response.id);
+      cv.set("zone_name", json_response.name);
+    language: text/javascript
+examples: ./.resources/Create a Zone.resources/examples
+order: 1000

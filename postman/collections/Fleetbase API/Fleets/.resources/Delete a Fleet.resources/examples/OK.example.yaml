@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "object": "<string>",
+        "deleted": "<boolean>"
+      }
+order: 1000

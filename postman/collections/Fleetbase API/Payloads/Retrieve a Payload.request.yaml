@@ -1,0 +1,7 @@
+$kind: http-request
+description: Retrieve a Payload.
+url: "{{base_url}}/{{namespace}}/payloads/:id"
+method: GET
+pathVariables:
+  id: "{{payload_id}}"
+order: 2000

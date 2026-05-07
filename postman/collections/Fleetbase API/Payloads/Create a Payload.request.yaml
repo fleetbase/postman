@@ -1,0 +1,24 @@
+$kind: http-request
+description: Create a Payload.
+url: "{{base_url}}/{{namespace}}/payloads"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"pickup\": \"10 Bayfront Avenue, Singapore 018956\",\r
+
+    \    \"dropoff\": \"80 Mandai Lake Rd, Singapore 729826\",\r
+
+    \    \"type\": \"food_delivery\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("payload_id", json_response.id);
+    language: text/javascript
+examples: ./.resources/Create a Payload.resources/examples
+order: 1000

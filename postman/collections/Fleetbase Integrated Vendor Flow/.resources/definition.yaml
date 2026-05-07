@@ -1,0 +1,11 @@
+$kind: collection
+variables:
+  base_url: ""
+  namespace: v1
+  api_key: ""
+auth:
+  - id: ccab1f0e-177f-4083-92de-0609f8154be1
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

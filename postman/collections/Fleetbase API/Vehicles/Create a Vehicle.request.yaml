@@ -1,0 +1,28 @@
+$kind: http-request
+description: In order to create a vehicle you must provide the VIN number, Fleetbase will automatically decode the VIN and pull the information on the vehicle.
+url: "{{base_url}}/{{namespace}}/vehicles"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "vin": "1GCGSBEA0G1111111",
+      "year": 2023,
+      "make": "Toyota",
+      "model": "Camry",
+      "trim": "SE",
+      "plate_number": "ABC123",
+      "status": "maintenance"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("vehicle_id", json_response.id);
+      cv.set("vehicle_name", json_response.make);
+    language: text/javascript
+examples: ./.resources/Create a Vehicle.resources/examples
+order: 1000

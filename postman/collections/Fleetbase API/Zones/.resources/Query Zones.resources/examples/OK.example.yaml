@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/zones?id=<string>"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: id
+      value: <string>
+      description: The id of the zone you want to retrieve.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "service_area": "<string>",
+        "name": "<string>",
+        "description": "<string>",
+        "coordinates": "<string>",
+        "color": "<string>",
+        "stroke_color": "<string>",
+        "status": "<string>",
+        "created_at": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

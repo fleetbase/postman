@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: service_quote
+      value: quote_wadAVAw
+order: 6000

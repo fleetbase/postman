@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve an Order.
+url: "{{base_url}}/{{namespace}}/orders/{{order_id}}"
+method: GET
+headers:
+  Accept: application/json
+examples: ./.resources/Retrieve an Order.resources/examples
+order: 11000

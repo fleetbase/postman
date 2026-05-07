@@ -1,0 +1,23 @@
+$kind: http-request
+description: |
+  This endpoint allows you to retrieve a tracking-number object to view it's details.
+url: "{{base_url}}/{{namespace}}/tracking-numbers"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "region": "SG",
+        "owner": "{{order_id}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("tracking_number_id", json_response.id);
+    language: text/javascript
+examples: ./.resources/Create a Tracking Number.resources/examples
+order: 1000

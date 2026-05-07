@@ -1,0 +1,12 @@
+$kind: http-request
+description: Use this endpoint to delete a zone.
+url: "{{base_url}}/{{namespace}}/carts/{id}/{line_item_id}"
+method: DELETE
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+pathVariables:
+  id: ""
+  line_item_id: ""
+order: 4000

@@ -1,0 +1,10 @@
+$kind: http-request
+description: Dispatches order to Driver.
+url: "{{base_url}}/{{namespace}}/orders/:id/dispatch"
+method: PATCH
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the order to dispatch.
+examples: ./.resources/Dispatch an Order.resources/examples
+order: 4000

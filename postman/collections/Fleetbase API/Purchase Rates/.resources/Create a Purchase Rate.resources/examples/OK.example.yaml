@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/purchase-rates?service_quote=<string>&customer=<string>"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: service_quote
+      value: <string>
+      description: The id of the ServiceQuote to be purchased.
+    - key: customer
+      value: <string>
+      description: Optionally purchase the service for a customer which can either be a Contact or Vendor.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "customer": "<string>",
+        "order": "<string>",
+        "service_quote": "<string>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

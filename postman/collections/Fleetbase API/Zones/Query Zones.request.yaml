@@ -1,0 +1,12 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a zone object to view it's details.
+url: "{{base_url}}/{{namespace}}/zones?name={{zone_name}}"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: name
+    value: "{{zone_name}}"
+    description: The id of the zone you want to retrieve.
+examples: ./.resources/Query Zones.resources/examples
+order: 3000

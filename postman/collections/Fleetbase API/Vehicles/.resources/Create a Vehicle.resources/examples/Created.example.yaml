@@ -1,0 +1,56 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/vehicles?vin=<string>&driver=<string>&year=<string>&make=<string>&model=<string>&trim=<string>&plate_number=<string>&status=maintenance"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: vin
+      value: <string>
+      description: (Required) The VIN (Vehicle Identification Number) of the vehicle.
+    - key: driver
+      value: <string>
+      description: The id of the Driver to be assigned to the vehicle.
+    - key: year
+      value: <string>
+      description: The year the vehicle was produced.
+    - key: make
+      value: <string>
+      description: The vehicle make.
+    - key: model
+      value: <string>
+      description: The vehicle model.
+    - key: trim
+      value: <string>
+      description: The trim of the vehicle.
+    - key: plate_number
+      value: <string>
+      description: The vehicle's plate number.
+    - key: status
+      value: maintenance
+      description: (Required) The status of the vehicle.
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "name": "<string>",
+        "vin": "<string>",
+        "driver": "<string>",
+        "photo_url": "<string>",
+        "make": "<string>",
+        "model": "<string>",
+        "year": "<string>",
+        "trim": "<string>",
+        "type": "<string>",
+        "plate_number": "<string>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

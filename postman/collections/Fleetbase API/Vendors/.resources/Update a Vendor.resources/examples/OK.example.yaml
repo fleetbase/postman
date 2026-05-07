@@ -1,0 +1,46 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/vendors/:id?internal_id=<string>&email=<string>&phone_number=<string>&phone_country_code=<string>&address=<string>"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: internal_id
+      value: <string>
+      description: The unique identifier used internally.
+    - key: email
+      value: <string>
+      description: The email of the vendor.
+    - key: phone_number
+      value: <string>
+      description: The phone number of the vendor.
+    - key: phone_country_code
+      value: <string>
+      description: The international calling code of the phone number of the vendor.
+    - key: address
+      value: <string>
+      description: The Place object identifier to assign to the vendor as the vendors address.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "name": "<string>",
+        "internal_id": "<string>",
+        "email": "<string>",
+        "phone_number": "<string>",
+        "phone_country_code": "<string>",
+        "address": "<string>",
+        "type": "<string>",
+        "slug": "<string>",
+        "created_at": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

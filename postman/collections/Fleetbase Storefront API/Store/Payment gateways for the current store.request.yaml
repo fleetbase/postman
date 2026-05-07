@@ -1,0 +1,12 @@
+$kind: http-request
+description: Payment gateways for the current store
+url: "{{base_url}}/{{namespace}}/gateways?limit=&offset="
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  limit: ""
+  offset: ""
+order: 3000

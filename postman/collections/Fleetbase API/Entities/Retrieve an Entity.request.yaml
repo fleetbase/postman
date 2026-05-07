@@ -1,0 +1,12 @@
+$kind: http-request
+description: Retrieve an Entity.
+url: "{{base_url}}/{{namespace}}/entities/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{entity_id}}"
+    description: (Required) The id of the `Entity`.
+examples: ./.resources/Retrieve an Entity.resources/examples
+order: 3000

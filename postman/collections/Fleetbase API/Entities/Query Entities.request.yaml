@@ -1,0 +1,24 @@
+$kind: http-request
+description: List all entities.
+url: "{{base_url}}/{{namespace}}/entities?limit=25&offset=0&type=parcel"
+method: GET
+queryParams:
+  - key: limit
+    value: "25"
+  - key: sort
+    value: created_at
+    disabled: true
+  - key: offset
+    value: "0"
+  - key: query
+    value: test
+    disabled: true
+    description: This parameter allows you to filter the results by their name.
+  - key: type
+    value: parcel
+    description: Filter entities by their type.
+  - key: payload
+    value: "{{payload_id}}"
+    disabled: true
+    description: Filter entites by payload they belong to.
+order: 2000

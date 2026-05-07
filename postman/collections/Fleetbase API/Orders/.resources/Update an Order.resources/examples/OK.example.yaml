@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id?payload=<string>&scheduled_at=<dateTime>&driver=<string>&facilitator=<string>&customer=<string>&meta=<string>&notes=<string>"
+  method: PUT
+  queryParams:
+    - key: payload
+      value: <string>
+      description: The id of the Payload object to be sent by the order.
+    - key: scheduled_at
+      value: <dateTime>
+      description: The date and time the order should optionally be dispatched at, otherwise upon order creation the order will be dispatched unless dispatch is explicitly set to false.
+    - key: driver
+      value: <string>
+      description: The id of the Driver to be assigned to the order, if no driver is set the dispatch will send a "ping" to all drivers within an expanding radius around the pickup point coordinates.
+    - key: facilitator
+      value: <string>
+      description: The id of the Vendor or Contact object assigned to facilitate the completion of the order. This is for orders that will be assigned to third parties.
+    - key: customer
+      value: <string>
+      description: The id of the Vendor or Contact object the payload is for.
+    - key: meta
+      value: <string>
+      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    - key: notes
+      value: <string>
+      description: Text containing additional information for the order, which can be used to assist the driver or facilitator.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

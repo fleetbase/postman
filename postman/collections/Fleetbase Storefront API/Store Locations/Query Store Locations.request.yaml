@@ -1,0 +1,9 @@
+$kind: http-request
+description: This endpoint allows you to retrieve a zone object to view it's details.
+url: "{{base_url}}/{{namespace}}/store-locations"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+order: 1000

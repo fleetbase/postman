@@ -1,0 +1,11 @@
+$kind: http-request
+description: Capture checkout as order ❗
+url: "{{base_url}}/{{namespace}}/checkouts/capture?token="
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  token: ""
+order: 2000

@@ -1,0 +1,9 @@
+$kind: http-request
+description: About Store
+url: "{{base_url}}/{{namespace}}/about"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+order: 2000

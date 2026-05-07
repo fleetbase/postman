@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-areas/:id?status=<string>"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: status
+      value: <string>
+      description: The status you want to update the service area to.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "name": "<string>",
+        "type": "<string>",
+        "latitude": "<string>",
+        "longitude": "<string>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

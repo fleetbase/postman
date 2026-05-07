@@ -1,0 +1,22 @@
+$kind: http-request
+description: You can update all properties of the Vendor.
+url: "{{base_url}}/{{namespace}}/vendors/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{vendor_id}}"
+    description: (Required) The id of the vendor you want to delete.
+body:
+  type: json
+  content: |-
+    {
+        "name": "ABC Corporation",
+        "type": "Supplier",
+        "internal_id": "ABC123",
+        "email": "abc@example.com",
+        "phone": "1234567890"
+    }
+examples: ./.resources/Update a Vendor.resources/examples
+order: 3000

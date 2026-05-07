@@ -1,0 +1,67 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/drivers/:id?name=<string>&email=<string>&password=<string>&phone_number=<string>&phone_country_code=<string>&country=<string>&city=<string>&vehicle=<string>&status=<string>"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: The name you want to update for the driver.
+    - key: email
+      value: <string>
+      description: The email to update for the driver.
+    - key: password
+      value: <string>
+      description: The password to update for the driver
+    - key: phone_number
+      value: <string>
+      description: The drivers phone number to update for the driver
+    - key: phone_country_code
+      value: <string>
+      description: The country code of the driver to update for the driver.
+    - key: country
+      value: <string>
+      description: The 2 letter country code of the country to update for the driver.
+    - key: city
+      value: <string>
+      description: The city to update for the driver
+    - key: vehicle
+      value: <string>
+      description: An Vehicle object id that you want to assign to the driver.
+    - key: status
+      value: <string>
+      description: The drivers standing status. Can either be "active" or "inactive". Defaults to "active".
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "current_job": "<string>",
+        "vehicle": "<string>",
+        "email": "<string>",
+        "phone_number": "<string>",
+        "phone_country_code": "<string>",
+        "signup_token_used": "<string>",
+        "drivers_license_number": "<string>",
+        "latitude": "<string>",
+        "longitude": "<string>",
+        "heading": "<string>",
+        "altitude": "<string>",
+        "speed": "<string>",
+        "country": "<string>",
+        "currency": "<string>",
+        "city": "<string>",
+        "online": "<number>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

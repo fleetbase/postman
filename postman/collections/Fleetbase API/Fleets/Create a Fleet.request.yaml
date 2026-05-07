@@ -1,0 +1,24 @@
+$kind: http-request
+description: Create a new fleet.
+url: "{{base_url}}/{{namespace}}/fleets"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "Haulers",
+        "status": "active"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("fleet_id", json_response.id);
+      cv.set("fleet_name", json_response.name);
+    language: text/javascript
+examples: ./.resources/Create a Fleet.resources/examples
+order: 1000

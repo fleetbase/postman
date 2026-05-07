@@ -1,0 +1,18 @@
+$kind: http-request
+description: |+
+  You can update all properties of the Zone.
+
+url: "{{base_url}}/{{namespace}}/zones/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{zone_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "color": "#ff00000"
+    }
+examples: ./.resources/Update a Zone.resources/examples
+order: 4000

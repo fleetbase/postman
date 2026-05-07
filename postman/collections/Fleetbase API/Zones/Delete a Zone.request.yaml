@@ -1,0 +1,12 @@
+$kind: http-request
+description: Use this endpoint to delete a zone.
+url: "{{base_url}}/{{namespace}}/zones/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{zone_id}}"
+    description: (Required) The id of the zone you want to delete.
+examples: ./.resources/Delete a Zone.resources/examples
+order: 5000

@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/entities/:id"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "payload": "<string>",
+        "tracking_number": "<string>",
+        "customer": "<string>",
+        "internal_id": "<string>",
+        "name": "<string>",
+        "type": "<string>",
+        "description": "<string>",
+        "currency": "<string>",
+        "weight": "<number>",
+        "weight_unit": "<string>",
+        "length": "<number>",
+        "width": "<number>",
+        "height": "<number>",
+        "dimensions_unit": "<string>",
+        "declared_value": "<number>",
+        "sku": "<string>",
+        "price": "<number>",
+        "sale_price": "<number>",
+        "meta": [],
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

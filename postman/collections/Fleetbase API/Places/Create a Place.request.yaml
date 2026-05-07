@@ -1,0 +1,37 @@
+$kind: http-request
+description: |-
+  When you create a place, you must specify a name and latitude and longitude coordinates.
+
+  Fleetbase will run a reverse geocode automatically on the provided coordinates to automatically complete the address when the optional fields are not provided.
+url: "{{base_url}}/{{namespace}}/places"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "name": "Central Park",
+      "street1": "830 5th Ave",
+      "city": "New York",
+      "province": "New York",
+      "postal_code": "10065",
+      "neighborhood": "Manhattan",
+      "district": "Midtown",
+      "building": "Park Area",
+      "country": "US",
+      "phone_number": "212-310-6600",
+      "phone_country_code": "+1",
+      "type": "Park"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("place_id", json_response.id);
+      cv.set("place_name", json_response.name);
+    language: text/javascript
+examples: ./.resources/Create a Place.resources/examples
+order: 1000

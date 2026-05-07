@@ -1,0 +1,12 @@
+$kind: http-request
+description: Permanently deletes a `Vehicle`. It cannot be undone.
+url: "{{base_url}}/{{namespace}}/vehicles/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{vehicle_id}}"
+    description: (Required) The id of the `Vehicle`.
+examples: ./.resources/Delete a Vehicle.resources/examples
+order: 5000

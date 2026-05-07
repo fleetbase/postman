@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-areas?name=<string>&type=<string>&status=<string>"
+  method: POST
+  queryParams:
+    - key: name
+      value: <string>
+      description: "(Required) The service area name, which would be a city, province, country, or region. (For example: Seattle, WA)."
+    - key: type
+      value: <string>
+      description: The type of service area, this can be "city", "province", or "country".
+    - key: status
+      value: <string>
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

@@ -1,0 +1,27 @@
+$kind: http-request
+description: Create a new Contact.
+url: "{{base_url}}/{{namespace}}/contacts"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "name": "John Doe",
+      "type": "customer",
+      "title": "Mr",
+      "email": "john@exampleco.com",
+      "phone": "+1 563-920-4264"
+    }
+scripts:
+  - type: afterResponse
+    code: |+
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("contact_id", json_response.id);
+      cv.set("contact_name", json_response.name);
+
+    language: text/javascript
+examples: ./.resources/Create a Contact.resources/examples
+order: 1000

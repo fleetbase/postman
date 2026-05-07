@@ -1,0 +1,40 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets?query=<string>&limit=<string>&offset=<string>&sort=<string>&status=active"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: query
+      value: <string>
+      description: This parameter allows you to filter the results by their name.
+    - key: limit
+      value: <string>
+      description: A cursor for use in pagination. A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+    - key: offset
+      value: <string>
+      description: A cursor for use in pagination. A offset for the results, when the offset is supplied the results will start from the offset.
+    - key: sort
+      value: <string>
+      description: A cursor used to sort results. Sort can be any property of the object, to sort descending sort must append the minus symbol. To sort by created date descending sort would be `-created_at` to sort in ascending order the sort would be `created_at`.
+    - key: status
+      value: active
+      description: Filter for filtering results by status.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "service_area": "<string>",
+        "name": "<string>",
+        "task": "<string>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

@@ -1,0 +1,13 @@
+$kind: http-request
+description: You are only able to update the service area status
+url: "{{base_url}}/{{namespace}}/service-areas/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{service_area_id}}"
+body:
+  type: json
+  content: "{\r\n    \"status\": \"active\"\r\n}"
+examples: ./.resources/Update a Service Area.resources/examples
+order: 4000

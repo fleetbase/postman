@@ -1,0 +1,51 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/zones?name=Center of Singapore&boundary[latitude]=1.352083&boundary[longitude]=103.819836&boundary[radius]=5000&service_area={{service_area_id}}&description=<string>&color=<string>&stroke_color=<string>&status=active"
+  method: POST
+  headers:
+    Accept: application/json
+  queryParams:
+    name: Center of Singapore
+    boundary[latitude]: "1.352083"
+    boundary[longitude]: "103.819836"
+    boundary[radius]: "5000"
+    service_area: "{{service_area_id}}"
+    description: <string>
+    color: <string>
+    stroke_color: <string>
+    status: active
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Date: Tue, 02 Jan 2024 05:54:57 GMT
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: nginx
+    Cache-Control: no-cache, private
+    X-Frame-Options: DENY
+    X-RateLimit-Limit: "60"
+    X-RateLimit-Remaining: "58"
+    Access-Control-Allow-Methods: GET, OPTIONS
+    Access-Control-Allow-Credentials: "true"
+    Access-Control-Allow-Headers: Content-Type, Authorization, Referer, User-Agent, Signature, Customer-Token, Access-Control-Request-Headers, Access-Control-Request-Method, Origin
+    Access-Control-Max-Age: "600"
+    Invalid: "1"
+    Set-Cookie: fleetbase_session=BZTQN5le6WBpsdEIXN5x9dJuLqtxL3hHlFoV8WTH; expires=Tue, 30-Jan-2024 05:54:57 GMT; Max-Age=2419200; path=/; domain=.fleetbase.io; httponly; samesite=lax
+  body:
+    type: json
+    content: |-
+      {
+          "id": "zone_bm37E57",
+          "name": "Center of Singapore",
+          "description": "<string>",
+          "coordinates": [],
+          "color": "<string>",
+          "stroke_color": "<string>",
+          "status": "active",
+          "service_area": null,
+          "updated_at": "2024-01-02T05:54:57.000000Z",
+          "created_at": "2024-01-02T05:54:57.000000Z"
+      }
+order: 2000

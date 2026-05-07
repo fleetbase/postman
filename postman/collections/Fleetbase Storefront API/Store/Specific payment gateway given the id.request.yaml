@@ -1,0 +1,11 @@
+$kind: http-request
+description: Specific payment gateway given the id
+url: "{{base_url}}/{{namespace}}/gateways/{id}"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+pathVariables:
+  id: ""
+order: 4000

@@ -1,0 +1,27 @@
+$kind: http-request
+description: Create a vendor
+url: "{{base_url}}/{{namespace}}/vendors"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "name": "ABC Corporation",
+      "type": "Supplier",
+      "internal_id": "ABC123",
+      "email": "abc@example.com",
+      "phone": "1234567890"
+    }
+scripts:
+  - type: afterResponse
+    code: |+
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("vendor_id", json_response.id);
+      cv.set("vendor_name", json_response.name);
+
+    language: text/javascript
+examples: ./.resources/Create a Vendor.resources/examples
+order: 1000

@@ -1,0 +1,42 @@
+$kind: http-request
+description: Create an Entity.
+url: "{{base_url}}/{{namespace}}/entities"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "SampleEntity",
+        "type": "parcel",
+        "payload": "{{payload_id}}",
+        "customer": "ACustomer",
+        "internal_id": "ENTITY001",
+        "description": "Sample description",
+        "meta": {
+            "warehouse_bin": "1",
+            "warehouse_rack": "3",
+            "warehouse_section": "4"
+        },
+        "weight": 2.5,
+        "weight_unit": "kg",
+        "length": 10,
+        "width": 5,
+        "height": 8,
+        "dimensions_unit": "mm",
+        "declared_value": 1500,
+        "price": 1200,
+        "sale_price": 900,
+        "sku": "SKU123",
+        "currency": "USD"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("entity_id", json_response.id);
+    language: text/javascript
+examples: ./.resources/Create an Entity.resources/examples
+order: 1000

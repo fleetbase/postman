@@ -1,0 +1,12 @@
+$kind: http-request
+description: Use this endpoint to delete a driver.
+url: "{{base_url}}/{{namespace}}/drivers/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+    description: (Required) The id of the `Driver`.
+examples: ./.resources/Delete a Driver.resources/examples
+order: 5000

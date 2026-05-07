@@ -1,0 +1,25 @@
+$kind: http-request
+description: Create a driver
+url: "{{base_url}}/{{namespace}}/drivers"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "name": "John Doe",
+      "email": "{{$randomEmail}}",
+      "phone": "{{$randomPhoneNumber}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("driver_id", json_response.id);
+      cv.set("driver_name", json_response.name);
+    language: text/javascript
+examples: ./.resources/Create a Driver.resources/examples
+order: 1000

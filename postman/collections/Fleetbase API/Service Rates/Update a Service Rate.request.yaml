@@ -1,0 +1,19 @@
+$kind: http-request
+description: Update a Service Rate.
+url: "{{base_url}}/{{namespace}}/service-rates/:id"
+method: PUT
+pathVariables:
+  id: "{{service_rate_id}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"currency\": \"SGD\",\r
+
+    \    \"base_fee\": 12.66,\r
+
+    \    \"estimated_days\": 6\r
+
+    }"
+examples: ./.resources/Update a Service Rate.resources/examples
+order: 4000

@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{base_url}}/{{namespace}}/orders/order_mdy2Rog/cancel"
+method: DELETE
+order: 7000

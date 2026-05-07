@@ -1,0 +1,29 @@
+$kind: http-request
+description: Create a new Tracking Status.
+url: "{{base_url}}/{{namespace}}/tracking-statuses"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "status": "Delivery is en-route",
+        "code": "delivery-en-route",
+        "details": "Our driver has picked up your order and is on the way to your address!",
+        "tracking_number": "{{tracking_number_id}}",
+        "location": [1.3521, 103.8198],
+        "city": "Singapore"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && typeof json_response.id === 'string') {
+          cv.set("tracking_status_id", json_response.id);
+      }
+    language: text/javascript
+examples: ./.resources/Create a Tracking Status.resources/examples
+order: 1000

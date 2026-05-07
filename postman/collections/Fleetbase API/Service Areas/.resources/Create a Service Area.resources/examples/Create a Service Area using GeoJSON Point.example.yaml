@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/service-areas"
+  method: POST
+  body:
+    type: json
+    content: |-
+      {
+          "name": "MBS Service Area",
+          "type": "city",
+          "location": {
+              "type": "Point",
+              "coordinates": ["1.2838", "103.8591"]
+          },
+          "radius": "30000",
+          "country": "SG",
+          "status": "active"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 2000

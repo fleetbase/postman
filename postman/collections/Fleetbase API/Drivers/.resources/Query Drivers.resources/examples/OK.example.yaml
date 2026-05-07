@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/drivers?id=<string>"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: id
+      value: <string>
+      description: The id of the driver you want to retrieve.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "current_job": "<string>",
+        "vehicle": "<string>",
+        "email": "<string>",
+        "phone_number": "<string>",
+        "phone_country_code": "<string>",
+        "signup_token_used": "<string>",
+        "drivers_license_number": "<string>",
+        "latitude": "<string>",
+        "longitude": "<string>",
+        "heading": "<string>",
+        "altitude": "<string>",
+        "speed": "<string>",
+        "country": "<string>",
+        "currency": "<string>",
+        "city": "<string>",
+        "online": "<number>",
+        "status": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

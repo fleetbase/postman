@@ -1,0 +1,12 @@
+$kind: http-request
+description: Retrieve a Tracking Status.
+url: "{{base_url}}/{{namespace}}/tracking-statuses/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{tracking_status_id}}"
+    description: (Required) The Tracking Status id.
+examples: ./.resources/Retrieve a Tracking Status.resources/examples
+order: 3000

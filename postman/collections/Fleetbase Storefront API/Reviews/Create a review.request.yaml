@@ -1,0 +1,18 @@
+$kind: http-request
+description: Create a review
+url: "{{base_url}}/{{namespace}}/reviews"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "content": "",
+      "rating": 5
+    }
+order: 2000

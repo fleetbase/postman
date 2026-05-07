@@ -1,0 +1,11 @@
+name: local
+values:
+  - key: base_url
+    value: 'http://localhost:8000'
+    enabled: true
+  - key: namespace
+    value: v1
+    enabled: true
+  - key: api_key
+    value: ''
+    enabled: true

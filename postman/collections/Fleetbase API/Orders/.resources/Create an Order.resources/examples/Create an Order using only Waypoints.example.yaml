@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |
+      {
+        "waypoints": [
+            [1.3521, 103.8198],
+            "10 Bayfront Avenue, Singapore 018956",
+            "18 Marina Gardens Drive, Singapore 018953",
+            "80 Mandai Lake Rd, Singapore 729826",
+            "1 Beach Road, Singapore 189673",
+            "Sentosa, Singapore"
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 3000

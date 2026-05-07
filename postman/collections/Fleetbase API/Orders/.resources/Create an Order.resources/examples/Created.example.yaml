@@ -1,0 +1,255 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders?payload=<string>&dispatch=<boolean>&scheduled_at=<dateTime>&driver=<string>&facilitator=<string>&customer=<string>&meta=<string>&notes=<string>&with=<string>"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  queryParams:
+    - key: payload
+      value: <string>
+      description: (Required) The id of the `Payload` object or a `Payload` object.
+    - key: dispatch
+      value: <boolean>
+      description: Boolean value that should determine whether or not the order should be dispatched on creation or not. By default dispatch is true.
+    - key: scheduled_at
+      value: <dateTime>
+      description: The date and time the order should optionally be dispatched at, otherwise upon order creation the order will be dispatched unless dispatch is explicitly set to false.
+    - key: driver
+      value: <string>
+      description: The id of the Driver to be assigned to the order, if no driver is set the dispatch will send a "ping" to all drivers within an expanding radius around the pickup point coordinates.
+    - key: facilitator
+      value: <string>
+      description: The id of the Vendor or Contact object assigned to facilitate the completion of the order. This is for orders that will be assigned to third parties.
+    - key: customer
+      value: <string>
+      description: The id of the Vendor or Contact object the payload is for.
+    - key: meta
+      value: <string>
+      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+    - key: notes
+      value: <string>
+      description: Text containing additional information for the order, which can be used to assist the driver or facilitator.
+    - key: with
+      value: <string>
+      description: Set of relationships to embedd in response.
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "customer": "<string>",
+        "facilitator": "<string>",
+        "driver": {
+          "id": "<string>",
+          "current_job": "<string>",
+          "vehicle": "<string>",
+          "email": "<string>",
+          "phone_number": "<string>",
+          "phone_country_code": "<string>",
+          "signup_token_used": "<string>",
+          "drivers_license_number": "<string>",
+          "latitude": "<string>",
+          "longitude": "<string>",
+          "heading": "<string>",
+          "altitude": "<string>",
+          "speed": "<string>",
+          "country": "<string>",
+          "currency": "<string>",
+          "city": "<string>",
+          "online": "<number>",
+          "status": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "purchase_rate": {
+          "id": "<string>",
+          "customer": "<string>",
+          "order": "<string>",
+          "service_quote": "<string>",
+          "status": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "payload": {
+          "id": "<string>",
+          "pickup": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "dropoff": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "return": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "customer": "<string>",
+          "meta": {},
+          "cod_amount": "<number>",
+          "cod_currency": "<string>",
+          "cod_payment_method": "<string>",
+          "type": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>",
+          "": "<string>"
+        },
+        "meta": {},
+        "notes": "<string>",
+        "type": "<string>",
+        "status": "<string>",
+        "scheduled_at": "<dateTime>",
+        "updated_at": "<dateTime>",
+        "created_at": "<dateTime>"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "customer": {
+          "id": "<string>",
+          "name": "<string>",
+          "title": "<string>",
+          "email": "<string>",
+          "phone": "<string>",
+          "type": "<string>",
+          "slug": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "facilitator": {
+          "id": "<string>",
+          "internal_id": "<string>",
+          "name": "<string>",
+          "email": "<string>",
+          "phone_number": "<string>",
+          "phone_country_code": "<string>",
+          "address": "<string>",
+          "type": "<string>",
+          "slug": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "driver": {
+          "id": "<string>",
+          "current_job": "<string>",
+          "vehicle": "<string>",
+          "email": "<string>",
+          "phone_number": "<string>",
+          "phone_country_code": "<string>",
+          "signup_token_used": "<string>",
+          "drivers_license_number": "<string>",
+          "latitude": "<string>",
+          "longitude": "<string>",
+          "heading": "<string>",
+          "altitude": "<string>",
+          "speed": "<string>",
+          "country": "<string>",
+          "currency": "<string>",
+          "city": "<string>",
+          "online": "<number>",
+          "status": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "tracking_number": {
+          "id": "<string>",
+          "customer": "<string>",
+          "facilitator": "<string>",
+          "driver": "<string>",
+          "tracking_number": "<string>",
+          "purchase_rate": "<string>",
+          "payload": "<string>",
+          "meta": [],
+          "notes": "<string>",
+          "type": "<string>",
+          "status": "<string>",
+          "scheduled_at": "<boolean>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "purchase_rate": {
+          "id": "<string>",
+          "customer": "<string>",
+          "order": "<string>",
+          "service_quote": "<string>",
+          "status": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>"
+        },
+        "payload": {
+          "id": "<string>",
+          "pickup": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "dropoff": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "return": {
+            "id": "<string>",
+            "name": "<string>",
+            "type": "<string>",
+            "latitude": "<string>",
+            "longitude": "<string>",
+            "status": "<string>",
+            "updated_at": "<string>",
+            "created_at": "<string>"
+          },
+          "customer": "<string>",
+          "meta": {},
+          "cod_amount": "<number>",
+          "cod_currency": "<string>",
+          "cod_payment_method": "<string>",
+          "type": "<string>",
+          "updated_at": "<string>",
+          "created_at": "<string>",
+          "": "<string>"
+        },
+        "meta": {},
+        "notes": "<string>",
+        "type": "<string>",
+        "status": "<string>",
+        "scheduled_at": "<string>",
+        "updated_at": "<string>",
+        "created_at": "<string>"
+      }
+order: 1000

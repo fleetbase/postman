@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/payloads/:id?pickup=<string>&dropoff=<string>&type=<string>&return=<string>&customer=<string>&meta=<string>"
+  method: PUT
+  queryParams:
+    - key: pickup
+      value: <string>
+      description: The id of the Place object where the payload should be picked up.
+    - key: dropoff
+      value: <string>
+      description: The id of the Place object where the payload should be dropped off.
+    - key: type
+      value: <string>
+      description: The type of payload. This is typically aligned with the service type such as "passenger", "parcel", or "task". This should match the service rate type if payload must be delivered through PurchaseRate creation.
+    - key: return
+      value: <string>
+      description: The id of the Place object where the payload should be returned to if the drop off cannot be completed.
+    - key: customer
+      value: <string>
+      description: The id of the Vendor or Contact object the payload is for.
+    - key: meta
+      value: <string>
+      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

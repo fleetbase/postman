@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/places"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |
+      {
+        "latitude": "1.2838",
+        "longitude": "103.8591"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

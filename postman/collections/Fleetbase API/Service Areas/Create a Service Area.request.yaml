@@ -1,0 +1,29 @@
+$kind: http-request
+description: |-
+  A service area is created by simply providing a city, province or country in which Fleetbase will reverse geocode into a service area.
+
+  If the service area cannot be reverse geocoded, Fleetbase will return an error.
+url: "{{base_url}}/{{namespace}}/service-areas"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Singapore",
+        "type": "city",
+        "latitude": "1.3521",
+        "longitude": "103.8198",
+        "radius": "30000",
+        "country": "SG",
+        "status": "active"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("service_area_id", json_response.id);
+      cv.set("service_area_name", json_response.name);
+    language: text/javascript
+examples: ./.resources/Create a Service Area.resources/examples
+order: 1000

@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/zones/:id?name=<string>&description=<string>&boundary=<string>&color=<string>&stroke_color=<string>&status=<string>"
+  method: PUT
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: name
+      value: <string>
+      description: The name you want to update the zone to.
+    - key: description
+      value: <string>
+      description: The description you want to update the zone to.
+    - key: boundary
+      value: <string>
+      description: 'The new boundary you want to update the zone to. The boundary can either be an array of coordinates that make up the zone, or a key value array with three elements: "latitude", "longitude", and "radius". Supplying the key value array creates a zone with a radius in meters around the supplied latitude and longitude.'
+    - key: color
+      value: <string>
+      description: The color of the zone you want to update. This is typically a hexedecimal color code, but not limited to rgba, hexa, rgb, hsl, hsla, or hsv color codes.
+    - key: stroke_color
+      value: <string>
+      description: The outline color of the zone you want to update to. This is typically a hexedecimal color code, but not limited to rgba, hexa, rgb, hsl, hsla, or hsv color codes.
+    - key: status
+      value: <string>
+      description: The status you want to update the zone to.
+  pathVariables:
+    id: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "service_area": "<string>",
+        "name": "<string>",
+        "description": "<string>",
+        "coordinates": "<string>",
+        "color": "<string>",
+        "stroke_color": "<string>",
+        "status": "<string>",
+        "created_at": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

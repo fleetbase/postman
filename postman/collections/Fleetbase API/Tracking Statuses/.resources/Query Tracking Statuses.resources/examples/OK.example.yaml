@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/tracking-statuses"
+  method: GET
+  headers:
+    Accept: application/json
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    header-0: <string>
+  body:
+    type: json
+    content: |-
+      {
+        "id": "<string>",
+        "status": "<string>",
+        "details": "<string>",
+        "code": "<string>",
+        "tracking_number": "<string>",
+        "city": "<string>",
+        "postal_code": "<string>",
+        "country": "<string>",
+        "location": "<string>",
+        "updated_at": "<string>"
+      }
+order: 1000

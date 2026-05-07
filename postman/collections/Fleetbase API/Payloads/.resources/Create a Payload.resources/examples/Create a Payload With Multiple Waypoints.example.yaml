@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/payloads"
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"waypoints\": [\r
+
+      \        \"10 Bayfront Avenue, Singapore 018956\",\r
+
+      \        \"18 Marina Gardens Drive, Singapore 018953\",\r
+
+      \        \"80 Mandai Lake Rd, Singapore 729826\",\r
+
+      \        \"1 Beach Road, Singapore 189673\",\r
+
+      \        \"Sentosa, Singapore\"\r
+
+      \    ],\r
+
+      \    \"type\": \"food_delivery\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 3000

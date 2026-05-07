@@ -1,0 +1,13 @@
+$kind: http-request
+description: Search Store
+url: "{{base_url}}/{{namespace}}/stores?query=&limit=&store="
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  query: ""
+  limit: ""
+  store: ""
+order: 1000
