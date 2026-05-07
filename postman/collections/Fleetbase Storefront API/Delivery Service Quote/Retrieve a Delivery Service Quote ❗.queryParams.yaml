@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: origin
+    type: string
+    description: "Origin value for this delivery service quote request."
+  - name: destination
+    type: string
+    description: "Destination value for this delivery service quote request."
+  - name: cart
+    type: string
+    description: "Cart value for this delivery service quote request."

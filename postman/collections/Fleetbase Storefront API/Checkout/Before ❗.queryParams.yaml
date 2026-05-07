@@ -1,0 +1,26 @@
+$kind: params
+fields:
+  - name: gateway
+    type: string
+    description: "Payment gateway ID or code."
+  - name: customer
+    type: string
+    description: "Customer ID associated with the request."
+  - name: cart
+    type: string
+    description: "Cart value for this checkout request."
+  - name: service_quote
+    type: string
+    description: "Service quote ID used by the request."
+  - name: cash
+    type: boolean
+    description: "Cash value for this checkout request."
+  - name: pickup
+    type: boolean
+    description: "Pickup address, place ID, or pickup payload for the order."
+  - name: tip
+    type: number
+    description: "Tip amount applied to the checkout."
+  - name: delivery_tip
+    type: number
+    description: "Tip amount allocated to delivery."
