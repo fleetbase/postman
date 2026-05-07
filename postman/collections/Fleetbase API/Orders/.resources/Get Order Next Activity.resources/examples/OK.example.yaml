@@ -8,6 +8,26 @@ response:
   statusCode: 200
   statusText: OK
   body:
-    type: text
-    content: ""
+    type: json
+    content: |-
+      [
+        {
+          "code": "started",
+          "status": "Order started",
+          "details": "The assigned driver has started the order.",
+          "sequence": 2,
+          "_resolved_status": "Order started",
+          "_resolved_details": "The assigned driver has started the order."
+        },
+        {
+          "code": "completed",
+          "status": "Order completed",
+          "details": "The order has been completed.",
+          "sequence": 3,
+          "require_pod": true,
+          "pod_method": "signature",
+          "_resolved_status": "Order completed",
+          "_resolved_details": "The order has been completed."
+        }
+      ]
 order: 1000

@@ -1,12 +1,16 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/orders/:id/dispatch"
-  method: PATCH
+  url: "{{base_url}}/{{namespace}}/orders/:id/complete"
+  method: POST
+  headers:
+    Accept: application/json
   pathVariables:
-    id: ""
+    id: "order_7YqM3KpL2n"
 response:
   statusCode: 200
   statusText: OK
+  headers:
+    Content-Type: application/json
   body:
     type: json
     content: |-
@@ -14,20 +18,20 @@ response:
         "id": "order_7YqM3KpL2n",
         "internal_id": "ORD-1001",
         "order_config": "order_config_transport",
-        "payload": { "id": "payload_x9Z2Lm8QpA", "current_waypoint": "place_1A2b3C4d5E", "waypoints": [], "entities": [], "meta": {} },
+        "payload": { "id": "payload_x9Z2Lm8QpA", "waypoints": [], "entities": [], "meta": {} },
         "customer": null,
         "facilitator": null,
         "driver_assigned": { "id": "driver_A1b2C3d4E5", "name": "Alex Driver" },
         "vehicle_assigned": null,
-        "tracking_number": { "id": "tracking_3Nf8Qw2YxM", "tracking_number": "FB-1001", "status": "started", "status_code": "started", "type": "order" },
+        "tracking_number": { "id": "tracking_3Nf8Qw2YxM", "tracking_number": "FB-1001", "status": "completed", "status_code": "completed", "type": "order" },
         "tracking_statuses": [],
         "files": [],
         "purchase_rate": null,
         "notes": "Deliver through receiving bay.",
         "type": "transport",
-        "status": "started",
-        "pod_method": null,
-        "pod_required": false,
+        "status": "completed",
+        "pod_method": "signature",
+        "pod_required": true,
         "dispatched": true,
         "started": true,
         "adhoc": false,
@@ -38,7 +42,7 @@ response:
         "dispatched_at": "2026-05-07T08:50:00.000000Z",
         "started_at": "2026-05-07T08:52:00.000000Z",
         "scheduled_at": null,
-        "updated_at": "2026-05-07T08:52:00.000000Z",
+        "updated_at": "2026-05-07T09:20:00.000000Z",
         "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

@@ -1,0 +1,39 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/tracker"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "driver_current_location": {
+          "latitude": 1.2921,
+          "longitude": 103.8502
+        },
+        "progress_percentage": 42.5,
+        "total_distance": 4830,
+        "completed_distance": 2053,
+        "current_destination_eta": 720,
+        "completion_eta": 1540,
+        "estimated_completion_time": "2026-05-07T09:35:00.000000Z",
+        "estimated_completion_time_formatted": "May 7th, 2026 09:35",
+        "start_time": "2026-05-07T08:52:00.000000Z",
+        "completion_time": null,
+        "current_destination": {
+          "id": "place_9Z8y7X6w5V",
+          "name": "321 Orchard Rd"
+        },
+        "next_destination": null,
+        "first_waypoint_completed": true,
+        "last_waypoint_completed": false
+      }
+order: 1000

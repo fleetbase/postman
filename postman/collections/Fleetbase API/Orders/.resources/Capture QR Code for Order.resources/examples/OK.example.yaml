@@ -8,6 +8,17 @@ response:
   statusCode: 200
   statusText: OK
   body:
-    type: text
-    content: ""
+    type: json
+    content: |-
+      {
+        "id": "proof_x9L2mN4pQr",
+        "subject_id": "entity_4Kp9Lm2QxZ",
+        "order_id": "order_7YqM3KpL2n",
+        "url": null,
+        "remarks": "Verified by QR Code Scan",
+        "raw": "entity-qr-scan-payload",
+        "data": { "scanner": "driver-app" },
+        "updated_at": "2026-05-07T09:05:00.000000Z",
+        "created_at": "2026-05-07T09:05:00.000000Z"
+      }
 order: 1000

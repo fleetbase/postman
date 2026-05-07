@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/capture-photo/:subjectId"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+    subjectId: "order_7YqM3KpL2n"
+  body:
+    type: json
+    content: |-
+      {
+        "photos": ["iVBORw0KGgoAAAANSUhEUgAA..."],
+        "remarks": "Verified by Photo",
+        "data": {
+          "captured_by": "driver-app"
+        }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "proof_3Vq8mN2xLa",
+        "subject_id": "order_7YqM3KpL2n",
+        "order_id": "order_7YqM3KpL2n",
+        "url": "https://files.example.com/uploads/company_123/photos/proof_3Vq8mN2xLa.png",
+        "remarks": "Verified by Photo",
+        "raw": "iVBORw0KGgoAAAANSUhEUgAA...",
+        "data": {
+          "captured_by": "driver-app"
+        },
+        "updated_at": "2026-05-07T09:15:00.000000Z",
+        "created_at": "2026-05-07T09:15:00.000000Z"
+      }
+order: 1000

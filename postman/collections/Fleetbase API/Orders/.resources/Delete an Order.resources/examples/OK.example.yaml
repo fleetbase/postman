@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "order_7YqM3KpL2n",
+        "object": "order",
+        "time": "2026-05-07T09:25:00.000000Z",
+        "deleted": true
+      }
+order: 1000

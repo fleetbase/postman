@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/editable-entity-fields"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "key": "weight",
+          "label": "Weight",
+          "type": "number"
+        },
+        {
+          "key": "length",
+          "label": "Length",
+          "type": "number"
+        }
+      ]
+order: 1000
