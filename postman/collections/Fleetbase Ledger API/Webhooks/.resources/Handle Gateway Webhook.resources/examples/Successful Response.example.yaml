@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/webhooks/{{gateway_driver}}"
+  method: POST
+  headers:
+    Accept: application/json
+  pathVariables:
+    gateway_driver: ""
+  body:
+    type: json
+    content: |-
+      {
+        "company_uuid": "{{company_id}}",
+        "id": "{{gateway_event_id}}",
+        "type": "payment_intent.succeeded",
+        "data": {
+          "object": {}
+        }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "webhook_abc123",
+        "object": "webhook",
+        "status": "active",
+        "created_at": "2026-05-07T12:00:00Z",
+        "updated_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000
