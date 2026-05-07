@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create Stripe Setup Intent
+description: |-
+  Creates a checkout resource. The response returns the created resource with its generated identifier.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-setup-intent"
 method: POST
 headers:

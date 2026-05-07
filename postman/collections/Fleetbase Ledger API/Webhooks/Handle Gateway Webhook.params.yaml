@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: company_uuid
+    type: string
+    description: "Company uuid value for this webhooks request."
+  - name: id
+    type: string
+    description: "Unique identifier for the resource."
+  - name: type
+    type: enum
+    values: ["customer", "vendor", "driver"]
+    description: "Classification used to group or process the resource."
+  - name: data
+    type: object
+    description: "Data value for this webhooks request."
+    fields:
+      - name: object
+        type: string
+        description: "Object type returned by the API."

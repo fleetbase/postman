@@ -1,5 +1,6 @@
 $kind: http-request
-description: Handle Gateway Webhook
+description: |-
+  Receives a payment gateway webhook and records the normalized ledger event. The response acknowledges the webhook so the gateway can stop retrying.
 url: "{{base_url}}/{{api_prefix}}/webhooks/{{gateway_driver}}"
 method: POST
 headers:

@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: "Email address or phone number used for authentication."
+  - name: code
+    type: string
+    required: true
+    description: "Verification or status code."

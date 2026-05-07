@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  You can update the driver assigned, plate number, and status of the `Vehicle`.
-
-  Vehicle's can only be assigned to one driver at a time, if a vehicle is re-assigned to another driver then the last driver will no longer be assigned to the vehicle.
+  Updates a vehicle. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/vehicles/:id"
 method: PUT
 headers:

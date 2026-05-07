@@ -1,5 +1,6 @@
 $kind: http-request
-description: Delete a Review
+description: |-
+  Deletes a reviews resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{id}"
 method: DELETE
 headers:

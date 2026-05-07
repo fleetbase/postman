@@ -1,5 +1,6 @@
 $kind: http-request
-description: Retrieve a Customer
+description: |-
+  Retrieves a customer. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{{customer_id}}"
 method: GET
 headers:

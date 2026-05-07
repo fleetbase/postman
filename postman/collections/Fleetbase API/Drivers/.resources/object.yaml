@@ -1,0 +1,37 @@
+$kind: object
+name: Driver
+description: |-
+  A driver represents a driver record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
+example: |-
+  {
+    "id": "driver_abc123",
+    "object": "driver",
+    "name": "Alex Driver",
+    "status": "active",
+    "phone": "+15555550101",
+    "online": false,
+    "created_at": "2026-05-07T12:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Unique identifier for the resource."
+  - name: object
+    type: string
+    description: "Object type returned by the API."
+  - name: name
+    type: string
+    description: "Display name for the resource."
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: "Lifecycle status of the resource."
+  - name: phone
+    type: string
+    description: "Phone number for the person or customer."
+  - name: online
+    type: boolean
+    description: "Online value for this drivers request."
+  - name: created_at
+    type: timestamp
+    description: "Time when the resource was created."

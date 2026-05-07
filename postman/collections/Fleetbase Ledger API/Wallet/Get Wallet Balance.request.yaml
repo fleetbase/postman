@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Wallet Balance
+description: |-
+  Retrieves a wallet. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/balance"
 method: GET
 headers:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Delete Cart
+description: |-
+  Deletes a cart resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}"
 method: DELETE
 headers:

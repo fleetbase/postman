@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates the current activity state for an order. The response returns the order with the latest workflow activity applied.
+  Updates an orders resource. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/orders/:id/update-activity"
 method: POST
 pathVariables:

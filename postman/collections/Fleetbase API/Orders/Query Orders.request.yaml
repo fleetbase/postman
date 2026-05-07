@@ -1,5 +1,6 @@
 $kind: http-request
-description: List all orders.
+description: |-
+  Returns orders matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/orders"
 method: GET
 queryParams:

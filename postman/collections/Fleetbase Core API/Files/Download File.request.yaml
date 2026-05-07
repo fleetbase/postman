@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Download File"
+description: |-
+  Downloads a file by ID. The response returns the file payload or download metadata.
 url: "{{base_url}}/{{namespace}}/files/:id/download"
 method: GET
 pathVariables:

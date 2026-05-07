@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/chat-channels/delete-message/:chatMessageId"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    chatMessageId: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "chat-channel_abc123",
+        "object": "chat-channel",
+        "deleted": true
+      }
+order: 1000

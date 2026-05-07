@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: "Token used to authorize or capture the operation."

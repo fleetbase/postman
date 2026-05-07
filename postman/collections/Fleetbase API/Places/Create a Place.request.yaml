@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  When you create a place, you must specify a name and latitude and longitude coordinates.
-
-  Fleetbase will run a reverse geocode automatically on the provided coordinates to automatically complete the address when the optional fields are not provided.
+  Creates a place. The response returns the created resource with its generated identifier.
 url: "{{base_url}}/{{namespace}}/places"
 method: POST
 headers:

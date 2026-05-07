@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Stripe Ephemeral Key
+description: |-
+  Retrieves a customer. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-ephemeral-key"
 method: POST
 headers:

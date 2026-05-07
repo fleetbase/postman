@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Public Invoice
+description: |-
+  Retrieves a public invoice. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}"
 method: GET
 headers:

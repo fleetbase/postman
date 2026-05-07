@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: gateway_id
+    type: string
+    description: "Payment gateway public identifier."
+  - name: reference
+    type: string
+    description: "External reference for the payment or request."

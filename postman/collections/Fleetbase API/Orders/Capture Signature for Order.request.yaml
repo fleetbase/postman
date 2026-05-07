@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Captures a signature proof for an order or order subject. Use this when a workflow requires signed proof of delivery or pickup.
+  Captures a signature proof for an order or order subject. Use it when a workflow requires signed proof of pickup or delivery.
 url: "{{base_url}}/{{namespace}}/orders/:id/capture-signature/:subject-id"
 method: POST
 pathVariables:

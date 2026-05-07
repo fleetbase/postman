@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update a Contact
+description: |-
+  Updates a contact. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/contacts/:id"
 method: PUT
 headers:

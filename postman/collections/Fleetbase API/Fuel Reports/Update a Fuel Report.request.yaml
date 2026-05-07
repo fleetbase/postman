@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Update a Fuel Report"
+description: |-
+  Updates a fuel reports resource. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
 method: PUT
 pathVariables:

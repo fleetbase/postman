@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create a Payload.
+description: |-
+  Creates a payload. The response returns the created resource with its generated identifier.
 url: "{{base_url}}/{{namespace}}/payloads"
 method: POST
 body:

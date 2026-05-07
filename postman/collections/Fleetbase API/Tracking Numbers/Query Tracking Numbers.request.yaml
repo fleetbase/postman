@@ -1,5 +1,6 @@
 $kind: http-request
-description: This endpoint allows you to query tracking-numbers you have created, it also provides paginated results on all the tracking-numbers in your Fleetbase.
+description: |-
+  Returns tracking numbers matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/tracking-numbers"
 method: GET
 headers:

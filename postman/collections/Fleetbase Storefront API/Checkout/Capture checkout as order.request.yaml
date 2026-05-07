@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Captures a checkout token and creates the corresponding order. The response returns the completed order or the existing order when the checkout was already captured.
+  Captures a checkout token and creates the corresponding order. If the checkout was already captured, the existing order is returned.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture"
 method: POST
 headers:

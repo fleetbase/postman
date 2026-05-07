@@ -1,5 +1,6 @@
 $kind: http-request
-description: Get Stripe Setup Intent
+description: |-
+  Retrieves a customer. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-setup-intent"
 method: POST
 headers:

@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Send Message"
+description: |-
+  Sends a message to a chat channel. The response returns the created chat message.
 url: "{{base_url}}/{{namespace}}/chat-channels/:id/send-message"
 method: POST
 pathVariables:

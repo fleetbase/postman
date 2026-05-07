@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update a Payload.
+description: |-
+  Updates a payload. Parameters not supplied remain unchanged.
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: PUT
 pathVariables:

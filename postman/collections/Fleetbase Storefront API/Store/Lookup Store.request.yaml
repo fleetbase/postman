@@ -1,5 +1,6 @@
 $kind: http-request
-description: Lookup Store
+description: |-
+  Looks up a storefront by identifier. The response returns the matching store profile when it is available to the caller.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/lookup/{{store_id}}"
 method: GET
 headers:

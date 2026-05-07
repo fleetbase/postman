@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Starts SMS authentication for an existing storefront customer. The customer receives a verification code that can be exchanged for an auth token.
+  Starts SMS authentication for an existing storefront customer. The customer receives a code that can be exchanged for an access token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-sms"
 method: POST
 headers:

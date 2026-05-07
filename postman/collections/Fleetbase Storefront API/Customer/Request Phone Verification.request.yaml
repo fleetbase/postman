@@ -1,5 +1,6 @@
 $kind: http-request
-description: Request Phone Verification
+description: |-
+  Sends a phone verification code to the authenticated storefront customer. Use the code with the verify phone number endpoint.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
 method: POST
 headers:

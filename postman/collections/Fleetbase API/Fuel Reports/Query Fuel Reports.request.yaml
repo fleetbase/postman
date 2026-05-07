@@ -1,5 +1,6 @@
 $kind: http-request
-description: "Query Fuel Reports"
+description: |-
+  Returns fuel reports matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/fuel-reports"
 method: GET
 queryParams:

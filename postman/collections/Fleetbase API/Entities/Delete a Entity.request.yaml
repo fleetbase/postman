@@ -1,5 +1,6 @@
 $kind: http-request
-description: Delete an Entity.
+description: |-
+  Deletes an entities resource. The response confirms the resource that was removed.
 url: "{{base_url}}/{{namespace}}/entities/:id"
 method: DELETE
 headers:

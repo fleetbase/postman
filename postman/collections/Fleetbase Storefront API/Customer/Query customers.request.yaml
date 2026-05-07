@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns storefront customers for the current company. Use query and pagination parameters to find matching customer records.
+  Returns customer matching the supplied filters. Use pagination and query parameters to control the result set.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers"
 method: GET
 headers:

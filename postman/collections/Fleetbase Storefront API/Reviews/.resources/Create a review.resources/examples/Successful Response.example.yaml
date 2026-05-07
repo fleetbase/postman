@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "content": "",
+        "rating": 5
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "review_abc123",
+        "object": "review",
+        "status": "active",
+        "created_at": "2026-05-07T12:00:00Z",
+        "updated_at": "2026-05-07T12:00:00Z"
+      }
+order: 1000

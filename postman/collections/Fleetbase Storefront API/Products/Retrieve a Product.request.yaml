@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a single storefront product by ID. The response includes product details, pricing, variants, and related catalog data when available.
+  Retrieves a product. The response includes the current API representation of the resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{id}"
 method: GET
 headers:
