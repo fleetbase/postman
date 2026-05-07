@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: next
+    type: string
+    required: true
+    description: Organization ID to switch the driver session to.

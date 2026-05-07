@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create a new Contact.
+description: |-
+  Creates a contact for the current company. Contacts are used as customers, facilitators, personnel, or other addressable people in FleetOps workflows.
 url: "{{base_url}}/{{namespace}}/contacts"
 method: POST
 headers:

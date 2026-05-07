@@ -2,13 +2,16 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this vehicles request."
+    description: Search term matched against vehicle fields.
   - name: limit
-    type: string
-    description: "Limit value for this vehicles request."
+    type: integer
+    description: Maximum number of vehicles to return.
   - name: offset
-    type: string
-    description: "Offset value for this vehicles request."
+    type: integer
+    description: Number of vehicles to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this vehicles request."
+    description: Sort expression for the vehicle query.
+  - name: vendor
+    type: string
+    description: Vendor ID used to filter vehicles assigned to a vendor.

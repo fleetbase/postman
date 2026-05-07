@@ -1,11 +1,14 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this fleets request."
+    type: integer
+    description: Maximum number of fleets to return.
   - name: offset
-    type: string
-    description: "Offset value for this fleets request."
+    type: integer
+    description: Number of fleets to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this fleets request."
+    description: Sort expression for the fleet query.
+  - name: with
+    type: array of strings
+    description: Relationships to include in fleet responses.

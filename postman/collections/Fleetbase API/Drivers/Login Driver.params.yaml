@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: Driver email address or phone number.
+  - name: password
+    type: string
+    required: true
+    description: Driver account password.

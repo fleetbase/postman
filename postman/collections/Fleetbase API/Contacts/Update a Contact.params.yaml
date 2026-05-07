@@ -2,20 +2,25 @@ $kind: params
 fields:
   - name: name
     type: string
-    description: "Display name for the resource."
+    description: Contact display name.
+  - name: type
+    type: string
+    description: Contact type.
   - name: title
     type: string
-    description: "Optional title associated with the contact or person."
+    description: Optional contact title.
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: Contact email address.
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
-  - name: type
-    type: enum
-    values: ["customer", "vendor", "driver"]
-    description: "Classification used to group or process the resource."
-  - name: slug
+    description: Contact phone number.
+  - name: photo
     type: string
-    description: "URL-friendly identifier for the resource."
+    description: File ID, upload reference, or resolvable file input for the contact photo.
+  - name: place
+    type: string
+    description: Place ID to use as the contact's primary place.
+  - name: meta
+    type: object
+    description: Additional contact metadata.

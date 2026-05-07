@@ -2,10 +2,41 @@ $kind: params
 fields:
   - name: name
     type: string
-    description: "Display name for the resource."
+    description: Driver display name.
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: Driver email address.
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
+    description: Driver phone number.
+  - name: password
+    type: string
+    description: Optional password for the driver user account.
+  - name: vehicle
+    type: string
+    description: Vehicle ID to assign to the driver.
+  - name: vendor
+    type: string
+    description: Vendor ID to assign to the driver.
+  - name: job
+    type: string
+    description: Current order ID to assign to the driver.
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: Driver lifecycle status.
+  - name: photo
+    type: string
+    description: File ID, upload reference, or resolvable file input for the driver photo.
+  - name: location
+    type: object
+    description: Resolvable point used as the driver's current location.
+  - name: latitude
+    type: number
+    description: Decimal latitude. Required with `longitude`.
+  - name: longitude
+    type: number
+    description: Decimal longitude. Required with `latitude`.
+  - name: meta
+    type: object
+    description: Additional driver metadata.

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Updates a fleet.
+description: |-
+  Updates a fleet's name or assigned service area.
 url: "{{base_url}}/{{namespace}}/fleets/:id"
 method: PUT
 headers:
@@ -11,7 +12,7 @@ body:
   content: |-
     {
         "name": "Haulers",
-        "status": "active"
+        "service_area": "{{service_area_id}}"
     }
 examples: ./.resources/Update a Fleet.resources/examples
 order: 4000

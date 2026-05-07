@@ -1,0 +1,13 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: Device push token to register.
+  - name: platform
+    type: string
+    required: true
+    description: Device platform. May also be supplied as `os`.
+  - name: os
+    type: string
+    description: Alias for `platform`.

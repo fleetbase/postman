@@ -3,8 +3,7 @@ fields:
   - name: name
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    description: Fleet display name.
+  - name: service_area
+    type: string
+    description: Service area ID to assign to the fleet.

@@ -1,0 +1,120 @@
+$kind: object
+name: Driver
+description: |-
+  A driver represents a FleetOps operator who can receive jobs, report location, register devices, and belong to fleets, vendors, vehicles, and organizations.
+example: |
+  {
+    "id": "driver_A1b2C3d4E5",
+    "user": "user_1A2b3C4d5E",
+    "internal_id": "DRV-1001",
+    "company": "company_6zV1KqN9pR",
+    "company_name": "Fleetbase",
+    "name": "Alex Driver",
+    "email": "alex.driver@example.com",
+    "phone": "+15555550111",
+    "drivers_license_number": null,
+    "photo_url": null,
+    "avatar_url": null,
+    "vehicle_avatar": null,
+    "location": {
+      "latitude": 1.3521,
+      "longitude": 103.8198
+    },
+    "heading": 0,
+    "altitude": 0,
+    "speed": 0,
+    "country": "SG",
+    "currency": "SGD",
+    "city": "Singapore",
+    "online": false,
+    "status": "active",
+    "token": null,
+    "meta": {},
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public driver identifier.
+  - name: user
+    type: string
+    description: Public user ID linked to the driver.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier.
+  - name: company
+    type: string
+    description: Public company ID for the driver's current company.
+  - name: company_name
+    type: string
+    description: Name of the driver's current company.
+  - name: name
+    type: string
+    description: Driver display name.
+  - name: email
+    type: string
+    description: Driver email address.
+  - name: phone
+    type: string
+    description: Driver phone number.
+  - name: drivers_license_number
+    type: string
+    description: Driver license number.
+  - name: photo_url
+    type: string
+    description: Driver photo URL.
+  - name: avatar_url
+    type: string
+    description: Driver avatar URL.
+  - name: vehicle
+    type: object
+    description: Assigned vehicle, when loaded.
+  - name: current_job
+    type: object
+    description: Current order, when loaded.
+  - name: vendor
+    type: object
+    description: Assigned vendor, when loaded.
+  - name: fleets
+    type: array of objects
+    description: Fleets the driver belongs to, when loaded.
+  - name: location
+    type: object
+    description: Current driver coordinates.
+  - name: heading
+    type: integer
+    description: Current heading in degrees.
+  - name: altitude
+    type: integer
+    description: Current altitude.
+  - name: speed
+    type: integer
+    description: Current speed.
+  - name: country
+    type: string
+    description: Current country code.
+  - name: currency
+    type: currency
+    description: Currency inferred from the driver's country.
+  - name: city
+    type: string
+    description: Current city.
+  - name: online
+    type: boolean
+    description: Whether the driver is online.
+  - name: status
+    type: string
+    description: Driver lifecycle status.
+  - name: token
+    type: string
+    description: Authentication token returned by driver login endpoints.
+  - name: meta
+    type: object
+    description: Additional driver metadata.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the driver was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the driver was created.

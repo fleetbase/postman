@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create a new fleet.
+description: |-
+  Creates a fleet for grouping drivers and vehicles. Assign a service area when the fleet should be constrained to a specific operating area.
 url: "{{base_url}}/{{namespace}}/fleets"
 method: POST
 headers:
@@ -9,7 +10,7 @@ body:
   content: |-
     {
         "name": "Haulers",
-        "status": "active"
+        "service_area": "{{service_area_id}}"
     }
 scripts:
   - type: afterResponse

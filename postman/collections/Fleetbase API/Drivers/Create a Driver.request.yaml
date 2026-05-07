@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create a driver
+description: |-
+  Creates a driver profile and linked user account. Provide a unique email and phone number, then optionally assign a vehicle, vendor, current job, location, or photo.
 url: "{{base_url}}/{{namespace}}/drivers"
 method: POST
 headers:

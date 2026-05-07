@@ -1,0 +1,195 @@
+$kind: object
+name: Vehicle
+description: |-
+  A vehicle represents a trackable asset used for FleetOps assignment, routing, and capacity planning. It stores vehicle identity, status, assignment, current position, capacity, orchestrator constraints, and metadata.
+example: |
+  {
+    "id": "vehicle_7YqM3KpL2n",
+    "internal_id": "VEH-1001",
+    "photo_url": null,
+    "avatar_url": null,
+    "name": "ABC123",
+    "description": null,
+    "driver": null,
+    "make": "Toyota",
+    "model": "Camry",
+    "year": 2023,
+    "trim": "SE",
+    "type": "sedan",
+    "plate_number": "ABC123",
+    "vin": "1GCGSBEA0G1111111",
+    "status": "operational",
+    "online": false,
+    "payload_capacity": 500,
+    "location": {
+      "latitude": 40.7484,
+      "longitude": -73.9857
+    },
+    "heading": 0,
+    "altitude": 0,
+    "speed": 0,
+    "notes": null,
+    "meta": {},
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public vehicle identifier.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier.
+  - name: photo_url
+    type: string
+    description: Vehicle photo URL.
+  - name: avatar_url
+    type: string
+    description: Vehicle avatar URL.
+  - name: name
+    type: string
+    description: Vehicle display name.
+  - name: description
+    type: string
+    description: Vehicle description.
+  - name: driver
+    type: object
+    description: Assigned driver, when loaded.
+  - name: devices
+    type: array of objects
+    description: Vehicle devices, when loaded.
+  - name: make
+    type: string
+    description: Vehicle manufacturer.
+  - name: model
+    type: string
+    description: Vehicle model.
+  - name: model_type
+    type: string
+    description: Vehicle model type.
+  - name: year
+    type: integer
+    description: Model year.
+  - name: trim
+    type: string
+    description: Vehicle trim.
+  - name: type
+    type: string
+    description: Vehicle type.
+  - name: class
+    type: string
+    description: Vehicle class.
+  - name: color
+    type: string
+    description: Vehicle color.
+  - name: serial_number
+    type: string
+    description: Vehicle serial number.
+  - name: plate_number
+    type: string
+    description: License plate number.
+  - name: call_sign
+    type: string
+    description: Vehicle call sign.
+  - name: vin
+    type: string
+    description: Vehicle identification number.
+  - name: vin_data
+    type: object
+    description: Decoded VIN data.
+  - name: specs
+    type: object
+    description: Vehicle specification data.
+  - name: details
+    type: object
+    description: Additional vehicle detail data.
+  - name: status
+    type: string
+    description: Vehicle operational status.
+  - name: online
+    type: boolean
+    description: Whether the vehicle is online.
+  - name: slug
+    type: string
+    description: URL-friendly vehicle slug.
+  - name: financing_status
+    type: string
+    description: Vehicle financing status.
+  - name: measurement_system
+    type: string
+    description: Measurement system used for vehicle metrics.
+  - name: odometer
+    type: number
+    description: Current odometer reading.
+  - name: odometer_unit
+    type: string
+    description: Unit for odometer readings.
+  - name: fuel_type
+    type: string
+    description: Vehicle fuel type.
+  - name: payload_capacity
+    type: number
+    description: Payload capacity.
+  - name: towing_capacity
+    type: number
+    description: Towing capacity.
+  - name: seating_capacity
+    type: integer
+    description: Seating capacity.
+  - name: weight
+    type: number
+    description: Vehicle weight.
+  - name: length
+    type: number
+    description: Vehicle length.
+  - name: width
+    type: number
+    description: Vehicle width.
+  - name: height
+    type: number
+    description: Vehicle height.
+  - name: currency
+    type: currency
+    description: Currency for vehicle financial fields.
+  - name: acquisition_cost
+    type: currency
+    description: Acquisition cost.
+  - name: current_value
+    type: currency
+    description: Current vehicle value.
+  - name: purchased_at
+    type: timestamp
+    description: Purchase timestamp.
+  - name: lease_expires_at
+    type: timestamp
+    description: Lease expiration timestamp.
+  - name: deleted_at
+    type: timestamp
+    description: Deletion timestamp when soft deleted.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the vehicle was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the vehicle was created.
+  - name: location
+    type: object
+    description: Current vehicle coordinates.
+  - name: heading
+    type: integer
+    description: Current heading in degrees.
+  - name: altitude
+    type: integer
+    description: Current altitude.
+  - name: speed
+    type: integer
+    description: Current speed.
+  - name: telematics
+    type: object
+    description: Telematics payload.
+  - name: notes
+    type: string
+    description: Vehicle notes.
+  - name: meta
+    type: object
+    description: Additional vehicle metadata.

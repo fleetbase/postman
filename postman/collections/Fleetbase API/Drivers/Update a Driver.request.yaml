@@ -1,5 +1,6 @@
 $kind: http-request
-description: You can update all properties of the Driver.
+description: |-
+  Updates a driver's account fields, assignment, status, location, photo, or metadata.
 url: "{{base_url}}/{{namespace}}/drivers/:id"
 method: PUT
 headers:
@@ -13,8 +14,8 @@ body:
   content: |
     {
       "name": "John Doe",
-      "email": {{$randomEmail}},
-      "phone": {{$randomPhoneNumber}}
+      "email": "{{$randomEmail}}",
+      "phone": "{{$randomPhoneNumber}}"
     }
 examples: ./.resources/Update a Driver.resources/examples
 order: 4000

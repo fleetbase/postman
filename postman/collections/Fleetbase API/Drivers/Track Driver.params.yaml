@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: latitude
+    type: number
+    description: Driver latitude. When omitted with `longitude`, Fleetbase returns the current driver resource without updating location.
+  - name: longitude
+    type: number
+    description: Driver longitude. When omitted with `latitude`, Fleetbase returns the current driver resource without updating location.
+  - name: altitude
+    type: number
+    description: Current altitude.
+  - name: heading
+    type: number
+    description: Current heading in degrees.
+  - name: speed
+    type: number
+    description: Current speed.

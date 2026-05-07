@@ -1,0 +1,84 @@
+$kind: object
+name: Vendor
+description: |-
+  A vendor represents a third-party company or provider that can be assigned to FleetOps resources and facilitator workflows.
+example: |
+  {
+    "id": "vendor_8Qw2YxM3Nf",
+    "internal_id": "VEND-1001",
+    "business_id": null,
+    "name": "ABC Corporation",
+    "email": "abc@example.com",
+    "phone": "1234567890",
+    "logo_url": null,
+    "photo_url": null,
+    "place": null,
+    "places": [],
+    "personnels": [],
+    "country": null,
+    "type": "Supplier",
+    "meta": {},
+    "status": "active",
+    "slug": "abc-corporation",
+    "website_url": null,
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public vendor identifier.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier.
+  - name: business_id
+    type: string
+    description: Business identifier associated with the vendor.
+  - name: name
+    type: string
+    description: Vendor display name.
+  - name: email
+    type: string
+    description: Vendor email address.
+  - name: phone
+    type: string
+    description: Vendor phone number.
+  - name: logo_url
+    type: string
+    description: Vendor logo URL.
+  - name: photo_url
+    type: string
+    description: Vendor photo URL.
+  - name: place
+    type: object
+    description: Primary vendor place, when loaded.
+  - name: places
+    type: array of objects
+    description: Places associated with the vendor, when loaded.
+  - name: personnels
+    type: array of objects
+    description: Personnel contacts associated with the vendor, when loaded.
+  - name: country
+    type: string
+    description: Vendor country code.
+  - name: type
+    type: string
+    description: Vendor type.
+  - name: meta
+    type: object
+    description: Additional vendor metadata.
+  - name: status
+    type: string
+    description: Vendor lifecycle status.
+  - name: slug
+    type: string
+    description: URL-friendly vendor slug.
+  - name: website_url
+    type: string
+    description: Vendor website URL.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the vendor was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the vendor was created.

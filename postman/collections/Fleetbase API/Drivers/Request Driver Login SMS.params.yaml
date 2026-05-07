@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: phone
+    type: string
+    required: true
+    description: Driver phone number to send the verification code to.
