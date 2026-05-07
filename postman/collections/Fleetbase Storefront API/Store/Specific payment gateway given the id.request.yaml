@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Specific payment gateway given the id for store. The response returns the result of the operation.
+  Retrieves a payment gateway by ID for the current storefront. The response includes the gateway metadata safe for storefront clients.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways/{id}"
 method: GET
 headers:

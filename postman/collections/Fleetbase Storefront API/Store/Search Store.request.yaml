@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Search Store for store. The response returns the result of the operation.
+  Searches the current storefront catalog and related store data. Use query parameters to narrow the results returned to the shopper.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/search"
 method: GET
 headers:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Empty cart for cart. The response returns the result of the operation.
+  Removes every line item from the cart. The response returns the cart after its items have been cleared.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/empty"
 method: PUT
 headers:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Upload Base64 File for files. The response returns the result of the operation.
+  Uploads a file from base64-encoded content. The response returns the created file resource.
 url: "{{base_url}}/{{namespace}}/files/base64"
 method: POST
 body:

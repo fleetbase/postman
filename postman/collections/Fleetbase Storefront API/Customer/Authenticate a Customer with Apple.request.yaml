@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Authenticate a Customer with Apple for customer. The response returns the result of the operation.
+  Authenticates a storefront customer with Apple Sign In credentials. The response returns the customer profile and access token when authentication succeeds.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-apple"
 method: POST
 headers:

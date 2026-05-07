@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  About Store for store. The response returns the result of the operation.
+  Returns public profile and configuration details for the current storefront. Use this endpoint to initialize storefront clients.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/about"
 method: GET
 headers:

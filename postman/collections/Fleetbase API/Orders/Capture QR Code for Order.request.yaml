@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Capture QR Code for Order for orders. The response returns the result of the operation.
+  Captures a QR code proof for an order or order subject. The response returns the proof data associated with the order.
 url: "{{base_url}}/{{namespace}}/orders/:id/capture-qr/:subject-id"
 method: POST
 pathVariables:

@@ -1,7 +1,7 @@
 $kind: http-request
 name: Setups a verification request to create a new storefront customer. ?
 description: |-
-  Setups a verification request to create a new storefront custome for customer. The response returns the result of the operation.
+  Sends a verification code for creating a storefront customer. Use the code when submitting the customer creation request.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
 method: POST
 headers:

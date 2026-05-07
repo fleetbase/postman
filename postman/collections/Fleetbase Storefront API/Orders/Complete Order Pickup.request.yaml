@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Complete Order Pickup for orders. The response returns the result of the operation.
+  Marks a pickup order as completed by the authenticated customer. The response returns the updated order pickup status.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/picked-up"
 method: PUT
 headers:

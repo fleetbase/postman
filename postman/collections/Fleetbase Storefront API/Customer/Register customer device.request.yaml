@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Register customer device for customer. The response returns the result of the operation.
+  Registers a push notification device token for the authenticated storefront customer. Use this endpoint to enable customer device notifications.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/register-device"
 method: POST
 headers:

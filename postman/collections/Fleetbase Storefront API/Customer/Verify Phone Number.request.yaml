@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Verify Phone Number for customer. The response returns the result of the operation.
+  Verifies a customer phone number with a previously issued code. The response confirms the phone verification result.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-phone-number"
 method: POST
 headers:
