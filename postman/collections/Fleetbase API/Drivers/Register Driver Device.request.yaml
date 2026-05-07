@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Register Driver Device"
+description: "Registers a device token for a specific driver."
+url: "{{base_url}}/{{namespace}}/drivers/:id/register-device"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{device_token}}",
+      "platform": "ios"
+    }
+
+order: 12300

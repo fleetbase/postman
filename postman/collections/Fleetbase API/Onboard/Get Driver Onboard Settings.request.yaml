@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Returns driver onboarding settings for an organization."
+url: "{{base_url}}/{{namespace}}/onboard/driver-onboard-settings/:companyId"
+method: GET
+pathVariables:
+  - key: companyId
+    value: "{{organization_id}}"
+
+order: 1000

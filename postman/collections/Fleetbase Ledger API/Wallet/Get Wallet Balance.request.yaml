@@ -1,0 +1,11 @@
+$kind: http-request
+description: Get Wallet Balance
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/balance"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  currency: "USD"
+order: 2000

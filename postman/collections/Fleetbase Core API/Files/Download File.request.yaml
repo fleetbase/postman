@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Download File"
+url: "{{base_url}}/{{namespace}}/files/:id/download"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{file_id}}"
+
+order: 4000

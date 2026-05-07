@@ -1,0 +1,21 @@
+$kind: http-request
+description: "Update a Fuel Report"
+url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
+method: PUT
+pathVariables:
+  - key: id
+    value: "{{fuel_report_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "odometer": 12050,
+      "volume": 43.1,
+      "metric_unit": "liter",
+      "amount": 122.75,
+      "currency": "USD",
+      "status": "approved"
+    }
+
+order: 4000

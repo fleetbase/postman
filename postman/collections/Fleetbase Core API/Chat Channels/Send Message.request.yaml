@@ -1,0 +1,18 @@
+$kind: http-request
+description: "Send Message"
+url: "{{base_url}}/{{namespace}}/chat-channels/:id/send-message"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{chat_channel_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "sender": "{{chat_participant_id}}",
+      "content": "Hello from Fleetbase API",
+      "files": []
+    }
+
+order: 2000

@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Login Driver"
+description: "Authenticates a driver with email/phone and password."
+url: "{{base_url}}/{{namespace}}/drivers/login"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{driver_identity}}",
+      "password": "{{driver_password}}"
+    }
+
+order: 12000

@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieves a service quote by id."
+url: "{{base_url}}/{{namespace}}/service-quotes/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{service_quote_id}}"
+
+order: 2000

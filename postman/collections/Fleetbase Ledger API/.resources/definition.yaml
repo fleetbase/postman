@@ -1,0 +1,12 @@
+$kind: collection
+description: Public Ledger API endpoints for wallets, public invoice payment, and gateway webhooks.
+variables:
+  base_url: ""
+  namespace: v1
+  api_prefix: ledger
+  api_key: ""
+auth:
+  - type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

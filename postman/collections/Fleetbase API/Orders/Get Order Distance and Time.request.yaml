@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Get Order Distance and Time"
+description: "Returns and updates the order distance/time matrix."
+url: "{{base_url}}/{{namespace}}/orders/:id/distance-and-time"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+
+order: 14000

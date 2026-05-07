@@ -6,10 +6,11 @@
   "scripts": {
     "postman:lint": "./scripts/lint-collections.sh",
     "postman:run": "./scripts/run-collection.sh",
-    "postman:run:fleetbase": "./scripts/run-collection.sh postman/collections/fleetbase-api.postman_collection.json",
-    "postman:run:storefront": "./scripts/run-collection.sh postman/collections/storefront-api.postman_collection.json",
-    "postman:run:ledger": "./scripts/run-collection.sh collections/apis/ledger-api/collection.yaml",
-    "postman:run:integrated-vendor": "./scripts/run-collection.sh postman/collections/integrated-vendor-flow.postman_collection.json"
+    "postman:run:fleetbase": "./scripts/run-collection.sh postman/collections/Fleetbase API",
+    "postman:run:core": "./scripts/run-collection.sh postman/collections/Fleetbase Core API",
+    "postman:run:storefront": "./scripts/run-collection.sh postman/collections/Fleetbase Storefront API",
+    "postman:run:ledger": "./scripts/run-collection.sh postman/collections/Fleetbase Ledger API",
+    "postman:run:integrated-vendor": "./scripts/run-collection.sh postman/collections/Fleetbase Integrated Vendor Flow"
   },
   "keywords": [
     "fleetbase",

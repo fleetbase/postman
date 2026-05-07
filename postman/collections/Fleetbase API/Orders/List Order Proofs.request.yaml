@@ -1,0 +1,12 @@
+$kind: http-request
+name: "List Order Proofs"
+description: "Lists proof of delivery resources for an order or subject."
+url: "{{base_url}}/{{namespace}}/orders/:id/proofs/:subjectId"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+  - key: subjectId
+    value: "{{subject_id}}"
+
+order: 14600

@@ -1,0 +1,22 @@
+$kind: http-request
+description: Authenticate a Customer with Apple
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-apple"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "identityToken": "{{apple_identity_token}}",
+      "authorizationCode": "{{apple_authorization_code}}",
+      "email": "{{customer_email}}",
+      "phone": "{{customer_phone}}",
+      "name": "{{customer_name}}",
+      "appleUserId": "{{apple_user_id}}"
+    }
+order: 5200

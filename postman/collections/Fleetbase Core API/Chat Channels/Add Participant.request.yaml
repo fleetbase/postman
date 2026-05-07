@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Add Participant"
+url: "{{base_url}}/{{namespace}}/chat-channels/:id/add-participant"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{chat_channel_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "user": "{{user_id}}"
+    }
+
+order: 10000

@@ -1,0 +1,21 @@
+$kind: http-request
+description: Top Up Wallet
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/topup"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "gateway": "{{gateway_id}}",
+      "amount": 1000,
+      "payment_method_token": "{{payment_method_token}}",
+      "customer_id": "{{gateway_customer_id}}",
+      "description": "Wallet top-up"
+    }
+order: 4000

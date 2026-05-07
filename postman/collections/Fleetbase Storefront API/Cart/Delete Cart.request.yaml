@@ -1,0 +1,9 @@
+$kind: http-request
+description: Delete Cart
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}"
+method: DELETE
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+order: 6000

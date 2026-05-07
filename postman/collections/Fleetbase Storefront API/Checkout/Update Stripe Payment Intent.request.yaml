@@ -1,0 +1,23 @@
+$kind: http-request
+description: Update Stripe Payment Intent
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-update-payment-intent"
+method: PUT
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "customer": "{{customer_id}}",
+      "cart": "{{cart_id}}",
+      "service_quote": "{{service_quote_id}}",
+      "payment_intent_id": "{{payment_intent_id}}",
+      "pickup": false,
+      "tip": 0,
+      "delivery_tip": 0
+    }
+order: 7000

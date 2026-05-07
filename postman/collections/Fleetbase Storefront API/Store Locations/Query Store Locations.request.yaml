@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/store-locations"
+description: |-
+  Returns store locations available through the current storefront or network. Use these locations for browsing, pickup, and fulfillment selection.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/store-locations"
 method: GET
 headers:
   - key: Authorization

@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Delete Chat Channel"
+url: "{{base_url}}/{{namespace}}/chat-channels/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{chat_channel_id}}"
+
+order: 9000

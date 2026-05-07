@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/customers/places"
+description: |-
+  Returns saved places for the authenticated storefront customer. Use these places for delivery addresses and checkout defaults.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/places"
 method: GET
 headers:
   - key: Authorization

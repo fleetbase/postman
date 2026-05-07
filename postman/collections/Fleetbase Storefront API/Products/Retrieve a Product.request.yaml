@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/products/{id}"
+description: |-
+  Retrieves a single storefront product by ID. The response includes product details, pricing, variants, and related catalog data when available.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{id}"
 method: GET
 headers:
   - key: Authorization

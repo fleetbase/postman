@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Query Files"
+url: "{{base_url}}/{{namespace}}/files?limit=25&offset=0&sort=created_at"
+method: GET
+order: 5000

@@ -1,6 +1,7 @@
 type: collection
 name: Ledger API
 version: 1.0.0
+description: Legacy single-file placeholder. The editable Postman Local Mode collection lives at postman/collections/Fleetbase Ledger API.
 auth:
   type: bearer
   bearer:
@@ -10,18 +11,46 @@ auth:
 variables:
   - key: base_url
     value: "{{base_url}}"
-  - key: ledger_account_id
-    value: "{{ledger_account_id}}"
+  - key: namespace
+    value: "{{namespace}}"
+  - key: api_prefix
+    value: ledger
 items:
-  - name: Accounts
+  - name: Wallet
     items:
-      - name: Get Ledger Account
+      - name: Get Wallet
         request:
           method: GET
-          url: "{{base_url}}/ledger/accounts/{{ledger_account_id}}"
-  - name: Transactions
-    items:
-      - name: List Transactions
+          url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet"
+      - name: Get Wallet Balance
         request:
           method: GET
-          url: "{{base_url}}/ledger/accounts/{{ledger_account_id}}/transactions"
+          url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/balance"
+      - name: List Wallet Transactions
+        request:
+          method: GET
+          url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/transactions"
+      - name: Top Up Wallet
+        request:
+          method: POST
+          url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/topup"
+  - name: Public Invoices
+    items:
+      - name: Get Public Invoice
+        request:
+          method: GET
+          url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}"
+      - name: List Public Invoice Gateways
+        request:
+          method: GET
+          url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/gateways"
+      - name: Pay Public Invoice
+        request:
+          method: POST
+          url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/pay"
+  - name: Webhooks
+    items:
+      - name: Handle Gateway Webhook
+        request:
+          method: POST
+          url: "{{base_url}}/{{api_prefix}}/webhooks/{{gateway_driver}}"

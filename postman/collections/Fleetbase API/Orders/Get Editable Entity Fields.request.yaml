@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Get Editable Entity Fields"
+description: "Returns configured editable entity fields for an order."
+url: "{{base_url}}/{{namespace}}/orders/:id/editable-entity-fields"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+
+order: 14700

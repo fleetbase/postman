@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Get Geofence Inventory"
+url: "{{base_url}}/{{namespace}}/geofences/inventory"
+method: GET
+order: 2000

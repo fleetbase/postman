@@ -1,6 +1,7 @@
 $kind: http-request
-description: This endpoint allows you to retrieve a zone object to view it's details.
-url: "{{base_url}}/{{namespace}}/customers/orders"
+description: |-
+  Returns orders that belong to the authenticated storefront customer. Use pagination and filters to browse the customer order history.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/orders"
 method: GET
 headers:
   - key: Authorization

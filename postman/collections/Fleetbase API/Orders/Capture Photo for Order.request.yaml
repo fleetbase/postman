@@ -1,0 +1,23 @@
+$kind: http-request
+name: "Capture Photo for Order"
+description: "Captures proof photos for an order or order subject."
+url: "{{base_url}}/{{namespace}}/orders/:id/capture-photo/:subjectId"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+  - key: subjectId
+    value: "{{subject_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "photos": [
+        "{{proof_photo_base64}}"
+      ],
+      "remarks": "Verified by Photo",
+      "data": {}
+    }
+
+order: 14500

@@ -1,0 +1,10 @@
+$kind: http-request
+name: "List Driver Organizations"
+description: "Lists organizations a driver belongs to."
+url: "{{base_url}}/{{namespace}}/drivers/:id/organizations"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+
+order: 12700

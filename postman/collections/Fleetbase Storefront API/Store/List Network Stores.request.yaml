@@ -1,0 +1,14 @@
+$kind: http-request
+description: List Network Stores
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  query: ""
+  limit: ""
+  offset: ""
+  store: ""
+order: 2700

@@ -1,0 +1,17 @@
+$kind: http-request
+description: Request Phone Verification
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "phone": "{{customer_phone}}"
+    }
+order: 8200

@@ -1,6 +1,6 @@
 $kind: http-request
 description: Before ❗
-url: "{{base_url}}/{{namespace}}/checkouts/before?gateway=&customer=&cart=&service_quote=&cash=&pickup=&tip=&delivery_tip="
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before?gateway=&customer=&cart=&service_quote=&cash=&pickup=&tip=&delivery_tip="
 method: GET
 headers:
   - key: Authorization

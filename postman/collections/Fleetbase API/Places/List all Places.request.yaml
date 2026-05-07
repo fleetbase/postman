@@ -1,5 +1,6 @@
 $kind: http-request
-description: Returns a list of your places. The places are returned sorted by creation date, with the most recent customers appearing first.
+description: |-
+  Returns a paginated list of places for the current organization. Places are sorted by creation date unless another sort order is provided.
 url: "{{base_url}}/{{namespace}}/places?limit=25&offset=0&sort=created_at"
 method: GET
 headers:

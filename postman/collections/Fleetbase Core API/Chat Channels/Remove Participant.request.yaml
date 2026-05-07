@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Remove Participant"
+url: "{{base_url}}/{{namespace}}/chat-channels/remove-participant/:participantId"
+method: DELETE
+pathVariables:
+  - key: participantId
+    value: "{{chat_participant_id}}"
+
+order: 11000

@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Request Driver Login SMS"
+description: "Starts driver SMS verification login."
+url: "{{base_url}}/{{namespace}}/drivers/login-with-sms"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "phone": "{{driver_phone}}"
+    }
+
+order: 12100

@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Decodes a tracking/entity/order QR code UUID and returns the matching resource."
+url: "{{base_url}}/{{namespace}}/tracking-numbers/from-qr"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "code": "{{qr_code}}"
+    }
+
+order: 1500

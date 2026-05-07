@@ -1,0 +1,9 @@
+$kind: http-request
+description: "Retrieve Comment"
+url: "{{base_url}}/{{namespace}}/comments/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{comment_id}}"
+
+order: 4000

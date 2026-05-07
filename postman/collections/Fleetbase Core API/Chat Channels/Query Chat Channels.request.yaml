@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Query Chat Channels"
+url: "{{base_url}}/{{namespace}}/chat-channels?limit=25&offset=0&sort=created_at"
+method: GET
+order: 7000

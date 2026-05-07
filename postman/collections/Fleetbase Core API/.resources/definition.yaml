@@ -1,0 +1,11 @@
+$kind: collection
+description: Core Fleetbase API endpoints shared across Fleetbase modules.
+variables:
+  base_url: ""
+  namespace: v1
+  api_key: ""
+auth:
+  - type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

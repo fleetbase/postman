@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Query Fuel Reports"
+url: "{{base_url}}/{{namespace}}/fuel-reports?limit=25&offset=0&sort=created_at"
+method: GET
+order: 2000

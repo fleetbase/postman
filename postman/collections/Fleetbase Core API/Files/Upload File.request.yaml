@@ -1,0 +1,18 @@
+$kind: http-request
+description: "Upload File"
+url: "{{base_url}}/{{namespace}}/files"
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src: []
+    - type: text
+      key: path
+      value: "uploads"
+    - type: text
+      key: type
+      value: "attachment"
+
+order: 1000

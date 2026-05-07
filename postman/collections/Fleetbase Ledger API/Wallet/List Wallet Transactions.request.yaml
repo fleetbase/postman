@@ -1,0 +1,16 @@
+$kind: http-request
+description: List Wallet Transactions
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/transactions"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  type: ""
+  direction: ""
+  status: ""
+  date_from: ""
+  date_to: ""
+  limit: "25"
+order: 3000

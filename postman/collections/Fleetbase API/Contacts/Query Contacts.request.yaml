@@ -1,5 +1,6 @@
 $kind: http-request
-description: Returns a list of your contacts. The contacts are returned sorted by creation date, with the most recent customers appearing first.
+description: |-
+  Returns a paginated list of contacts for the current organization. Use filters such as `query`, `limit`, `offset`, and `sort` to narrow and order the results.
 url: "{{base_url}}/{{namespace}}/contacts?query={{contact_name}}&limit=25&offset=0&sort=created_at"
 method: GET
 headers:

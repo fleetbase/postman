@@ -1,0 +1,19 @@
+$kind: http-request
+description: Authenticate a Customer with Facebook
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-facebook"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "{{customer_email}}",
+      "name": "{{customer_name}}",
+      "facebookUserId": "{{facebook_user_id}}"
+    }
+order: 5300

@@ -1,0 +1,26 @@
+$kind: http-request
+description: "List Geofence Events"
+url: "{{base_url}}/{{namespace}}/geofences/events?per_page=50&event_type=entered"
+method: GET
+queryParams:
+  - key: per_page
+    value: "50"
+  - key: event_type
+    value: "entered"
+  - key: driver_uuid
+    value: "{{driver_uuid}}"
+    disabled: true
+  - key: vehicle_uuid
+    value: "{{vehicle_uuid}}"
+    disabled: true
+  - key: geofence_uuid
+    value: "{{geofence_uuid}}"
+    disabled: true
+  - key: from
+    value: "{{from_datetime}}"
+    disabled: true
+  - key: to
+    value: "{{to_datetime}}"
+    disabled: true
+
+order: 1000

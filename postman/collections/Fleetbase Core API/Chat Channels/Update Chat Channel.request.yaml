@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Update Chat Channel"
+url: "{{base_url}}/{{namespace}}/chat-channels/:id"
+method: PUT
+pathVariables:
+  - key: id
+    value: "{{chat_channel_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "name": "Dispatch Updates"
+    }
+
+order: 6000

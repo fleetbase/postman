@@ -1,0 +1,19 @@
+$kind: http-request
+description: Get Order Receipt
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/receipt"
+method: POST
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "order": "{{order_id}}",
+      "ebarimt_receiver_type": "CITIZEN",
+      "ebarimt_receiver": ""
+    }
+order: 2000

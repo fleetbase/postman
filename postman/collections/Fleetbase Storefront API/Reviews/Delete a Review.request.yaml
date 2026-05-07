@@ -1,6 +1,6 @@
 $kind: http-request
 description: Delete a Review
-url: "{{base_url}}/{{namespace}}/reviews/{id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{id}"
 method: DELETE
 headers:
   - key: Authorization

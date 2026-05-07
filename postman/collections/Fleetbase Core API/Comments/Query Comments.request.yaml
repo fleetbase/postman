@@ -1,0 +1,5 @@
+$kind: http-request
+description: "Query Comments"
+url: "{{base_url}}/{{namespace}}/comments?limit=25&offset=0&sort=created_at"
+method: GET
+order: 3000

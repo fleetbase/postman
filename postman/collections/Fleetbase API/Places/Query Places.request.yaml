@@ -1,5 +1,6 @@
 $kind: http-request
-description: Returns a list of your places. The places are returned sorted by creation date, with the most recent customers appearing first.
+description: |-
+  Searches and filters places for the current organization. Use query and pagination parameters to find matching saved locations.
 url: "{{base_url}}/{{namespace}}/places?query={{place_name}}&limit=25&offset=<string>&sort=created_at"
 method: GET
 headers:

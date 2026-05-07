@@ -5,6 +5,8 @@ workspace:
 localResources:
   collections:
     - ../postman/collections/Fleetbase API
+    - ../postman/collections/Fleetbase Core API
+    - ../postman/collections/Fleetbase Ledger API
     - ../postman/collections/Fleetbase Storefront API
     - ../postman/collections/Fleetbase Integrated Vendor Flow
   environments:

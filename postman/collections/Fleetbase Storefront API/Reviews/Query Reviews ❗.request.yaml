@@ -1,6 +1,6 @@
 $kind: http-request
 description: Query Reviews ❗
-url: "{{base_url}}/{{namespace}}/reviews?limit=&offset=&sort="
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews?limit=&offset=&sort="
 method: GET
 headers:
   - key: Authorization

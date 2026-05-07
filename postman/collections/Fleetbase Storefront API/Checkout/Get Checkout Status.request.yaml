@@ -1,0 +1,12 @@
+$kind: http-request
+description: Get Checkout Status
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/status"
+method: GET
+headers:
+  - key: Authorization
+    value: ""
+    description: Authentication header
+queryParams:
+  checkout: "{{checkout_id}}"
+  token: "{{checkout_token}}"
+order: 5000

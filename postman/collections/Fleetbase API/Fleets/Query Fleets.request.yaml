@@ -1,5 +1,6 @@
 $kind: http-request
-description: Returns a list of your fleets. The fleet are returned sorted by creation date, with the most recent customers appearing first.
+description: |-
+  Returns a paginated list of fleets for the current organization. Use pagination and sorting parameters to control the result set.
 url: "{{base_url}}/{{namespace}}/fleets?limit=25&offset=0&sort=created_at"
 method: GET
 headers:

@@ -2,7 +2,7 @@ $kind: http-request
 description: |+
   You can update all properties of the Zone.
 
-url: "{{base_url}}/{{namespace}}/carts/{id}/{line_item_id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
 method: PUT
 headers:
   - key: Authorization

@@ -1,0 +1,22 @@
+$kind: http-request
+description: "Create a Fuel Report"
+url: "{{base_url}}/{{namespace}}/fuel-reports"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "driver": "{{driver_id}}",
+      "odometer": 12042,
+      "volume": 42.5,
+      "metric_unit": "liter",
+      "location": {
+        "latitude": 1.3521,
+        "longitude": 103.8198
+      },
+      "amount": 120.5,
+      "currency": "USD",
+      "status": "submitted"
+    }
+
+order: 1000

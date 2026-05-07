@@ -1,7 +1,7 @@
 $kind: http-request
 name: Cancel an Order.
-description: Cancel an Order.
-url: "{{base_url}}/{{namespace}}/orders/:id"
+description: Cancels an order without deleting the order resource.
+url: "{{base_url}}/{{namespace}}/orders/:id/cancel"
 method: DELETE
 pathVariables:
   - key: id

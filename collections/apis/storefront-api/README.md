@@ -6,6 +6,7 @@ Reference collection for Fleetbase Storefront API requests.
 
 - `base_url`
 - `namespace`
+- `api_prefix`
 - `api_key`
 
 ## Auth
@@ -14,4 +15,4 @@ Requests inherit bearer token authentication from the collection. Set `api_key` 
 
 ## Coverage
 
-This collection is based on the exported Fleetbase Storefront API Postman collection and uses `{{base_url}}/{{namespace}}` for request URLs.
+The editable Postman Local Mode collection lives at `postman/collections/Fleetbase Storefront API`. It uses `api_prefix=storefront`, so versioned request URLs resolve as `{{base_url}}/{{api_prefix}}/{{namespace}}/...`.
