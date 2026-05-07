@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Orders represent work to be planned, dispatched, tracked, and completed. Use order endpoints to create delivery or service jobs, assign resources, manage status, capture proof of delivery, and record activity.
 order: 8000

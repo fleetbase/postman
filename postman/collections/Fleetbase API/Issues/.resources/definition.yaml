@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Issues capture operational problems reported against orders, drivers, vehicles, or other resources. Use issues to track incidents, exceptions, and resolution status during fulfillment.
 order: 7600

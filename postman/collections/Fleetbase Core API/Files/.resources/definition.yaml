@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Files store uploaded documents, images, and other binary assets used across Fleetbase. Use file endpoints to upload, retrieve, download, update, and attach file metadata to other resources.
 order: 2000

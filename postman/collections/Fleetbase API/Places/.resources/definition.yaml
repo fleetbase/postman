@@ -1,3 +1,4 @@
 $kind: collection
-description: Place represents a location, places are typically addresses, but can also be objects or landmarks as long as the `Place` has coordinates.
+description: |-
+  Places represent physical locations used across routing, dispatch, contacts, stores, and orders. A place can be a street address, landmark, facility, or any coordinate-backed location Fleetbase can route to.
 order: 1000

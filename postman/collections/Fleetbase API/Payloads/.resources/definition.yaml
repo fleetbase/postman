@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Payloads describe what an order is carrying and where it moves from pickup to dropoff. Use payload endpoints to manage shipment contents, payment details, and the entities attached to an order.
 order: 10000

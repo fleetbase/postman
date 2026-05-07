@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Service quotes price a requested movement before an order is created. Use quotes to estimate delivery cost, select a service type or facilitator, and convert accepted pricing into an order.
 order: 13000

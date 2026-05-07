@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Geofences detect when tracked resources enter or leave defined geographic areas. Use geofence endpoints to monitor location-based events around depots, service areas, customer sites, and operational zones.
 order: 8050

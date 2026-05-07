@@ -1,4 +1,6 @@
 $kind: collection
+description: |-
+  This workflow shows how to quote, create, inspect, and cancel an order that uses an integrated vendor. Follow the steps in order to move from place lookup through service quote selection and order creation.
 variables:
   base_url: ""
   namespace: v1

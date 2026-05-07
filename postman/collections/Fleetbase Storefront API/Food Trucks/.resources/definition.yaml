@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Food trucks expose mobile storefront availability backed by FleetOps vehicles, zones, and service areas. Use food truck endpoints to discover mobile vendors and their current operating state.
 order: 5500

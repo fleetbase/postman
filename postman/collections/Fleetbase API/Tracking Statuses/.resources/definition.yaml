@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Tracking statuses define the customer-facing milestones shown during shipment tracking. Use them to create and manage the status labels, codes, and descriptions surfaced in tracking flows.
 order: 16000

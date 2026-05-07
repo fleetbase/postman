@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Vehicles represent fleet assets that can be tracked, assigned, and used to fulfill orders. Use vehicle endpoints to manage registration details, assignment state, live location, and operational status.
 order: 6000

@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Service rates define sell-side pricing rules for delivery and logistics services. Use service rates to configure how quotes are calculated from distance, time, zones, service areas, and service types.
 order: 12000

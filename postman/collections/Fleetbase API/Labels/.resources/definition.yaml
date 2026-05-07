@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Labels generate printable shipment labels for Fleetbase resources. Use label endpoints to render carrier, order, payload, or entity data into label output for fulfillment workflows.
 order: 13000

@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Delivery service quotes estimate the fulfillment cost for a storefront cart. Use this endpoint before checkout when an order requires delivery instead of pickup.
 order: 7000

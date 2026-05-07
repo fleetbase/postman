@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Store locations connect a storefront to physical places and operating hours. Use location endpoints to list or inspect where a store can fulfill pickup, delivery, or local service.
 order: 6000

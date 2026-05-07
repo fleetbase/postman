@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Storefront order endpoints expose customer-facing actions after checkout. Use them to mark pickup orders complete and retrieve receipts for supported payment methods.
 order: 7000

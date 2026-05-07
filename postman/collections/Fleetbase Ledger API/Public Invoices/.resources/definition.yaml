@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Public invoices let customers view and pay invoices without signing in to Fleetbase. Use these endpoints to retrieve invoice details, list available gateways, and start or record payment.
 order: 2000

@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Fuel reports record vehicle refueling events and fuel costs. Use them to track fuel purchases, odometer context, and operational expenses for fleet vehicles.
 order: 7700

@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Categories organize storefront products for browsing and discovery. Use category endpoints to list product groupings exposed by a store or network.
 order: 3000
