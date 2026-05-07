@@ -3,8 +3,8 @@ fields:
   - name: identity
     type: string
     required: true
-    description: "Email address or phone number used for authentication."
+    description: Driver email address or phone number.
   - name: password
     type: string
     required: true
-    description: "Password used for authentication."
+    description: Driver account password.

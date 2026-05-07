@@ -1,0 +1,20 @@
+$kind: params
+fields:
+  - name: id
+    type: string
+    description: Driver ID filter used by this request example.
+  - name: query
+    type: string
+    description: Search term matched against driver fields.
+  - name: limit
+    type: integer
+    description: Maximum number of drivers to return.
+  - name: offset
+    type: integer
+    description: Number of drivers to skip before returning results.
+  - name: sort
+    type: string
+    description: Sort expression for the driver query.
+  - name: vendor
+    type: string
+    description: Vendor ID used to filter drivers assigned to a vendor.

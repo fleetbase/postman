@@ -1,29 +1,52 @@
 $kind: object
 name: File
 description: |-
-  A file represents a file record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A file represents an uploaded binary object and the metadata Fleetbase stores for it.
+example: |
   {
-    "id": "file_abc123",
-    "object": "file",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "file_4WdX9o2",
+    "url": "https://files.example.com/uploads/example.png",
+    "original_filename": "example.png",
+    "folder": "uploads",
+    "content_type": "image/png",
+    "file_size": 24576,
+    "caption": "Proof of delivery",
+    "type": "attachment",
+    "meta": {},
+    "updated_at": "2026-05-07T09:30:00Z",
+    "created_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the file."
+  - name: url
     type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
+    description: "Public URL for the stored file."
+  - name: original_filename
+    type: string
+    description: "Original filename stored on the file record."
+  - name: folder
+    type: string
+    description: "Storage folder containing the file."
+  - name: content_type
+    type: string
+    description: "MIME content type of the file."
+  - name: file_size
+    type: integer
+    description: "File size in bytes."
+  - name: caption
+    type: string
+    description: "Caption displayed with the file."
+  - name: type
+    type: string
+    description: "Logical file type stored on the file record."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the file."
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Time the file record was last updated."
+  - name: created_at
+    type: timestamp
+    description: "Time the file record was created."

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Adds a product to a cart and creates or updates the matching line item. Include quantity, variants, addons, scheduling, or store location details when needed.
+  Adds a product to a cart and creates or updates the matching cart line item. Include quantity, variants, addons, scheduling, or store location details when needed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{product_id}"
 method: POST
 headers:

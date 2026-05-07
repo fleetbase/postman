@@ -1,9 +1,11 @@
 $kind: http-request
-description: List all entities.
+description: |-
+  Returns entities for the current company. Use filters such as `type`, `payload`, or `destination` to narrow the result set.
 url: "{{base_url}}/{{namespace}}/entities"
 method: GET
 queryParams:
   limit: "25"
   offset: "0"
+  sort: "created_at"
   type: "parcel"
 order: 2000

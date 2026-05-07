@@ -1,11 +1,20 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this purchase rates request."
+    type: integer
+    description: Maximum number of purchase rates to return.
   - name: offset
-    type: string
-    description: "Offset value for this purchase rates request."
+    type: integer
+    description: Number of purchase rates to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this purchase rates request."
+    description: Sort expression for the purchase rate query.
+  - name: service_quote
+    type: string
+    description: Filters purchase rates by service quote ID.
+  - name: order
+    type: string
+    description: Filters purchase rates by order ID.
+  - name: customer
+    type: string
+    description: Filters purchase rates by customer ID.

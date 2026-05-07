@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Customers represent storefront shoppers and their authentication context. Use customer endpoints to create accounts, authenticate with SMS or social providers, manage devices, addresses, orders, and account closure.
 order: 4000

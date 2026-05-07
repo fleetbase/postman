@@ -1,11 +1,20 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this service rates request."
+    type: integer
+    description: Maximum number of service rates to return.
   - name: offset
+    type: integer
+    description: Number of service rates to skip before returning results.
+  - name: sort
     type: string
-    description: "Offset value for this service rates request."
-  - name: currency
-    type: currency
-    description: "Three-letter currency code for monetary values."
+    description: Sort expression for the service rate query.
+  - name: service_area
+    type: string
+    description: Filters service rates by service area ID.
+  - name: zone
+    type: string
+    description: Filters service rates by zone ID.
+  - name: service_type
+    type: string
+    description: Filters service rates by service type.

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns zones matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns zones matching the supplied filters. Use this to find configured geofences by name or other query parameters.
 url: "{{base_url}}/{{namespace}}/zones"
 method: GET
 headers:

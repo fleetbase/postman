@@ -1,16 +1,15 @@
 $kind: params
 fields:
-  - name: name
+  - name: service_quote
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Service quote ID to purchase.
+  - name: order
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    description: Existing order ID to attach the purchase rate to. When omitted, Fleetbase may create an order from the service quote.
+  - name: customer
+    type: string
+    description: Contact or vendor ID to assign as the purchase customer.
   - name: meta
-    type: string
-    description: "Arbitrary metadata stored with the resource."
+    type: object
+    description: Additional purchase rate metadata.

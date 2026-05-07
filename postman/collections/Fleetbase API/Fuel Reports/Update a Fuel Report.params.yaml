@@ -1,21 +1,20 @@
 $kind: params
 fields:
+  - name: driver
+    type: string
+    description: Driver ID reporting the fuel purchase.
   - name: odometer
-    type: integer
-    description: "Vehicle odometer reading at the time of the report."
+    type: number
+    description: Vehicle odometer reading at the time of the report.
   - name: volume
     type: number
-    description: "Fuel volume purchased or reported."
+    description: Fuel volume purchased or reported.
   - name: metric_unit
     type: string
-    description: "Unit used for the fuel volume."
+    description: Unit used for the fuel volume.
+  - name: location
+    type: object
+    description: Location where the fuel was purchased or reported.
   - name: amount
-    type: number
-    description: "Monetary amount for the request."
-  - name: currency
     type: currency
-    description: "Three-letter currency code for monetary values."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    description: Monetary amount for the fuel purchase.

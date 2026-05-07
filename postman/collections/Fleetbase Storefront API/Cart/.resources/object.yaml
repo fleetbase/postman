@@ -1,36 +1,56 @@
 $kind: object
 name: Cart
 description: |-
-  A cart represents a cart record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A cart stores storefront products selected for checkout, including quantities, variants, addons, scheduling, and pricing totals.
+example: |
   {
-    "id": "cart_abc123",
-    "object": "cart",
+    "id": "cart_8Xk2mQ1",
+    "customer_id": "customer_4sW9kP2",
     "currency": "USD",
+    "subtotal": 4200,
+    "total_items": 3,
+    "total_unique_items": 2,
     "items": [],
-    "subtotal": 0,
-    "total": 0,
-    "created_at": "2026-05-07T12:00:00Z"
+    "events": [],
+    "discount_code": null,
+    "expires_at": "2026-05-08T09:30:00Z",
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the cart."
+  - name: customer_id
     type: string
-    description: "Object type returned by the API."
+    description: "Customer identifier associated with the cart."
   - name: currency
     type: currency
-    description: "Three-letter currency code."
-  - name: items
-    type: array of strings
-    description: "Items value for this cart request."
+    description: "Cart currency code."
   - name: subtotal
+    type: integer
+    description: "Cart subtotal."
+  - name: total_items
+    type: integer
+    description: "Total quantity of items in the cart."
+  - name: total_unique_items
+    type: integer
+    description: "Number of unique cart line items."
+  - name: items
+    type: array of objects
+    description: "Cart line items."
+  - name: events
+    type: array of objects
+    description: "Cart event history."
+  - name: discount_code
     type: string
-    description: "Subtotal value for this cart request."
-  - name: total
-    type: string
-    description: "Total value for this cart request."
+    description: "Discount code applied to the cart."
+  - name: expires_at
+    type: timestamp
+    description: "Time the cart expires."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the cart was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the cart was last updated."

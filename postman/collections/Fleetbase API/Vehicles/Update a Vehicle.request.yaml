@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a vehicle. Parameters not supplied remain unchanged.
+  Updates a vehicle's identity, operational status, vendor assignment, location, capacity, or orchestrator constraints. Updating the VIN refreshes decoded VIN data.
 url: "{{base_url}}/{{namespace}}/vehicles/:id"
 method: PUT
 headers:
@@ -13,10 +13,11 @@ body:
   type: json
   content: |
     {
-        "speed": 90,
-        "bearing": 22.5,
+        "plate_number": "ABC123",
+        "status": "operational",
         "latitude": 40.7484,
-        "longitude": -73.9857
+        "longitude": -73.9857,
+        "speed": 90
     }
 examples: ./.resources/Update a Vehicle.resources/examples
 order: 4000

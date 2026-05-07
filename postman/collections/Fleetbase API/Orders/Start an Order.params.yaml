@@ -1,5 +1,11 @@
 $kind: params
 fields:
   - name: skip_dispatch
+    type: boolean
+    description: Starts the order even if it has not been dispatched.
+  - name: skipDispatch
+    type: boolean
+    description: Camel-case alias for `skip_dispatch`.
+  - name: assign
     type: string
-    description: "Skip dispatch value for this orders request."
+    description: Driver ID to assign before starting an ad hoc order.

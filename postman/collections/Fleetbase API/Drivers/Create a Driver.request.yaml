@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a driver. The response returns the created resource with its generated identifier.
+  Creates a driver profile and linked user account. Provide a unique email and phone number, then optionally assign a vehicle, vendor, current job, location, or photo.
 url: "{{base_url}}/{{namespace}}/drivers"
 method: POST
 headers:

@@ -1,29 +1,44 @@
 $kind: object
 name: Review
 description: |-
-  A review represents a review record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A review stores a customer rating, written content, photos, and the reviewed subject.
+example: |
   {
-    "id": "review_abc123",
-    "object": "review",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "review_2xK9mQ1",
+    "subject_id": "store_3Xb9kL2",
+    "rating": 5,
+    "content": "Great pickup experience.",
+    "customer": null,
+    "slug": "great-pickup-experience",
+    "photos": [],
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the review."
+  - name: subject_id
     type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
+    description: "Identifier of the reviewed subject."
+  - name: rating
+    type: integer
+    description: "Numeric review rating."
+  - name: content
+    type: string
+    description: "Review text."
+  - name: customer
+    type: object
+    description: "Customer that created the review."
+  - name: slug
+    type: string
+    description: "URL-friendly review slug."
+  - name: photos
+    type: array of objects
+    description: "Photos attached to the review."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the review was created."
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Time the review was last updated."

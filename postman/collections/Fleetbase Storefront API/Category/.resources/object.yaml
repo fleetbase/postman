@@ -1,29 +1,62 @@
 $kind: object
 name: Category
 description: |-
-  A category represents a category record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A category groups storefront products and can include nested subcategories.
+example: |
   {
-    "id": "category_abc123",
-    "object": "category",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "category_2xK9mP1",
+    "name": "Beverages",
+    "description": "Drinks and bottled beverages.",
+    "icon_url": "https://files.example.com/beverages.png",
+    "parent": null,
+    "tags": [],
+    "translations": [],
+    "meta": {},
+    "order": 1,
+    "slug": "beverages",
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the category."
+  - name: name
     type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
+    description: "Category name."
+  - name: description
+    type: string
+    description: "Category description."
+  - name: icon_url
+    type: string
+    description: "Category icon URL."
+  - name: parent
+    type: string
+    description: "Parent category public ID when loaded."
+  - name: tags
+    type: array of strings
+    description: "Category tags."
+  - name: translations
+    type: object
+    description: "Translated category values."
+  - name: products
+    type: array of objects
+    description: "Products in the category when requested."
+  - name: subcategories
+    type: array of objects
+    description: "Nested subcategories when requested."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the category."
+  - name: order
+    type: integer
+    description: "Sort order."
+  - name: slug
+    type: string
+    description: "URL-friendly category slug."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the category was created."
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Time the category was last updated."

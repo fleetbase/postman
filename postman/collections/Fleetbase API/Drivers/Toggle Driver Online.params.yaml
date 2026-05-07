@@ -2,4 +2,4 @@ $kind: params
 fields:
   - name: online
     type: boolean
-    description: "Online value for this drivers request."
+    description: Online status to set. When omitted, Fleetbase toggles the driver's current online status.

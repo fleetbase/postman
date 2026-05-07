@@ -1,35 +1,62 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/orders/:id?payload=<string>&scheduled_at=<dateTime>&driver=<string>&facilitator=<string>&customer=<string>&meta=<string>&notes=<string>"
+  url: "{{base_url}}/{{namespace}}/orders/:id"
   method: PUT
-  queryParams:
-    - key: payload
-      value: <string>
-      description: The id of the Payload object to be sent by the order.
-    - key: scheduled_at
-      value: <dateTime>
-      description: The date and time the order should optionally be dispatched at, otherwise upon order creation the order will be dispatched unless dispatch is explicitly set to false.
-    - key: driver
-      value: <string>
-      description: The id of the Driver to be assigned to the order, if no driver is set the dispatch will send a "ping" to all drivers within an expanding radius around the pickup point coordinates.
-    - key: facilitator
-      value: <string>
-      description: The id of the Vendor or Contact object assigned to facilitate the completion of the order. This is for orders that will be assigned to third parties.
-    - key: customer
-      value: <string>
-      description: The id of the Vendor or Contact object the payload is for.
-    - key: meta
-      value: <string>
-      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    - key: notes
-      value: <string>
-      description: Text containing additional information for the order, which can be used to assist the driver or facilitator.
+  headers:
+    Content-Type: application/json
+    Accept: application/json
   pathVariables:
-    id: ""
+    id: "order_7YqM3KpL2n"
+  body:
+    type: json
+    content: |-
+      {
+        "notes": "Leave with the receiving desk.",
+        "status": "created"
+      }
 response:
   statusCode: 200
   statusText: OK
+  headers:
+    Content-Type: application/json
   body:
-    type: text
-    content: ""
+    type: json
+    content: |-
+      {
+        "id": "order_7YqM3KpL2n",
+        "internal_id": "ORD-1001",
+        "payload": {
+          "id": "payload_x9Z2Lm8QpA",
+          "waypoints": [],
+          "entities": [],
+          "meta": {}
+        },
+        "customer": null,
+        "facilitator": null,
+        "driver_assigned": null,
+        "vehicle_assigned": null,
+        "tracking_number": {
+          "id": "tracking_3Nf8Qw2YxM",
+          "tracking_number": "FB-1001"
+        },
+        "tracking_statuses": [],
+        "files": [],
+        "purchase_rate": null,
+        "notes": "Leave with the receiving desk.",
+        "type": "transport",
+        "status": "created",
+        "pod_required": false,
+        "dispatched": false,
+        "started": false,
+        "adhoc": false,
+        "adhoc_distance": 0,
+        "distance": 0,
+        "time": 0,
+        "meta": {},
+        "dispatched_at": null,
+        "started_at": null,
+        "scheduled_at": null,
+        "updated_at": "2026-05-07T08:45:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
+      }
 order: 1000

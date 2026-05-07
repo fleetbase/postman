@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates an entities resource. The response returns the created resource with its generated identifier.
+  Creates an entity such as a parcel, package, or item. Attach it to a payload and optionally set a destination or waypoint within that payload route.
 url: "{{base_url}}/{{namespace}}/entities"
 method: POST
 headers:

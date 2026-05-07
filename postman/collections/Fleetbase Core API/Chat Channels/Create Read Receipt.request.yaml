@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a chat channels resource. The response returns the created resource with its generated identifier.
+  Marks a chat message as read for a participant. If a receipt already exists for the message and participant, Fleetbase returns the existing receipt.
 url: "{{base_url}}/{{namespace}}/chat-channels/read-message/:chatMessageId"
 method: POST
 pathVariables:

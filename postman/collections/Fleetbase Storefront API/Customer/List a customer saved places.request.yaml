@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns customer matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns saved places for the authenticated storefront customer. Use these places for delivery addresses and checkout defaults.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/places"
 method: GET
 headers:

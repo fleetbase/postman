@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a issue. The response includes the current API representation of the resource.
+description: "Retrieve an Issue"
 url: "{{base_url}}/{{namespace}}/issues/:id"
 method: GET
 pathVariables:

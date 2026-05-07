@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Service areas define the geographic regions where a fleet, vendor, or storefront operates. Use service areas to constrain availability, pricing, routing, and dispatch behavior by region.
 order: 2000

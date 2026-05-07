@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Wallet endpoints expose the authenticated subject's balance and transaction history. Use wallets to retrieve current funds, inspect ledger activity, and initiate top-ups through a configured gateway.
 order: 1000

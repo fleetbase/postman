@@ -2,10 +2,11 @@ $kind: params
 fields:
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: "Customer email address from Facebook."
   - name: name
     type: string
-    description: "Display name for the resource."
+    description: "Customer display name from Facebook."
   - name: facebookUserId
     type: string
-    description: "FacebookUserId value for this customer request."
+    required: true
+    description: "Stable Facebook user identifier."

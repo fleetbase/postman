@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a customer. The response includes the current API representation of the resource.
+  Creates a Stripe SetupIntent for the authenticated storefront customer. Use the returned client secret to collect or update a saved payment method.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-setup-intent"
 method: POST
 headers:

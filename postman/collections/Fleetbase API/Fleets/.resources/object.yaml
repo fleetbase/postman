@@ -1,29 +1,60 @@
 $kind: object
 name: Fleet
 description: |-
-  A fleet represents a fleet record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A fleet groups drivers and vehicles for operational assignment. Fleets can be linked to service areas, zones, vendors, parent fleets, subfleets, drivers, and vehicles.
+example: |
   {
-    "id": "fleet_abc123",
-    "object": "fleet",
+    "id": "fleet_4Mnp8Qx2Vz",
+    "name": "Haulers",
+    "task": null,
     "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "service_area": null,
+    "zone": null,
+    "vendor": null,
+    "parent_fleet": null,
+    "subfleets": [],
+    "drivers": [],
+    "vehicles": [],
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: Public fleet identifier.
+  - name: name
     type: string
-    description: "Object type returned by the API."
+    description: Fleet display name.
+  - name: task
+    type: string
+    description: Task associated with the fleet.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
+    type: string
+    description: Fleet status.
+  - name: service_area
+    type: object
+    description: Service area assigned to the fleet, when loaded.
+  - name: zone
+    type: object
+    description: Zone assigned to the fleet, when loaded.
+  - name: vendor
+    type: object
+    description: Vendor assigned to the fleet, when loaded.
+  - name: parent_fleet
+    type: object
+    description: Parent fleet, when loaded.
+  - name: subfleets
+    type: array of objects
+    description: Child fleets, when loaded.
+  - name: drivers
+    type: array of objects
+    description: Drivers assigned to the fleet, when loaded.
+  - name: vehicles
+    type: array of objects
+    description: Vehicles assigned to the fleet, when loaded.
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: Timestamp when the fleet was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the fleet was created.

@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns store matching the supplied filters. Use pagination and query parameters to control the result set.
+description: List Network Stores
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
 headers:

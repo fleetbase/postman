@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Retrieves a review. The response includes the current API representation of the resource.
+description: Retrieve a Store review
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{id}"
 method: GET
 headers:

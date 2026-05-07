@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a customer. The response includes the current API representation of the resource.
+  Creates a Stripe ephemeral key for the authenticated storefront customer. Fleetbase creates the Stripe customer first when the customer does not already have one.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/stripe-ephemeral-key"
 method: POST
 headers:

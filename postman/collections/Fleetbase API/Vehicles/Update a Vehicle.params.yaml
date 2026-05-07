@@ -1,14 +1,82 @@
 $kind: params
 fields:
-  - name: speed
+  - name: vin
+    type: string
+    description: Vehicle identification number. Updating the VIN refreshes decoded VIN data.
+  - name: year
     type: integer
-    description: "Current speed for the tracked subject."
-  - name: bearing
-    type: number
-    description: "Current heading or bearing in degrees."
+    description: Model year of the vehicle.
+  - name: make
+    type: string
+    description: Vehicle manufacturer.
+  - name: model
+    type: string
+    description: Vehicle model.
+  - name: trim
+    type: string
+    description: Vehicle trim or variant.
+  - name: type
+    type: string
+    description: Vehicle type.
+  - name: plate_number
+    type: string
+    description: Vehicle license plate number.
+  - name: status
+    type: enum
+    values: ["operational", "maintenance", "decommissioned"]
+    description: Vehicle operational status.
+  - name: vendor
+    type: string
+    description: Vendor ID to assign to the vehicle.
+  - name: online
+    type: boolean
+    default: false
+    description: Whether the vehicle is online.
+  - name: location
+    type: object
+    description: Resolvable point used as the vehicle's current location.
   - name: latitude
     type: number
-    description: "Decimal latitude coordinate."
+    description: Decimal latitude. Required with `longitude`.
   - name: longitude
     type: number
-    description: "Decimal longitude coordinate."
+    description: Decimal longitude. Required with `latitude`.
+  - name: altitude
+    type: number
+    description: Current altitude.
+  - name: heading
+    type: number
+    description: Current heading in degrees.
+  - name: speed
+    type: number
+    description: Current speed.
+  - name: payload_capacity
+    type: number
+    description: Payload capacity value used by orchestrator assignment.
+  - name: payload_capacity_volume
+    type: number
+    description: Payload volume capacity.
+  - name: payload_capacity_pallets
+    type: integer
+    description: Pallet capacity.
+  - name: payload_capacity_parcels
+    type: integer
+    description: Parcel capacity.
+  - name: skills
+    type: array of strings
+    description: Skills supported by the vehicle for orchestrator assignment.
+  - name: max_tasks
+    type: integer
+    description: Maximum concurrent tasks for orchestrator assignment.
+  - name: time_window_start
+    type: timestamp
+    description: Earliest time the vehicle is available.
+  - name: time_window_end
+    type: timestamp
+    description: Latest time the vehicle is available.
+  - name: return_to_depot
+    type: boolean
+    description: Whether the vehicle should return to depot after assigned work.
+  - name: meta
+    type: object
+    description: Additional vehicle metadata.

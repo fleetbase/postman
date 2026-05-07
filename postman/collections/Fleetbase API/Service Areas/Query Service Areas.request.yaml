@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns service areas matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns service areas matching the supplied filters. Use this to find configured operating regions by name or other query parameters.
 url: "{{base_url}}/{{namespace}}/service-areas"
 method: GET
 queryParams:

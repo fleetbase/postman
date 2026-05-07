@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a comment. The response returns the created resource with its generated identifier.
+  Creates a comment on a subject resource or as a reply to an existing comment. Provide either a subject reference or a parent comment ID with the comment content.
 url: "{{base_url}}/{{namespace}}/comments"
 method: POST
 body:

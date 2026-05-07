@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a vendor. The response returns the created resource with its generated identifier.
+  Creates a vendor for the current company. Vendors can be assigned to orders, vehicles, drivers, places, and facilitator workflows.
 url: "{{base_url}}/{{namespace}}/vendors"
 method: POST
 headers:
@@ -11,7 +11,6 @@ body:
     {
       "name": "ABC Corporation",
       "type": "Supplier",
-      "internal_id": "ABC123",
       "email": "abc@example.com",
       "phone": "1234567890"
     }

@@ -2,4 +2,5 @@ $kind: params
 fields:
   - name: order
     type: string
-    description: "Order value for this orders request."
+    required: true
+    description: "Public ID of the pickup order to mark completed."

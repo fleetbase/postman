@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a order. The response includes the current API representation of the resource.
+  Returns a receipt for an authenticated customer's order when the payment method supports receipts. QPay orders can generate an Ebarimt receipt.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/receipt"
 method: POST
 headers:

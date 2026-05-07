@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Purchase rates record the cost paid to acquire capacity or services from carriers, vendors, and integrated providers. Use them to compare buy-side costs against customer-facing service rates.
 order: 14000

@@ -1,16 +1,23 @@
 $kind: params
 fields:
-  - name: name
+  - name: driver
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Driver ID reporting the issue.
+  - name: location
+    type: object
+    required: true
+    description: Location where the issue was reported.
+  - name: report
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
+    required: true
+    description: Issue report text submitted by the caller.
+  - name: category
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: Category used to classify the issue.
+  - name: type
+    type: string
+    description: Issue type.
+  - name: priority
+    type: string
+    description: Priority level for the issue.

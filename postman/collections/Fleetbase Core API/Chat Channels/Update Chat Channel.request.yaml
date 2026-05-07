@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a chat channels resource. Parameters not supplied remain unchanged.
+  Updates a chat channel's name. The response returns the updated chat channel resource.
 url: "{{base_url}}/{{namespace}}/chat-channels/:id"
 method: PUT
 pathVariables:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a file. Parameters not supplied remain unchanged.
+  Updates a file record's caption, metadata, or original filename. The uploaded binary object is not replaced.
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: PUT
 pathVariables:

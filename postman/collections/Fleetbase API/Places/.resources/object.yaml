@@ -1,40 +1,100 @@
 $kind: object
 name: Place
 description: |-
-  A place represents a place record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A place represents a physical location used by FleetOps resources such as orders, payloads, vendors, contacts, and waypoints. It stores geocoded coordinates, address fields, ownership, contact details, and metadata.
+example: |
   {
-    "id": "place_abc123",
-    "object": "place",
+    "id": "place_1A2b3C4d5E",
     "name": "Central Park",
-    "latitude": 40.7829,
-    "longitude": -73.9654,
+    "location": {
+      "latitude": 40.785091,
+      "longitude": -73.968285
+    },
+    "address": "830 5th Ave, New York, NY 10065, USA",
+    "avatar_url": null,
+    "street1": "830 5th Ave",
+    "street2": null,
     "city": "New York",
+    "province": "New York",
+    "postal_code": "10065",
+    "neighborhood": "Manhattan",
+    "district": "Midtown",
+    "building": "Park Area",
+    "security_access_code": null,
     "country": "US",
-    "created_at": "2026-05-07T12:00:00Z"
+    "phone": "+12123106600",
+    "type": "park",
+    "meta": {},
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
-    type: string
-    description: "Object type returned by the API."
+    description: Public place identifier.
   - name: name
     type: string
-    description: "Display name for the resource."
-  - name: latitude
-    type: number
-    description: "Decimal latitude coordinate."
-  - name: longitude
-    type: number
-    description: "Decimal longitude coordinate."
+    description: Display name for the place.
+  - name: location
+    type: object
+    description: Geospatial coordinates for the place.
+  - name: address
+    type: string
+    description: Formatted address for the place.
+  - name: avatar_url
+    type: string
+    description: Avatar URL associated with the place.
+  - name: street1
+    type: string
+    description: Primary street address.
+  - name: street2
+    type: string
+    description: Secondary street address.
   - name: city
     type: string
-    description: "City value for this places request."
+    description: City or locality.
+  - name: province
+    type: string
+    description: State, province, or region.
+  - name: postal_code
+    type: string
+    description: Postal or ZIP code.
+  - name: neighborhood
+    type: string
+    description: Neighborhood or local area.
+  - name: district
+    type: string
+    description: District or administrative subdivision.
+  - name: building
+    type: string
+    description: Building name, number, or additional address detail.
+  - name: security_access_code
+    type: string
+    description: Access code or delivery instructions needed to enter the building.
   - name: country
-    type: integer
-    description: "Country value for this places request."
+    type: string
+    description: Country code.
+  - name: phone
+    type: string
+    description: Phone number associated with the place.
+  - name: owner
+    type: object
+    description: Contact or vendor resource that owns the place, when loaded.
+  - name: tracking_number
+    type: object
+    description: Tracking number associated with the place, when loaded.
+  - name: type
+    type: string
+    description: Place classification.
+  - name: meta
+    type: object
+    description: Additional place metadata.
+  - name: eta
+    type: object
+    description: Estimated arrival data when route ETA is requested.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the place was last updated.
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: Timestamp when the place was created.

@@ -1,125 +1,20 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/orders?payload=<string>&dispatch=<boolean>&scheduled_at=<dateTime>&driver=<string>&facilitator=<string>&customer=<string>&meta=<string>&notes=<string>&with=<string>"
+  url: "{{base_url}}/{{namespace}}/orders"
   method: POST
   headers:
     Content-Type: application/json
     Accept: application/json
-  queryParams:
-    - key: payload
-      value: <string>
-      description: (Required) The id of the `Payload` object or a `Payload` object.
-    - key: dispatch
-      value: <boolean>
-      description: Boolean value that should determine whether or not the order should be dispatched on creation or not. By default dispatch is true.
-    - key: scheduled_at
-      value: <dateTime>
-      description: The date and time the order should optionally be dispatched at, otherwise upon order creation the order will be dispatched unless dispatch is explicitly set to false.
-    - key: driver
-      value: <string>
-      description: The id of the Driver to be assigned to the order, if no driver is set the dispatch will send a "ping" to all drivers within an expanding radius around the pickup point coordinates.
-    - key: facilitator
-      value: <string>
-      description: The id of the Vendor or Contact object assigned to facilitate the completion of the order. This is for orders that will be assigned to third parties.
-    - key: customer
-      value: <string>
-      description: The id of the Vendor or Contact object the payload is for.
-    - key: meta
-      value: <string>
-      description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-    - key: notes
-      value: <string>
-      description: Text containing additional information for the order, which can be used to assist the driver or facilitator.
-    - key: with
-      value: <string>
-      description: Set of relationships to embedd in response.
   body:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "customer": "<string>",
-        "facilitator": "<string>",
-        "driver": {
-          "id": "<string>",
-          "current_job": "<string>",
-          "vehicle": "<string>",
-          "email": "<string>",
-          "phone_number": "<string>",
-          "phone_country_code": "<string>",
-          "signup_token_used": "<string>",
-          "drivers_license_number": "<string>",
-          "latitude": "<string>",
-          "longitude": "<string>",
-          "heading": "<string>",
-          "altitude": "<string>",
-          "speed": "<string>",
-          "country": "<string>",
-          "currency": "<string>",
-          "city": "<string>",
-          "online": "<number>",
-          "status": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "purchase_rate": {
-          "id": "<string>",
-          "customer": "<string>",
-          "order": "<string>",
-          "service_quote": "<string>",
-          "status": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "payload": {
-          "id": "<string>",
-          "pickup": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
-          },
-          "dropoff": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
-          },
-          "return": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
-          },
-          "customer": "<string>",
-          "meta": {},
-          "cod_amount": "<number>",
-          "cod_currency": "<string>",
-          "cod_payment_method": "<string>",
-          "type": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>",
-          "": "<string>"
-        },
-        "meta": {},
-        "notes": "<string>",
-        "type": "<string>",
-        "status": "<string>",
-        "scheduled_at": "<dateTime>",
-        "updated_at": "<dateTime>",
-        "created_at": "<dateTime>"
+        "pickup": "Singapore 018971",
+        "dropoff": "321 Orchard Rd, Singapore",
+        "dispatch": false,
+        "driver": "{{driver_id}}",
+        "customer": "{{contact_id}}",
+        "notes": "Deliver through receiving bay."
       }
 response:
   statusCode: 201
@@ -130,126 +25,101 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
+        "id": "order_7YqM3KpL2n",
+        "internal_id": "ORD-1001",
+        "order_config": "order_config_transport",
         "customer": {
-          "id": "<string>",
-          "name": "<string>",
-          "title": "<string>",
-          "email": "<string>",
-          "phone": "<string>",
-          "type": "<string>",
-          "slug": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "facilitator": {
-          "id": "<string>",
-          "internal_id": "<string>",
-          "name": "<string>",
-          "email": "<string>",
-          "phone_number": "<string>",
-          "phone_country_code": "<string>",
-          "address": "<string>",
-          "type": "<string>",
-          "slug": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "driver": {
-          "id": "<string>",
-          "current_job": "<string>",
-          "vehicle": "<string>",
-          "email": "<string>",
-          "phone_number": "<string>",
-          "phone_country_code": "<string>",
-          "signup_token_used": "<string>",
-          "drivers_license_number": "<string>",
-          "latitude": "<string>",
-          "longitude": "<string>",
-          "heading": "<string>",
-          "altitude": "<string>",
-          "speed": "<string>",
-          "country": "<string>",
-          "currency": "<string>",
-          "city": "<string>",
-          "online": "<number>",
-          "status": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "tracking_number": {
-          "id": "<string>",
-          "customer": "<string>",
-          "facilitator": "<string>",
-          "driver": "<string>",
-          "tracking_number": "<string>",
-          "purchase_rate": "<string>",
-          "payload": "<string>",
-          "meta": [],
-          "notes": "<string>",
-          "type": "<string>",
-          "status": "<string>",
-          "scheduled_at": "<boolean>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
-        },
-        "purchase_rate": {
-          "id": "<string>",
-          "customer": "<string>",
-          "order": "<string>",
-          "service_quote": "<string>",
-          "status": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>"
+          "id": "contact_6zV1KqN9pR",
+          "name": "Acme Receiving",
+          "email": "receiving@example.com",
+          "phone": "+15555550100",
+          "type": "customer-contact",
+          "customer_type": "customer-contact",
+          "updated_at": "2026-05-07T08:30:00.000000Z",
+          "created_at": "2026-05-07T08:30:00.000000Z"
         },
         "payload": {
-          "id": "<string>",
+          "id": "payload_x9Z2Lm8QpA",
+          "current_waypoint": "place_1A2b3C4d5E",
           "pickup": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
+            "id": "place_1A2b3C4d5E",
+            "name": "Marina Bay Sands",
+            "location": {
+              "latitude": 1.2834,
+              "longitude": 103.8607
+            },
+            "address": "10 Bayfront Avenue, Singapore 018956",
+            "type": "place",
+            "meta": {},
+            "updated_at": "2026-05-07T08:30:00.000000Z",
+            "created_at": "2026-05-07T08:30:00.000000Z"
           },
           "dropoff": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
+            "id": "place_9Z8y7X6w5V",
+            "name": "321 Orchard Rd",
+            "location": {
+              "latitude": 1.3048,
+              "longitude": 103.8318
+            },
+            "address": "321 Orchard Rd, Singapore",
+            "type": "place",
+            "meta": {},
+            "updated_at": "2026-05-07T08:30:00.000000Z",
+            "created_at": "2026-05-07T08:30:00.000000Z"
           },
-          "return": {
-            "id": "<string>",
-            "name": "<string>",
-            "type": "<string>",
-            "latitude": "<string>",
-            "longitude": "<string>",
-            "status": "<string>",
-            "updated_at": "<string>",
-            "created_at": "<string>"
-          },
-          "customer": "<string>",
+          "return": null,
+          "waypoints": [],
+          "entities": [],
+          "cod_amount": null,
+          "cod_currency": null,
+          "cod_payment_method": null,
+          "payment_method": null,
           "meta": {},
-          "cod_amount": "<number>",
-          "cod_currency": "<string>",
-          "cod_payment_method": "<string>",
-          "type": "<string>",
-          "updated_at": "<string>",
-          "created_at": "<string>",
-          "": "<string>"
+          "updated_at": "2026-05-07T08:30:00.000000Z",
+          "created_at": "2026-05-07T08:30:00.000000Z"
         },
+        "facilitator": null,
+        "driver_assigned": {
+          "id": "driver_A1b2C3d4E5",
+          "name": "Alex Driver",
+          "email": "alex.driver@example.com",
+          "phone": "+15555550111",
+          "status": "active",
+          "updated_at": "2026-05-07T08:30:00.000000Z",
+          "created_at": "2026-05-07T08:30:00.000000Z"
+        },
+        "vehicle_assigned": null,
+        "tracking_number": {
+          "id": "tracking_3Nf8Qw2YxM",
+          "tracking_number": "FB-1001",
+          "status": "created",
+          "status_code": "created",
+          "qr_code": "https://api.fleetbase.io/qr/FB-1001",
+          "barcode": "https://api.fleetbase.io/barcode/FB-1001",
+          "url": "https://console.fleetbase.io/track-order/FB-1001",
+          "type": "order",
+          "updated_at": "2026-05-07T08:30:00.000000Z",
+          "created_at": "2026-05-07T08:30:00.000000Z"
+        },
+        "tracking_statuses": [],
+        "files": [],
+        "purchase_rate": null,
+        "notes": "Deliver through receiving bay.",
+        "type": "transport",
+        "status": "created",
+        "pod_method": null,
+        "pod_required": false,
+        "dispatched": false,
+        "started": false,
+        "adhoc": false,
+        "adhoc_distance": 0,
+        "distance": 0,
+        "time": 0,
         "meta": {},
-        "notes": "<string>",
-        "type": "<string>",
-        "status": "<string>",
-        "scheduled_at": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "dispatched_at": null,
+        "started_at": null,
+        "scheduled_at": null,
+        "updated_at": "2026-05-07T08:30:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

@@ -5,7 +5,7 @@ request:
   headers:
     Accept: application/json
   pathVariables:
-    id: ""
+    id: "order_7YqM3KpL2n"
 response:
   statusCode: 200
   statusText: OK
@@ -15,19 +15,60 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "customer": "<string>",
-        "facilitator": "<string>",
-        "driver": "<string>",
-        "tracking_number": "<string>",
-        "purchase_rate": "<string>",
-        "payload": "<string>",
-        "meta": [],
-        "notes": "<string>",
-        "type": "<string>",
-        "status": "<string>",
-        "scheduled_at": "<boolean>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "id": "order_7YqM3KpL2n",
+        "internal_id": "ORD-1001",
+        "order_config": "order_config_transport",
+        "customer": {
+          "id": "contact_6zV1KqN9pR",
+          "name": "Acme Receiving",
+          "type": "customer-contact"
+        },
+        "payload": {
+          "id": "payload_x9Z2Lm8QpA",
+          "pickup": {
+            "id": "place_1A2b3C4d5E",
+            "name": "Marina Bay Sands",
+            "address": "10 Bayfront Avenue, Singapore 018956"
+          },
+          "dropoff": {
+            "id": "place_9Z8y7X6w5V",
+            "name": "321 Orchard Rd",
+            "address": "321 Orchard Rd, Singapore"
+          },
+          "return": null,
+          "waypoints": [],
+          "entities": [],
+          "meta": {}
+        },
+        "facilitator": null,
+        "driver_assigned": null,
+        "vehicle_assigned": null,
+        "tracking_number": {
+          "id": "tracking_3Nf8Qw2YxM",
+          "tracking_number": "FB-1001",
+          "status": "created",
+          "status_code": "created",
+          "type": "order"
+        },
+        "tracking_statuses": [],
+        "files": [],
+        "purchase_rate": null,
+        "notes": "Deliver through receiving bay.",
+        "type": "transport",
+        "status": "created",
+        "pod_method": null,
+        "pod_required": false,
+        "dispatched": false,
+        "started": false,
+        "adhoc": false,
+        "adhoc_distance": 0,
+        "distance": 0,
+        "time": 0,
+        "meta": {},
+        "dispatched_at": null,
+        "started_at": null,
+        "scheduled_at": null,
+        "updated_at": "2026-05-07T08:30:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

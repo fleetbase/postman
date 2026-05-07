@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Deletes a payloads resource. The response confirms the resource that was removed.
+description: Delete a Payload.
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: DELETE
 pathVariables:

@@ -2,7 +2,9 @@ $kind: params
 fields:
   - name: idToken
     type: string
-    description: "IdToken value for this customer request."
+    required: true
+    description: "Google ID token to verify."
   - name: clientId
     type: string
-    description: "ClientId value for this customer request."
+    required: true
+    description: "Google OAuth client ID expected for the ID token."

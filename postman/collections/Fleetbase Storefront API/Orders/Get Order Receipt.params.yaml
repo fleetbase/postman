@@ -2,10 +2,12 @@ $kind: params
 fields:
   - name: order
     type: string
-    description: "Order value for this orders request."
+    required: true
+    description: "Public ID of the order to retrieve a receipt for."
   - name: ebarimt_receiver_type
-    type: string
-    description: "Ebarimt receiver type value for this orders request."
+    type: enum
+    values: ["CITIZEN", "COMPANY"]
+    description: "Ebarimt receiver type for QPay receipts."
   - name: ebarimt_receiver
     type: string
-    description: "Ebarimt receiver value for this orders request."
+    description: "Company registration number. Required when `ebarimt_receiver_type` is `COMPANY`."

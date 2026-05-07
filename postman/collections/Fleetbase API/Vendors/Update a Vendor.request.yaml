@@ -1,5 +1,6 @@
 $kind: http-request
-description: You can update all properties of the Vendor.
+description: |-
+  Updates a vendor's profile, primary address, type, contact fields, or metadata.
 url: "{{base_url}}/{{namespace}}/vendors/:id"
 method: PUT
 headers:
@@ -7,14 +8,13 @@ headers:
 pathVariables:
   - key: id
     value: "{{vendor_id}}"
-    description: (Required) The id of the vendor you want to delete.
+    description: (Required) The id of the vendor to update.
 body:
   type: json
   content: |-
     {
         "name": "ABC Corporation",
         "type": "Supplier",
-        "internal_id": "ABC123",
         "email": "abc@example.com",
         "phone": "1234567890"
     }

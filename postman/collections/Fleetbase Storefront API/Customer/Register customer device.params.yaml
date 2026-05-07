@@ -3,7 +3,10 @@ fields:
   - name: token
     type: string
     required: true
-    description: "Token used to authorize or capture the operation."
+    description: "Push notification device token."
   - name: platform
     type: string
-    description: "Platform value for this customer request."
+    description: "Device platform. `os` is also accepted as an alias."
+  - name: os
+    type: string
+    description: "Device platform alias used when `platform` is not provided."

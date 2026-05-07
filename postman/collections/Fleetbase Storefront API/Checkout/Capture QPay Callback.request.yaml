@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Processes a QPay checkout callback and publishes the payment result for the checkout session. The response returns payment status details when a response is requested.
+  Processes a QPay checkout callback. Fleetbase verifies the checkout and gateway, checks the QPay invoice payment state, and creates the order when payment is confirmed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: POST
 headers:

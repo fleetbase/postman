@@ -1,33 +1,68 @@
 $kind: object
 name: Wallet
 description: |-
-  A wallet represents a wallet record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A wallet tracks the balance for the authenticated subject. Ledger stores monetary values in the smallest currency unit.
+example: |
   {
-    "id": "wallet_abc123",
-    "object": "wallet",
-    "balance": 1000,
+    "id": "wallet_2Tn8Qk1",
+    "subject_uuid": "9c6292e4-9d7b-4ab4-94a1-3f4a11c1cf25",
+    "subject_type": "Fleetbase\\Models\\User",
+    "subject": null,
+    "name": "Default wallet",
+    "description": null,
+    "type": "default",
+    "balance": 5000,
+    "formatted_balance": "50.00",
     "currency": "USD",
     "status": "active",
-    "created_at": "2026-05-07T12:00:00Z"
+    "is_frozen": false,
+    "meta": {},
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the wallet."
+  - name: subject_uuid
     type: string
-    description: "Object type returned by the API."
+    description: "UUID of the model that owns the wallet."
+  - name: subject_type
+    type: string
+    description: "Model class that owns the wallet."
+  - name: subject
+    type: object
+    description: "Loaded wallet owner, when included."
+  - name: name
+    type: string
+    description: "Wallet name."
+  - name: description
+    type: string
+    description: "Wallet description."
+  - name: type
+    type: string
+    description: "Wallet type."
   - name: balance
+    type: integer
+    description: "Wallet balance in the smallest currency unit."
+  - name: formatted_balance
     type: string
-    description: "Balance value for this wallet request."
+    description: "Human-readable wallet balance."
   - name: currency
     type: currency
-    description: "Three-letter currency code."
+    description: "Wallet currency code."
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
+    type: string
+    description: "Wallet status."
+  - name: is_frozen
+    type: boolean
+    description: "Whether wallet activity is frozen."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the wallet."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the wallet was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the wallet was last updated."

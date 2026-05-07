@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Onboarding endpoints support initial API setup flows. Use them when a workflow needs to bootstrap or verify account context before consuming operational resources.
 order: 13100

@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Lists recent orders so you can verify the order created by the integrated vendor workflow.
 url: "{{base_url}}/{{namespace}}/orders"
 method: GET
 headers:

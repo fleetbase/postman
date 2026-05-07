@@ -1,29 +1,48 @@
 $kind: object
-name: Purchase rate
+name: Purchase Rate
 description: |-
-  A purchase rate represents a purchase rate record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A purchase rate records a purchased service quote and links it to an order, customer, transaction, amount, currency, and status.
+example: |
   {
-    "id": "purchase-rate_abc123",
-    "object": "purchase-rate",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "purchase_rate_7YqM3KpL2n",
+    "service_quote": "service_quote_6zV1KqN9pR",
+    "order": "order_7YqM3KpL2n",
+    "customer": "contact_6zV1KqN9pR",
+    "transaction": null,
+    "amount": 2500,
+    "currency": "USD",
+    "status": "created",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: Public purchase rate identifier.
+  - name: service_quote
     type: string
-    description: "Object type returned by the API."
+    description: Service quote associated with the purchase.
+  - name: order
+    type: string
+    description: Order associated with the purchase.
+  - name: customer
+    type: string
+    description: Customer associated with the purchase.
+  - name: transaction
+    type: string
+    description: Transaction associated with the purchase.
+  - name: amount
+    type: currency
+    description: Purchased amount.
+  - name: currency
+    type: currency
+    description: Three-letter currency code.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
+    type: string
+    description: Purchase rate status.
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: Timestamp when the purchase rate was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the purchase rate was created.

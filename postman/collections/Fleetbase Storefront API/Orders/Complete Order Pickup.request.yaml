@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Marks a pickup order as completed by the authenticated customer. The response returns the updated order pickup status.
+  Marks an authenticated customer's pickup order as completed. Fleetbase verifies that the order belongs to the customer before updating the order status.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/picked-up"
 method: PUT
 headers:

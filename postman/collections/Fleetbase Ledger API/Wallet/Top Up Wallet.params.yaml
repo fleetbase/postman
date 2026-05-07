@@ -3,17 +3,17 @@ fields:
   - name: gateway
     type: string
     required: true
-    description: "Payment gateway ID or code."
+    description: "Public ID or UUID of the payment gateway to charge."
   - name: amount
-    type: number
+    type: integer
     required: true
-    description: "Monetary amount for the request."
+    description: "Top-up amount in the smallest currency unit. Must be at least 100."
   - name: payment_method_token
     type: string
-    description: "Payment method token returned by the gateway."
+    description: "Gateway payment method token, such as a Stripe `pm_` token."
   - name: customer_id
     type: string
-    description: "Customer id value for this wallet request."
+    description: "Customer ID from the payment gateway."
   - name: description
     type: string
-    description: "Human-readable description of the resource."
+    description: "Description stored with the top-up payment. Maximum length is 500 characters."

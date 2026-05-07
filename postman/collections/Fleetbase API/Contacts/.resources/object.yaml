@@ -1,37 +1,72 @@
 $kind: object
 name: Contact
 description: |-
-  A contact represents a contact record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A contact represents a person or customer profile used by FleetOps resources. Contacts can own places, appear as customers, and carry contact details, photos, type, slug, and metadata.
+example: |
   {
-    "id": "contact_abc123",
-    "object": "contact",
+    "id": "contact_6zV1KqN9pR",
+    "customer_id": "customer_6zV1KqN9pR",
+    "internal_id": "CUST-1001",
     "name": "John Doe",
-    "type": "customer",
+    "title": "Mr",
     "email": "john@example.com",
-    "phone": "+15555550100",
-    "created_at": "2026-05-07T12:00:00Z"
+    "phone": "+15639204264",
+    "photo_url": null,
+    "place": null,
+    "places": [],
+    "user": null,
+    "type": "customer",
+    "meta": {},
+    "slug": "john-doe",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: Public contact identifier.
+  - name: customer_id
     type: string
-    description: "Object type returned by the API."
+    description: Customer-form identifier returned for public customer contacts.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier.
   - name: name
     type: string
-    description: "Display name for the resource."
-  - name: type
-    type: enum
-    values: ["customer", "vendor", "driver"]
-    description: "Classification used to group or process the resource."
+    description: Contact display name.
+  - name: title
+    type: string
+    description: Contact title.
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: Contact email address.
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
+    description: Contact phone number.
+  - name: photo_url
+    type: string
+    description: Contact photo URL.
+  - name: place
+    type: object
+    description: Primary place for the contact, when loaded.
+  - name: places
+    type: array of objects
+    description: Places associated with the contact, when loaded.
+  - name: user
+    type: string
+    description: Public user ID linked to the contact, when present.
+  - name: type
+    type: string
+    description: Contact type.
+  - name: meta
+    type: object
+    description: Additional contact metadata.
+  - name: slug
+    type: string
+    description: URL-friendly contact slug.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the contact was last updated.
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: Timestamp when the contact was created.

@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Comments attach discussion to Fleetbase resources or reply to existing comments. Use comment endpoints to create threaded context around orders, files, operational records, and other subject models.
 order: 4000

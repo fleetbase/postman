@@ -1,32 +1,72 @@
 $kind: object
 name: Customer
 description: |-
-  A customer represents a customer record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A storefront customer is a FleetOps contact exposed through the Storefront API with customer-specific identifiers, saved addresses, and an optional auth token.
+example: |
   {
-    "id": "customer_abc123",
-    "object": "customer",
-    "name": "Jane Customer",
-    "email": "jane@example.com",
-    "phone": "+15555550102",
-    "created_at": "2026-05-07T12:00:00Z"
+    "id": "customer_5M8xQp2",
+    "address_id": "place_9eL2wA1",
+    "internal_id": null,
+    "name": "Alex Rivera",
+    "title": null,
+    "photo_url": null,
+    "email": "alex@example.com",
+    "phone": "+15555550100",
+    "address": "123 Market Street",
+    "addresses": [],
+    "token": "plain-text-token",
+    "orders": 4,
+    "meta": {},
+    "slug": "alex-rivera",
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public customer identifier."
+  - name: address_id
     type: string
-    description: "Object type returned by the API."
+    description: "Public ID of the customer's default place."
+  - name: internal_id
+    type: string
+    description: "Internal customer reference."
   - name: name
     type: string
-    description: "Display name for the resource."
+    description: "Customer name."
+  - name: title
+    type: string
+    description: "Customer title."
+  - name: photo_url
+    type: string
+    description: "Customer photo URL."
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: "Customer email address."
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
+    description: "Customer phone number."
+  - name: address
+    type: string
+    description: "Default address text."
+  - name: addresses
+    type: array of objects
+    description: "Saved customer places."
+  - name: token
+    type: string
+    description: "Auth token returned by authentication and customer creation endpoints."
+  - name: orders
+    type: integer
+    description: "Count of customer orders for the current storefront or network context."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the customer."
+  - name: slug
+    type: string
+    description: "URL-friendly customer slug."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the customer was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the customer was last updated."

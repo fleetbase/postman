@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Chat channels organize conversations between users and participants in an organization. Use chat channel endpoints to create rooms, send messages, manage participants, and record read receipts.
 order: 3000

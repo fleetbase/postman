@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns drivers matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns drivers for the current company. Use filters such as `vendor`, search, pagination, or sort parameters to narrow the result set.
 url: "{{base_url}}/{{namespace}}/drivers"
 method: GET
 headers:

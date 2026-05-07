@@ -2,52 +2,52 @@ $kind: params
 fields:
   - name: service_type
     type: string
-    description: "Service type code used for rating and dispatch logic."
+    description: "Integrated vendor service type code used for rating."
   - name: facilitator
     type: string
-    description: "Vendor or contact ID that facilitates the order."
+    description: "Public ID of the integrated vendor facilitator."
   - name: is_route_optimized
     type: boolean
-    description: "Is route optimized value for this get internal service quote.request.yaml request."
+    description: "Whether the integrated vendor should optimize waypoint order."
   - name: waypoints[0][name]
     type: string
-    description: "Waypoints[0][name] value for this get internal service quote.request.yaml request."
+    description: "Display name for the first waypoint."
   - name: waypoints[0][phone]
     type: string
-    description: "Waypoints[0][phone] value for this get internal service quote.request.yaml request."
+    description: "Contact phone number for the first waypoint."
   - name: waypoints[0][location][type]
     type: string
-    description: "Waypoints[0][location][type] value for this get internal service quote.request.yaml request."
+    description: "GeoJSON location type for the first waypoint."
   - name: waypoints[0][location][coordinates]
     type: string
-    description: "Waypoints[0][location][coordinates] value for this get internal service quote.request.yaml request."
+    description: "Longitude and latitude coordinates for the first waypoint."
   - name: waypoints[1][name]
     type: string
-    description: "Waypoints[1][name] value for this get internal service quote.request.yaml request."
+    description: "Display name for the second waypoint."
   - name: waypoints[1][phone]
     type: string
-    description: "Waypoints[1][phone] value for this get internal service quote.request.yaml request."
+    description: "Contact phone number for the second waypoint."
   - name: waypoints[1][location][type]
     type: string
-    description: "Waypoints[1][location][type] value for this get internal service quote.request.yaml request."
+    description: "GeoJSON location type for the second waypoint."
   - name: waypoints[1][location][coordinates]
     type: string
-    description: "Waypoints[1][location][coordinates] value for this get internal service quote.request.yaml request."
+    description: "Longitude and latitude coordinates for the second waypoint."
   - name: waypoints[2][name]
     type: string
-    description: "Waypoints[2][name] value for this get internal service quote.request.yaml request."
+    description: "Display name for the third waypoint."
   - name: waypoints[2][phone]
     type: string
-    description: "Waypoints[2][phone] value for this get internal service quote.request.yaml request."
+    description: "Contact phone number for the third waypoint."
   - name: waypoints[2][location][type]
     type: string
-    description: "Waypoints[2][location][type] value for this get internal service quote.request.yaml request."
+    description: "GeoJSON location type for the third waypoint."
   - name: waypoints[2][location][coordinates]
     type: string
-    description: "Waypoints[2][location][coordinates] value for this get internal service quote.request.yaml request."
+    description: "Longitude and latitude coordinates for the third waypoint."
   - name: specialRequests[0]
     type: string
-    description: "SpecialRequests[0] value for this get internal service quote.request.yaml request."
+    description: "First integrated vendor special request code."
   - name: specialRequests[1]
     type: string
-    description: "SpecialRequests[1] value for this get internal service quote.request.yaml request."
+    description: "Second integrated vendor special request code."

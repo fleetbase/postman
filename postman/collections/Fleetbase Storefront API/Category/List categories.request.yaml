@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns category matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns product categories available to the current storefront. Use this list to organize product browsing and filtering.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
 headers:

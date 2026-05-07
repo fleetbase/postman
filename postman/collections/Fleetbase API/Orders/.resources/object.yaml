@@ -1,53 +1,145 @@
 $kind: object
 name: Order
 description: |-
-  An order represents a order record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  An order represents a FleetOps delivery or service workflow. It links a payload, optional customer and facilitator, assigned driver and vehicle resources, tracking data, proof-of-delivery settings, and lifecycle timestamps.
+example: |
   {
-    "id": "order_abc123",
-    "object": "order",
+    "id": "order_7YqM3KpL2n",
+    "internal_id": "ORD-1001",
+    "customer": {
+      "id": "contact_6zV1KqN9pR",
+      "name": "Acme Receiving"
+    },
+    "payload": {
+      "id": "payload_x9Z2Lm8QpA",
+      "pickup": {
+        "id": "place_1A2b3C4d5E",
+        "name": "Warehouse 7"
+      },
+      "dropoff": {
+        "id": "place_9Z8y7X6w5V",
+        "name": "Customer Dock"
+      },
+      "waypoints": [],
+      "entities": []
+    },
+    "facilitator": null,
+    "driver_assigned": null,
+    "vehicle_assigned": null,
+    "tracking_number": {
+      "id": "tracking_3Nf8Qw2YxM",
+      "tracking_number": "FB-1001"
+    },
+    "purchase_rate": null,
+    "notes": "Deliver through receiving bay.",
+    "type": "transport",
     "status": "created",
-    "pickup": {
-      "id": "place_pickup",
-      "name": "Warehouse"
-    },
-    "dropoff": {
-      "id": "place_dropoff",
-      "name": "Customer address"
-    },
-    "created_at": "2026-05-07T12:00:00Z"
+    "pod_method": null,
+    "pod_required": false,
+    "dispatched": false,
+    "started": false,
+    "adhoc": false,
+    "adhoc_distance": 0,
+    "distance": 0,
+    "time": 0,
+    "meta": {},
+    "dispatched_at": null,
+    "started_at": null,
+    "scheduled_at": null,
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: Public order identifier.
+  - name: internal_id
     type: string
-    description: "Object type returned by the API."
+    description: Optional internal identifier for the order.
+  - name: order_config
+    type: string
+    description: Public identifier of the order configuration used by the order flow.
+  - name: customer
+    type: object
+    description: Customer contact or vendor resource loaded with the order.
+  - name: payload
+    type: object
+    description: Payload resource containing the pickup, dropoff, return stop, waypoints, and entities for the order.
+  - name: facilitator
+    type: object
+    description: Contact, vendor, or integrated vendor facilitating the order.
+  - name: driver_assigned
+    type: object
+    description: Driver assigned to the order.
+  - name: vehicle_assigned
+    type: object
+    description: Vehicle assigned to the order.
+  - name: tracking_number
+    type: object
+    description: Tracking number resource generated for the order.
+  - name: tracking_statuses
+    type: array of objects
+    description: Tracking statuses loaded with the order.
+  - name: files
+    type: array of objects
+    description: Files attached to the order.
+  - name: purchase_rate
+    type: object
+    description: Purchase rate attached to the order, when present.
+  - name: notes
+    type: string
+    description: Free-form notes attached to the order.
+  - name: type
+    type: string
+    description: Order type resolved from the order configuration.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: pickup
+    type: string
+    description: Current order lifecycle status.
+  - name: pod_method
+    type: string
+    description: Proof-of-delivery method required for the order.
+  - name: pod_required
+    type: boolean
+    description: Whether proof of delivery is required.
+  - name: dispatched
+    type: boolean
+    description: Whether the order has been dispatched.
+  - name: started
+    type: boolean
+    description: Whether the order has started.
+  - name: adhoc
+    type: boolean
+    description: Whether the order is ad hoc.
+  - name: adhoc_distance
+    type: integer
+    description: Ad hoc dispatch distance in meters.
+  - name: distance
+    type: integer
+    description: Preliminary route distance in meters.
+  - name: time
+    type: integer
+    description: Preliminary route duration in seconds.
+  - name: tracker_data
     type: object
-    description: "Pickup location, place ID, or embedded pickup details."
-    fields:
-      - name: id
-        type: string
-        description: "Unique identifier for the resource."
-      - name: name
-        type: string
-        description: "Display name for the resource."
-  - name: dropoff
+    description: Tracker data returned when requested with `with_tracker_data`.
+  - name: eta
     type: object
-    description: "Dropoff location, place ID, or embedded dropoff details."
-    fields:
-      - name: id
-        type: string
-        description: "Unique identifier for the resource."
-      - name: name
-        type: string
-        description: "Display name for the resource."
+    description: Estimated arrival data returned when requested with `with_eta`.
+  - name: meta
+    type: object
+    description: Additional order metadata.
+  - name: dispatched_at
+    type: timestamp
+    description: Timestamp when the order was dispatched.
+  - name: started_at
+    type: timestamp
+    description: Timestamp when the order was started.
+  - name: scheduled_at
+    type: timestamp
+    description: Timestamp when the order is scheduled.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the order was last updated.
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: Timestamp when the order was created.

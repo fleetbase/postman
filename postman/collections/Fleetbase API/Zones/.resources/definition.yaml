@@ -1,6 +1,4 @@
 $kind: collection
 description: |-
-  Zone represents a boundry within a Service Area to limit your fleet operataations to a specific area.
-
-  The Zone boundy can also be visually styled and represented to stand out in your service area views.
+  Zones define boundaries inside a service area for pricing, dispatch, and operational control. Use zones to model neighborhoods, delivery regions, restricted areas, or styled map overlays.
 order: 3000

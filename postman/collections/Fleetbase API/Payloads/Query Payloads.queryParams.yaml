@@ -1,11 +1,11 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this payloads request."
+    type: integer
+    description: Maximum number of payloads to return.
   - name: offset
-    type: string
-    description: "Offset value for this payloads request."
+    type: integer
+    description: Number of payloads to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this payloads request."
+    description: Sort expression for the payload query.

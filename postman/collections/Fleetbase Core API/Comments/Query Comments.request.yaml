@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns comments matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns comments for the current organization. Use query parameters to filter, sort, and paginate the result set.
 url: "{{base_url}}/{{namespace}}/comments"
 method: GET
 queryParams:

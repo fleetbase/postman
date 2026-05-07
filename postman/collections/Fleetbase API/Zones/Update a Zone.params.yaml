@@ -1,5 +1,49 @@
 $kind: params
 fields:
+  - name: name
+    type: string
+    description: Zone display name.
+  - name: service_area
+    type: string
+    description: Service area ID the zone belongs to.
+  - name: border
+    type: object
+    description: Zone polygon border.
+  - name: location
+    type: object
+    description: Resolvable point used to create a circular zone.
+  - name: latitude
+    type: number
+    description: Decimal latitude for a circular zone. Required with `longitude`.
+  - name: longitude
+    type: number
+    description: Decimal longitude for a circular zone. Required with `latitude`.
+  - name: radius
+    type: number
+    default: 500
+    description: Radius in meters when updating a circular zone.
+  - name: description
+    type: string
+    description: Zone description.
   - name: color
     type: string
-    description: "Fill color used when rendering the zone."
+    description: Fill color used when rendering the zone.
+  - name: stroke_color
+    type: string
+    description: Stroke color used when rendering the zone.
+  - name: status
+    type: enum
+    values: ["active", "inactive"]
+    description: Zone status.
+  - name: trigger_on_entry
+    type: boolean
+    description: Whether entering this zone should trigger geofence events.
+  - name: trigger_on_exit
+    type: boolean
+    description: Whether exiting this zone should trigger geofence events.
+  - name: dwell_threshold_minutes
+    type: integer
+    description: Minutes inside the zone before dwell behavior is triggered.
+  - name: speed_limit_kmh
+    type: integer
+    description: Speed limit in kilometers per hour for geofence events.

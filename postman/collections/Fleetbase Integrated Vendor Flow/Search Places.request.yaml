@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Searches places near a latitude/longitude pair for use as workflow waypoint data.
 url: "{{base_url}}/{{namespace}}/places/search"
 method: GET
 headers:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns store locations matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns store locations available through the current storefront or network. Use these locations for browsing, pickup, and fulfillment selection.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/store-locations"
 method: GET
 headers:

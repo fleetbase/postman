@@ -1,29 +1,85 @@
 $kind: object
 name: Store
 description: |-
-  A store represents a store record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A store describes a storefront business, including branding, contact information, operating options, locations, media, and network membership.
+example: |
   {
-    "id": "store_abc123",
-    "object": "store",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "store_3Xb9kL2",
+    "name": "Acme Market",
+    "description": "Local grocery and delivery.",
+    "website": "https://example.com",
+    "email": "orders@example.com",
+    "phone": "+15555550100",
+    "tags": ["grocery"],
+    "currency": "USD",
+    "country": "US",
+    "options": {},
+    "logo_url": "https://files.example.com/logo.png",
+    "backdrop_url": null,
+    "rating": 4.8,
+    "online": true,
+    "alertable": true,
+    "is_network": false,
+    "is_store": true,
+    "slug": "acme-market",
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the store."
+  - name: name
     type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
+    description: "Store name."
+  - name: description
+    type: string
+    description: "Store description."
+  - name: website
+    type: string
+    description: "Store website URL."
+  - name: email
+    type: string
+    description: "Store email address."
+  - name: phone
+    type: string
+    description: "Store phone number."
+  - name: tags
+    type: array of strings
+    description: "Store tags."
+  - name: currency
+    type: currency
+    description: "Store currency code."
+  - name: country
+    type: string
+    description: "Country code derived from the store currency."
+  - name: options
+    type: object
+    description: "Public store option values."
+  - name: logo_url
+    type: string
+    description: "Store logo URL."
+  - name: backdrop_url
+    type: string
+    description: "Store backdrop image URL."
+  - name: rating
+    type: number
+    description: "Store rating."
+  - name: online
+    type: boolean
+    description: "Whether the store is online."
+  - name: alertable
+    type: boolean
+    description: "Whether the store can receive order alerts."
+  - name: is_network
+    type: boolean
+    description: "Whether the resource is a storefront network."
+  - name: is_store
+    type: boolean
+    description: "Whether the resource is a store."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the store was created."
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Time the store was last updated."

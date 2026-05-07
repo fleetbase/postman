@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Webhooks receive payment gateway events and normalize them for Ledger processing. Use this resource to understand the callback shape Fleetbase expects from configured gateway drivers.
 order: 3000

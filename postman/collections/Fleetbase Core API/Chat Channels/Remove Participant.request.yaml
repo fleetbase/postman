@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Deletes a chat channels resource. The response confirms the resource that was removed.
+  Removes a participant from a chat channel by participant ID. The channel remains active for the remaining participants.
 url: "{{base_url}}/{{namespace}}/chat-channels/remove-participant/:participantId"
 method: DELETE
 pathVariables:

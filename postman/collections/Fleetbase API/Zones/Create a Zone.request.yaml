@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a zone. The response returns the created resource with its generated identifier.
+  Creates a zone inside a service area. Provide either a GeoJSON boundary or a center point with radius, and Fleetbase will store the zone for geofencing and service coverage checks.
 url: "{{base_url}}/{{namespace}}/zones"
 method: POST
 body:

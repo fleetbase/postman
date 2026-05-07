@@ -1,17 +1,67 @@
 $kind: params
 fields:
+  - name: name
+    type: string
+    description: Display name for the entity.
+  - name: type
+    type: string
+    description: Entity type.
   - name: internal_id
     type: string
-    description: "External or internal identifier supplied by your system."
+    description: Optional internal identifier for the entity.
   - name: description
     type: string
-    description: "Human-readable description of the resource."
+    description: Human-readable entity description.
+  - name: payload
+    type: string
+    description: Payload ID to attach the entity to.
   - name: destination
     type: string
-    description: "Destination value for this entities request."
+    description: Place ID within the payload route to use as the entity destination.
+  - name: waypoint
+    type: string
+    description: Alias for `destination`; resolves a place within the payload route.
+  - name: customer
+    type: string
+    description: Contact or vendor ID to assign as the entity customer.
+  - name: driver
+    type: string
+    description: Driver ID to associate with the entity.
+  - name: weight
+    type: number
+    description: Entity weight.
+  - name: weight_unit
+    type: enum
+    values: ["g", "oz", "lb", "kg"]
+    description: Unit for `weight`.
+  - name: length
+    type: number
+    description: Entity length.
+  - name: width
+    type: number
+    description: Entity width.
+  - name: height
+    type: number
+    description: Entity height.
+  - name: dimensions_unit
+    type: enum
+    values: ["cm", "in", "ft", "mm", "m", "yd"]
+    description: Unit for length, width, and height.
+  - name: declared_value
+    type: currency
+    description: Declared value of the entity.
+  - name: price
+    type: currency
+    description: Price of the entity.
+  - name: sale_price
+    type: currency
+    description: Sale price of the entity.
   - name: sku
     type: string
-    description: "Sku value for this entities request."
+    description: Stock keeping unit for the entity.
   - name: currency
     type: currency
-    description: "Three-letter currency code for monetary values."
+    description: Three-letter currency code for monetary fields.
+  - name: meta
+    type: object
+    description: Additional entity metadata.

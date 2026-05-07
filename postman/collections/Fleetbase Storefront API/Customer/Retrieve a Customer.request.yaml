@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a customer. The response includes the current API representation of the resource.
+  Retrieves a storefront customer by ID.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{{customer_id}}"
 method: GET
 headers:

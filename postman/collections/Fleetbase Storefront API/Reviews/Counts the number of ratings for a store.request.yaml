@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns the number of storefront ratings for the current store. Use it to display aggregate review counts without fetching the full review list.
+description: Counts the number of ratings for a store
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/count"
 method: GET
 headers:

@@ -1,5 +1,32 @@
 $kind: params
 fields:
+  - name: status
+    type: string
+    description: Human-readable tracking status.
+  - name: code
+    type: string
+    description: Machine-readable tracking status code.
+  - name: details
+    type: string
+    description: Status details visible to tracking consumers.
+  - name: location
+    type: object
+    description: Resolvable point where the status occurred.
+  - name: latitude
+    type: number
+    description: Decimal latitude for the status location.
+  - name: longitude
+    type: number
+    description: Decimal longitude for the status location.
+  - name: city
+    type: string
+    description: City where the status occurred.
+  - name: province
+    type: string
+    description: Province or region where the status occurred.
+  - name: postal_code
+    type: string
+    description: Postal code where the status occurred.
   - name: country
     type: string
-    description: "ISO country code for the address."
+    description: Two-letter country code where the status occurred.

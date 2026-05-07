@@ -1,16 +1,44 @@
 $kind: params
 fields:
-  - name: name
+  - name: tracking_number
+    type: string
+    description: Tracking number ID to attach the status to. Required unless `order` is supplied.
+  - name: order
+    type: string
+    description: Order ID used to resolve the order's tracking number when `tracking_number` is not supplied.
+  - name: status
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Human-readable tracking status.
+  - name: code
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
+    required: true
+    description: Machine-readable tracking status code.
+  - name: details
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    required: true
+    description: Status details visible to tracking consumers.
+  - name: location
+    type: object
+    description: Resolvable point where the status occurred. Required unless latitude and longitude are supplied.
+  - name: latitude
+    type: number
+    description: Decimal latitude for the status location.
+  - name: longitude
+    type: number
+    description: Decimal longitude for the status location.
+  - name: city
+    type: string
+    description: City where the status occurred.
+  - name: province
+    type: string
+    description: Province or region where the status occurred.
+  - name: postal_code
+    type: string
+    description: Postal code where the status occurred.
+  - name: country
+    type: string
+    description: Two-letter country code where the status occurred.
+  - name: duplicate
+    type: boolean
+    description: When true, allows duplicate status text for the same order or tracking number.

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Creates a chat channels resource. The response returns the created resource with its generated identifier.
+  Creates a chat channel for the current organization. Include participant user IDs to add those users to the channel immediately after it is created.
 url: "{{base_url}}/{{namespace}}/chat-channels"
 method: POST
 body:

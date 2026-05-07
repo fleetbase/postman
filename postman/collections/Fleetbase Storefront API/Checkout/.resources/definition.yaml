@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Checkout endpoints turn a cart into a payable order flow. Use them to initialize gateway-specific payment data, check checkout status, capture payment callbacks, and create orders from completed checkouts.
 order: 8000

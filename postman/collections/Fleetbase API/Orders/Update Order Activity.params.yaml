@@ -1,5 +1,14 @@
 $kind: params
 fields:
+  - name: activity
+    type: object
+    description: Activity payload to apply to the order. Fleetbase resolves it against the order configuration flow.
+  - name: proof
+    type: object
+    description: Optional proof data to attach when the activity updates an entity or waypoint.
   - name: skip_dispatch
     type: boolean
-    description: "Skip dispatch value for this orders request."
+    description: Uses the first started activity instead of dispatching when the submitted activity is `dispatched`.
+  - name: skipDispatch
+    type: boolean
+    description: Camel-case alias for `skip_dispatch`.

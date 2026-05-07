@@ -2,10 +2,11 @@ $kind: params
 fields:
   - name: sender
     type: string
-    description: "Sender value for this chat channels request."
+    required: true
+    description: "Public ID of the chat participant sending the message."
   - name: content
     type: string
-    description: "Content value for this chat channels request."
+    description: "Message text to publish to the channel."
   - name: files
     type: array of strings
-    description: "Files value for this chat channels request."
+    description: "Public IDs of uploaded files to attach to the message."

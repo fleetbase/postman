@@ -1,12 +1,12 @@
 $kind: http-request
 description: |-
-  Retrieves a order. The response includes the current API representation of the resource.
+  Returns the next workflow activity for an order. Use it to determine the next operational step available to the assigned driver or dispatcher.
 url: "{{base_url}}/{{namespace}}/orders/:id/next-activity"
 method: GET
 pathVariables:
   - key: id
     value: "{{order_id}}"
-    description: (Required) The id of the order to dispatch.
+    description: (Required) The id of the order.
 body:
   type: json
   content: ""

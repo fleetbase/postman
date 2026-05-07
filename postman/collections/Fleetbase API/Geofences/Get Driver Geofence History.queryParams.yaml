@@ -1,5 +1,5 @@
 $kind: params
 fields:
   - name: per_page
-    type: string
-    description: "Per page value for this geofences request."
+    type: integer
+    description: Number of geofence history records to return per page.

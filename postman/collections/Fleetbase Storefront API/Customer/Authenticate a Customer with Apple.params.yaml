@@ -2,19 +2,21 @@ $kind: params
 fields:
   - name: identityToken
     type: string
-    description: "IdentityToken value for this customer request."
+    required: true
+    description: "Apple identity token to verify."
   - name: authorizationCode
     type: string
-    description: "AuthorizationCode value for this customer request."
+    required: true
+    description: "Apple authorization code issued during sign-in."
   - name: email
     type: string
-    description: "Email address for the person or customer."
+    description: "Customer email address provided by Apple."
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
+    description: "Customer phone number."
   - name: name
     type: string
-    description: "Display name for the resource."
+    description: "Customer display name."
   - name: appleUserId
     type: string
-    description: "AppleUserId value for this customer request."
+    description: "Stable Apple user identifier."

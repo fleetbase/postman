@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a wallet. The response includes the current API representation of the resource.
+  Retrieves the authenticated subject's wallet. Pass a currency to choose the wallet currency when Fleetbase needs to provision one.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet"
 method: GET
 headers:

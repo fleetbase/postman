@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Drivers are mobile workers who can be assigned to vehicles and orders. Use driver endpoints to manage driver profiles, authentication, devices, availability, tracking, and organization context.
 order: 7000

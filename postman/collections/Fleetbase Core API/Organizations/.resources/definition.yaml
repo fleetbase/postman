@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Organizations expose the company context tied to the current API credential. Use this resource to confirm which organization a request is scoped to.
 order: 1000

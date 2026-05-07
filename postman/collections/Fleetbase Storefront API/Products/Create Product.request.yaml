@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Creates a product. The response returns the created resource with its generated identifier.
+description: Create Product
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
 method: POST
 headers:

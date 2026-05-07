@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a contact. Parameters not supplied remain unchanged.
+  Updates a contact's profile, type, primary place, photo, or metadata.
 url: "{{base_url}}/{{namespace}}/contacts/:id"
 method: PUT
 headers:
@@ -18,7 +18,9 @@ body:
         "email": "john@exampleco.com",
         "phone": "563-920-4264",
         "type": "technician",
-        "slug": "john-doe"
+        "meta": {
+            "external_ref": "john-doe"
+        }
     }
 examples: ./.resources/Update a Contact.resources/examples
 order: 4000

@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: id
+    type: string
+    description: Vendor ID filter used by this request example.
+  - name: query
+    type: string
+    description: Search term matched against vendor fields.
+  - name: limit
+    type: integer
+    description: Maximum number of vendors to return.
+  - name: offset
+    type: integer
+    description: Number of vendors to skip before returning results.
+  - name: sort
+    type: string
+    description: Sort expression for the vendor query.

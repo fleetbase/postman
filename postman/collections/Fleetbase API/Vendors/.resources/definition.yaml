@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Vendors represent external service providers, carriers, or partners that can support fulfillment. Use vendors to model third-party capacity, contact details, and service relationships.
 order: 5000

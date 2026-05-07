@@ -2,21 +2,14 @@ $kind: params
 fields:
   - name: start
     type: object
-    description: "Start value for this drivers request."
-    fields:
-      - name: latitude
-        type: number
-        description: "Decimal latitude coordinate."
-      - name: longitude
-        type: number
-        description: "Decimal longitude coordinate."
+    description: Starting point for the simulated drive. Required when `order` is not supplied.
   - name: end
     type: object
-    description: "End value for this drivers request."
-    fields:
-      - name: latitude
-        type: number
-        description: "Decimal latitude coordinate."
-      - name: longitude
-        type: number
-        description: "Decimal longitude coordinate."
+    description: Ending point for the simulated drive. Required when `order` is not supplied.
+  - name: order
+    type: string
+    description: Order ID to simulate. Required when the action is `order`.
+  - name: action
+    type: string
+    default: drive
+    description: Simulation action. Defaults to `drive`.

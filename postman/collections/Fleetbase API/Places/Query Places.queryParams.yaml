@@ -2,13 +2,16 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this places request."
+    description: Search term matched against place fields.
   - name: limit
-    type: string
-    description: "Limit value for this places request."
+    type: integer
+    description: Maximum number of places to return.
   - name: offset
-    type: string
-    description: "Offset value for this places request."
+    type: integer
+    description: Number of places to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this places request."
+    description: Sort expression for the place query.
+  - name: vendor
+    type: string
+    description: Vendor ID used to filter places owned by a vendor.

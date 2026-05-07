@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Updates an issues resource. Parameters not supplied remain unchanged.
+description: "Update an Issue"
 url: "{{base_url}}/{{namespace}}/issues/:id"
 method: PUT
 pathVariables:

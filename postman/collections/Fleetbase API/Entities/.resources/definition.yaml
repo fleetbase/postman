@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Entities describe the individual goods, parcels, or items carried inside a payload. Use entities to capture dimensions, weight, declared value, tracking metadata, and customer ownership for shipment contents.
 order: 11000

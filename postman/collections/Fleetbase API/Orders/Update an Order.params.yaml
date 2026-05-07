@@ -1,5 +1,81 @@
 $kind: params
 fields:
+  - name: payload
+    type: object
+    description: Existing payload ID or inline payload data used to replace or update the order payload.
+  - name: pickup
+    type: object
+    description: Replacement pickup place data or address for the order payload.
+  - name: dropoff
+    type: object
+    description: Replacement dropoff place data or address for the order payload.
+  - name: return
+    type: object
+    description: Replacement return place data or address for the order payload.
+  - name: waypoints
+    type: array of objects
+    description: Replacement waypoint list. When sent empty with route endpoint fields, existing waypoints are removed.
+  - name: entities
+    type: array of objects
+    description: Replacement entities for the order payload.
   - name: service_quote
     type: string
-    description: "Service quote ID used by the request."
+    description: Service quote ID to purchase and attach to the order.
+  - name: driver
+    type: string
+    description: Driver ID to assign to the order.
+  - name: vehicle
+    type: string
+    description: Vehicle ID to assign to the order.
+  - name: facilitator
+    type: string
+    description: Contact or vendor ID responsible for facilitating the order.
+  - name: customer
+    type: string
+    description: Contact or vendor ID to assign as the order customer.
+  - name: dispatch
+    type: boolean
+    description: When `true`, dispatches the order after applying the update.
+  - name: adhoc
+    type: boolean
+    description: Marks the order as ad hoc.
+  - name: adhoc_distance
+    type: number
+    description: Ad hoc search distance for dispatching nearby drivers.
+  - name: pod_required
+    type: boolean
+    description: Whether proof of delivery is required to complete the order.
+  - name: pod_method
+    type: string
+    description: Proof of delivery method. Required when `pod_required` is true.
+  - name: scheduled_at
+    type: timestamp
+    description: Date and time when the order should be scheduled.
+  - name: type
+    type: string
+    description: Order type or order configuration key.
+  - name: status
+    type: string
+    description: Order lifecycle status to set.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier for the order.
+  - name: meta
+    type: object
+    description: Additional order metadata.
+  - name: notes
+    type: string
+    description: Free-form notes attached to the order.
+  - name: time_window_start
+    type: timestamp
+    description: Earliest time the order should be serviced by the orchestrator.
+  - name: time_window_end
+    type: timestamp
+    description: Latest time the order should be serviced by the orchestrator.
+  - name: required_skills
+    type: array of strings
+    description: Skills required for orchestrator assignment.
+  - name: orchestrator_priority
+    type: integer
+    default: 50
+    description: Orchestrator priority for assignment. Fleetbase defaults explicitly empty values to `50`.

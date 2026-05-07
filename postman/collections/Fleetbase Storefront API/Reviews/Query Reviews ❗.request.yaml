@@ -1,6 +1,5 @@
 $kind: http-request
-description: |-
-  Returns reviews matching the supplied filters. Use pagination and query parameters to control the result set.
+description: Query Reviews ❗
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: GET
 headers:

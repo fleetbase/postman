@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Fleets group vehicles and drivers under an operating unit. Use fleets to organize capacity by team, region, or service area before assigning resources to orders.
 order: 9000

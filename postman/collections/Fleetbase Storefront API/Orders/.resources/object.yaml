@@ -1,53 +1,53 @@
 $kind: object
-name: Order
+name: Storefront Order
 description: |-
-  An order represents a order record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A storefront order is a FleetOps order created from a captured storefront checkout.
+example: |
   {
-    "id": "order_abc123",
-    "object": "order",
+    "id": "order_9Kx2mQ1",
+    "public_id": "order_9Kx2mQ1",
     "status": "created",
-    "pickup": {
-      "id": "place_pickup",
-      "name": "Warehouse"
+    "type": "storefront",
+    "payload": null,
+    "customer": null,
+    "meta": {
+      "checkout_id": "checkout_123",
+      "storefront": "Acme Market",
+      "total": 5150,
+      "currency": "USD"
     },
-    "dropoff": {
-      "id": "place_dropoff",
-      "name": "Customer address"
-    },
-    "created_at": "2026-05-07T12:00:00Z"
+    "notes": null,
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the order."
+  - name: public_id
     type: string
-    description: "Object type returned by the API."
+    description: "Public identifier of the order."
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: pickup
+    type: string
+    description: "Order lifecycle status."
+  - name: type
+    type: string
+    description: "Order type, usually `storefront` for orders created by this API."
+  - name: payload
     type: object
-    description: "Pickup location, place ID, or embedded pickup details."
-    fields:
-      - name: id
-        type: string
-        description: "Unique identifier for the resource."
-      - name: name
-        type: string
-        description: "Display name for the resource."
-  - name: dropoff
+    description: "FleetOps payload created from the storefront cart."
+  - name: customer
     type: object
-    description: "Dropoff location, place ID, or embedded dropoff details."
-    fields:
-      - name: id
-        type: string
-        description: "Unique identifier for the resource."
-      - name: name
-        type: string
-        description: "Display name for the resource."
+    description: "Customer associated with the order."
+  - name: meta
+    type: object
+    description: "Storefront checkout, payment, totals, and fulfillment metadata."
+  - name: notes
+    type: string
+    description: "Order notes supplied during checkout capture."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the order was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the order was last updated."

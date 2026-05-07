@@ -1,29 +1,39 @@
 $kind: object
-name: Store location
+name: Store Location
 description: |-
-  A store location represents a store location record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A store location links a storefront to a FleetOps place and operating hours.
+example: |
   {
-    "id": "store-location_abc123",
-    "object": "store-location",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "store_location_7Lk2mQ1",
+    "store": "store_3Xb9kL2",
+    "name": "Downtown",
+    "place": null,
+    "hours": [],
+    "created_at": "2026-05-07T09:30:00Z",
+    "updated_at": "2026-05-07T09:30:00Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: "Public identifier of the store location."
+  - name: store
     type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
+    description: "Public ID of the store."
+  - name: store_data
+    type: object
+    description: "Store resource when requested."
+  - name: name
+    type: string
+    description: "Location name."
+  - name: place
+    type: object
+    description: "FleetOps place for the store location."
+  - name: hours
+    type: array of objects
+    description: "Operating hours for the location."
   - name: created_at
     type: timestamp
-    description: "Time when the resource was created."
+    description: "Time the store location was created."
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Time the store location was last updated."

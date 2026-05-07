@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Reviews capture customer ratings and feedback for storefront resources. Use review endpoints to create, retrieve, count, query, and remove customer feedback.
 order: 9000

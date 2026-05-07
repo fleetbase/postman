@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Products are the items and services customers can browse and add to carts. Use product endpoints to list, retrieve, create, or update catalog items with pricing, media, variants, addons, and availability.
 order: 2000

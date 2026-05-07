@@ -2,4 +2,5 @@ $kind: params
 fields:
   - name: phone
     type: string
-    description: "Phone number for the person or customer."
+    required: true
+    description: Driver phone number to send the verification code to.

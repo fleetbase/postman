@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Tracking numbers identify shipments, payloads, and scannable workflow artifacts. Use tracking number endpoints to create identifiers, decode QR data, and attach trackable references to operations.
 order: 15000

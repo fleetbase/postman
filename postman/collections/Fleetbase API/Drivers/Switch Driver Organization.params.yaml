@@ -2,4 +2,5 @@ $kind: params
 fields:
   - name: next
     type: string
-    description: "Next value for this drivers request."
+    required: true
+    description: Organization ID to switch the driver session to.

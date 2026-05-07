@@ -2,13 +2,19 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this tracking numbers request."
+    description: Search term matched against tracking number fields.
   - name: limit
-    type: string
-    description: "Limit value for this tracking numbers request."
+    type: integer
+    description: Maximum number of tracking numbers to return.
   - name: offset
-    type: string
-    description: "Offset value for this tracking numbers request."
+    type: integer
+    description: Number of tracking numbers to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this tracking numbers request."
+    description: Sort expression for the tracking number query.
+  - name: owner
+    type: string
+    description: Filters tracking numbers by owner order or entity ID.
+  - name: status
+    type: string
+    description: Filters tracking numbers by latest status.

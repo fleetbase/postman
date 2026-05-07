@@ -3,4 +3,4 @@ fields:
   - name: code
     type: string
     required: true
-    description: "Verification or status code."
+    description: QR code UUID to resolve into its matching order, entity, or tracking resource.

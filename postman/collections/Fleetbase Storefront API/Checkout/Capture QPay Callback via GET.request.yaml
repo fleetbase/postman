@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Processes a QPay checkout callback over GET. This variant is useful for gateway redirects and sandbox callback testing.
+  Processes a QPay checkout callback from query parameters. Sandbox requests can pass `test` to simulate success or failure.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: GET
 headers:

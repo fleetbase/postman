@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates an entities resource. Parameters not supplied remain unchanged.
+  Updates an entity's descriptive fields, payload assignment, destination, dimensions, weight, pricing, or metadata.
 url: "{{base_url}}/{{namespace}}/entities/:id"
 method: PUT
 headers:

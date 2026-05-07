@@ -1,11 +1,11 @@
 $kind: http-request
 description: |-
-  Returns orders matching the supplied filters. Use pagination and query parameters to control the result set.
+  Returns orders for the current company. Use filters such as `status`, `payload`, `customer`, `facilitator`, or `nearby` to narrow the result set.
 url: "{{base_url}}/{{namespace}}/orders"
 method: GET
 queryParams:
   limit: "25"
   offset: "0"
   sort: "created_at"
-  status: "active"
+  status: "created"
 order: 2000

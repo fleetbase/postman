@@ -1,5 +1,6 @@
 $kind: http-request
-description: In order to create a vehicle you must provide the VIN number, Fleetbase will automatically decode the VIN and pull the information on the vehicle.
+description: |-
+  Creates a vehicle for the current company. Send VIN, make/model fields, assignment fields, status, location, capacity, or orchestrator constraints as needed.
 url: "{{base_url}}/{{namespace}}/vehicles"
 method: POST
 headers:
@@ -14,7 +15,8 @@ body:
       "model": "Camry",
       "trim": "SE",
       "plate_number": "ABC123",
-      "status": "maintenance"
+      "status": "maintenance",
+      "online": false
     }
 scripts:
   - type: afterResponse

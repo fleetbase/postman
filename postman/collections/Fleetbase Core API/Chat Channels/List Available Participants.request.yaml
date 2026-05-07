@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns chat channels matching the supplied filters. Use pagination and query parameters to control the result set.
+  Lists users in the current organization that can be added to a chat channel. When a channel ID is provided, users already participating in that channel are excluded.
 url: "{{base_url}}/{{namespace}}/chat-channels/available-participants"
 method: GET
 queryParams:

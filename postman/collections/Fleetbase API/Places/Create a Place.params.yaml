@@ -2,39 +2,67 @@ $kind: params
 fields:
   - name: name
     type: string
-    required: true
-    description: "Display name for the resource."
+    description: Display name for the place. Required on create unless address, street, or coordinates are enough for Fleetbase to geocode the place.
+  - name: address
+    type: string
+    description: Address string to geocode into a place when structured address fields are not supplied.
   - name: street1
     type: string
-    description: "Primary street address."
+    description: Primary street address. Required on create unless address or coordinates are supplied.
+  - name: street2
+    type: string
+    description: Secondary street address.
   - name: city
     type: string
-    description: "City or locality for the address."
+    description: City or locality for the address.
   - name: province
     type: string
-    description: "State, province, or region for the address."
+    description: State, province, or region for the address.
   - name: postal_code
     type: string
-    description: "Postal or ZIP code for the address."
+    description: Postal or ZIP code for the address.
   - name: neighborhood
     type: string
-    description: "Neighborhood or local area for the address."
+    description: Neighborhood or local area for the address.
   - name: district
     type: string
-    description: "District or administrative subdivision for the address."
+    description: District or administrative subdivision for the address.
   - name: building
     type: string
-    description: "Building name, number, or additional address detail."
+    description: Building name, number, or additional address detail.
+  - name: security_access_code
+    type: string
+    description: Access code or delivery instructions needed to enter the building.
   - name: country
     type: string
-    description: "ISO country code for the address."
-  - name: phone_number
+    description: Country code for the address.
+  - name: phone
     type: string
-    description: "Local phone number for the place or contact."
-  - name: phone_country_code
+    description: Phone number associated with the place.
+  - name: location
+    type: object
+    description: Resolvable point used as the place location. Fleetbase accepts supported coordinate formats and reverse geocodes missing address fields.
+  - name: latitude
+    type: number
+    description: Decimal latitude. Required with `longitude`.
+  - name: longitude
+    type: number
+    description: Decimal longitude. Required with `latitude`.
+  - name: owner
     type: string
-    description: "International dialing code for the phone number."
+    description: Contact or vendor ID that owns the place.
+  - name: customer
+    type: string
+    description: Contact or vendor ID to assign as the place owner.
+  - name: contact
+    type: string
+    description: Contact or vendor ID to assign as the place owner.
+  - name: vendor
+    type: string
+    description: Vendor ID to assign as the place owner.
   - name: type
-    type: enum
-    values: ["customer", "vendor", "driver"]
-    description: "Classification used to group or process the resource."
+    type: string
+    description: Place classification.
+  - name: meta
+    type: object
+    description: Additional place metadata.

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Authenticates a storefront customer with a Google ID token. The response returns the customer profile and access token when authentication succeeds.
+  Authenticates a storefront customer with Google Sign-In. Fleetbase verifies the Google ID token, creates or updates the user, and returns the storefront customer with an auth token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-google"
 method: POST
 headers:

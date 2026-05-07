@@ -3,10 +3,10 @@ fields:
   - name: code
     type: string
     required: true
-    description: "Verification or status code."
+    description: QR code value to verify. The code must match the resolved subject UUID.
   - name: data
-    type: array of strings
-    description: "Data value for this orders request."
+    type: object
+    description: Structured proof metadata stored with the QR proof.
   - name: raw_data
-    type: array of strings
-    description: "Raw data value for this orders request."
+    type: object
+    description: Raw QR payload stored on the proof record.

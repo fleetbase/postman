@@ -1,8 +1,11 @@
 $kind: params
 fields:
-  - name: name
+  - name: mode
+    type: enum
+    values: ["email", "sms"]
+    required: true
+    description: "Verification delivery mode."
+  - name: identity
     type: string
-    description: "Display name for the resource."
-  - name: description
-    type: string
-    description: "Human-readable description of the resource."
+    required: true
+    description: "Email address or phone number receiving the customer creation code."

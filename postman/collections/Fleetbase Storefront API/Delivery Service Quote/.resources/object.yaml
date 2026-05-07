@@ -1,29 +1,27 @@
 $kind: object
-name: Delivery service quote
+name: Delivery Service Quote
 description: |-
-  A delivery service quote represents a delivery service quote record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A delivery service quote prices delivery for a storefront cart and is consumed during checkout capture.
+example: |
   {
-    "id": "delivery-service-quote_abc123",
-    "object": "delivery-service-quote",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "service_quote_4fK2mQ8",
+    "amount": 950,
+    "currency": "USD",
+    "meta": {
+      "origin": "place_123",
+      "destination": "place_456"
+    }
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
-    type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
-  - name: updated_at
-    type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Public identifier of the service quote."
+  - name: amount
+    type: integer
+    description: "Quoted delivery amount."
+  - name: currency
+    type: currency
+    description: "Quote currency code."
+  - name: meta
+    type: object
+    description: "Quote metadata, including origin and destination used by checkout."

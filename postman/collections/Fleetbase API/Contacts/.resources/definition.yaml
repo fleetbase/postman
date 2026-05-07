@@ -1,2 +1,4 @@
 $kind: collection
+description: |-
+  Contacts represent customers, recipients, senders, and other people or organizations connected to logistics activity. Use contacts to attach identity, communication details, and default places to orders and payloads.
 order: 4000

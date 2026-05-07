@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Receives a payment gateway webhook and records the normalized ledger event. The response acknowledges the webhook so the gateway can stop retrying.
+  Receives an inbound webhook from a payment gateway driver. Fleetbase verifies the gateway event, records it idempotently, and dispatches normalized payment events.
 url: "{{base_url}}/{{api_prefix}}/webhooks/{{gateway_driver}}"
 method: POST
 headers:

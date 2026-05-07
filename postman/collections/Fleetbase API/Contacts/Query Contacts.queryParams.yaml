@@ -2,13 +2,16 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this contacts request."
+    description: Search term matched against contact fields.
   - name: limit
-    type: string
-    description: "Limit value for this contacts request."
+    type: integer
+    description: Maximum number of contacts to return.
   - name: offset
-    type: string
-    description: "Offset value for this contacts request."
+    type: integer
+    description: Number of contacts to skip before returning results.
   - name: sort
     type: string
-    description: "Sort value for this contacts request."
+    description: Sort expression for the contact query.
+  - name: type
+    type: string
+    description: Filters contacts by contact type.

@@ -3,8 +3,12 @@ fields:
   - name: identity
     type: string
     required: true
-    description: "Email address or phone number used for authentication."
+    description: Driver email address or phone number used for verification.
   - name: code
     type: string
     required: true
-    description: "Verification or status code."
+    description: Verification code sent to the driver.
+  - name: for
+    type: string
+    default: driver_login
+    description: Verification purpose. Defaults to `driver_login`.

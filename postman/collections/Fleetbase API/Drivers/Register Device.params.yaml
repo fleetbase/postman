@@ -3,7 +3,11 @@ fields:
   - name: token
     type: string
     required: true
-    description: "Token used to authorize or capture the operation."
+    description: Device push token to register.
   - name: platform
     type: string
-    description: "Platform value for this drivers request."
+    required: true
+    description: Device platform. May also be supplied as `os`.
+  - name: os
+    type: string
+    description: Alias for `platform`.

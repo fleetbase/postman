@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Creates an orders resource. The response returns the created resource with its generated identifier.
+  Creates a new order for the current company. Provide an existing payload ID, an inline payload, a pickup/dropoff pair, or at least two waypoints; Fleetbase creates or attaches the payload before creating the order.
+
+  You can assign a driver, vehicle, facilitator, customer, service quote, or schedule at creation time. When `dispatch` is true, Fleetbase dispatches the order after it is created unless the order belongs to an integrated vendor flow.
 url: "{{base_url}}/{{namespace}}/orders"
 method: POST
 headers:

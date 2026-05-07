@@ -1,29 +1,63 @@
 $kind: object
-name: Fuel report
+name: Fuel Report
 description: |-
-  A fuel report represents a fuel report record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A fuel report records a driver's fuel purchase or fuel usage report with odometer, amount, volume, unit, location, vehicle, and status data.
+example: |
   {
-    "id": "fuel-report_abc123",
-    "object": "fuel-report",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "id": "fuel_report_4Mnp8Qx2Vz",
+    "vehicle": null,
+    "driver": null,
+    "odometer": 10042,
+    "amount": 6500,
+    "currency": "USD",
+    "volume": 42.5,
+    "metric_unit": "liters",
+    "type": null,
+    "status": "created",
+    "location": { "latitude": 1.3521, "longitude": 103.8198 },
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
   }
 fields:
   - name: id
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
+    description: Public fuel report identifier.
+  - name: reporter
+    type: object
+    description: User who reported the fuel purchase, when loaded.
+  - name: vehicle
+    type: object
+    description: Vehicle associated with the fuel report, when loaded.
+  - name: driver
+    type: object
+    description: Driver associated with the fuel report, when loaded.
+  - name: odometer
+    type: number
+    description: Odometer reading at the time of the report.
+  - name: amount
+    type: currency
+    description: Monetary amount for the fuel purchase.
+  - name: currency
+    type: currency
+    description: Three-letter currency code.
+  - name: volume
+    type: number
+    description: Fuel volume.
+  - name: metric_unit
     type: string
-    description: "Object type returned by the API."
+    description: Unit for the fuel volume.
+  - name: type
+    type: string
+    description: Fuel report type.
   - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
+    type: string
+    description: Fuel report status.
+  - name: location
+    type: object
+    description: Location where fuel was reported.
   - name: updated_at
     type: timestamp
-    description: "Time when the resource was last updated."
+    description: Timestamp when the fuel report was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the fuel report was created.

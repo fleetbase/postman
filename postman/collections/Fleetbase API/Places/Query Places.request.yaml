@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns places matching the supplied filters. Use pagination and query parameters to control the result set.
+  Searches and filters places for the current organization. Use query and pagination parameters to find matching saved locations.
 url: "{{base_url}}/{{namespace}}/places"
 method: GET
 headers:

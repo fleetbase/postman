@@ -1,29 +1,12 @@
 $kind: object
-name: Webhook
+name: Gateway Webhook
 description: |-
-  A webhook represents a webhook record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
-example: |-
+  A gateway webhook is an inbound provider event handled by a Ledger payment gateway driver.
+example: |
   {
-    "id": "webhook_abc123",
-    "object": "webhook",
-    "status": "active",
-    "created_at": "2026-05-07T12:00:00Z",
-    "updated_at": "2026-05-07T12:00:00Z"
+    "message": "Webhook received."
   }
 fields:
-  - name: id
+  - name: message
     type: string
-    description: "Unique identifier for the resource."
-  - name: object
-    type: string
-    description: "Object type returned by the API."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status of the resource."
-  - name: created_at
-    type: timestamp
-    description: "Time when the resource was created."
-  - name: updated_at
-    type: timestamp
-    description: "Time when the resource was last updated."
+    description: "Processing result returned to the gateway provider."

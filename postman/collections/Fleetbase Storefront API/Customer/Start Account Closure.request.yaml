@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Starts account closure for the authenticated storefront customer. Fleetbase sends a confirmation code before the account can be closed.
+  Starts storefront account closure for the authenticated customer. Fleetbase sends a verification code to the linked phone number or email address.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/account-closure"
 method: POST
 headers:

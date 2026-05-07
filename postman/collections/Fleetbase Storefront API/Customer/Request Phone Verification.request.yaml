@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Sends a phone verification code to the authenticated storefront customer. Use the code with the verify phone number endpoint.
+  Sends a verification code to a new phone number for the authenticated storefront customer. Fleetbase rejects numbers already assigned to another user.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
 method: POST
 headers:
