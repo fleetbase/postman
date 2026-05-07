@@ -1,0 +1,36 @@
+$kind: object
+name: Cart
+description: |-
+  A cart represents a cart record managed through the Fleetbase API. It includes a stable identifier, lifecycle state, timestamps, and the resource-specific attributes returned by the API.
+example: |-
+  {
+    "id": "cart_abc123",
+    "object": "cart",
+    "currency": "USD",
+    "items": [],
+    "subtotal": 0,
+    "total": 0,
+    "created_at": "2026-05-07T12:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Unique identifier for the resource."
+  - name: object
+    type: string
+    description: "Object type returned by the API."
+  - name: currency
+    type: currency
+    description: "Three-letter currency code."
+  - name: items
+    type: array of strings
+    description: "Items value for this cart request."
+  - name: subtotal
+    type: string
+    description: "Subtotal value for this cart request."
+  - name: total
+    type: string
+    description: "Total value for this cart request."
+  - name: created_at
+    type: timestamp
+    description: "Time when the resource was created."
