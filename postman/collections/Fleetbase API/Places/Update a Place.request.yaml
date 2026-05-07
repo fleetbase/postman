@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  Updates the specified place by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the location parameter, that becomes the place's new location to be used for all spatial queries in the future.
-
-  This request accepts mostly the same arguments as the place creation call.
+  Updates a place by setting the fields included in the request. Send address fields, coordinates, owner assignment, type, phone, or metadata to change only those values.
 url: "{{base_url}}/{{namespace}}/places/:id"
 method: PUT
 headers:
@@ -24,8 +22,7 @@ body:
         "district": "Midtown",
         "building": "Park Area",
         "country": "US",
-        "phone_number": "212-310-6600",
-        "phone_country_code": "+1",
+        "phone": "+12123106600",
         "type": "Park"
     }
 examples: ./.resources/Update a Place.resources/examples

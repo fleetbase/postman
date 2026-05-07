@@ -1,0 +1,70 @@
+$kind: object
+name: Payload
+description: |-
+  A payload describes what an order moves and where it moves through. It links pickup, dropoff, return, waypoints, entities, cash-on-delivery settings, and metadata.
+example: |
+  {
+    "id": "payload_x9Z2Lm8QpA",
+    "current_waypoint": "place_1A2b3C4d5E",
+    "pickup": {
+      "id": "place_1A2b3C4d5E",
+      "name": "Warehouse 7"
+    },
+    "dropoff": {
+      "id": "place_9Z8y7X6w5V",
+      "name": "Customer Dock"
+    },
+    "return": null,
+    "waypoints": [],
+    "entities": [],
+    "cod_amount": null,
+    "cod_currency": null,
+    "cod_payment_method": null,
+    "payment_method": null,
+    "meta": {},
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public payload identifier.
+  - name: current_waypoint
+    type: string
+    description: Public ID of the current waypoint, when one is set.
+  - name: pickup
+    type: object
+    description: Pickup place for the payload.
+  - name: dropoff
+    type: object
+    description: Dropoff place for the payload.
+  - name: return
+    type: object
+    description: Return place for the payload.
+  - name: waypoints
+    type: array of objects
+    description: Ordered waypoint resources for the payload.
+  - name: entities
+    type: array of objects
+    description: Entity resources attached to the payload.
+  - name: cod_amount
+    type: currency
+    description: Cash-on-delivery amount.
+  - name: cod_currency
+    type: currency
+    description: Three-letter currency code for cash-on-delivery.
+  - name: cod_payment_method
+    type: string
+    description: Cash-on-delivery payment method.
+  - name: payment_method
+    type: string
+    description: Payment method associated with the payload.
+  - name: meta
+    type: object
+    description: Additional payload metadata.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the payload was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the payload was created.

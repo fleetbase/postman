@@ -2,10 +2,24 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this places request."
+    required: true
+    description: Free-form search text matched against place name and address fields.
   - name: ll
     type: string
-    description: "Ll value for this places request."
+    description: Latitude/longitude context used to rank or localize search results.
   - name: locale
     type: string
-    description: "Locale value for this places request."
+    description: Locale hint used for place search.
+  - name: limit
+    type: integer
+    default: 10
+    description: Maximum number of matching places to return.
+  - name: geo
+    type: boolean
+    description: When true, enables geospatial search behavior.
+  - name: latitude
+    type: number
+    description: Latitude context for geospatial search.
+  - name: longitude
+    type: number
+    description: Longitude context for geospatial search.

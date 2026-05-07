@@ -1,18 +1,16 @@
 $kind: http-request
-description: Create a Payload.
+description: |-
+  Creates a payload containing route endpoints and optional entities. Provide either pickup/dropoff endpoints or a waypoint list, then attach entities as needed.
 url: "{{base_url}}/{{namespace}}/payloads"
 method: POST
 body:
   type: json
-  content: "{\r
-
-    \    \"pickup\": \"10 Bayfront Avenue, Singapore 018956\",\r
-
-    \    \"dropoff\": \"80 Mandai Lake Rd, Singapore 729826\",\r
-
-    \    \"type\": \"food_delivery\"\r
-
-    }"
+  content: |-
+    {
+      "pickup": "10 Bayfront Avenue, Singapore 018956",
+      "dropoff": "80 Mandai Lake Rd, Singapore 729826",
+      "type": "food_delivery"
+    }
 scripts:
   - type: afterResponse
     code: |

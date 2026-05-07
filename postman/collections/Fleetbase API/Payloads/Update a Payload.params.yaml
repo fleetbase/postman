@@ -1,18 +1,36 @@
 $kind: params
 fields:
+  - name: pickup
+    type: object
+    description: Replacement pickup place data, address string, or place ID for the payload.
+  - name: dropoff
+    type: object
+    description: Replacement dropoff place data, address string, or place ID for the payload.
+  - name: return
+    type: object
+    description: Replacement return place data, address string, or place ID for the payload.
+  - name: waypoints
+    type: array of objects
+    description: Replacement waypoint list. Sending route endpoint fields without waypoints removes existing waypoints.
   - name: entities
     type: array of objects
-    description: "Entities included in the payload or order."
-    fields:
-      - name: name
-        type: string
-        description: "Display name for the resource."
-      - name: description
-        type: string
-        description: "Human-readable description of the resource."
-      - name: currency
-        type: currency
-        description: "Three-letter currency code for monetary values."
-      - name: price
-        type: integer
-        description: "Price for the item or entity."
+    description: Replacement entities, packages, or items attached to the payload.
+  - name: type
+    type: string
+    description: Payload type.
+  - name: provider
+    type: string
+    description: Provider identifier associated with the payload.
+  - name: cod_amount
+    type: currency
+    description: Cash-on-delivery amount.
+  - name: cod_currency
+    type: currency
+    description: Three-letter currency code for `cod_amount`.
+  - name: cod_payment_method
+    type: enum
+    values: ["card", "check", "cash", "bank_transfer"]
+    description: Cash-on-delivery payment method.
+  - name: meta
+    type: object
+    description: Additional payload metadata.

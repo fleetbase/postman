@@ -1,5 +1,6 @@
 $kind: http-request
-description: Create an Entity.
+description: |-
+  Creates an entity such as a parcel, package, or item. Attach it to a payload and optionally set a destination or waypoint within that payload route.
 url: "{{base_url}}/{{namespace}}/entities"
 method: POST
 headers:

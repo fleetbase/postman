@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  When you create a place, you must specify a name and latitude and longitude coordinates.
-
-  Fleetbase will run a reverse geocode automatically on the provided coordinates to automatically complete the address when the optional fields are not provided.
+  Creates a place for the current company. Provide structured address fields, a free-form `address` or `street1` value to geocode, or coordinates for Fleetbase to reverse geocode.
 url: "{{base_url}}/{{namespace}}/places"
 method: POST
 headers:
@@ -20,8 +18,7 @@ body:
       "district": "Midtown",
       "building": "Park Area",
       "country": "US",
-      "phone_number": "212-310-6600",
-      "phone_country_code": "+1",
+      "phone": "+12123106600",
       "type": "Park"
     }
 scripts:

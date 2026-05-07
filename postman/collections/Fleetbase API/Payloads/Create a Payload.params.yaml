@@ -1,16 +1,37 @@
 $kind: params
 fields:
-  - name: name
+  - name: pickup
+    type: object
+    description: Pickup place data, address string, or place ID for the payload.
+  - name: dropoff
+    type: object
+    description: Dropoff place data, address string, or place ID for the payload.
+  - name: return
+    type: object
+    description: Optional return place data, address string, or place ID for the payload.
+  - name: waypoints
+    type: array of objects
+    description: Ordered route stops for the payload.
+  - name: entities
+    type: array of objects
+    description: Entities, packages, or items attached to the payload.
+  - name: type
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
+    description: Payload type. Required when creating a payload.
+  - name: provider
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
+    description: Provider identifier associated with the payload.
+  - name: cod_amount
+    type: currency
+    description: Cash-on-delivery amount.
+  - name: cod_currency
+    type: currency
+    description: Three-letter currency code for `cod_amount`. Required when `cod_amount` is supplied.
+  - name: cod_payment_method
     type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
+    values: ["card", "check", "cash", "bank_transfer"]
+    description: Cash-on-delivery payment method. Required when `cod_amount` is supplied.
   - name: meta
-    type: string
-    description: "Arbitrary metadata stored with the resource."
+    type: object
+    description: Additional payload metadata.

@@ -1,5 +1,6 @@
 $kind: http-request
-description: Update a Payload.
+description: |-
+  Updates a payload's route endpoints, waypoints, entities, cash-on-delivery settings, or metadata. The response returns the updated payload with route and entity data.
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: PUT
 pathVariables:
