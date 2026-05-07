@@ -1,5 +1,5 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this query places.request.yaml request."
+    type: integer
+    description: "Maximum number of places to return."

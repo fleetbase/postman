@@ -2,10 +2,10 @@ $kind: params
 fields:
   - name: ll
     type: string
-    description: "Ll value for this search places.request.yaml request."
+    description: "Latitude and longitude used as the search origin."
   - name: locale
     type: string
-    description: "Locale value for this search places.request.yaml request."
+    description: "Locale used to format place search results."
   - name: query
     type: string
-    description: "Query value for this search places.request.yaml request."
+    description: "Search text for the place lookup."

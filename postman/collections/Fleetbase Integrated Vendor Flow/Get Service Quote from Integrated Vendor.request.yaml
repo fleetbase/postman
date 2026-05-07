@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Requests a route-optimized service quote from an integrated vendor using waypoint coordinates and optional stop remarks.
 url: "{{base_url}}/{{namespace}}/service-quotes"
 method: GET
 queryParams:

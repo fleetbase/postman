@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Lists recent places that can be reused as waypoint or order locations during the workflow.
 url: "{{base_url}}/{{namespace}}/places"
 method: GET
 queryParams:

@@ -1,4 +1,6 @@
 $kind: http-request
+description: |-
+  Creates an order from a purchased service quote. Use this after selecting the integrated vendor quote returned by the service quote step.
 url: "{{base_url}}/{{namespace}}/orders"
 method: POST
 body:
@@ -6,5 +8,5 @@ body:
   content:
     - type: text
       key: service_quote
-      value: quote_wadAVAw
+      value: "{{service_quote_id}}"
 order: 6000

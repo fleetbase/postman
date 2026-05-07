@@ -1,5 +1,5 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this query orders.request.yaml request."
+    type: integer
+    description: "Maximum number of orders to return."
