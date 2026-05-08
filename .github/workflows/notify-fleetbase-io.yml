@@ -1,0 +1,61 @@
+name: Notify fleetbase.io
+
+# When the postman collection updates on main, fire a repository_dispatch event
+# at fleetbase/fleetbase.io. The receiving workflow (bump-postman.yml in that
+# repo) bumps the submodule pointer, regenerates the API docs, and opens a PR.
+#
+# Setup required:
+#   - Create a fine-grained PAT (or GitHub App token) with permissions:
+#       repo: fleetbase/fleetbase.io
+#       contents: read
+#       metadata: read
+#       (the repository_dispatch endpoint requires no extra scope)
+#   - Add it to this repo's secrets as FLEETBASE_IO_DISPATCH_TOKEN
+#     (Settings → Secrets and variables → Actions → New repository secret)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allow manual triggers from the Actions tab
+
+jobs:
+  dispatch:
+    name: Trigger fleetbase.io API docs bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository_dispatch to fleetbase/fleetbase.io
+        env:
+          DISPATCH_TOKEN: ${{ secrets.FLEETBASE_IO_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$DISPATCH_TOKEN" ]; then
+            echo "::error::Missing FLEETBASE_IO_DISPATCH_TOKEN secret. Add it in Settings → Secrets → Actions."
+            exit 1
+          fi
+
+          response_status=$(curl -sS -o /tmp/dispatch.out -w "%{http_code}" \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $DISPATCH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/fleetbase/fleetbase.io/dispatches \
+            -d @- <<EOF
+          {
+            "event_type": "postman-updated",
+            "client_payload": {
+              "sha": "${{ github.sha }}",
+              "ref": "${{ github.ref }}",
+              "actor": "${{ github.actor }}",
+              "compare_url": "${{ github.event.compare }}"
+            }
+          }
+          EOF
+          )
+
+          if [ "$response_status" != "204" ]; then
+            echo "::error::Dispatch failed (HTTP $response_status)"
+            cat /tmp/dispatch.out
+            exit 1
+          fi
+
+          echo "✅ Dispatched postman-updated event to fleetbase/fleetbase.io"
