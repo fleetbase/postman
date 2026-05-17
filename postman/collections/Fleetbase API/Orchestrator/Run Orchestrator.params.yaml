@@ -1,0 +1,58 @@
+$kind: params
+fields:
+  - name: mode
+    type: string
+    description: Orchestration phase to run. Supported values include `assign_vehicles`, `assign_drivers`, `optimize_routes`, and `allocate`.
+  - name: order_ids
+    type: array of strings
+    description: Public order IDs to include. When omitted, Fleetbase selects eligible orders for the requested mode.
+  - name: vehicle_ids
+    type: array of strings
+    description: Public vehicle IDs to include.
+  - name: driver_ids
+    type: array of strings
+    description: Public driver IDs used to filter eligible vehicle/driver resources.
+  - name: prior_assignments
+    type: array of objects
+    description: Public-ID assignment records from earlier orchestration phases that have not been committed yet.
+    fields:
+      - name: order_id
+        type: string
+        description: Public order ID.
+      - name: vehicle_id
+        type: string
+        description: Public vehicle ID.
+      - name: driver_id
+        type: string
+        description: Public driver ID, when assigned.
+      - name: sequence
+        type: integer
+        description: Proposed route sequence from the prior phase.
+  - name: options
+    type: object
+    description: Engine and constraint options for this run. Unknown options are ignored by engines that do not use them.
+    fields:
+      - name: engine
+        type: string
+        description: Optional engine identifier. Use `vroom` for VROOM, `capacity` for Fleetbase's built-in capacity-only engine, or `greedy` for the built-in nearest-vehicle engine.
+      - name: allocation_strategy
+        type: string
+        description: Allocation strategy for engines that support multiple modes. Use `route_aware` for normal route-aware VROOM allocation, or `capacity_only` with `engine: vroom` to run VROOM with a synthetic matrix and no vehicle locations.
+      - name: geometry
+        type: boolean
+        description: Whether supported engines should request route geometry.
+      - name: respect_capacity
+        type: boolean
+        description: Whether capacity constraints should be respected by supported engines. Capacity is evaluated as `[weight_kg, volume_litres, pallets, parcels]`.
+      - name: respect_skills
+        type: boolean
+        description: Whether skill constraints should be respected by supported engines.
+      - name: max_tasks
+        type: integer
+        description: Optional task limit per vehicle when supported by the selected engine or vehicle configuration.
+      - name: balance_workload
+        type: boolean
+        description: When supported, distributes orders across eligible vehicles instead of packing the first feasible vehicles.
+      - name: return_to_depot
+        type: boolean
+        description: Whether supported route-aware engines should plan routes returning to the vehicle depot. This is ignored by capacity-only allocation.

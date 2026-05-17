@@ -1,0 +1,33 @@
+$kind: params
+fields:
+  - name: scheduled_date
+    type: date
+    description: Manifest scheduled date. Defaults to the current date when omitted.
+  - name: assignments
+    type: array of objects
+    description: Proposed assignment records to commit. All IDs are public resource IDs.
+    fields:
+      - name: order_id
+        type: string
+        description: Public order ID.
+      - name: vehicle_id
+        type: string
+        description: Public vehicle ID.
+      - name: driver_id
+        type: string
+        description: Public driver ID, when a driver is assigned.
+      - name: sequence
+        type: integer
+        description: Stop sequence for the order within the vehicle route.
+      - name: arrival
+        type: integer
+        description: Estimated arrival time as a Unix timestamp.
+      - name: duration
+        type: integer
+        description: Duration from the previous stop in seconds.
+      - name: distance
+        type: integer
+        description: Distance from the previous stop in meters.
+      - name: waypoint_sequence
+        type: array of strings
+        description: Optional ordered waypoint public IDs for multi-stop route updates.

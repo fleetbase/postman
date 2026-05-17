@@ -1,0 +1,8 @@
+$kind: collection
+description: |-
+  Orchestrator endpoints generate and commit FleetOps resource assignment plans. All resource identifiers accepted and returned by the consumable API are public IDs.
+
+  `POST /orchestrator/run` supports route-aware VROOM allocation, VROOM capacity-only allocation, native Fleetbase capacity-only allocation, driver assignment, route optimization, and multi-phase prior-assignment flows.
+
+  Capacity-only allocation is for clients who need to answer which vehicles can carry selected orders by weight, volume, pallet count, parcel count, skills, and task limits without relying on vehicle GPS positions.
+order: 8500
