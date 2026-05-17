@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orchestrator/commit"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "scheduled_date": "2026-05-16",
+        "assignments": [
+          {
+            "order_id": "order_7YqM3KpL2n",
+            "vehicle_id": "vehicle_Q1w2E3r4T5",
+            "driver_id": "driver_A1b2C3d4E5",
+            "sequence": 1,
+            "arrival": 1778918400,
+            "duration": 900,
+            "distance": 4200
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "committed": ["order_7YqM3KpL2n"],
+        "failed": [],
+        "manifests": ["manifest_P9qR8sT7uV"]
+      }
+order: 1000

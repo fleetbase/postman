@@ -1,0 +1,63 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orchestrator/run"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "assign_vehicles",
+        "order_ids": ["order_7YqM3KpL2n", "order_8AkN4LqP9x"],
+        "vehicle_ids": ["vehicle_Q1w2E3r4T5", "vehicle_A9s8D7f6G5"],
+        "options": {
+          "engine": "vroom",
+          "allocation_strategy": "route_aware",
+          "geometry": false,
+          "respect_capacity": true,
+          "respect_skills": true
+        }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "assignments": [
+          {
+            "order_id": "order_7YqM3KpL2n",
+            "vehicle_id": "vehicle_Q1w2E3r4T5",
+            "driver_id": null,
+            "sequence": 1,
+            "arrival": 1778918400,
+            "duration": 900,
+            "distance": 4200
+          },
+          {
+            "order_id": "order_8AkN4LqP9x",
+            "vehicle_id": "vehicle_A9s8D7f6G5",
+            "driver_id": null,
+            "sequence": 1,
+            "arrival": 1778919300,
+            "duration": 780,
+            "distance": 3600
+          }
+        ],
+        "unassigned": [],
+        "summary": {
+          "engine": "vroom",
+          "allocation_strategy": "route_aware",
+          "cost": 7800,
+          "routes": 2,
+          "unassigned": 0,
+          "duration": 1680,
+          "distance": 7800
+        }
+      }
+order: 1000

@@ -1,0 +1,50 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orchestrator/run"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "assign_drivers",
+        "order_ids": ["order_7YqM3KpL2n"],
+        "vehicle_ids": ["vehicle_Q1w2E3r4T5"],
+        "prior_assignments": [
+          {
+            "order_id": "order_7YqM3KpL2n",
+            "vehicle_id": "vehicle_Q1w2E3r4T5",
+            "sequence": 1
+          }
+        ],
+        "options": {
+          "respect_skills": true,
+          "require_active_shift": false
+        }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "assignments": [
+          {
+            "order_id": "order_7YqM3KpL2n",
+            "vehicle_id": "vehicle_Q1w2E3r4T5",
+            "driver_id": "driver_A1b2C3d4E5",
+            "sequence": null
+          }
+        ],
+        "unassigned": [],
+        "summary": {
+          "drivers_assigned": 1,
+          "vehicles_assigned": 0
+        }
+      }
+order: 2000

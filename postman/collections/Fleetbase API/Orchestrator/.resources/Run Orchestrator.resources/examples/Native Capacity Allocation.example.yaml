@@ -1,0 +1,69 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orchestrator/run"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "assign_vehicles",
+        "order_ids": ["order_heavy_01", "order_cold_02", "order_oversized_04"],
+        "vehicle_ids": ["vehicle_capacity_truck_01", "vehicle_cold_van_01"],
+        "prior_assignments": [],
+        "options": {
+          "engine": "capacity",
+          "respect_capacity": true,
+          "respect_skills": true,
+          "balance_workload": false
+        }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "assignments": [
+          {
+            "order_id": "order_heavy_01",
+            "vehicle_id": "vehicle_capacity_truck_01",
+            "driver_id": null,
+            "sequence": 1,
+            "arrival": null,
+            "duration": null,
+            "distance": null
+          },
+          {
+            "order_id": "order_cold_02",
+            "vehicle_id": "vehicle_cold_van_01",
+            "driver_id": null,
+            "sequence": 1,
+            "arrival": null,
+            "duration": null,
+            "distance": null
+          }
+        ],
+        "unassigned": ["order_oversized_04"],
+        "summary": {
+          "engine": "capacity",
+          "allocation_strategy": "capacity_only",
+          "assigned": 2,
+          "unassigned": 1,
+          "unassigned_reasons": [
+            {
+              "order_id": "order_oversized_04",
+              "reason": "capacity_exceeded"
+            }
+          ],
+          "respect_capacity": true,
+          "respect_skills": true,
+          "balance_workload": false
+        }
+      }
+order: 1200

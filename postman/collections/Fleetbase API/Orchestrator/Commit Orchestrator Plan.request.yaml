@@ -1,0 +1,29 @@
+$kind: http-request
+description: |-
+  Commits a proposed orchestrator plan by creating manifests and applying vehicle and driver assignments to orders. Assignment records must use public resource IDs.
+
+  This endpoint is engine-agnostic: commit the `assignments` returned by route-aware VROOM, VROOM capacity-only, native capacity-only, or multi-phase orchestration runs. Do not submit internal UUIDs or database IDs.
+url: "{{base_url}}/{{namespace}}/orchestrator/commit"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "scheduled_date": "2026-05-16",
+      "assignments": [
+        {
+          "order_id": "{{order_id}}",
+          "vehicle_id": "{{vehicle_id}}",
+          "driver_id": "{{driver_id}}",
+          "sequence": 1,
+          "arrival": 1778918400,
+          "duration": 900,
+          "distance": 4200
+        }
+      ]
+    }
+examples: ./.resources/Commit Orchestrator Plan.resources/examples
+order: 2000

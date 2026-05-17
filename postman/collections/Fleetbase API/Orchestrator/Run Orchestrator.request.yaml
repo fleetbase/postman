@@ -1,0 +1,44 @@
+$kind: http-request
+description: |-
+  Runs an orchestration phase and returns a proposed assignment plan without committing changes. Use `options.engine` to force an engine such as `vroom`, `capacity`, or `greedy`; otherwise Fleetbase uses the orchestrator engine configured in admin settings.
+
+  For normal route-aware VROOM allocation, send `options.engine: "vroom"` and omit `allocation_strategy` or set it to `route_aware`. Vehicles must have usable positions because VROOM will solve against route coordinates.
+
+  For capacity-only VROOM allocation, send `options.engine: "vroom"` and `options.allocation_strategy: "capacity_only"`. This mode answers which vehicles can carry the selected orders by weight, volume, pallets, parcels, skills, and task limits without requiring vehicle locations.
+
+  For Fleetbase's deterministic built-in capacity allocation, send `options.engine: "capacity"`. This native engine is useful as a fallback and debugging baseline for capacity-only allocation without VROOM.
+
+  The consumable API accepts and returns public IDs only. Use `order_ids`, `vehicle_ids`, `driver_ids`, `prior_assignments.*_id`, and response `*_id` values as public IDs. Do not submit internal UUIDs.
+url: "{{base_url}}/{{namespace}}/orchestrator/run"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "mode": "assign_vehicles",
+      "order_ids": ["{{order_id}}"],
+      "vehicle_ids": ["{{vehicle_id}}"],
+      "driver_ids": [],
+      "prior_assignments": [],
+      "options": {
+        "engine": "vroom",
+        "allocation_strategy": "route_aware",
+        "geometry": false,
+        "respect_capacity": true,
+        "respect_skills": true,
+        "return_to_depot": false
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      if (Array.isArray(json.assignments) && json.assignments.length) {
+          pm.environment.set("orchestrator_assignments", JSON.stringify(json.assignments));
+      }
+    language: text/javascript
+examples: ./.resources/Run Orchestrator.resources/examples
+order: 1000
