@@ -38,6 +38,12 @@ fields:
       - name: allocation_strategy
         type: string
         description: Allocation strategy for engines that support multiple modes. Use `route_aware` for normal route-aware VROOM allocation, or `capacity_only` with `engine: vroom` to run VROOM with a synthetic matrix and no vehicle locations.
+      - name: vehicle_packing
+        type: string
+        description: VROOM capacity-only packing policy. Use `minimize_vehicles` to prefer filling feasible vehicles before opening another vehicle. Use `balanced` or `none` to omit the vehicle fixed-cost packing bias. Defaults to `minimize_vehicles` when `engine` is `vroom` and `allocation_strategy` is `capacity_only`.
+      - name: vehicle_fixed_cost
+        type: integer
+        description: Optional VROOM fixed cost per vehicle used when `vehicle_packing` is `minimize_vehicles`. Defaults to `100000`.
       - name: geometry
         type: boolean
         description: Whether supported engines should request route geometry.

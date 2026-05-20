@@ -4,7 +4,7 @@ description: |-
 
   For normal route-aware VROOM allocation, send `options.engine: "vroom"` and omit `allocation_strategy` or set it to `route_aware`. Vehicles must have usable positions because VROOM will solve against route coordinates.
 
-  For capacity-only VROOM allocation, send `options.engine: "vroom"` and `options.allocation_strategy: "capacity_only"`. This mode answers which vehicles can carry the selected orders by weight, volume, pallets, parcels, skills, and task limits without requiring vehicle locations.
+  For capacity-only VROOM allocation, send `options.engine: "vroom"` and `options.allocation_strategy: "capacity_only"`. This mode answers which vehicles can carry the selected orders by weight, volume, pallets, parcels, skills, and task limits without requiring vehicle locations. Use `options.vehicle_packing: "minimize_vehicles"` to bias VROOM toward filling feasible vehicles before opening another vehicle; use `balanced` or `none` to disable that packing bias.
 
   For Fleetbase's deterministic built-in capacity allocation, send `options.engine: "capacity"`. This native engine is useful as a fallback and debugging baseline for capacity-only allocation without VROOM.
 
