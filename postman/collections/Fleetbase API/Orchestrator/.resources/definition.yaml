@@ -4,5 +4,5 @@ description: |-
 
   `POST /orchestrator/run` supports route-aware VROOM allocation, VROOM capacity-only allocation, native Fleetbase capacity-only allocation, driver assignment, route optimization, and multi-phase prior-assignment flows.
 
-  Capacity-only allocation is for clients who need to answer which vehicles can carry selected orders by weight, volume, pallet count, parcel count, skills, and task limits without relying on vehicle GPS positions.
+  Capacity-only allocation is for clients who need to answer which vehicles can carry selected orders by weight, volume, pallet count, parcel count, skills, and task limits without relying on vehicle GPS positions. VROOM capacity-only allocation supports `vehicle_packing` to prefer fewer, fuller vehicles.
 order: 8500

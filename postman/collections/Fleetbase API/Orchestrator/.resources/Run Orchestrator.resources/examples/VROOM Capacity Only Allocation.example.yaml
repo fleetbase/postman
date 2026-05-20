@@ -16,9 +16,11 @@ request:
         "options": {
           "engine": "vroom",
           "allocation_strategy": "capacity_only",
+          "vehicle_packing": "minimize_vehicles",
+          "vehicle_fixed_cost": 100000,
           "respect_capacity": true,
           "respect_skills": true,
-          "balance_workload": true
+          "balance_workload": false
         }
       }
 response:
@@ -42,9 +44,9 @@ response:
           },
           {
             "order_id": "order_cold_02",
-            "vehicle_id": "vehicle_cold_van_01",
+            "vehicle_id": "vehicle_capacity_truck_01",
             "driver_id": null,
-            "sequence": 1,
+            "sequence": 2,
             "arrival": 0,
             "duration": 0,
             "distance": 0
@@ -54,7 +56,9 @@ response:
         "summary": {
           "engine": "vroom",
           "allocation_strategy": "capacity_only",
-          "routes": 2,
+          "vehicle_packing": "minimize_vehicles",
+          "vehicle_fixed_cost": 100000,
+          "routes": 1,
           "unassigned": 1
         }
       }
