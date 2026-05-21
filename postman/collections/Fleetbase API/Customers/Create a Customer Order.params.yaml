@@ -24,6 +24,11 @@ fields:
     type: object
     required: false
     description: Free-form metadata stored on the order's `meta` column.
+  - name: service_quote
+    type: string
+    required: false
+    description: |-
+      Optional ServiceQuote reference (uuid or `sqte_…` public_id) returned by `GET /v1/service-quotes`. When supplied, the controller resolves the quote via `ServiceQuote::resolveFromRequest` and consumes it via `$order->purchaseServiceQuote()` to lock the pricing onto the order's PurchaseRate (same behavior as `OrderController::create`).
   - name: payload
     type: string|object
     required: false
