@@ -8,3 +8,11 @@ fields:
     type: string
     required: true
     description: Channel to send the code through. One of `email` or `sms`.
+  - name: name
+    type: string
+    required: false
+    description: Customer display name. When supplied, the verification email greets the customer by name and the pending user record is seeded with this value (avoids a "Pending Customer" placeholder).
+  - name: phone
+    type: string
+    required: false
+    description: Phone number (E.164 recommended). Pre-seeded on the pending user record alongside the email identity.
