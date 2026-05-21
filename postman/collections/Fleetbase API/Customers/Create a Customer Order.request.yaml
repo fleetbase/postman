@@ -1,7 +1,7 @@
 $kind: http-request
 name: "Create a Customer Order"
 description: |-
-  Creates a freight order on behalf of the authenticated customer. The customer's `uuid` is automatically attached as `orders.customer_uuid`, and the order is created in the same company resolved from the API credential. Accepts a lightweight portal-friendly body; the controller maps it into a full FleetOps payload/entity under the company's default `OrderConfig`.
+  Creates an Order on behalf of the authenticated customer. Accepts the canonical Fleet-Ops Order create shape — the same fields as `POST /v1/orders` would accept from an operator. The customer's `uuid` is automatically attached as `orders.customer_uuid`; any client-supplied `customer` field is ignored. `status` is forced to `created` (customers cannot self-dispatch). The Order lands in the company resolved from the API credential.
 url: "{{base_url}}/{{namespace}}/customers/orders"
 method: POST
 headers:
@@ -11,17 +11,11 @@ body:
   type: json
   content: |-
     {
-      "item": "Wireless Headphones",
-      "weight": 2.5,
-      "weight_unit": "lb",
-      "value": 150,
-      "currency": "USD",
-      "category": "Electronics",
-      "mode": "Ocean",
-      "delivery": true,
+      "type": "transport",
       "scheduled_at": "2026-05-25T10:00:00Z",
+      "notes": "Handle with care.",
       "pickup": {
-        "name": "Ultra Warehouse",
+        "name": "Pickup",
         "street1": "4169 N State RD 7",
         "city": "Lauderdale Lakes",
         "province": "FL",
@@ -29,11 +23,20 @@ body:
         "country": "US"
       },
       "dropoff": {
-        "name": "Customer Address",
+        "name": "Dropoff",
         "city": "Kingston",
         "country": "JM"
       },
-      "notes": "Handle with care."
+      "entities": [
+        {
+          "name": "Wireless Headphones",
+          "description": "Electronics",
+          "weight": 2.5,
+          "weight_unit": "lb",
+          "declared_value": 150,
+          "currency": "USD"
+        }
+      ]
     }
 scripts:
   - type: afterResponse

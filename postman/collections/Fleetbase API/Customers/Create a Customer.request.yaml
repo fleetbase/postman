@@ -12,7 +12,15 @@ body:
       "code": "{{verification_code}}",
       "name": "Jane Customer",
       "password": "{{customer_password}}",
-      "phone": "{{$randomPhoneNumber}}"
+      "phone": "{{$randomPhoneNumber}}",
+      "place": {
+        "name": "Home",
+        "street1": "123 Main Street",
+        "city": "Kingston",
+        "province": "Kingston",
+        "postal_code": "00000",
+        "country": "JM"
+      }
     }
 scripts:
   - type: afterResponse
