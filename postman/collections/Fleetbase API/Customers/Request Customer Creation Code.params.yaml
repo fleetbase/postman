@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: Customer email address or phone number to send the verification code to.
+  - name: mode
+    type: string
+    required: true
+    description: Channel to send the code through. One of `email` or `sms`.

@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: APNs / FCM device token to register.
+  - name: platform
+    type: string
+    required: true
+    description: Device platform. One of `ios`, `android`, or `web`. `os` is accepted as an alias.

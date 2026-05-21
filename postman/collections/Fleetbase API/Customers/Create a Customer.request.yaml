@@ -1,0 +1,32 @@
+$kind: http-request
+name: "Create a Customer"
+description: |-
+  Creates a customer account (Contact + linked User) after verifying the code from `Request Customer Creation Code`. Returns the customer with a Sanctum `token` — persist this client-side and send it back as the `Customer-Token` header on authenticated requests.
+url: "{{base_url}}/{{namespace}}/customers"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{customer_identity}}",
+      "code": "{{verification_code}}",
+      "name": "Jane Customer",
+      "password": "{{customer_password}}",
+      "phone": "{{$randomPhoneNumber}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.id) {
+        cv.set("customer_id", json_response.id);
+        cv.set("customer_name", json_response.name);
+        if (json_response.token) {
+          cv.set("customer_token", json_response.token);
+        }
+      }
+    language: text/javascript
+
+order: 2000

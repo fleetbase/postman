@@ -1,0 +1,18 @@
+$kind: http-request
+name: "Update Authenticated Customer"
+description: "Updates the authenticated customer's profile. Changes to `name`, `email`, and `phone` are mirrored onto the linked user so subsequent logins work."
+url: "{{base_url}}/{{namespace}}/customers/me"
+method: PUT
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "name": "{{customer_name}}",
+      "phone": "{{customer_phone}}",
+      "email": "{{customer_email}}"
+    }
+
+order: 9000

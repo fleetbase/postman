@@ -1,0 +1,49 @@
+$kind: http-request
+name: "Create a Customer Order"
+description: |-
+  Creates a freight order on behalf of the authenticated customer. The customer's `uuid` is automatically attached as `orders.customer_uuid`, and the order is created in the same company resolved from the API credential. Accepts a lightweight portal-friendly body; the controller maps it into a full FleetOps payload/entity under the company's default `OrderConfig`.
+url: "{{base_url}}/{{namespace}}/customers/orders"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "item": "Wireless Headphones",
+      "weight": 2.5,
+      "weight_unit": "lb",
+      "value": 150,
+      "currency": "USD",
+      "category": "Electronics",
+      "mode": "Ocean",
+      "delivery": true,
+      "scheduled_at": "2026-05-25T10:00:00Z",
+      "pickup": {
+        "name": "Ultra Warehouse",
+        "street1": "4169 N State RD 7",
+        "city": "Lauderdale Lakes",
+        "province": "FL",
+        "postal_code": "33319",
+        "country": "US"
+      },
+      "dropoff": {
+        "name": "Customer Address",
+        "city": "Kingston",
+        "country": "JM"
+      },
+      "notes": "Handle with care."
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.id) {
+        cv.set("customer_order_id", json_response.id);
+      }
+    language: text/javascript
+
+order: 14000

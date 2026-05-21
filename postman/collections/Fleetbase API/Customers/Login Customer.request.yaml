@@ -1,0 +1,25 @@
+$kind: http-request
+name: "Login Customer"
+description: "Authenticates a customer with email/phone + password. Returns the customer with a Sanctum `token` to use as `Customer-Token`."
+url: "{{base_url}}/{{namespace}}/customers/login"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{customer_identity}}",
+      "password": "{{customer_password}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.token) {
+        cv.set("customer_token", json_response.token);
+        cv.set("customer_id", json_response.id);
+      }
+    language: text/javascript
+
+order: 3000

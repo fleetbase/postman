@@ -1,0 +1,54 @@
+$kind: params
+fields:
+  - name: item
+    type: string
+    required: true
+    description: Item / cargo name.
+  - name: weight
+    type: number
+    required: true
+    description: Item weight.
+  - name: weight_unit
+    type: string
+    required: false
+    description: Unit for `weight`. One of `lb`, `kg`, `g`, `oz`. Defaults to `lb`.
+  - name: value
+    type: number
+    required: true
+    description: Declared value (used for duty estimation).
+  - name: currency
+    type: string
+    required: false
+    description: ISO-4217 currency code for `value`. Defaults to `USD`.
+  - name: category
+    type: string
+    required: false
+    description: Free-form category (e.g. `Electronics`, `Documents`).
+  - name: mode
+    type: string
+    required: false
+    description: Shipping mode. One of `Ocean`, `Air`, `Ground`. Defaults to `Ocean`.
+  - name: delivery
+    type: boolean
+    required: false
+    description: Whether last-mile delivery is required (vs. depot pickup).
+  - name: notes
+    type: string
+    required: false
+    description: Free-form notes / special handling instructions.
+  - name: scheduled_at
+    type: timestamp
+    required: false
+    description: Requested fulfillment timestamp.
+  - name: pickup
+    type: object
+    required: false
+    description: Either a Place public id, or an inline address object (`name`, `street1`, `city`, `province`, `postal_code`, `country`).
+  - name: dropoff
+    type: object
+    required: false
+    description: Either a Place public id, or an inline address object.
+  - name: meta
+    type: object
+    required: false
+    description: Free-form metadata merged onto the resulting order's `meta`.

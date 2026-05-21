@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Customer endpoints provide email/password + verification-code authentication and customer-scoped order management for FleetOps, without requiring the Storefront publishable key. All flows authenticate to a single Fleetbase company resolved from your `flb_live_…` API credential; per-customer requests additionally require the `Customer-Token` returned by signup/login.
+order: 5000

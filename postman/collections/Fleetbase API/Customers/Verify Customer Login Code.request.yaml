@@ -1,0 +1,27 @@
+$kind: http-request
+name: "Verify Customer Login Code"
+description: |-
+  Verifies the SMS/email code from `Request Customer Login SMS` and returns the customer with a Sanctum `token`. When `for` is `fleetops_create_customer` this proxies to `Create a Customer`.
+url: "{{base_url}}/{{namespace}}/customers/verify-code"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{customer_identity}}",
+      "code": "{{verification_code}}",
+      "for": "fleetops_customer_login"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.token) {
+        cv.set("customer_token", json_response.token);
+        cv.set("customer_id", json_response.id);
+      }
+    language: text/javascript
+
+order: 5000

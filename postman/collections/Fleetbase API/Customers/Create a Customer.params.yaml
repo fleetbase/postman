@@ -1,0 +1,38 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: Email or phone the verification code was requested for.
+  - name: code
+    type: string
+    required: true
+    description: Verification code received via email or SMS.
+  - name: name
+    type: string
+    required: true
+    description: Customer display name.
+  - name: password
+    type: string
+    required: true
+    description: Account password (minimum 8 characters).
+  - name: email
+    type: string
+    required: false
+    description: Email address, if different from the identity. Must be unique within the company.
+  - name: phone
+    type: string
+    required: false
+    description: Phone number (E.164 recommended). Must be unique within the company.
+  - name: title
+    type: string
+    required: false
+    description: Optional title.
+  - name: photo
+    type: string
+    required: false
+    description: Either a `file_…` public id or a base64-encoded data URI.
+  - name: meta
+    type: object
+    required: false
+    description: Free-form metadata. `meta.origin` is auto-set to `fleetops_customer_portal`.
