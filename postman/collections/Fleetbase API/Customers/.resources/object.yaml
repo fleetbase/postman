@@ -15,9 +15,14 @@ example: |
     "addresses": [],
     "token": "1|f4Wd3jY9aB...",
     "orders_count": 0,
-    "meta": {
-      "origin": "fleetops_customer_portal"
+    "company": {
+      "id": "company_6zV1KqN9pR",
+      "name": "ACME Logistics",
+      "currency": "USD",
+      "country": "US",
+      "phone": "+1-555-0100"
     },
+    "meta": {},
     "slug": "jane-customer",
     "created_at": "2026-05-21T10:00:00.000000Z",
     "updated_at": "2026-05-21T10:00:00.000000Z"
@@ -56,9 +61,13 @@ fields:
   - name: orders_count
     type: integer
     description: Number of non-deleted orders linked to this customer.
+  - name: company
+    type: object
+    description: |-
+      Public-safe projection of the customer's company. Contains the company's public id, name, resolved transaction currency (with fallback through `companies.currency` → ledger `base_currency` → `"USD"`), country, and phone. Useful for portals that need to render currency labels and contact info without making a separate request.
   - name: meta
     type: object
-    description: Free-form metadata. Customer-portal-created accounts ship `meta.origin = "fleetops_customer_portal"` for distinguishability from operator-created contacts.
+    description: Free-form metadata stored on the contact's `meta` column. The API does not write to this field — it is client-owned.
   - name: slug
     type: string
     description: URL-friendly slug.

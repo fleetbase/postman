@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  An Order Config defines the activity flow that orders progress through (created → dispatched → enroute → completed, etc.). Each company has at least the system default `transport` config; bespoke configs can be defined for other operating models. Use these read-only endpoints to discover the configs available to the API credential's company and to drive UI such as status filters, activity labels, and progress timelines.
+order: 8500

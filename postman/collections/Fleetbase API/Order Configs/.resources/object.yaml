@@ -1,0 +1,66 @@
+$kind: object
+name: OrderConfig
+description: |-
+  Read-only projection of an OrderConfig. Exposes the activity `flow` and config metadata so consumers can drive status filter chips, activity labels, and progress UI without learning the internal config schema. Internal-only fields (entities JSON, version, raw flow logic) are filtered out.
+example: |
+  {
+    "id": "ordercfg_A1b2C3d4E5",
+    "key": "transport",
+    "name": "Transport",
+    "namespace": "system:order-config:transport",
+    "description": "Default Fleet-Ops transport flow.",
+    "tags": [],
+    "status": "active",
+    "version": 1,
+    "flow": [
+      { "code": "created",    "status": "Order Created",    "details": "",  "color": "#6028b8", "complete": false, "pod_method": null, "require_pod": false },
+      { "code": "dispatched", "status": "Order Dispatched", "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
+      { "code": "started",    "status": "Order Started",    "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
+      { "code": "enroute",    "status": "Driver Enroute",   "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
+      { "code": "completed",  "status": "Order Completed",  "details": "",  "color": "#16a34a", "complete": true,  "pod_method": null, "require_pod": false }
+    ],
+    "created_at": "2026-04-01T10:00:00.000000Z",
+    "updated_at": "2026-04-01T10:00:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public order-config identifier. Prefixed `ordercfg_`.
+  - name: key
+    type: string
+    description: Short identifier (e.g. `transport`). Stable across companies for system configs.
+  - name: name
+    type: string
+    description: Human-readable name.
+  - name: namespace
+    type: string
+    description: Fully-qualified identifier (e.g. `system:order-config:transport`). Unique per company.
+  - name: description
+    type: string
+    description: Free-form description.
+  - name: tags
+    type: array of strings
+    description: Free-form tags.
+  - name: status
+    type: string
+    description: Config lifecycle status (e.g. `active`).
+  - name: version
+    type: integer
+    description: Schema version.
+  - name: flow
+    type: array of objects
+    description: |-
+      Ordered list of activities in the config's status flow. Each activity carries:
+        - `code` (string) — machine identifier (e.g. `created`, `dispatched`)
+        - `status` (string) — human-readable label
+        - `details` (string) — long-form description
+        - `color` (string) — hex colour hint for status UI
+        - `complete` (boolean) — true for terminal activities
+        - `pod_method` (string|null) — proof-of-delivery method, when set
+        - `require_pod` (boolean) — whether proof-of-delivery is required at this step
+  - name: created_at
+    type: timestamp
+    description: When the config was created.
+  - name: updated_at
+    type: timestamp
+    description: When the config was last updated.

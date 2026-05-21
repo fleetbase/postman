@@ -1,0 +1,9 @@
+$kind: http-request
+name: "Query Order Configs"
+description: "Lists OrderConfigs available to the company resolved from the API credential."
+url: "{{base_url}}/{{namespace}}/order-configs"
+method: GET
+headers:
+  Accept: application/json
+
+order: 1000

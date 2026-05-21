@@ -1,0 +1,21 @@
+$kind: http-request
+name: "Retrieve an Order Config"
+description: |-
+  Fetches a single OrderConfig. The `{id}` segment accepts any identifier supported by `OrderConfig::resolveFromIdentifier` — `uuid`, `public_id`, `namespace`, or short `key`. Use `transport` to retrieve the system default flow.
+url: "{{base_url}}/{{namespace}}/order-configs/{{order_config_id}}"
+method: GET
+headers:
+  Accept: application/json
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.id) {
+        cv.set("order_config_id", json_response.id);
+        cv.set("order_config_key", json_response.key);
+      }
+    language: text/javascript
+
+order: 2000
