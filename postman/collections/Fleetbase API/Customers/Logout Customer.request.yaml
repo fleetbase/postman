@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Logout Customer"
+description: "Revokes the Sanctum token used to make this request. The customer's other active sessions are unaffected — use `Logout All Customer Sessions` to revoke every token for the linked user."
+url: "{{base_url}}/{{namespace}}/customers/logout"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 10000

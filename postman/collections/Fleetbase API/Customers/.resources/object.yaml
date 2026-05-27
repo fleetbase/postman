@@ -1,0 +1,79 @@
+$kind: object
+name: Customer
+description: |-
+  A customer is a Fleet-Ops contact of `type=customer` that is linked to a user for authentication. Returned by all `/v1/customers/...` endpoints. The `token` field is only present on responses to signup, login, and verify-code; persist it client-side and send it on subsequent requests via the `Customer-Token` header.
+example: |
+  {
+    "id": "customer_A1b2C3d4E5",
+    "internal_id": null,
+    "name": "Jane Customer",
+    "title": null,
+    "email": "jane@example.com",
+    "phone": "+15555550111",
+    "photo_url": null,
+    "address": null,
+    "addresses": [],
+    "token": "1|f4Wd3jY9aB...",
+    "orders_count": 0,
+    "company": {
+      "id": "company_6zV1KqN9pR",
+      "name": "ACME Logistics",
+      "currency": "USD",
+      "country": "US",
+      "phone": "+1-555-0100"
+    },
+    "meta": {},
+    "slug": "jane-customer",
+    "created_at": "2026-05-21T10:00:00.000000Z",
+    "updated_at": "2026-05-21T10:00:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public customer identifier. Prefixed `customer_` on the public API.
+  - name: internal_id
+    type: string
+    description: Optional internal identifier.
+  - name: name
+    type: string
+    description: Customer display name.
+  - name: title
+    type: string
+    description: Optional title.
+  - name: email
+    type: string
+    description: Customer email address.
+  - name: phone
+    type: string
+    description: Customer phone number (E.164 format).
+  - name: photo_url
+    type: string
+    description: Customer photo URL.
+  - name: address
+    type: string
+    description: Default address derived from the linked place, when one is set.
+  - name: addresses
+    type: array of objects
+    description: Saved Place addresses, when the `places` relation is loaded.
+  - name: token
+    type: string
+    description: Sanctum personal-access-token returned by signup/login/verify-code. Send back on authenticated requests as the `Customer-Token` header.
+  - name: orders_count
+    type: integer
+    description: Number of non-deleted orders linked to this customer.
+  - name: company
+    type: object
+    description: |-
+      Public-safe projection of the customer's company. Contains the company's public id, name, resolved transaction currency (with fallback through `companies.currency` → ledger `base_currency` → `"USD"`), country, and phone. Useful for portals that need to render currency labels and contact info without making a separate request.
+  - name: meta
+    type: object
+    description: Free-form metadata stored on the contact's `meta` column. The API does not write to this field — it is client-owned.
+  - name: slug
+    type: string
+    description: URL-friendly slug.
+  - name: created_at
+    type: timestamp
+    description: When the customer was created.
+  - name: updated_at
+    type: timestamp
+    description: When the customer was last updated.

@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: limit
+    type: integer
+    required: false
+    description: Page size.
+  - name: offset
+    type: integer
+    required: false
+    description: Page offset.
+  - name: query
+    type: string
+    required: false
+    description: Free-text search against Place fields.

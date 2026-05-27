@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Retrieve a Customer Order"
+description: "Fetches a single order by id, public id, or tracking number. Returns 404 if the order doesn't belong to the authenticated customer."
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 15000

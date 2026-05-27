@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Register Customer Device"
+description: "Registers a push-notification device token against the authenticated customer's linked user."
+url: "{{base_url}}/{{namespace}}/customers/register-device"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{push_token}}",
+      "platform": "ios"
+    }
+
+order: 11000

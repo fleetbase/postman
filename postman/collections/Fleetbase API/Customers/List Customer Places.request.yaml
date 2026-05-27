@@ -1,0 +1,10 @@
+$kind: http-request
+name: "List Customer Places"
+description: "Lists the authenticated customer's saved Places (delivery addresses, etc.)."
+url: "{{base_url}}/{{namespace}}/customers/places"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 12000

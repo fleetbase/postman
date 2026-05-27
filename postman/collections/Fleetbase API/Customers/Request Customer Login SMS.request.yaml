@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Request Customer Login SMS"
+description: "Starts SMS-based passwordless login by sending a verification code to the customer's phone. Falls back to email if SMS delivery fails and an email is on file."
+url: "{{base_url}}/{{namespace}}/customers/login-with-sms"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "phone": "{{customer_phone}}"
+    }
+
+order: 4000

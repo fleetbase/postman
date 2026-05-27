@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Request Customer Creation Code"
+description: |-
+  Sends an email or SMS verification code to start a customer signup. Required before calling `Create a Customer`. Optionally include `name` and `phone` so the verification email greets the customer by name and the pending user row is pre-seeded with real values.
+url: "{{base_url}}/{{namespace}}/customers/request-creation-code"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "identity": "{{customer_identity}}",
+      "mode": "email",
+      "name": "{{customer_name}}",
+      "phone": "{{customer_phone}}"
+    }
+
+order: 1000

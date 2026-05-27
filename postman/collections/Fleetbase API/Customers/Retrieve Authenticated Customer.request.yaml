@@ -1,0 +1,10 @@
+$kind: http-request
+name: "Retrieve Authenticated Customer"
+description: "Returns the profile of the customer identified by the `Customer-Token` header."
+url: "{{base_url}}/{{namespace}}/customers/me"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 8000

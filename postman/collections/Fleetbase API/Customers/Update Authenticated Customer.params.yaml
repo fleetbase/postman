@@ -1,0 +1,26 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: false
+    description: New display name.
+  - name: title
+    type: string
+    required: false
+    description: New title.
+  - name: email
+    type: string
+    required: false
+    description: New email. Mirrored to the linked user.
+  - name: phone
+    type: string
+    required: false
+    description: New phone (E.164 recommended). Mirrored to the linked user.
+  - name: photo
+    type: string
+    required: false
+    description: Either a `file_…` public id, a base64-encoded data URI, or the literal string `REMOVE` to clear the photo.
+  - name: meta
+    type: object
+    required: false
+    description: Free-form metadata patch.

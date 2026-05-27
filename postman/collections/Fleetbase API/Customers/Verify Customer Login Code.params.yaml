@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: identity
+    type: string
+    required: true
+    description: Email or phone the code was sent to.
+  - name: code
+    type: string
+    required: true
+    description: Verification code received via SMS or email.
+  - name: for
+    type: string
+    required: false
+    description: Verification slug. Defaults to `fleetops_customer_login`. Set to `fleetops_create_customer` to complete a signup flow that started with `Request Customer Creation Code`.

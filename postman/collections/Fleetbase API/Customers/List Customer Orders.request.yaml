@@ -1,0 +1,10 @@
+$kind: http-request
+name: "List Customer Orders"
+description: "Lists orders owned by the authenticated customer (scoped to `orders.customer_uuid`)."
+url: "{{base_url}}/{{namespace}}/customers/orders"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 13000

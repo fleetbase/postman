@@ -1,0 +1,57 @@
+$kind: params
+fields:
+  - name: type
+    type: string
+    required: false
+    description: Order config key (e.g. `transport`, `freight`). When omitted, the company's default OrderConfig is used.
+  - name: order_config
+    type: string
+    required: false
+    description: Explicit OrderConfig public id, overrides `type`.
+  - name: scheduled_at
+    type: timestamp
+    required: false
+    description: Requested fulfillment timestamp (ISO 8601).
+  - name: notes
+    type: string
+    required: false
+    description: Free-form notes / special handling instructions.
+  - name: internal_id
+    type: string
+    required: false
+    description: Optional caller-supplied identifier.
+  - name: meta
+    type: object
+    required: false
+    description: Free-form metadata stored on the order's `meta` column.
+  - name: service_quote
+    type: string
+    required: false
+    description: |-
+      Optional ServiceQuote reference (uuid or `sqte_…` public_id) returned by `GET /v1/service-quotes`. When supplied, the controller resolves the quote via `ServiceQuote::resolveFromRequest` and consumes it via `$order->purchaseServiceQuote()` to lock the pricing onto the order's PurchaseRate (same behavior as `OrderController::create`).
+  - name: payload
+    type: string|object
+    required: false
+    description: |-
+      Either an existing Payload public_id, or an inline object with `{ pickup, dropoff, return, waypoints, entities }`. The controller mirrors `OrderController::create`'s payload-building branch — Place sub-objects accept either a public_id or the standard Place fillable shape; entities accept the standard Entity fillable shape.
+  - name: pickup
+    type: string|object
+    required: false
+    description: Accepted only when `payload` is not provided. Either an existing Place public_id or a Place-shaped object (`name`, `street1`, `street2`, `city`, `province`, `postal_code`, `country`, `phone`, `meta`).
+  - name: dropoff
+    type: string|object
+    required: false
+    description: Same shape as `pickup`. Accepted only when `payload` is not provided.
+  - name: return
+    type: string|object
+    required: false
+    description: Same shape as `pickup`. Accepted only when `payload` is not provided.
+  - name: waypoints
+    type: array of strings|objects
+    required: false
+    description: Accepted only when `payload` is not provided. Each item is either a Place public_id or a Place-shaped object.
+  - name: entities
+    type: array of objects
+    required: false
+    description: |-
+      Accepted only when `payload` is not provided. Each entity uses the standard Entity field shape: `name`, `description`, `weight`, `weight_unit`, `declared_value`, `currency`, `meta`. The controller delegates to `Payload::setEntities` so customer-created orders are indistinguishable from operator-created ones at the data layer.
