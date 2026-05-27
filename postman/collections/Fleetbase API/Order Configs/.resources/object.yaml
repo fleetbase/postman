@@ -1,23 +1,23 @@
 $kind: object
 name: OrderConfig
 description: |-
-  Read-only projection of an OrderConfig. Exposes the activity `flow` and config metadata so consumers can drive status filter chips, activity labels, and progress UI without learning the internal config schema. Internal-only fields (entities JSON, version, raw flow logic) are filtered out.
+  Read-only projection of an OrderConfig. Exposes the activity `flow` and config metadata so consumers can drive status filter chips, activity labels, and progress UI without learning the internal config schema. Internal-only fields (entities JSON, raw flow logic, events, options, the editable activity graph) are filtered out.
 example: |
   {
-    "id": "ordercfg_A1b2C3d4E5",
+    "id": "order_config_A1b2C3d4E5",
     "key": "transport",
     "name": "Transport",
     "namespace": "system:order-config:transport",
-    "description": "Default Fleet-Ops transport flow.",
-    "tags": [],
-    "status": "active",
-    "version": 1,
+    "description": "Default order configuration for transport",
+    "tags": ["transport", "delivery"],
+    "status": "private",
+    "version": "0.0.1",
     "flow": [
-      { "code": "created",    "status": "Order Created",    "details": "",  "color": "#6028b8", "complete": false, "pod_method": null, "require_pod": false },
-      { "code": "dispatched", "status": "Order Dispatched", "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
-      { "code": "started",    "status": "Order Started",    "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
-      { "code": "enroute",    "status": "Driver Enroute",   "details": "",  "color": "#2563eb", "complete": false, "pod_method": null, "require_pod": false },
-      { "code": "completed",  "status": "Order Completed",  "details": "",  "color": "#16a34a", "complete": true,  "pod_method": null, "require_pod": false }
+      { "code": "created",    "status": "Order Created",    "details": "New order was created.",  "color": "#1f2937", "complete": false, "pod_method": "scan", "require_pod": false },
+      { "code": "enroute",    "status": "Driver Enroute",   "details": "Driver is en-route.",     "color": "#1f2937", "complete": false, "pod_method": "scan", "require_pod": false },
+      { "code": "started",    "status": "Order Started",    "details": "Order has been started",  "color": "#1f2937", "complete": false, "pod_method": "scan", "require_pod": false },
+      { "code": "completed",  "status": "Order Completed",  "details": "Order has been completed.","color": "#1f2937", "complete": true,  "pod_method": "scan", "require_pod": false },
+      { "code": "dispatched", "status": "Order Dispatched", "details": "Order has been dispatched.","color": "#1f2937", "complete": false, "pod_method": "scan", "require_pod": false }
     ],
     "created_at": "2026-04-01T10:00:00.000000Z",
     "updated_at": "2026-04-01T10:00:00.000000Z"
@@ -25,7 +25,7 @@ example: |
 fields:
   - name: id
     type: string
-    description: Public order-config identifier. Prefixed `ordercfg_`.
+    description: Public order-config identifier. Prefixed `order_config_`.
   - name: key
     type: string
     description: Short identifier (e.g. `transport`). Stable across companies for system configs.
@@ -43,21 +43,23 @@ fields:
     description: Free-form tags.
   - name: status
     type: string
-    description: Config lifecycle status (e.g. `active`).
+    description: Config lifecycle status. Newly created configs default to `private`; system configs may be `active`.
   - name: version
-    type: integer
-    description: Schema version.
+    type: string
+    description: Semver-style schema version (e.g. `0.0.1`).
   - name: flow
     type: array of objects
     description: |-
-      Ordered list of activities in the config's status flow. Each activity carries:
-        - `code` (string) — machine identifier (e.g. `created`, `dispatched`)
-        - `status` (string) — human-readable label
-        - `details` (string) — long-form description
-        - `color` (string) — hex colour hint for status UI
-        - `complete` (boolean) — true for terminal activities
-        - `pod_method` (string|null) — proof-of-delivery method, when set
-        - `require_pod` (boolean) — whether proof-of-delivery is required at this step
+      Public-safe projection of the config's activity graph. Internally each activity is a node in a directed graph (an activity's `activities` field lists its child activity codes), but this projection flattens the graph into a list of activity rows and drops the editable wiring (logic, events, options, activities/child links, sequence, key, internalId).
+      Each row carries:
+        - `code` (string) — canonical activity identifier. Well-known codes for the default transport config are `created`, `dispatched`, `started`, `enroute`, `completed`; `canceled` is reserved for cancellations. Treat `code` as the stable identifier and drive UI from it rather than from the row's position in the array.
+        - `status` (string) — human-readable label (e.g. `Order Dispatched`).
+        - `details` (string|null) — long-form description.
+        - `color` (string|null) — hex colour hint for status UI.
+        - `complete` (boolean) — `true` for terminal activities (e.g. `completed`). Multiple activities can be terminal.
+        - `pod_method` (string|null) — proof-of-delivery method required by this activity. One of `scan`, `signature`, `photo`, or `null` when no POD is configured.
+        - `require_pod` (boolean) — whether proof-of-delivery is required to advance past this activity.
+      Array order reflects how activities are declared in the underlying flow object (insertion order) and is **not** guaranteed to follow graph progression. Consumers needing the workflow sequence should manage the operator console — the public surface does not expose child-activity links.
   - name: created_at
     type: timestamp
     description: When the config was created.
