@@ -1,0 +1,20 @@
+$kind: http-request
+description: "Create a fuel transaction."
+url: "{{base_url}}/{{namespace}}/fuel-transactions"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "provider": "petroapp",
+      "provider_transaction_id": "TX-10001",
+      "vehicle": "{{vehicle_id}}",
+      "station_name": "North Depot Fuel",
+      "transaction_at": "2026-05-07T08:30:00Z",
+      "volume": 42.5,
+      "metric_unit": "liter",
+      "amount": 6500,
+      "currency": "USD"
+    }
+order: 1000
+examples: ./.resources/Create a Fuel Transaction.resources/examples

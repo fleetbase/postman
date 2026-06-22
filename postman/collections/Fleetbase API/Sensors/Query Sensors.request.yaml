@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Query sensors."
+url: "{{base_url}}/{{namespace}}/sensors"
+method: GET
+order: 2000
+examples: ./.resources/Query Sensors.resources/examples

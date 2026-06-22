@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: Search query for parts.
+  - name: limit
+    type: integer
+    description: Maximum number of records to return.
+  - name: page
+    type: integer
+    description: Page number for paginated results.
+  - name: sort
+    type: string
+    description: Sort expression, such as `-created_at`.
+  - name: status
+    type: string
+    description: Filter by part status.
+  - name: manufacturer
+    type: string
+    description: Filter by manufacturer.
+  - name: vendor_uuid
+    type: string
+    description: Filter by vendor UUID.

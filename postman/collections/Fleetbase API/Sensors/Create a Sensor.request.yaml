@@ -1,0 +1,18 @@
+$kind: http-request
+description: "Create a sensor."
+url: "{{base_url}}/{{namespace}}/sensors"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "Cargo Temperature",
+      "type": "temperature",
+      "device": "{{device_id}}",
+      "unit": "celsius",
+      "status": "active",
+      "min_threshold": 0,
+      "max_threshold": 8
+    }
+order: 1000
+examples: ./.resources/Create a Sensor.resources/examples

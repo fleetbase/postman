@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Retrieve a part."
+url: "{{base_url}}/{{namespace}}/parts/{{part_id}}"
+method: GET
+order: 3000
+examples: ./.resources/Retrieve a Part.resources/examples

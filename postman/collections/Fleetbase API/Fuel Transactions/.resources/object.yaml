@@ -1,0 +1,50 @@
+$kind: object
+name: Fuel Transaction
+description: |-
+  A fuel transaction stores provider transaction identity, matched vehicle/order/fuel report links, station data, volume, amount, odometer, and sync status.
+example: |
+  {
+    "id": "fuel_provider_transaction_3KpL7Vz9Qx",
+    "provider": "petroapp",
+    "provider_transaction_id": "TX-10001",
+    "vehicle": "vehicle_7YqM3KpL2n",
+    "station_name": "North Depot Fuel",
+    "volume": 42.5,
+    "metric_unit": "liter",
+    "amount": 6500,
+    "currency": "USD",
+    "sync_status": "matched",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public fuel transaction identifier.
+  - name: provider
+    type: string
+    description: Fuel provider key.
+  - name: provider_transaction_id
+    type: string
+    description: Provider transaction identifier.
+  - name: vehicle
+    type: string
+    description: Matched vehicle public ID, when loaded.
+  - name: driver
+    type: string
+    description: Matched driver public ID, when loaded.
+  - name: order
+    type: string
+    description: Matched order public ID, when loaded.
+  - name: fuel_report
+    type: string
+    description: Generated fuel report public ID, when loaded.
+  - name: station_name
+    type: string
+    description: Fuel station name.
+  - name: volume
+    type: number
+    description: Fuel volume.
+  - name: sync_status
+    type: string
+    description: Sync or review status.

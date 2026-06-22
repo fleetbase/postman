@@ -1,0 +1,32 @@
+$kind: params
+fields:
+  - name: provider
+    type: string
+    description: Fuel provider key.
+  - name: provider_transaction_id
+    type: string
+    description: Provider transaction identifier.
+  - name: connection
+    type: string
+    description: Fuel provider connection public ID.
+  - name: vehicle
+    type: string
+    description: Vehicle public ID.
+  - name: driver
+    type: string
+    description: Driver public ID.
+  - name: order
+    type: string
+    description: Order public ID.
+  - name: fuel_report
+    type: string
+    description: Fuel report public ID.
+  - name: transaction_at
+    type: timestamp
+    description: Transaction timestamp.
+  - name: volume
+    type: number
+    description: Fuel volume.
+  - name: amount
+    type: currency
+    description: Transaction amount.

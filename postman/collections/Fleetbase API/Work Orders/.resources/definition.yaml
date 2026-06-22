@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Work orders coordinate maintenance or operational jobs, including target asset, assignee, priority, checklist, budget, due date, and completion state.
+order: 8000

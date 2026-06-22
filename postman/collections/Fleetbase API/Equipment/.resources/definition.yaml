@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Equipment represents auxiliary fleet gear such as PPE, refrigeration units, tools, liftgates, ramps, containers, and other assignable operational equipment.
+order: 7800

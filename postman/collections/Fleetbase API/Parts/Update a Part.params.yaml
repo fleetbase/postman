@@ -1,0 +1,29 @@
+$kind: params
+fields:
+  - name: sku
+    type: string
+    description: Part SKU.
+  - name: name
+    type: string
+    description: Part name.
+  - name: quantity_on_hand
+    type: integer
+    description: Current stock quantity.
+  - name: unit_cost
+    type: currency
+    description: Unit cost.
+  - name: vendor
+    type: string
+    description: Vendor public ID.
+  - name: asset_type
+    type: string
+    description: Polymorphic resource type such as `fleet-ops:vehicle` or `fleet-ops:equipment`.
+  - name: asset
+    type: string
+    description: Public ID of the associated asset.
+  - name: specs
+    type: object
+    description: Part specification data.
+  - name: meta
+    type: object
+    description: Additional metadata.

@@ -1,0 +1,32 @@
+$kind: params
+fields:
+  - name: subject
+    type: string
+    description: Work order subject.
+  - name: category
+    type: string
+    description: Work order category.
+  - name: status
+    type: string
+    description: Work order status.
+  - name: priority
+    type: string
+    description: Priority value.
+  - name: target_type
+    type: string
+    description: Target resource type such as `fleet-ops:vehicle` or `fleet-ops:equipment`.
+  - name: target
+    type: string
+    description: Target resource public ID.
+  - name: assignee_type
+    type: string
+    description: Assignee resource type such as `fleet-ops:vendor` or `fleet-ops:contact`.
+  - name: assignee
+    type: string
+    description: Assignee public ID.
+  - name: checklist
+    type: array
+    description: Checklist items.
+  - name: meta
+    type: object
+    description: Additional metadata.

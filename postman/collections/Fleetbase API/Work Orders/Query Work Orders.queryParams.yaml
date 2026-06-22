@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: Search query for work orders.
+  - name: limit
+    type: integer
+    description: Maximum number of records to return.
+  - name: page
+    type: integer
+    description: Page number for paginated results.
+  - name: sort
+    type: string
+    description: Sort expression, such as `-created_at`.
+  - name: category
+    type: string
+    description: Filter by work order category.
+  - name: status
+    type: string
+    description: Filter by work order status.
+  - name: priority
+    type: string
+    description: Filter by priority.

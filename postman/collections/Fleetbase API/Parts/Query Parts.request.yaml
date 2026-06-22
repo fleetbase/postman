@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Query parts."
+url: "{{base_url}}/{{namespace}}/parts"
+method: GET
+order: 2000
+examples: ./.resources/Query Parts.resources/examples

@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Mark this fuel transaction as reviewed or ignored."
+url: "{{base_url}}/{{namespace}}/fuel-transactions/{{fuel_transaction_id}}/review"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "status": "reviewed"
+    }
+order: 9000
+examples: ./.resources/Review Fuel Transaction.resources/examples

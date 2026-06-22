@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Update a work order."
+url: "{{base_url}}/{{namespace}}/work-orders/{{work_order_id}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "status": "in_progress"
+    }
+order: 4000
+examples: ./.resources/Update a Work Order.resources/examples

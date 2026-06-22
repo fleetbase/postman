@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Query devices."
+url: "{{base_url}}/{{namespace}}/devices"
+method: GET
+order: 2000
+examples: ./.resources/Query Devices.resources/examples

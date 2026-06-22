@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Devices represent physical telematics or tracking hardware that can be attached to vehicles or other fleet resources.
+order: 8100

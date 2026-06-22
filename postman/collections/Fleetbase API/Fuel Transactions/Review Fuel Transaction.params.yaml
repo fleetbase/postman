@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: status
+    type: enum
+    description: `reviewed` or `ignored`.

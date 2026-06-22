@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Query equipment."
+url: "{{base_url}}/{{namespace}}/equipment"
+method: GET
+order: 2000
+examples: ./.resources/Query Equipment.resources/examples

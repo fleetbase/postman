@@ -1,0 +1,29 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: Sensor name.
+  - name: type
+    type: string
+    description: Sensor type.
+  - name: device
+    type: string
+    description: Device public ID.
+  - name: telematic
+    type: string
+    description: Telematic public ID.
+  - name: unit
+    type: string
+    description: Measurement unit.
+  - name: min_threshold
+    type: number
+    description: Minimum threshold.
+  - name: max_threshold
+    type: number
+    description: Maximum threshold.
+  - name: sensorable_type
+    type: string
+    description: Attachable resource type.
+  - name: sensorable
+    type: string
+    description: Attachable resource public ID.

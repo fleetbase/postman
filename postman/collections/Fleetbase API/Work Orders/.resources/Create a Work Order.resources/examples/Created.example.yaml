@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/work-orders"
+  method: POST
+  headers:
+    Accept: application/json
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+              "id": "<string>",
+              "object": "work_orders"
+            }

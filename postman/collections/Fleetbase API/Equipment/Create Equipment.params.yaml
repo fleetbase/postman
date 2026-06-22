@@ -1,0 +1,29 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: Equipment name.
+  - name: code
+    type: string
+    description: Internal equipment code.
+  - name: type
+    type: string
+    description: Equipment type.
+  - name: status
+    type: string
+    description: Equipment status.
+  - name: warranty
+    type: string
+    description: Warranty public ID.
+  - name: photo
+    type: string
+    description: File public ID for the equipment photo.
+  - name: equipable_type
+    type: string
+    description: Polymorphic resource type such as `fleet-ops:vehicle` or `fleet-ops:driver`.
+  - name: equipable
+    type: string
+    description: Public ID of the resource to assign equipment to.
+  - name: meta
+    type: object
+    description: Additional metadata.

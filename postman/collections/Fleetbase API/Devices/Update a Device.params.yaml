@@ -1,0 +1,29 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: Device name.
+  - name: type
+    type: string
+    description: Device type.
+  - name: device_id
+    type: string
+    description: Provider or hardware device identifier.
+  - name: telematic
+    type: string
+    description: Telematic public ID.
+  - name: attachable_type
+    type: string
+    description: Attachable resource type, usually `fleet-ops:vehicle`.
+  - name: attachable
+    type: string
+    description: Attachable resource public ID.
+  - name: latitude
+    type: number
+    description: Last known latitude. Required with `longitude`.
+  - name: longitude
+    type: number
+    description: Last known longitude. Required with `latitude`.
+  - name: meta
+    type: object
+    description: Additional metadata.

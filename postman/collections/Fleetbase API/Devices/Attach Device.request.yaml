@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Attach this device to a vehicle."
+url: "{{base_url}}/{{namespace}}/devices/{{device_id}}/attach"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "vehicle": "{{vehicle_id}}"
+    }
+order: 6000
+examples: ./.resources/Attach Device.resources/examples
