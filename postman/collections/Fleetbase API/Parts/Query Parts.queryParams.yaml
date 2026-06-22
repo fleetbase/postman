@@ -18,6 +18,6 @@ fields:
   - name: manufacturer
     type: string
     description: Filter by manufacturer.
-  - name: vendor_uuid
+  - name: vendor
     type: string
-    description: Filter by vendor UUID.
+    description: Filter by vendor public ID or internal ID.

@@ -20,4 +20,4 @@ fields:
     description: Filter by sensor status.
   - name: device
     type: string
-    description: Filter by device UUID.
+    description: Filter by device public ID or internal ID.
