@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Update equipment."
+url: "{{base_url}}/{{namespace}}/equipment/{{equipment_id}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "status": "maintenance"
+    }
+order: 4000
+examples: ./.resources/Update Equipment.resources/examples

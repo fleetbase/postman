@@ -1,0 +1,16 @@
+$kind: http-request
+description: "Create a device."
+url: "{{base_url}}/{{namespace}}/devices"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "OBD Tracker 12",
+      "type": "obd",
+      "device_id": "OBD-12",
+      "serial_number": "SN-10001",
+      "status": "active"
+    }
+order: 1000
+examples: ./.resources/Create a Device.resources/examples

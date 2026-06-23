@@ -1,0 +1,19 @@
+$kind: http-request
+description: "Create a work order."
+url: "{{base_url}}/{{namespace}}/work-orders"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "subject": "Replace rear tire",
+      "category": "corrective_maintenance",
+      "status": "open",
+      "priority": "high",
+      "target_type": "fleet-ops:vehicle",
+      "target": "{{vehicle_id}}",
+      "assignee_type": "fleet-ops:vendor",
+      "assignee": "{{vendor_id}}"
+    }
+order: 1000
+examples: ./.resources/Create a Work Order.resources/examples

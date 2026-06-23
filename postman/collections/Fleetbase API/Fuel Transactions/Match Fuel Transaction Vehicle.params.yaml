@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: vehicle
+    type: string
+    description: Vehicle public ID.

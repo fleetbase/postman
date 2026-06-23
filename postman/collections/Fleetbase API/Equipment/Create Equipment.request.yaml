@@ -1,0 +1,19 @@
+$kind: http-request
+description: "Create equipment."
+url: "{{base_url}}/{{namespace}}/equipment"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "Liftgate LG-12",
+      "code": "LG-12",
+      "type": "liftgate",
+      "status": "available",
+      "serial_number": "LG120045",
+      "manufacturer": "Maxon",
+      "model": "BMR",
+      "currency": "USD"
+    }
+order: 1000
+examples: ./.resources/Create Equipment.resources/examples

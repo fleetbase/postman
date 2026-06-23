@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Fuel transactions represent imported or recorded fuel-card/provider transactions exposed to API users as fuel transactions.
+order: 8300

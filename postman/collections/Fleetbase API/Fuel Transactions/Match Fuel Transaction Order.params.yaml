@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: order
+    type: string
+    description: Order public ID.

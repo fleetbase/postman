@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Delete a work order."
+url: "{{base_url}}/{{namespace}}/work-orders/{{work_order_id}}"
+method: DELETE
+order: 5000
+examples: ./.resources/Delete a Work Order.resources/examples

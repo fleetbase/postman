@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fuel-transactions/{{fuel_transaction_id}}/review"
+  method: POST
+  headers:
+    Accept: application/json
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+              "id": "<string>",
+              "object": "fuel_transactions"
+            }

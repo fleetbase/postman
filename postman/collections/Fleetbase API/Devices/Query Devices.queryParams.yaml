@@ -1,0 +1,26 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: Search query for devices.
+  - name: limit
+    type: integer
+    description: Maximum number of records to return.
+  - name: page
+    type: integer
+    description: Page number for paginated results.
+  - name: sort
+    type: string
+    description: Sort expression, such as `-created_at`.
+  - name: status
+    type: string
+    description: Filter by status.
+  - name: attachment_state
+    type: string
+    description: Filter by `attached` or `unattached`.
+  - name: vehicle
+    type: string
+    description: Filter by attached vehicle public ID.
+  - name: connection_status
+    type: string
+    description: Filter by connection status.

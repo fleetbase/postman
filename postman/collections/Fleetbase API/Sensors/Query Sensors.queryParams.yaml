@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: Search query for sensors.
+  - name: limit
+    type: integer
+    description: Maximum number of records to return.
+  - name: page
+    type: integer
+    description: Page number for paginated results.
+  - name: sort
+    type: string
+    description: Sort expression, such as `-created_at`.
+  - name: type
+    type: string
+    description: Filter by sensor type.
+  - name: status
+    type: string
+    description: Filter by sensor status.
+  - name: device
+    type: string
+    description: Filter by device public ID or internal ID.

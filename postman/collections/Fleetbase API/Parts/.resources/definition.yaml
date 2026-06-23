@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Parts represent stocked replacement components such as tires, filters, belts, electronics, and other inventory used for fleet maintenance.
+order: 7900

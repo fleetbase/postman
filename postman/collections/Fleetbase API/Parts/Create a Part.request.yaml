@@ -1,0 +1,17 @@
+$kind: http-request
+description: "Create a part."
+url: "{{base_url}}/{{namespace}}/parts"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "sku": "FLT-OIL-001",
+      "name": "Oil Filter",
+      "quantity_on_hand": 24,
+      "unit_cost": 1200,
+      "currency": "USD",
+      "status": "in_stock"
+    }
+order: 1000
+examples: ./.resources/Create a Part.resources/examples

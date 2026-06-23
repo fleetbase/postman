@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Detach this device from its current resource."
+url: "{{base_url}}/{{namespace}}/devices/{{device_id}}/detach"
+method: POST
+order: 7000
+examples: ./.resources/Detach Device.resources/examples

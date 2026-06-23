@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Sensors represent measurable telemetry channels such as temperature, door state, vibration, fuel level, or tire pressure.
+order: 8200

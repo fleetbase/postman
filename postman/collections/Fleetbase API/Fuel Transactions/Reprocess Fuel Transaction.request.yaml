@@ -1,0 +1,6 @@
+$kind: http-request
+description: "Reprocess matching and fuel report generation for this fuel transaction."
+url: "{{base_url}}/{{namespace}}/fuel-transactions/{{fuel_transaction_id}}/reprocess"
+method: POST
+order: 8000
+examples: ./.resources/Reprocess Fuel Transaction.resources/examples

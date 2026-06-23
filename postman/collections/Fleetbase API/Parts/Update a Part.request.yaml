@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Update a part."
+url: "{{base_url}}/{{namespace}}/parts/{{part_id}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "quantity_on_hand": 18
+    }
+order: 4000
+examples: ./.resources/Update a Part.resources/examples

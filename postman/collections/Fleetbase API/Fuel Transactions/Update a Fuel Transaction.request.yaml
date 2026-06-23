@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Update a fuel transaction."
+url: "{{base_url}}/{{namespace}}/fuel-transactions/{{fuel_transaction_id}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "sync_status": "reviewed"
+    }
+order: 4000
+examples: ./.resources/Update a Fuel Transaction.resources/examples

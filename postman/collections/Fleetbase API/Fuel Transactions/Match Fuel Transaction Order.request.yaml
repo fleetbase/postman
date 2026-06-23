@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Match this fuel transaction to an order."
+url: "{{base_url}}/{{namespace}}/fuel-transactions/{{fuel_transaction_id}}/match-order"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "order": "{{order_id}}"
+    }
+order: 7000
+examples: ./.resources/Match Fuel Transaction Order.resources/examples

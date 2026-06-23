@@ -1,0 +1,44 @@
+$kind: object
+name: Sensor
+description: |-
+  A sensor stores measurement type, thresholds, latest reading, associated device, and attachment metadata.
+example: |
+  {
+    "id": "sensor_2Qx9KpL7Vz",
+    "name": "Cargo Temperature",
+    "type": "temperature",
+    "unit": "celsius",
+    "last_value": "4.2",
+    "status": "active",
+    "threshold_status": "normal",
+    "updated_at": "2026-05-07T08:30:00.000000Z",
+    "created_at": "2026-05-07T08:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public sensor identifier.
+  - name: name
+    type: string
+    description: Sensor name.
+  - name: type
+    type: string
+    description: Sensor type.
+  - name: device
+    type: string
+    description: Device public ID, when loaded.
+  - name: unit
+    type: string
+    description: Measurement unit.
+  - name: last_value
+    type: string
+    description: Latest recorded value.
+  - name: threshold_status
+    type: string
+    description: Derived threshold status.
+  - name: status
+    type: string
+    description: Sensor status.
+  - name: meta
+    type: object
+    description: Additional sensor metadata.

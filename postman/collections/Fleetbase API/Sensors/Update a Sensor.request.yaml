@@ -1,0 +1,13 @@
+$kind: http-request
+description: "Update a sensor."
+url: "{{base_url}}/{{namespace}}/sensors/{{sensor_id}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+      "last_value": "4.2",
+      "last_reading_at": "2026-05-07T08:30:00Z"
+    }
+order: 4000
+examples: ./.resources/Update a Sensor.resources/examples
