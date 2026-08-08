@@ -6,7 +6,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "{{tracking_status_id_disposable}}"
+    value: "{{tracking_status_id}}"
     description: (Required) The Tracking Status id.
 examples: ./.resources/Delete a Tracking Status.resources/examples
 order: 5000
