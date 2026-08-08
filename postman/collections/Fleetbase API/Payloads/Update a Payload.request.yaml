@@ -11,6 +11,18 @@ body:
   type: json
   content: |-
     {
+        "pickup": {
+            "street1": "10 Bayfront Avenue",
+            "city": "Singapore",
+            "postal_code": "018956",
+            "country": "SG"
+        },
+        "dropoff": {
+            "street1": "80 Mandai Lake Rd",
+            "city": "Singapore",
+            "postal_code": "729826",
+            "country": "SG"
+        },
         "entities": [
             {
                 "name": "UltraHD 4K Smart TV",
