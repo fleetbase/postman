@@ -5,6 +5,6 @@ method: DELETE
 headers:
   Accept: application/json
 pathVariables:
-  id: "{{vendor_id_disposable}}"
+  id: "{{vendor_id}}"
 examples: ./.resources/Delete a Vendor.resources/examples
 order: 5000

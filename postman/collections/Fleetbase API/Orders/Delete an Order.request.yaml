@@ -4,7 +4,7 @@ url: "{{base_url}}/{{namespace}}/orders/:id"
 method: DELETE
 pathVariables:
   - key: id
-    value: "{{order_id_disposable}}"
+    value: "{{order_id}}"
     description: "The order id."
 
 order: 13500

@@ -6,7 +6,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "{{zone_id_disposable}}"
+    value: "{{zone_id}}"
     description: (Required) The id of the zone you want to delete.
 examples: ./.resources/Delete a Zone.resources/examples
 order: 5000

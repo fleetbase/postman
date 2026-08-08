@@ -3,7 +3,7 @@ description: Delete a Service Rate.
 url: "{{base_url}}/{{namespace}}/service-rates/:id"
 method: DELETE
 pathVariables:
-  id: "{{service_rate_id_disposable}}"
+  id: "{{service_rate_id}}"
 body:
   type: json
   content: ""

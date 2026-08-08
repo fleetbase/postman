@@ -5,6 +5,6 @@ method: DELETE
 headers:
   Accept: application/json
 pathVariables:
-  id: "{{contact_id_disposable}}"
+  id: "{{contact_id}}"
 examples: ./.resources/Delete a Contact.resources/examples
 order: 5000
