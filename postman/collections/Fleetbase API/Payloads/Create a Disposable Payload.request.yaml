@@ -1,0 +1,25 @@
+$kind: http-request
+name: "Create a Disposable Payload"
+description: |-
+  Creates a throwaway payload purely so `Delete a Payload` has
+  something to delete. Without it the delete destroys `{{payload_id}}`, which
+  later requests in this and other folders still depend on — leaving them to
+  404 against a deleted record.
+url: "{{base_url}}/{{namespace}}/payloads"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "pickup": "10 Bayfront Avenue, Singapore 018956",
+      "dropoff": "80 Mandai Lake Rd, Singapore 729826",
+      "type": "food_delivery"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("payload_id_disposable", json_response.id);
+    language: text/javascript
+order: 3999

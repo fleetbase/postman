@@ -6,6 +6,6 @@ method: DELETE
 headers:
   Accept: application/json
 pathVariables:
-  id: "{{tracking_number_id}}"
+  id: "{{tracking_number_id_disposable}}"
 examples: ./.resources/Delete a Tracking Number.resources/examples
 order: 4000

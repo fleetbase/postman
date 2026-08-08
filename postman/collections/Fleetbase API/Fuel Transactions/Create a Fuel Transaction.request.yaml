@@ -16,5 +16,12 @@ body:
       "amount": 6500,
       "currency": "USD"
     }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("fuel_transaction_id", json_response.id);
+    language: text/javascript
 order: 1000
 examples: ./.resources/Create a Fuel Transaction.resources/examples

@@ -6,7 +6,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "{{place_id}}"
+    value: "{{place_id_disposable}}"
     description: (Required) The id of the `Place`.
 examples: ./.resources/Delete a Place.resources/examples
 order: 6000

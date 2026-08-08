@@ -6,7 +6,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "{{fleet_id}}"
+    value: "{{fleet_id_disposable}}"
     description: (Required) The id of the `Fleet`.
 examples: ./.resources/Delete a Fleet.resources/examples
 order: 5000

@@ -6,7 +6,7 @@ headers:
   Accept: application/json
 pathVariables:
   - key: id
-    value: "{{service_area_id}}"
+    value: "{{service_area_id_disposable}}"
     description: (Required) The id of the service area you want to delete.
 examples: ./.resources/Delete a Service Area.resources/examples
 order: 5000

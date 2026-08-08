@@ -1,0 +1,29 @@
+$kind: http-request
+name: "Create a Disposable Service Area"
+description: |-
+  Creates a throwaway service area purely so `Delete a Service Area` has
+  something to delete. Without it the delete destroys `{{service_area_id}}`, which
+  later requests in this and other folders still depend on — leaving them to
+  404 against a deleted record.
+url: "{{base_url}}/{{namespace}}/service-areas"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Singapore",
+        "type": "city",
+        "latitude": "1.3521",
+        "longitude": "103.8198",
+        "radius": "30000",
+        "country": "SG",
+        "status": "active"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("service_area_id_disposable", json_response.id);
+    language: text/javascript
+order: 4999

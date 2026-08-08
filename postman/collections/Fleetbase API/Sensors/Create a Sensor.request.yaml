@@ -14,5 +14,12 @@ body:
       "min_threshold": 0,
       "max_threshold": 8
     }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("sensor_id", json_response.id);
+    language: text/javascript
 order: 1000
 examples: ./.resources/Create a Sensor.resources/examples

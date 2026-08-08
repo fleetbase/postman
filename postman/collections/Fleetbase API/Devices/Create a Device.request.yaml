@@ -12,5 +12,12 @@ body:
       "serial_number": "SN-10001",
       "status": "active"
     }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("device_id", json_response.id);
+    language: text/javascript
 order: 1000
 examples: ./.resources/Create a Device.resources/examples
