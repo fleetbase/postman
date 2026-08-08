@@ -7,7 +7,7 @@ body:
   content: |-
     {
       "provider": "petroapp",
-      "provider_transaction_id": "TX-10001",
+      "provider_transaction_id": "TX-{{$timestamp}}",
       "vehicle": "{{vehicle_id}}",
       "station_name": "North Depot Fuel",
       "transaction_at": "2026-05-07T08:30:00Z",

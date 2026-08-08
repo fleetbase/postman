@@ -6,7 +6,7 @@ body:
   type: json
   content: |-
     {
-      "sku": "FLT-OIL-001",
+      "sku": "FLT-OIL-{{$timestamp}}",
       "name": "Oil Filter",
       "quantity_on_hand": 24,
       "unit_cost": 1200,
