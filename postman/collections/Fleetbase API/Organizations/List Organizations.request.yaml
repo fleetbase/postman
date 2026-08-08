@@ -2,6 +2,10 @@ $kind: http-request
 description: "Lists organizations available for driver onboarding and organization selection."
 url: "{{base_url}}/{{namespace}}/organizations"
 method: GET
+# This endpoint sits behind the platform API token middleware rather than an
+# organization API credential, so the collection-level bearer answers 401 here.
+headers:
+  Authorization: Bearer {{platform_token}}
 
 queryParams:
   limit: "10"

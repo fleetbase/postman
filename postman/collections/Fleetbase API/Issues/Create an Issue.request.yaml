@@ -18,4 +18,11 @@ body:
       "status": "open"
     }
 
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("issue_id", json_response.id);
+    language: text/javascript
 order: 1000
