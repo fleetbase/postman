@@ -4,6 +4,7 @@ url: "{{base_url}}/{{namespace}}/labels/:id"
 method: GET
 
 pathVariables:
+headers:
   - key: id
     value: "{{label_subject_id}}"
 

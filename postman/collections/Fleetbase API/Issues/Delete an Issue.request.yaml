@@ -3,6 +3,7 @@ description: "Delete an Issue"
 url: "{{base_url}}/{{namespace}}/issues/:id"
 method: DELETE
 pathVariables:
+headers:
   - key: id
     value: "{{issue_id}}"
 

@@ -4,6 +4,7 @@ description: "Returns ETA data for an order."
 url: "{{base_url}}/{{namespace}}/orders/:id/eta"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
 

@@ -3,6 +3,7 @@ description: |-
   Marks an authenticated customer's pickup order as completed. Fleetbase verifies that the order belongs to the customer before updating the order status.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/picked-up"
 method: PUT
+headers:
   - key: Content-Type
     value: application/json
 body:

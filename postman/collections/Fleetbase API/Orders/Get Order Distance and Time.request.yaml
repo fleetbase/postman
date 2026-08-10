@@ -4,6 +4,7 @@ description: "Returns and updates the order distance/time matrix."
 url: "{{base_url}}/{{namespace}}/orders/:id/distance-and-time"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
 

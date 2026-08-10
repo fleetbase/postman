@@ -3,6 +3,7 @@ description: "Deletes an order resource."
 url: "{{base_url}}/{{namespace}}/orders/:id"
 method: DELETE
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
     description: "The order id."

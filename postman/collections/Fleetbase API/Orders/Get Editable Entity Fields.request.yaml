@@ -4,6 +4,7 @@ description: "Returns configured editable entity fields for an order."
 url: "{{base_url}}/{{namespace}}/orders/:id/editable-entity-fields"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
 

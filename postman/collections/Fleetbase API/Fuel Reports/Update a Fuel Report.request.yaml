@@ -3,6 +3,7 @@ description: "Update a Fuel Report"
 url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
 method: PUT
 pathVariables:
+headers:
   - key: id
     value: "{{fuel_report_id}}"
 

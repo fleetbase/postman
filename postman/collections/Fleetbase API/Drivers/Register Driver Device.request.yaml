@@ -4,6 +4,7 @@ description: "Registers a device token for a specific driver."
 url: "{{base_url}}/{{namespace}}/drivers/:id/register-device"
 method: POST
 pathVariables:
+headers:
   - key: id
     value: "{{driver_id}}"
 

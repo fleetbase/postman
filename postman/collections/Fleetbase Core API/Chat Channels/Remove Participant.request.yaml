@@ -4,6 +4,7 @@ description: |-
 url: "{{base_url}}/{{namespace}}/chat-channels/remove-participant/:participantId"
 method: DELETE
 pathVariables:
+headers:
   - key: participantId
     value: "{{chat_participant_id}}"
 

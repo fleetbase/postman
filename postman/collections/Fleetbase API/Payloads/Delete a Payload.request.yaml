@@ -3,6 +3,7 @@ description: Delete a Payload.
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: DELETE
 pathVariables:
+headers:
   - key: id
     value: "{{payload_id}}"
     description: (Required) The id of the `Payload`.

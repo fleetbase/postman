@@ -4,6 +4,7 @@ description: "Lists comments attached to an order."
 url: "{{base_url}}/{{namespace}}/orders/:id/comments"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
 
