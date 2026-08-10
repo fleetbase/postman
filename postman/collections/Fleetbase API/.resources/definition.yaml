@@ -33,6 +33,13 @@ variables:
   base_url: ""
   namespace: v1
   api_key: ""
+  customer_identity: ""
+  customer_email: ""
+  customer_name: ""
+  customer_password: ""
+  customer_phone: ""
+  verification_code: ""
+  push_token: ""
 scripts:
   - type: http:afterResponse
     code: |
