@@ -4,7 +4,6 @@ description: "Captures proof photos for an order or order subject."
 url: "{{base_url}}/{{namespace}}/orders/:id/capture-photo/:subjectId"
 method: POST
 pathVariables:
-headers:
   - key: id
     value: "{{order_id}}"
   - key: subjectId

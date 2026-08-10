@@ -3,7 +3,6 @@ description: "Retrieve a Fuel Report"
 url: "{{base_url}}/{{namespace}}/fuel-reports/:id"
 method: GET
 pathVariables:
-headers:
   - key: id
     value: "{{fuel_report_id}}"
 
