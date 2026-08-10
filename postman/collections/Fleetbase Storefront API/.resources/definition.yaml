@@ -1,5 +1,7 @@
 $kind: collection
 variables:
+  storefront_key: ""
+  customer_token: ""
   base_url: ""
   namespace: v1
   api_prefix: storefront
@@ -38,4 +40,4 @@ auth:
     type: bearer
     name: bearer auth
     credentials:
-      token: "{{api_key}}"
+      token: "{{storefront_key}}"

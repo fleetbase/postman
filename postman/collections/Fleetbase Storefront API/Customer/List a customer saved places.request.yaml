@@ -3,4 +3,7 @@ description: |-
   Returns saved places for the authenticated storefront customer. Use these places for delivery addresses and checkout defaults.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/places"
 method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
 order: 9000

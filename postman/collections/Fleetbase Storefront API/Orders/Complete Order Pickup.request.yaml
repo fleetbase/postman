@@ -4,6 +4,8 @@ description: |-
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/picked-up"
 method: PUT
 headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
   - key: Content-Type
     value: application/json
 body:
