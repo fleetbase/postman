@@ -4,7 +4,6 @@ description: |-
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: GET
 pathVariables:
-headers:
   - key: id
     value: "{{file_id}}"
 

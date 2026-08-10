@@ -4,7 +4,6 @@ description: "Simulates driver movement between two resolvable points, or pass o
 url: "{{base_url}}/{{namespace}}/drivers/:id/simulate"
 method: POST
 pathVariables:
-headers:
   - key: id
     value: "{{driver_id}}"
 

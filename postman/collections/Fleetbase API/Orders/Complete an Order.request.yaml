@@ -4,7 +4,6 @@ description: "Completes an order after all waypoints are complete."
 url: "{{base_url}}/{{namespace}}/orders/:id/complete"
 method: POST
 pathVariables:
-headers:
   - key: id
     value: "{{order_id}}"
 

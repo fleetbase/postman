@@ -4,7 +4,6 @@ description: "Toggles or sets driver online status."
 url: "{{base_url}}/{{namespace}}/drivers/:id/toggle-online"
 method: POST
 pathVariables:
-headers:
   - key: id
     value: "{{driver_id}}"
 

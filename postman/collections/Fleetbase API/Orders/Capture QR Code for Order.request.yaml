@@ -4,7 +4,6 @@ description: |-
 url: "{{base_url}}/{{namespace}}/orders/:id/capture-qr/:subject-id"
 method: POST
 pathVariables:
-headers:
   - key: id
     value: "{{order_id}}"
     description: (Required) The id of the order.

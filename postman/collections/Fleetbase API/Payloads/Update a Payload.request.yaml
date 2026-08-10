@@ -4,7 +4,6 @@ description: |-
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: PUT
 pathVariables:
-headers:
   - key: id
     value: "{{payload_id}}"
     description: (Required) The id of the `Payload`.
