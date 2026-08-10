@@ -6,10 +6,10 @@ description: |-
 url: "{{base_url}}/{{namespace}}/orders"
 method: POST
 headers:
-  - key: 0
-    value: [object Object]
-  - key: 1
-    value: [object Object]
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
 body:
   type: json
   content: |-
