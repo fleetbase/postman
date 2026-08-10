@@ -24,5 +24,8 @@ scripts:
       if (json_response && json_response.token) {
           cv.set("customer_token", json_response.token);
       }
+      
+      // Requests that address the customer by id use {{customer_id}}; nothing set it.
+      cv.set("customer_id", json_response.id);
     language: text/javascript
 order: 1000
