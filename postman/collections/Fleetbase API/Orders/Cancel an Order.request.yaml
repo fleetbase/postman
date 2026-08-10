@@ -3,6 +3,7 @@ description: Cancels an order without deleting the order resource.
 url: "{{base_url}}/{{namespace}}/orders/:id/cancel"
 method: DELETE
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
     description: (Required) The id of the `Order`.

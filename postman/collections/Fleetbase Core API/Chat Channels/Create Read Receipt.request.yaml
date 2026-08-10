@@ -4,6 +4,7 @@ description: |-
 url: "{{base_url}}/{{namespace}}/chat-channels/read-message/:chatMessageId"
 method: POST
 pathVariables:
+headers:
   - key: chatMessageId
     value: "{{chat_message_id}}"
 

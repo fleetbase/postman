@@ -2,6 +2,7 @@ $kind: http-request
 description: Update Product
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{product_id}}"
 method: PUT
+headers:
   - key: Content-Type
     value: application/json
 body:

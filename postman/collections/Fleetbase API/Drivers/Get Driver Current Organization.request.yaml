@@ -4,6 +4,7 @@ description: "Returns the driver current organization."
 url: "{{base_url}}/{{namespace}}/drivers/:id/current-organization"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{driver_id}}"
 

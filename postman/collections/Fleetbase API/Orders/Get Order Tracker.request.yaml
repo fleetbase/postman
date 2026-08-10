@@ -4,6 +4,7 @@ description: "Returns public tracking data for an order."
 url: "{{base_url}}/{{namespace}}/orders/:id/tracker"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
 

@@ -3,6 +3,7 @@ description: "Retrieve an Issue"
 url: "{{base_url}}/{{namespace}}/issues/:id"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{issue_id}}"
 

@@ -4,6 +4,7 @@ description: "Lists proof of delivery resources for an order or subject."
 url: "{{base_url}}/{{namespace}}/orders/:id/proofs/:subjectId"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{order_id}}"
   - key: subjectId

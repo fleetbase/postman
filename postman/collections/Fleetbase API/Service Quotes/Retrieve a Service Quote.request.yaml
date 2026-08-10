@@ -3,6 +3,7 @@ description: "Retrieves a service quote by id."
 url: "{{base_url}}/{{namespace}}/service-quotes/:id"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{service_quote_id}}"
 

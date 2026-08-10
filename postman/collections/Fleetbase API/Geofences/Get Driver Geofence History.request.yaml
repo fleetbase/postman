@@ -4,6 +4,7 @@ url: "{{base_url}}/{{namespace}}/geofences/driver/:driverUuid/history"
 method: GET
 
 pathVariables:
+headers:
   - key: driverUuid
     value: "{{driver_uuid}}"
 

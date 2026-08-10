@@ -4,6 +4,7 @@ description: "Lists organizations a driver belongs to."
 url: "{{base_url}}/{{namespace}}/drivers/:id/organizations"
 method: GET
 pathVariables:
+headers:
   - key: id
     value: "{{driver_id}}"
 

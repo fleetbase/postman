@@ -4,6 +4,7 @@ description: |-
 url: "{{base_url}}/{{namespace}}/files/:id"
 method: PUT
 pathVariables:
+headers:
   - key: id
     value: "{{file_id}}"
 
