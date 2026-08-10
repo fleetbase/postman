@@ -1,0 +1,14 @@
+$kind: http-request
+description: |-
+  Returns the organization associated with the API key on the request. Use it to confirm which account a credential belongs to, and to obtain the organization's id for endpoints that address an organization by path.
+url: "{{base_url}}/{{namespace}}/organizations/current"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("organization_id", json_response.id);
+    language: text/javascript
+order: 900
