@@ -2,6 +2,9 @@ $kind: http-request
 description: Query Reviews ❗
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
 queryParams:
   limit: ""
   offset: ""

@@ -8,5 +8,21 @@ headers:
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "identity": "{{customer_identity}}",
+      "password": "{{customer_password}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // The customer credential for the rest of this collection. login returns the
+      // Sanctum token at the top level (no data envelope), and it is sent back as a
+      // Customer-Token header, not as Authorization — that carries the store key.
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      if (json_response && json_response.token) {
+          cv.set("customer_token", json_response.token);
+      }
+    language: text/javascript
 order: 1000

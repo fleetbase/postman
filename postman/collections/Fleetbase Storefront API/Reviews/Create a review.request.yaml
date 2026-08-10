@@ -3,6 +3,8 @@ description: Create a review
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: POST
 headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
   - key: Content-Type
     value: application/json
 body:

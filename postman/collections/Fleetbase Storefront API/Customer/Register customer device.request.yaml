@@ -4,6 +4,8 @@ description: |-
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/register-device"
 method: POST
 headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
   - key: customer-token
     value: ""
   - key: Content-Type
