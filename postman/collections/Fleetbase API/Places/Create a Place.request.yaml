@@ -29,6 +29,18 @@ scripts:
 
       cv.set("place_id", json_response.id);
       cv.set("place_name", json_response.name);
+
+      // Search Places looks up by street1 or name, so seed its query from this
+      // record — a literal {{place_query}} was being sent before. Place::createFromMixed
+      // resolves a string the same way, so anything matching street1 resolves without
+      // a geocoding lookup.
+      cv.set("place_query", json_response.street1 || json_response.name);
+      if (json_response.location && Array.isArray(json_response.location.coordinates)) {
+          // GeoJSON is [lng, lat]; the search endpoint expects "lat,lng".
+          const [lng, lat] = json_response.location.coordinates;
+          cv.set("place_ll", lat + "," + lng);
+      }
+      cv.set("locale", "en");
     language: text/javascript
 examples: ./.resources/Create a Place.resources/examples
 order: 1000

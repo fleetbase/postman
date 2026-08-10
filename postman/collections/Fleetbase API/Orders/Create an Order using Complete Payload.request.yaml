@@ -1,0 +1,24 @@
+$kind: http-request
+description: |-
+  Creates an order using the Complete Payload payload shape.
+  Promoted from a stored example so the shape is actually exercised: the Postman CLI
+  runs requests, never examples, so these shapes had no coverage at all.
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+headers:
+  - key: 0
+    value: [object Object]
+  - key: 1
+    value: [object Object]
+body:
+  type: json
+  content: |-
+    {
+      "pickup": "Singapore 018971",
+      "dropoff": "321 Orchard Rd, Singapore",
+      "dispatch": false,
+      "driver": "{{driver_id}}",
+      "customer": "{{contact_id}}",
+      "notes": "Deliver through receiving bay."
+    }
+order: 1010
