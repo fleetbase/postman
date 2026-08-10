@@ -19,5 +19,13 @@ scripts:
       var json_response = pm.response.json();
       let cv = pm.environment;
       cv.set("chat_channel_id", json_response.id);
+
+      // The creator is added as a participant when the channel is created, and
+      // Send Message needs a participant as its sender. Taking it from here means
+      // the folder keeps its documentation order — create, send, then manage
+      // participants — instead of having to add a participant before sending.
+      if (Array.isArray(json_response.participants) && json_response.participants.length) {
+          cv.set("chat_participant_id", json_response.participants[0].id);
+      }
     language: text/javascript
 order: 2000
