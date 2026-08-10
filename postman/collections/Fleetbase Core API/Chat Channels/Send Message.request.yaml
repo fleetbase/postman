@@ -16,4 +16,11 @@ body:
       "files": []
     }
 
-order: 2000
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("chat_message_id", json_response.id);
+    language: text/javascript
+order: 3000

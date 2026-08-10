@@ -7,4 +7,4 @@ queryParams:
   limit: "25"
   offset: "0"
   sort: "created_at"
-order: 7000
+order: 6000

@@ -7,4 +7,4 @@ pathVariables:
   - key: id
     value: "{{chat_channel_id}}"
 
-order: 9000
+order: 11000

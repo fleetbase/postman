@@ -9,9 +9,16 @@ body:
     {
       "content": "Example comment",
       "subject": {
-        "id": "{{subject_id}}",
-        "type": "{{subject_type}}"
+        "id": "{{organization_id}}",
+        "type": "company"
       }
     }
 
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("comment_id", json_response.id);
+    language: text/javascript
 order: 1000
