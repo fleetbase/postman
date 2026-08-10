@@ -5,4 +5,18 @@ url: "{{base_url}}/{{namespace}}/chat-channels/available-participants"
 method: GET
 queryParams:
   channel: "{{chat_channel_id}}"
+scripts:
+  - type: afterResponse
+    code: |
+      // Send Message, Add Participant and Create Read Receipt all address a user
+      // by {{user_id}}, which nothing set — they failed with "Sender of chat
+      // message not found" and "User to add as participant not found". This
+      // endpoint already returns the users eligible to participate, so take the
+      // first one rather than seeding a second fixture.
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      if (Array.isArray(json_response) && json_response.length) {
+          cv.set("user_id", json_response[0].id);
+      }
+    language: text/javascript
 order: 1000
