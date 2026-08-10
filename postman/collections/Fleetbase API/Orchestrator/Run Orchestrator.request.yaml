@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Runs an orchestration phase and returns a proposed assignment plan without committing changes. Use `options.engine` to force an engine such as `vroom`, `capacity`, or `greedy`; otherwise Fleetbase uses the orchestrator engine configured in admin settings.
+  Runs an orchestration phase and returns a proposed assignment plan without committing changes. Use `options.engine` to force an engine: `greedy` and `capacity` are built in and need no external service, while `vroom` requires a reachable VROOM instance. Omitting `options.engine` uses the orchestrator engine configured in admin settings, which defaults to `greedy`.
 
   For normal route-aware VROOM allocation, send `options.engine: "vroom"` and omit `allocation_strategy` or set it to `route_aware`. Vehicles must have usable positions because VROOM will solve against route coordinates.
 
@@ -24,7 +24,7 @@ body:
       "driver_ids": [],
       "prior_assignments": [],
       "options": {
-        "engine": "vroom",
+        "engine": "greedy",
         "allocation_strategy": "route_aware",
         "geometry": false,
         "respect_capacity": true,
