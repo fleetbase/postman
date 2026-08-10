@@ -2,10 +2,6 @@ $kind: http-request
 description: Create a review
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

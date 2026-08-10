@@ -3,10 +3,6 @@ description: |-
   Verifies the customer's pending phone number with the code sent by the phone verification request.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-phone-number"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

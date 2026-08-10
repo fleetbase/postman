@@ -3,8 +3,4 @@ description: |-
   Retrieves the public view of an invoice by public ID or UUID. Draft invoices are not available through the public invoice URL.
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 order: 1000

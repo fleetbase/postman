@@ -3,10 +3,6 @@ description: |-
   Removes all line items from a cart. The response returns the emptied cart resource.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/empty"
 method: PUT
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
 order: 5000

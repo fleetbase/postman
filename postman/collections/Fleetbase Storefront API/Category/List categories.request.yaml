@@ -3,8 +3,4 @@ description: |-
   Returns product categories available to the current storefront. Use this list to organize product browsing and filtering.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 order: 1000

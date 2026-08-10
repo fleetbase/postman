@@ -3,10 +3,6 @@ description: |-
   Starts storefront account closure for the authenticated customer. Fleetbase sends a verification code to the linked phone number or email address.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/account-closure"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

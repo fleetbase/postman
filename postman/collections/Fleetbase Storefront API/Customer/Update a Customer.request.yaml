@@ -3,10 +3,6 @@ description: |-
   Updates a storefront customer profile. The response returns the customer with the new values applied.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{id}"
 method: PUT
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 pathVariables:

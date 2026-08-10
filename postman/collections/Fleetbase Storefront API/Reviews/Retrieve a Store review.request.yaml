@@ -2,10 +2,6 @@ $kind: http-request
 description: Retrieve a Store review
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{id}"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
 order: 4000

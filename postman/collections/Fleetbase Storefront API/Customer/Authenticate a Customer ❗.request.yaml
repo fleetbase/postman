@@ -3,10 +3,6 @@ description: |-
   Authenticates a storefront customer with an email or phone identity and password. The response includes the customer profile and an auth token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

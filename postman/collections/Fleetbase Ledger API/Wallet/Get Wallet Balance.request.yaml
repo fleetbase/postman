@@ -3,10 +3,6 @@ description: |-
   Returns the authenticated subject's wallet balance. Fleetbase provisions a wallet automatically when one does not already exist.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet/balance"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 queryParams:
   currency: "USD"
 order: 2000

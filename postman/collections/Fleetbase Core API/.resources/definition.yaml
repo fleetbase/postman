@@ -34,7 +34,8 @@ scripts:
       });
     language: text/javascript
 auth:
-  - type: bearer
+  - id: 7c1f0a94-2b6d-4e83-9a51-3f8c2d0b6e17
+    type: bearer
     name: bearer auth
     credentials:
       token: "{{api_key}}"

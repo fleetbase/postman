@@ -3,10 +3,6 @@ description: |-
   Retrieves an existing cart by its unique identifier. If the cart is still active, the response includes its current line items and totals.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
 order: 2000

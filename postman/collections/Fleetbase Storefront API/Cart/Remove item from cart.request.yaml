@@ -3,10 +3,6 @@ description: |-
   Removes a line item or product from a cart. The response returns the updated cart after the item is removed.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
 method: DELETE
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
   line_item_id: ""

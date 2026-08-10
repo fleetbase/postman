@@ -3,10 +3,6 @@ description: |-
   Returns products available in the current storefront. Use pagination and filters to browse the catalog.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 queryParams:
   offset: ""
 order: 1000

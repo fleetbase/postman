@@ -4,10 +4,6 @@ description: |+
 
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
 method: PUT
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
   line_item_id: ""

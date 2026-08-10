@@ -3,10 +3,6 @@ description: |-
   Retrieves a single storefront product by ID. The response includes product details, pricing, variants, and related catalog data when available.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{id}"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 pathVariables:
   id: ""
 order: 2000
