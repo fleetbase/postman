@@ -4,6 +4,35 @@ variables:
   namespace: v1
   api_prefix: storefront
   api_key: ""
+scripts:
+  - type: http:afterResponse
+    code: |
+      // Baseline contract assertions, applied to every request in this collection.
+      //
+      // Status is asserted explicitly against a list. The obvious-looking
+      // `pm.expect(pm.response).to.be.ok` is chai's truthiness check on an object and
+      // is therefore true for every response, including a 400 — it asserts nothing.
+      const expected = pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204];
+
+      pm.test(`${pm.info.requestName} responds 2xx`, function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
+      });
+
+      pm.test(`${pm.info.requestName} returns a JSON body`, function () {
+          pm.expect(pm.response.headers.get('Content-Type') || '').to.include('json');
+          pm.expect(() => pm.response.json(), 'body is not parseable JSON').to.not.throw();
+      });
+
+      // A 2xx carrying {"error": ...} or {"errors": [...]} is still a failure; the API
+      // returns that shape for several handled conditions.
+      pm.test(`${pm.info.requestName} returns no error payload`, function () {
+          let body;
+          try { body = pm.response.json(); } catch (e) { return; }
+          if (body === null || typeof body !== 'object') { return; }
+          pm.expect(body, 'response carries an "error" field').to.not.have.property('error');
+          pm.expect(body, 'response carries an "errors" field').to.not.have.property('errors');
+      });
+    language: text/javascript
 auth:
   - id: e8d21b47-4c30-4757-baa3-e0e5492aba20
     type: bearer

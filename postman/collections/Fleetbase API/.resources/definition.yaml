@@ -45,7 +45,7 @@ scripts:
           });
       } else if (pm.request.method != "POST") {
           pm.test(`Successful ${pm.info.requestName} request and response must be valid and have a body`, function () {
-              pm.expect(pm.response).to.be.ok;
+              pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201, 202, 204]);
               pm.expect(pm.response).to.be.withBody;
               pm.expect(pm.response).to.be.json;
           });
