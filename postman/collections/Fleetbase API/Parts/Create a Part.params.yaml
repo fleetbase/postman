@@ -2,7 +2,7 @@ $kind: params
 fields:
   - name: sku
     type: string
-    description: Part SKU.
+    description: Part SKU. Unique per organization.
   - name: name
     type: string
     description: Part name.

@@ -5,7 +5,7 @@ fields:
     description: Fuel provider key.
   - name: provider_transaction_id
     type: string
-    description: Provider transaction identifier.
+    description: Provider transaction identifier. Unique per provider within an organization.
   - name: connection
     type: string
     description: Fuel provider connection public ID.
