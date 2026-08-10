@@ -1,0 +1,30 @@
+$kind: http-request
+description: |-
+  Creates an order with `pickup` and `dropoff` given as coordinate objects.
+
+  `Place::createFromMixed` accepts a place as more than a public id. When the value is
+  a coordinate pair it resolves through `createFromCoordinates`, so no address lookup
+  is involved. Latitude and longitude are read through a list of aliases — `lat`,
+  `latitude`, `x`, `0` and `lon`, `lng`, `longitude`, `y`, `1` — so several spellings
+  are equivalent.
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "pickup": {
+        "latitude": 1.2830632,
+        "longitude": 103.8579965
+      },
+      "dropoff": {
+        "lat": 1.4043,
+        "lng": 103.7930
+      }
+    }
+order: 1070

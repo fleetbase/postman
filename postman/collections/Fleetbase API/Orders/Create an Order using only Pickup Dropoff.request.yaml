@@ -1,0 +1,20 @@
+$kind: http-request
+description: |-
+  Creates an order using the only Pickup Dropoff payload shape.
+  Promoted from a stored example so the shape is actually exercised: the Postman CLI
+  runs requests, never examples, so these shapes had no coverage at all.
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "pickup": "Singapore 018971",
+      "dropoff": "321 Orchard Rd, Singapore"
+    }
+order: 1050

@@ -1,0 +1,28 @@
+$kind: http-request
+description: |-
+  Creates an order with `pickup` and `dropoff` given as GeoJSON Point objects.
+
+  `Place::createFromMixed` recognises GeoJSON directly, so a client already holding
+  GeoJSON geometry does not have to convert it. Note the GeoJSON axis order is
+  `[longitude, latitude]`, the reverse of the coordinate-object form.
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "pickup": {
+        "type": "Point",
+        "coordinates": [103.8579965, 1.2830632]
+      },
+      "dropoff": {
+        "type": "Point",
+        "coordinates": [103.7930, 1.4043]
+      }
+    }
+order: 1080
