@@ -13,4 +13,12 @@ body:
       "description": "Example storefront product",
       "price": 1000
     }
-order: 3000
+scripts:
+  - type: afterResponse
+    code: |
+      // Retrieve and Update Product address {{product_id}}; nothing set it.
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("product_id", json_response.id);
+    language: text/javascript
+order: 2000

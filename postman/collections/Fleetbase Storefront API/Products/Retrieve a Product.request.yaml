@@ -5,4 +5,4 @@ url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{id}"
 method: GET
 pathVariables:
   id: ""
-order: 2000
+order: 3000
