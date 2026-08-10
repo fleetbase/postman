@@ -3,10 +3,6 @@ description: |-
   Verifies a storefront SMS or creation code. The response includes the customer profile and auth token when verification succeeds.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-code"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

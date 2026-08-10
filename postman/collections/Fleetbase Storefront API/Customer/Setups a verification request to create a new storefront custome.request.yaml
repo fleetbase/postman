@@ -4,10 +4,6 @@ description: |-
   Sends a verification code for storefront customer creation. The code is required when creating the customer account.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
 method: POST
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

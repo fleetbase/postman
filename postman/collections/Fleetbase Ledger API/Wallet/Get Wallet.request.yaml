@@ -3,10 +3,6 @@ description: |-
   Retrieves the authenticated subject's wallet. Pass a currency to choose the wallet currency when Fleetbase needs to provision one.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/wallet"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 queryParams:
   currency: "USD"
 order: 1000

@@ -6,9 +6,6 @@ method: POST
 headers:
   - key: customer-token
     value: ""
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

@@ -3,8 +3,4 @@ description: |-
   Lists active payment gateways available for a public invoice. Gateway credentials and sensitive configuration are never returned.
 url: "{{base_url}}/{{api_prefix}}/public/invoices/{{invoice_public_id}}/gateways"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 order: 2000

@@ -3,10 +3,6 @@ description: |-
   Recalculates and updates an existing Stripe PaymentIntent for the current cart and checkout options. The response includes refreshed Stripe client data and a new checkout token.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-update-payment-intent"
 method: PUT
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
   - key: Content-Type
     value: application/json
 body:

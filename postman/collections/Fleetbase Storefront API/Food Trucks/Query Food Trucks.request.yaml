@@ -2,10 +2,6 @@ $kind: http-request
 description: Query Food Trucks
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/food-trucks"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 queryParams:
   limit: ""
   offset: ""

@@ -3,8 +3,4 @@ description: |-
   Returns storefront customers for the current company. Use query and pagination parameters to find matching customer records.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers"
 method: GET
-headers:
-  - key: Authorization
-    value: ""
-    description: Authentication header
 order: 6000
