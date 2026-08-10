@@ -1,13 +1,11 @@
 $kind: http-request
 description: |-
   Updates a storefront customer profile. The response returns the customer with the new values applied.
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{{customer_id}}"
 method: PUT
 headers:
   - key: Content-Type
     value: application/json
-pathVariables:
-  id: ""
 body:
   type: json
   content: ""
