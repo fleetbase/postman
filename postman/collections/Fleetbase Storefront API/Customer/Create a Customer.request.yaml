@@ -8,5 +8,10 @@ headers:
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "name": "{{customer_name}}",
+      "email": "{{customer_identity}}",
+      "code": "{{verification_code}}"
+    }
 order: 7000
