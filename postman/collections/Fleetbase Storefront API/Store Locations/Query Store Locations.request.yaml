@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns locations belonging to active member stores of the authenticated marketplace network. Use these locations for the marketplace map, pickup selection, and multi-store delivery origins. Store-scoped keys and non-network sessions receive an error.
+  Returns locations for the authenticated storefront context. Network keys receive locations belonging to active member stores for marketplace maps, pickup selection, and multi-store delivery origins; store keys receive only their own locations. Requests without a storefront context receive an error.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/store-locations"
 method: GET
 queryParams:
