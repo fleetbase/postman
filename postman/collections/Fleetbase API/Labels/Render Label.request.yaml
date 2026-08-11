@@ -5,7 +5,8 @@ method: GET
 
 pathVariables:
   - key: id
-    value: "{{label_subject_id}}"
+    value: "{{order_id}}"
+    description: The order, waypoint or entity to render a label for, matching `type` below.
 
 queryParams:
   format: "stream"

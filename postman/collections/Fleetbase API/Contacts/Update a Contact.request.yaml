@@ -17,7 +17,6 @@ body:
         "title": "Mr",
         "email": "john@exampleco.com",
         "phone": "563-920-4264",
-        "type": "technician",
         "meta": {
             "external_ref": "john-doe"
         }
