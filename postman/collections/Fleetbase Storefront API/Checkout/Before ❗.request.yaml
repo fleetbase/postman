@@ -4,12 +4,22 @@ description: |-
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
 queryParams:
-  gateway: ""
-  customer: ""
-  cart: ""
-  service_quote: ""
-  cash: ""
-  pickup: ""
-  tip: ""
-  delivery_tip: ""
+  # `gateway` is the gateway CODE, not an id — "stripe", "cash", or whichever code the
+  # store has configured. CheckoutController resolves it with Storefront::findGateway().
+  gateway: "stripe"
+  customer: "{{customer_id}}"
+  cart: "{{cart_id}}"
+  service_quote: "{{service_quote_id}}"
+  pickup: "false"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Capture checkout as order and Get Checkout Status both address
+      // {{checkout_token}}; nothing set it.
+      var json_response = pm.response.json();
+
+      if (json_response && json_response.token) {
+          pm.environment.set("checkout_token", json_response.token);
+      }
+    language: text/javascript
 order: 1000
