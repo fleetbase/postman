@@ -1,10 +1,17 @@
 $kind: http-request
-description: |+
-  You can update all properties of the Zone.
-
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
+description: |-
+  Updates a line item already in the cart. Send any of `quantity`, `variants`,
+  `addons` or `scheduled_at`; omitted fields are left unchanged. The response
+  returns the updated cart.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/{{line_item_id}}"
 method: PUT
-pathVariables:
-  id: ""
-  line_item_id: ""
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "quantity": 2
+    }
 order: 3000

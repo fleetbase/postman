@@ -14,4 +14,15 @@ body:
       "quantity": 1,
       "variants": []
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Update item in Cart and Remove item from cart address {{line_item_id}} —
+      // the cart ITEM id (cart_item_*), not the product id. Nothing set it.
+      var json_response = pm.response.json();
+
+      if (Array.isArray(json_response.items) && json_response.items.length) {
+          pm.environment.set("line_item_id", json_response.items[0].id);
+      }
+    language: text/javascript
 order: 1000
