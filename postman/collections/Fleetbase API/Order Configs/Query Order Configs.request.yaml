@@ -5,5 +5,17 @@ url: "{{base_url}}/{{namespace}}/order-configs"
 method: GET
 headers:
   Accept: application/json
+scripts:
+  - type: afterResponse
+    code: |-
+      // Retrieve an Order Config addresses {{order_config_id}}. It used to set that
+      // itself in its own afterResponse, which cannot work — the value has to exist
+      // before the request is sent. This listing runs first, so it is the natural source.
+      var json_response = pm.response.json();
+
+      if (Array.isArray(json_response) && json_response.length) {
+          pm.environment.set("order_config_id", json_response[0].id);
+      }
+    language: text/javascript
 
 order: 1000
