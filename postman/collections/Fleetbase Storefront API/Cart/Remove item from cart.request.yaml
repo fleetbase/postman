@@ -1,9 +1,6 @@
 $kind: http-request
 description: |-
   Removes a line item or product from a cart. The response returns the updated cart after the item is removed.
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{line_item_id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/{{line_item_id}}"
 method: DELETE
-pathVariables:
-  id: ""
-  line_item_id: ""
 order: 4000
