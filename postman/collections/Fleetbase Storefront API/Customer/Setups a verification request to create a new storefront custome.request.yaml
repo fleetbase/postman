@@ -9,5 +9,9 @@ headers:
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "mode": "email",
+      "identity": "{{customer_identity}}"
+    }
 order: 4000

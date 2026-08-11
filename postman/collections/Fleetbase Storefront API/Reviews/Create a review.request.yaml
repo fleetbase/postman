@@ -11,7 +11,7 @@ body:
   type: json
   content: |-
     {
-      "content": "",
+      "content": "Arrived on time and exactly as described.",
       "rating": 5
     }
 order: 2000

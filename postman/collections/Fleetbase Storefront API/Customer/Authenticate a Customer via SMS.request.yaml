@@ -8,5 +8,8 @@ headers:
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "phone": "{{customer_phone}}"
+    }
 order: 2000
