@@ -8,8 +8,8 @@ pathVariables:
     value: "{{order_id}}"
     description: (Required) The id of the order to update.
   - key: placeId
-    value: "{{place_id}}"
-    description: (Required) The pickup, dropoff, or waypoint place id to set as the current destination.
+    value: "{{waypoint_id}}"
+    description: (Required) The pickup, dropoff, or waypoint place id to set as the current destination. It must belong to this order's payload — a place that is not one of the order's stops is rejected with "Place resource is not a valid destination."
 body:
   type: json
   content: ""

@@ -18,10 +18,23 @@ scripts:
           pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
       });
 
-      pm.test(`${pm.info.requestName} returns a JSON body`, function () {
-          pm.expect(pm.response.headers.get('Content-Type') || '').to.include('json');
-          pm.expect(() => pm.response.json(), 'body is not parseable JSON').to.not.throw();
-      });
+      // Files/Download File streams the stored file, so JSON is the wrong contract for it.
+      // Detected by Content-Disposition rather than by request name, so any future
+      // download endpoint is covered without adding another exception — and so a regular
+      // endpoint that started returning a file would still be caught.
+      const isFileDownload = (pm.response.headers.get('Content-Disposition') || '').includes('attachment');
+
+      if (isFileDownload) {
+          pm.test(`${pm.info.requestName} streams a file body`, function () {
+              pm.expect(pm.response.responseSize, 'download returned an empty body').to.be.above(0);
+              pm.expect(pm.response.headers.get('Content-Type') || '', 'download declared no content type').to.not.be.empty;
+          });
+      } else {
+          pm.test(`${pm.info.requestName} returns a JSON body`, function () {
+              pm.expect(pm.response.headers.get('Content-Type') || '').to.include('json');
+              pm.expect(() => pm.response.json(), 'body is not parseable JSON').to.not.throw();
+          });
+      }
 
       // A 2xx carrying {"error": ...} or {"errors": [...]} is still a failure; the API
       // returns that shape for several handled conditions.
