@@ -1,10 +1,20 @@
 $kind: http-request
-description: List Network Stores
+description: |-
+  Lists active member stores for the authenticated marketplace network key. Results are network-scoped and can be searched, filtered, distance-ranked, and paginated. A store-scoped key receives an error from this endpoint.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
 queryParams:
   query: ""
+  tagged: ""
+  category: ""
+  without_category: ""
+  ids: ""
+  exclude: ""
+  online: "true"
+  sort: ""
+  "location[latitude]": ""
+  "location[longitude]": ""
+  maximum_distance: ""
   limit: ""
   offset: ""
-  store: ""
 order: 2700

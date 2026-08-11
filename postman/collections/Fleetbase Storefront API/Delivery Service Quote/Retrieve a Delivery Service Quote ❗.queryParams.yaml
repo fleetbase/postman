@@ -2,10 +2,10 @@ $kind: params
 fields:
   - name: origin
     type: string
-    description: "Origin value for this delivery service quote request."
+    description: "Fallback store-location public ID, or comma-separated IDs for a multi-store cart. Cart line-item locations take precedence."
   - name: destination
     type: string
     description: "Destination value for this delivery service quote request."
   - name: cart
     type: string
-    description: "Cart value for this delivery service quote request."
+    description: "Cart public ID or unique identifier. Marketplace origins must belong to the corresponding member stores."

@@ -5,10 +5,10 @@ fields:
     description: "Payment gateway ID or code."
   - name: customer
     type: string
-    description: "Customer ID associated with the request."
+    description: "Customer public ID for guest checkout. When Customer-Token is present this value must identify the authenticated customer or checkout returns 403."
   - name: cart
     type: string
-    description: "Cart value for this checkout request."
+    description: "Cart public ID or unique identifier. Marketplace checkout validates member stores, online state, products, locations, currency consistency, and the network multi-cart policy before payment initialization."
   - name: service_quote
     type: string
     description: "Service quote ID used by the request."

@@ -1,0 +1,29 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    description: "Search member stores and return their matching locations."
+  - name: tagged
+    type: string
+    description: "Comma-separated member-store tags to match."
+  - name: ids
+    type: string
+    description: "Comma-separated store-location public IDs to include."
+  - name: exclude
+    type: string
+    description: "Comma-separated store-location public IDs to exclude."
+  - name: with_store
+    type: boolean
+    description: "Include the location's hydrated member store, logo, and backdrop."
+  - name: "location[latitude]"
+    type: number
+    description: "Customer latitude used to calculate and order location distance."
+  - name: "location[longitude]"
+    type: number
+    description: "Customer longitude used to calculate and order location distance."
+  - name: limit
+    type: integer
+    description: "Maximum number of locations to return; defaults to 30."
+  - name: offset
+    type: integer
+    description: "Number of matching locations to skip."

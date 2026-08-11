@@ -1,6 +1,16 @@
 $kind: http-request
 description: |-
-  Returns store locations available through the current storefront or network. Use these locations for browsing, pickup, and fulfillment selection.
+  Returns locations belonging to active member stores of the authenticated marketplace network. Use these locations for the marketplace map, pickup selection, and multi-store delivery origins. Store-scoped keys and non-network sessions receive an error.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/store-locations"
 method: GET
+queryParams:
+  query: ""
+  tagged: ""
+  ids: ""
+  exclude: ""
+  with_store: "true"
+  "location[latitude]": ""
+  "location[longitude]": ""
+  limit: ""
+  offset: ""
 order: 1000
