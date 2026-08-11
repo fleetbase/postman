@@ -4,7 +4,20 @@ description: |-
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/service-quotes/from-cart"
 method: GET
 queryParams:
-  origin: ""
-  destination: ""
-  cart: ""
+  # origin and destination accept a place id, a store_location id, a vehicle id, a
+  # food_truck id, or a "lat,lng" pair. Coordinates are shown because that is what a
+  # storefront client usually has: the store's position and the customer's address.
+  origin: "1.3521,103.8198"
+  destination: "1.3644,103.9915"
+  cart: "{{cart_id}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Checkout/Before addresses {{service_quote_id}}; nothing set it.
+      var json_response = pm.response.json();
+
+      if (Array.isArray(json_response) && json_response.length) {
+          pm.environment.set("service_quote_id", json_response[0].id);
+      }
+    language: text/javascript
 order: 1000
