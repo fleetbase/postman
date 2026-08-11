@@ -8,7 +8,10 @@ body:
   content:
     - type: file
       key: file
-      src: []
+      # Path is resolved against the CLI's process working directory, and --working-dir
+      # does not change that — so it is written relative to the repo root, which is where
+      # you run the collection from.
+      src: "postman/collections/Fleetbase Core API/Files/sample-upload.png"
     - type: text
       key: path
       value: "uploads"
