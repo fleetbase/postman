@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: store
+    type: string
+    description: "Marketplace member store public ID whose product categories should be returned."
+  - name: parent
+    type: string
+    description: "Parent category public ID used to return its direct children."
+  - name: parents_only
+    type: boolean
+    description: "Return only top-level categories."
+  - name: with_products
+    type: boolean
+    description: "Include published, available products for each returned store product category."
+  - name: with_stores
+    type: boolean
+    description: "For marketplace categories, include member stores assigned to each category."
