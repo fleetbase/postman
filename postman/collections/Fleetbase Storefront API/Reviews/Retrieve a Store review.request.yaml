@@ -1,7 +1,5 @@
 $kind: http-request
 description: Retrieve a Store review
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{{review_id}}"
 method: GET
-pathVariables:
-  id: ""
 order: 4000

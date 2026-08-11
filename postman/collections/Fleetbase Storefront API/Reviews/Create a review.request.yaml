@@ -11,7 +11,16 @@ body:
   type: json
   content: |-
     {
+      "subject": "{{product_id}}",
       "content": "Arrived on time and exactly as described.",
       "rating": 5
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Retrieve a Store review and Delete a Review both address {{review_id}};
+      // nothing set it.
+      var json_response = pm.response.json();
+      pm.environment.set("review_id", json_response.id);
+    language: text/javascript
 order: 2000

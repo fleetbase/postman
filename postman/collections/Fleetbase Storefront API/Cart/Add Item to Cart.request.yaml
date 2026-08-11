@@ -1,22 +1,17 @@
 $kind: http-request
 description: |-
   Adds a product to a cart and creates or updates the matching cart line item. Include quantity, variants, addons, scheduling, or store location details when needed.
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/{product_id}"
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/{{product_id}}"
 method: POST
 headers:
   - key: Content-Type
     value: application/json
-pathVariables:
-  id: ""
-  product_id: ""
 body:
   type: json
   content: |-
     {
       "addons": [],
       "quantity": 1,
-      "scheduled_at": "scheduled_at_value_here",
-      "store_location": "store_location_value_here",
       "variants": []
     }
 order: 1000
