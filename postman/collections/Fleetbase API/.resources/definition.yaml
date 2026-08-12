@@ -43,16 +43,26 @@ variables:
 scripts:
   - type: http:afterResponse
     code: |
-      // Check request method and perform appropriate tests
-      if (pm.request.method === "POST") {
-          pm.test(`Successful ${pm.info.requestName} request`, function () {
-              pm.expect(pm.response.code).to.be.oneOf([200, 201, 202]);
-              pm.expect(pm.response).to.be.withBody;
-              pm.expect(pm.response).to.be.json;
+      // Some endpoints answer with a document rather than JSON — Labels/Render Label
+      // streams a PDF. Asserting `to.be.json` on those fails on the first byte
+      // ("Unexpected token '%'" is %PDF), which says nothing useful about the endpoint.
+      //
+      // Detected by content type rather than by request name, so a new document endpoint
+      // is covered without another exception, and a JSON endpoint that unexpectedly
+      // started returning a document would still be caught.
+      const contentType = pm.response.headers.get('Content-Type') || '';
+      const isDocument  = /^(application\/pdf|image\/|application\/octet-stream|text\/csv)/i.test(contentType);
+      const expected    = pm.request.method === "POST" ? [200, 201, 202] : [200, 201, 202, 204];
+
+      if (isDocument) {
+          // Still asserted, not excused: a document response must carry actual bytes.
+          pm.test(`Successful ${pm.info.requestName} request returns a document body`, function () {
+              pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
+              pm.expect(pm.response.responseSize, 'document response is empty').to.be.above(0);
           });
-      } else if (pm.request.method != "POST") {
+      } else {
           pm.test(`Successful ${pm.info.requestName} request and response must be valid and have a body`, function () {
-              pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201, 202, 204]);
+              pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
               pm.expect(pm.response).to.be.withBody;
               pm.expect(pm.response).to.be.json;
           });
