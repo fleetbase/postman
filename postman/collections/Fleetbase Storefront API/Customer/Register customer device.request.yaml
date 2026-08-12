@@ -6,11 +6,13 @@ method: POST
 headers:
   - key: Customer-Token
     value: "{{customer_token}}"
-  - key: customer-token
-    value: ""
   - key: Content-Type
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "token": "{{device_token}}",
+      "platform": "ios"
+    }
 order: 5000
