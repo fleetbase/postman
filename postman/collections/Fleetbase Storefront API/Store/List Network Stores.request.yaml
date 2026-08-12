@@ -1,7 +1,14 @@
 $kind: http-request
-description: List Network Stores
+description: |-
+  Lists the stores belonging to a network.
+
+  This endpoint requires a NETWORK session: authenticate with a network key rather than a store key. A store key is rejected with "Stores cannot have stores!".
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
+headers:
+  - key: Authorization
+    value: "Bearer {{network_key}}"
+    description: A network key. The collection-level store key cannot reach this endpoint.
 queryParams:
   query: ""
   limit: ""
