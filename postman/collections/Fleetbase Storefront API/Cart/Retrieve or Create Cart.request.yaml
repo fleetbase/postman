@@ -3,4 +3,16 @@ description: |-
   Retrieves the current cart or creates a new cart when no cart identifier is supplied. Use the returned cart ID for subsequent cart operations.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts"
 method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      // Every other cart request addresses {{cart_id}} — add, update, remove, empty,
+      // delete, and the checkout that prices it — and nothing set it. This endpoint
+      // returns the cart it retrieved or created, so it is the source.
+      var json_response = pm.response.json();
+
+      if (json_response && json_response.id) {
+          pm.environment.set("cart_id", json_response.id);
+      }
+    language: text/javascript
 order: 900
