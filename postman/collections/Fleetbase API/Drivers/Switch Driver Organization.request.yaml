@@ -1,17 +1,21 @@
 $kind: http-request
 name: "Switch Driver Organization"
-description: "Switches the driver session to another organization."
+description: |-
+  Switches the driver session to another organization.
+
+  The driver must already belong to the target organization, and it must not be the one they are currently in — switching to the current organization is rejected. A driver created through `POST /drivers` belongs to a single organization, so this example uses one that belongs to more than one.
 url: "{{base_url}}/{{namespace}}/drivers/:id/switch-organization"
 method: POST
 pathVariables:
   - key: id
-    value: "{{driver_id}}"
+    value: "{{multi_org_driver_id}}"
+    description: (Required) A driver that belongs to more than one organization.
 
 body:
   type: json
   content: |-
     {
-      "next": "{{organization_id}}"
+      "next": "{{secondary_organization_id}}"
     }
 
 order: 12500
