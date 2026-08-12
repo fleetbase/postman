@@ -18,6 +18,40 @@ scripts:
       var json_response = pm.response.json();
       let cv = pm.environment;
       cv.set("tracking_number_id", json_response.id);
+
+      // Decode the QR image to recover the value a scanner would read.
+      //
+      // qr_code is a base64 PNG produced from the tracking number's owner uuid, and the
+      // QR endpoints are the one documented place the API takes a uuid — that is exactly
+      // what a scanner sends. Decoding it here mirrors what a device does, instead of
+      // asking the API to hand out the raw uuid.
+      //
+      // Guarded: if the runtime cannot resolve the packages, the rest of the run should
+      // continue rather than abort, and the two QR requests fail visibly on their own.
+      try {
+          const jsQR = pm.require('npm:jsqr@1.4.0');
+          const { decode } = pm.require('npm:fast-png@6.2.0');
+          const { Buffer } = require('buffer');
+
+          const base64 = String(json_response.qr_code || '').replace(/^data:image\/png;base64,/, '');
+          const image = decode(Buffer.from(base64, 'base64'));
+          const pixels = new Uint8ClampedArray(
+              image.data.buffer,
+              image.data.byteOffset,
+              image.data.byteLength
+          );
+          const qr = jsQR(pixels, image.width, image.height);
+
+          pm.test('Create a Tracking Number returns a decodable QR code', function () {
+              pm.expect(qr, 'no QR code detected in qr_code').to.not.be.null;
+          });
+
+          if (qr) {
+              cv.set('qr_code', qr.data);
+          }
+      } catch (e) {
+          console.log('QR decode unavailable:', e.message);
+      }
     language: text/javascript
 examples: ./.resources/Create a Tracking Number.resources/examples
 order: 1000
