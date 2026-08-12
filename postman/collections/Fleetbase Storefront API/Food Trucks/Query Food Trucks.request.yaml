@@ -6,4 +6,14 @@ queryParams:
   limit: ""
   offset: ""
   sort: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      // Retrieve Food Truck addresses {{food_truck_id}}; nothing set it.
+      var json_response = pm.response.json();
+
+      if (Array.isArray(json_response) && json_response.length) {
+          pm.environment.set("food_truck_id", json_response[0].id);
+      }
+    language: text/javascript
 order: 1000
