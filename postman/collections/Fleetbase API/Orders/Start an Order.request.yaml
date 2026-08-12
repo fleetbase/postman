@@ -13,5 +13,18 @@ body:
     {
         "skip_dispatch": false
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Seeds the destination the activity cycle works through. Get Order Next Activity
+      // scopes its lookup to this waypoint, and Update Order Activity re-reads it as the
+      // order advances.
+      var json_response = pm.response.json();
+      var waypoint = json_response && json_response.payload ? json_response.payload.current_waypoint : null;
+
+      if (waypoint) {
+          pm.environment.set("current_waypoint_id", waypoint);
+      }
+    language: text/javascript
 examples: ./.resources/Start an Order.resources/examples
 order: 5000

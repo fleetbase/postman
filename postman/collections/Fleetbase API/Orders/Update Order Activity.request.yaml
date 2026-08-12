@@ -11,7 +11,20 @@ body:
   type: json
   content: |-
     {
+        "activity": {{next_activity}},
         "skip_dispatch": false
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Applying an activity that completes the current stop advances the order to the
+      // next one, so re-read the destination for the following next-activity lookup.
+      var json_response = pm.response.json();
+      var waypoint = json_response && json_response.payload ? json_response.payload.current_waypoint : null;
+
+      if (waypoint) {
+          pm.environment.set("current_waypoint_id", waypoint);
+      }
+    language: text/javascript
 examples: ./.resources/Update Order Activity.resources/examples
 order: 6000
