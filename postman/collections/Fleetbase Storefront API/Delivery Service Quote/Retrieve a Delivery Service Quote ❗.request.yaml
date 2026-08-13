@@ -14,10 +14,21 @@ scripts:
   - type: afterResponse
     code: |-
       // Checkout/Before addresses {{service_quote_id}}; nothing set it.
+      //
+      // from-cart answers with a SINGLE quote object, not a list — an earlier version of
+      // this script only handled an array, so the id was never captured and Before failed
+      // with "The service quote field is required." Both shapes are accepted here so a
+      // future multi-quote response keeps working.
       var json_response = pm.response.json();
+      var quote = Array.isArray(json_response) ? json_response[0] : json_response;
 
-      if (Array.isArray(json_response) && json_response.length) {
-          pm.environment.set("service_quote_id", json_response[0].id);
+      pm.test("Retrieve a Delivery Service Quote returns a quote", function () {
+          pm.expect(quote, "no quote returned").to.be.an('object');
+          pm.expect(quote.id, "quote has no id").to.be.a('string').and.not.empty;
+      });
+
+      if (quote && quote.id) {
+          pm.environment.set("service_quote_id", quote.id);
       }
     language: text/javascript
 order: 1000
