@@ -27,12 +27,22 @@ scripts:
 
       // A 2xx carrying {"error": ...} or {"errors": [...]} is still a failure; the API
       // returns that shape for several handled conditions.
+      //
+      // An explicitly NULL error is not one of them. Storefront's QPay callback always
+      // answers with the same envelope — {checkout, payment, error} — and reports success
+      // by setting error to null. Asserting on the key's presence failed that, which is
+      // the opposite of what this test is for. Anything non-null still fails, and so does
+      // a non-empty errors array.
+      const isEmptyError = (value) =>
+          value === null || value === undefined ||
+          (Array.isArray(value) && value.length === 0);
+
       pm.test(`${pm.info.requestName} returns no error payload`, function () {
           let body;
           try { body = pm.response.json(); } catch (e) { return; }
           if (body === null || typeof body !== 'object') { return; }
-          pm.expect(body, 'response carries an "error" field').to.not.have.property('error');
-          pm.expect(body, 'response carries an "errors" field').to.not.have.property('errors');
+          pm.expect(isEmptyError(body.error), `response carries an "error": ${JSON.stringify(body.error)}`).to.be.true;
+          pm.expect(isEmptyError(body.errors), `response carries an "errors": ${JSON.stringify(body.errors)}`).to.be.true;
       });
     language: text/javascript
 auth:
