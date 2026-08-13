@@ -14,12 +14,29 @@ queryParams:
 scripts:
   - type: afterResponse
     code: |-
-      // Capture checkout as order and Get Checkout Status both address
-      // {{checkout_token}}; nothing set it.
+      // This response is the only source for three variables the rest of Checkout
+      // addresses, and nothing set any of them.
+      //
+      //   {{checkout_token}}     Capture checkout as order, Get Checkout Status
+      //   {{checkout_id}}        Get Checkout Status, both QPay callbacks. This is the
+      //                          chkt_* public id, NOT the token — /checkouts/status
+      //                          matches on both and they are different values.
+      //   {{payment_intent_id}}  Update Stripe Payment Intent
+      //
+      // Only the card gateway returns a payment intent, so that capture is guarded
+      // rather than assumed: a cash or pickup checkout answers with the ids alone.
       var json_response = pm.response.json();
 
       if (json_response && json_response.token) {
           pm.environment.set("checkout_token", json_response.token);
+      }
+
+      if (json_response && json_response.checkout) {
+          pm.environment.set("checkout_id", json_response.checkout);
+      }
+
+      if (json_response && json_response.paymentIntent) {
+          pm.environment.set("payment_intent_id", json_response.paymentIntent);
       }
     language: text/javascript
 order: 1000
