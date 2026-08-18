@@ -5,10 +5,21 @@ description: |-
   This endpoint requires a NETWORK session: authenticate with a network key rather than a store key. A store key is rejected with "Stores cannot have stores!".
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
-headers:
-  - key: Authorization
-    value: "Bearer {{network_key}}"
-    description: A network key. The collection-level store key cannot reach this endpoint.
+# A network key. The collection-level store key cannot reach this endpoint.
+#
+# Expressed as a request-level auth block, NOT as a raw Authorization header. A
+# manual header only overrides the collection's bearer on older Postman CLIs; on
+# 1.47.x the collection auth wins and this request went out with
+# {{storefront_key}}, answering 400 "Stores cannot have stores!". Measured on
+# the runner.
+#
+# The mapping form is load-bearing. `auth:` as a LIST is the collection-level
+# shape; used on a request it makes the request vanish from the collection and
+# aborts the run with "items were not found", with or without an id.
+auth:
+  type: bearer
+  credentials:
+    token: "{{network_key}}"
 queryParams:
   query: ""
   limit: ""
