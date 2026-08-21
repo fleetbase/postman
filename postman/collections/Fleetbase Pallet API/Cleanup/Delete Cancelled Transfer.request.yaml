@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the cancelled transfer
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers/{{cancellable_transfer_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9000

@@ -1,0 +1,29 @@
+$kind: http-request
+description: Create a second transfer, so cancel has something cancellable
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "from_warehouse": "{{warehouse_id}}",
+      "to_warehouse": "{{destination_warehouse_id}}",
+      "notes": "Raised to demonstrate cancellation",
+      "items": [
+        { "product": "{{stock_product_id}}", "quantity": 5 }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{cancellable_transfer_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("cancellable_transfer_id", captured); }
+    language: text/javascript
+order: 1550

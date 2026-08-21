@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a sales order
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/sales-orders/{{sales_order_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

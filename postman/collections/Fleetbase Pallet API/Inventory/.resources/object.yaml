@@ -1,0 +1,53 @@
+$kind: object
+name: Inventory
+description: |-
+  A stock record: one product, in one warehouse, optionally in one bin and batch.
+example: |
+  {
+    "id": "inventory_p7q8r9",
+    "object": "inventory",
+    "product": "product_a1b2c3",
+    "product_name": "Steel Shelving Bracket",
+    "sku": "SSB-{{$timestamp}}",
+    "warehouse": "warehouse_x1y2z3",
+    "warehouse_name": "Singapore Distribution Center",
+    "batch": null,
+    "bin_location": "bin_m4n5o6",
+    "quantity": 118,
+    "reserved_quantity": 6,
+    "available_quantity": 112,
+    "min_quantity": 0,
+    "reorder_point": 25,
+    "is_low_stock": false,
+    "is_out_of_stock": false,
+    "status": "active",
+    "expiry_date_at": null,
+    "received_at": "2026-08-19T11:00:00Z",
+    "created_at": "2026-07-14T08:10:00Z",
+    "updated_at": "2026-08-20T14:12:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the stock record."
+  - name: product
+    type: string
+    description: "Public id of the product."
+  - name: warehouse
+    type: string
+    description: "Public id of the warehouse."
+  - name: quantity
+    type: integer
+    description: "Units physically on hand."
+  - name: reserved_quantity
+    type: integer
+    description: "Units held against open commitments."
+  - name: available_quantity
+    type: integer
+    description: "On hand minus reserved. The figure to act on."
+  - name: is_low_stock
+    type: boolean
+    description: "Whether available stock is at or below the reorder point."
+  - name: expiry_date_at
+    type: timestamp
+    description: "Expiry date, for perishable stock."

@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve an audit entry
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/audits/{{audit_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1100

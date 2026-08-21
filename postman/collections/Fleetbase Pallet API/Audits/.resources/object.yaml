@@ -1,0 +1,32 @@
+$kind: object
+name: Audit
+description: |-
+  An immutable record of an operation that took place.
+example: |
+  {
+    "id": "audit_w4x5y6",
+    "object": "audit",
+    "event_type": "po_received",
+    "action": "received",
+    "type": "partial",
+    "reason": null,
+    "subject": "purchase_order_v4w5x6",
+    "subject_type": "PurchaseOrder",
+    "old_values": null,
+    "new_values": null,
+    "meta": { "order_number": "purchase_order_v4w5x6" },
+    "created_at": "2026-08-20T14:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the audit entry."
+  - name: event_type
+    type: string
+    description: "The kind of event recorded."
+  - name: subject
+    type: string
+    description: "Public id of the record the event happened to."
+  - name: subject_type
+    type: string
+    description: "Short type name of the subject, not the fully qualified class."

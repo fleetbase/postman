@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a stock record
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/inventory/{{inventory_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

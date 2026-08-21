@@ -1,0 +1,20 @@
+$kind: params
+fields:
+  - name: customer
+    type: string
+    description: "Public id of the customer contact."
+  - name: warehouse
+    type: string
+    description: "Public id of the fulfilling warehouse."
+  - name: reference_code
+    type: string
+    description: "Your own reference for the order."
+  - name: items
+    type: array of objects
+    description: "Order lines. A line whose product does not resolve fails the whole request."
+  - name: items[].product
+    type: string
+    description: "Public id of the product being sold."
+  - name: items[].quantity
+    type: integer
+    description: "Units ordered."
