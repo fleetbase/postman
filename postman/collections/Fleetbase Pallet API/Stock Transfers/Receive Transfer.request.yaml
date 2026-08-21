@@ -1,0 +1,8 @@
+$kind: http-request
+description: Receive, crediting the destination
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers/{{stock_transfer_id}}/receive"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+order: 1500

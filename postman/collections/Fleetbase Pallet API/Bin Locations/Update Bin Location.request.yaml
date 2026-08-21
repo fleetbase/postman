@@ -1,0 +1,16 @@
+$kind: http-request
+description: Update a bin location
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/bin-locations/{{bin_id}}"
+method: PUT
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "is_pickable": false
+    }
+order: 1300

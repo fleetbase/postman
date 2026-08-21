@@ -1,0 +1,40 @@
+$kind: object
+name: Product Variant
+description: |-
+  A stocked variation of a product, with its own SKU and pricing.
+example: |
+  {
+    "id": "variant_g7h8i9",
+    "object": "product_variant",
+    "product": "product_a1b2c3",
+    "product_name": "Steel Shelving Bracket",
+    "name": "Heavy Duty",
+    "sku": "SSB-HD-{{$timestamp}}",
+    "option_values": { "grade": "heavy-duty" },
+    "unit_price": 12.00,
+    "status": "active",
+    "created_at": "2026-08-01T09:35:00Z",
+    "updated_at": "2026-08-01T09:35:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the variant."
+  - name: product
+    type: string
+    description: "Public id of the parent product."
+  - name: name
+    type: string
+    description: "Variant name."
+  - name: sku
+    type: string
+    description: "Stock keeping unit."
+  - name: option_values
+    type: object
+    description: "The option values that define this variant."
+  - name: unit_price
+    type: number
+    description: "Sale price per unit."
+  - name: status
+    type: string
+    description: "Variant status."

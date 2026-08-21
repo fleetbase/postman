@@ -1,0 +1,45 @@
+$kind: object
+name: Stock Transfer
+description: |-
+  A movement of stock from one warehouse to another.
+example: |
+  {
+    "id": "transfer_k1l2m3",
+    "object": "stock_transfer",
+    "transfer_number": "TR-3001",
+    "status": "in_transit",
+    "type": "standard",
+    "from_warehouse": "warehouse_x1y2z3",
+    "from_warehouse_name": "Singapore Distribution Center",
+    "to_warehouse": "warehouse_n4o5p6",
+    "to_warehouse_name": "Johor Satellite",
+    "shipped_at": "2026-08-20T16:00:00Z",
+    "received_at": null,
+    "items": [
+      {
+        "id": "transfer_item_q7r8s9",
+        "object": "stock_transfer_item",
+        "product": "product_a1b2c3",
+        "quantity": 10,
+        "quantity_received": 0
+      }
+    ],
+    "created_at": "2026-08-20T15:30:00Z",
+    "updated_at": "2026-08-20T16:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the transfer."
+  - name: status
+    type: string
+    description: "pending, approved, in_transit, received or cancelled. Changed through the transition endpoints, never set directly."
+  - name: from_warehouse
+    type: string
+    description: "Public id of the source warehouse."
+  - name: to_warehouse
+    type: string
+    description: "Public id of the destination warehouse."
+  - name: items
+    type: array of objects
+    description: "Lines being moved."
