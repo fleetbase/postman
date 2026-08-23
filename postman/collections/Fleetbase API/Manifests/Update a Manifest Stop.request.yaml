@@ -1,0 +1,23 @@
+$kind: http-request
+name: "Update a Manifest Stop"
+description: |-
+  Marks a stop on a manifest as arrived, completed or skipped.
+
+  Status changes run through the manifest's own transitions rather than writing a column, so arrival and completion timestamps are recorded and a manifest completes itself when its last stop does.
+
+  Any other status is refused and changes nothing.
+url: "{{base_url}}/{{namespace}}/manifest-stops/:id"
+method: PATCH
+pathVariables:
+  - key: id
+    value: "{{manifest_stop_id}}"
+    description: (Required) The stop to update.
+
+body:
+  type: json
+  content: |-
+    {
+      "status": "arrived"
+    }
+
+order: 3000

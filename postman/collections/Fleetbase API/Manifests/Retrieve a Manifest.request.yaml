@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Retrieve a Manifest"
+description: |-
+  Retrieves a manifest with its stops, in the sequence they are to be driven.
+
+  Each stop carries its place inline — a route of twenty stops is one request, not twenty-one — along with its status, estimated and actual arrival, and the distance and duration from the previous stop.
+url: "{{base_url}}/{{namespace}}/manifests/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{manifest_id}}"
+    description: (Required) The manifest to retrieve.
+
+order: 1000

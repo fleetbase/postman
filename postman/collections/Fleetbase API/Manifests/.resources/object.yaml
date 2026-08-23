@@ -1,0 +1,22 @@
+$kind: object
+name: Manifest
+description: |-
+  A route assigned to a driver for a day, made of ordered stops.
+example: |
+  {
+    "id": "manifest_7KpQ2Rx9Vz",
+    "status": "in_progress",
+    "scheduled_date": "2026-08-23",
+    "started_at": "2026-08-23T07:12:04.000000Z",
+    "completed_at": null,
+    "total_distance_m": 41200,
+    "total_duration_s": 5400,
+    "stop_count": 8,
+    "completed_stops": 3,
+    "pending_stops": 5,
+    "driver_name": "Ron",
+    "vehicle_name": "EAS-01",
+    "notes": null,
+    "updated_at": "2026-08-23T09:02:00.000000Z",
+    "created_at": "2026-08-23T06:40:00.000000Z"
+  }

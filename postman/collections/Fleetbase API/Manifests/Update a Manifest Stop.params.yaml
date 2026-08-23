@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: status
+    type: string
+    required: false
+    description: One of `arrived`, `completed` or `skipped`. Anything else is refused.
+  - name: meta
+    type: object
+    required: false
+    description: Arbitrary metadata to store against the stop, such as a note left on arrival.

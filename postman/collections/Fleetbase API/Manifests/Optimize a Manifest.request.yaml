@@ -1,0 +1,28 @@
+$kind: http-request
+name: "Optimize a Manifest"
+description: |-
+  Re-sequences the stops a driver has not done yet, nearest first.
+
+  This is the driver's optimise, not the orchestrator's. The orchestrator allocates orders across a fleet and produces manifests; this reorders the stops of one manifest that is already assigned.
+
+  It is a nearest-neighbour walk over road distances: from the driver's position to the closest remaining stop, then the closest from there. That is usually a large improvement on an arbitrary order and is not guaranteed optimal.
+
+  Completed and skipped stops keep their place — a route already driven is not re-planned. A manifest with fewer than three stops still to do is returned unchanged, since there is no ordering to find.
+
+  Send `latitude` and `longitude` to start the walk from where the driver actually is. Without them it starts from the first stop still to do.
+url: "{{base_url}}/{{namespace}}/manifests/:id/optimize"
+method: POST
+pathVariables:
+  - key: id
+    value: "{{manifest_id}}"
+    description: (Required) The manifest to re-sequence.
+
+body:
+  type: json
+  content: |-
+    {
+      "latitude": 1.3521,
+      "longitude": 103.8198
+    }
+
+order: 2000

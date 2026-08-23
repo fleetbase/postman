@@ -1,0 +1,16 @@
+$kind: http-request
+name: "List Driver Manifests"
+description: |-
+  Lists the manifests assigned to a driver, newest first.
+
+  A manifest is a driver's route: an order-agnostic sequence of stops which may span several orders, or none the driver has seen as an order.
+
+  Defaults to a recent window rather than the driver's whole history. Use `status` and `on` to narrow it further.
+url: "{{base_url}}/{{namespace}}/drivers/:id/manifests"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+    description: (Required) The driver whose manifests to list.
+
+order: 13300
