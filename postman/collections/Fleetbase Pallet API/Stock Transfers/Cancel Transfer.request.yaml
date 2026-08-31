@@ -1,0 +1,8 @@
+$kind: http-request
+description: Cancel a transfer, restoring any shipped stock
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers/{{cancellable_transfer_id}}/cancel"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+order: 1600

@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Selling stock out. Unlike receiving, insufficient stock rejects the whole request and leaves inventory completely untouched — there is no partial deduction on the way to failing.
+order: 1900

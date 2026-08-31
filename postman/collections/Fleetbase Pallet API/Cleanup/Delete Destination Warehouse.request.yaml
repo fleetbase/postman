@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the destination warehouse
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouses/{{destination_warehouse_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9070

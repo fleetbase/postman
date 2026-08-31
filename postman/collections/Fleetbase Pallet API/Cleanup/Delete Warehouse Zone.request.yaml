@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the warehouse zone
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouse-zones/{{zone_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9050
