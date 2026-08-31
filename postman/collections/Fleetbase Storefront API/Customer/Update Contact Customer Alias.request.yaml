@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Updates a storefront customer through the legacy contact alias route. The request is handled by the same customer update controller as `/customers/{id}` and carries the same authorization contract: it must be authenticated with the `Customer-Token` of the customer being updated.
+  Updates the authenticated storefront customer through the legacy contact alias route. The request is handled by the same customer update controller as `/customers/{id}` and carries the same authorization contract: the `Customer-Token` must belong to the customer addressed by `customer_id`, and missing or mismatched customer credentials return `403 Not authorized to update customer.`
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/contacts/{{customer_id}}"
 method: PUT
 headers:
