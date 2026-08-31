@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns product categories for a store key, marketplace categories for a network key, or product categories for a selected marketplace member store. Category and product expansion remains scoped to the authenticated storefront owner.
+  Returns product categories for a store key, network categories for a network key, or product categories for a selected network member store. Category and product expansion remains scoped to the authenticated storefront owner.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
 queryParams:

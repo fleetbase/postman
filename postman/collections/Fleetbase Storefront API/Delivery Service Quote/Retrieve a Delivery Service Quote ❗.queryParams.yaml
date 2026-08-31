@@ -8,4 +8,4 @@ fields:
     description: "Destination value for this delivery service quote request."
   - name: cart
     type: string
-    description: "Cart public ID or unique identifier. Marketplace origins must belong to the corresponding member stores."
+    description: "Cart public ID or unique identifier. Network cart origins must belong to the corresponding member stores."

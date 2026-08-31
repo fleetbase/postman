@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Lists active member stores for the authenticated marketplace network key. Results are network-scoped and can be searched, filtered, distance-ranked, and paginated. A store-scoped key receives an error from this endpoint.
+  Lists active member stores for the authenticated network key. Results are network-scoped and can be searched, filtered, distance-ranked, and paginated. A store-scoped key receives an error from this endpoint.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
 queryParams:

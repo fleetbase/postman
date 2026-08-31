@@ -8,10 +8,10 @@ fields:
     description: "Comma-separated store tags; a store matching any supplied tag is returned."
   - name: category
     type: string
-    description: "Marketplace category public ID assigned to a network member store."
+    description: "Network category public ID assigned to a member store."
   - name: without_category
     type: boolean
-    description: "When true, return only member stores without a marketplace category assignment."
+    description: "When true, return only member stores without a network category assignment."
   - name: ids
     type: string
     description: "Comma-separated store public IDs to include."

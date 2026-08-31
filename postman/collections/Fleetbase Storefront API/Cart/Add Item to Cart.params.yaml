@@ -14,4 +14,4 @@ fields:
     description: "Scheduled fulfillment time for the line item."
   - name: store_location
     type: string
-    description: "Public ID of a location belonging to the product's store. Marketplace carts reject cross-store location substitution."
+    description: "Public ID of a location belonging to the product's store. Network carts reject cross-store location substitution."

@@ -2,7 +2,7 @@ $kind: params
 fields:
   - name: store
     type: string
-    description: "Marketplace member store public ID whose product categories should be returned."
+    description: "Network member store public ID whose product categories should be returned."
   - name: parent
     type: string
     description: "Parent category public ID used to return its direct children."
@@ -14,4 +14,4 @@ fields:
     description: "Include published, available products for each returned store product category."
   - name: with_stores
     type: boolean
-    description: "For marketplace categories, include member stores assigned to each category."
+    description: "For network categories, include member stores assigned to each category."
