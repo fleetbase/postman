@@ -13,20 +13,5 @@ pathVariables:
     value: "{{driver_id}}"
     description: (Required) The driver whose manifests to list.
 
-scripts:
-  - type: afterResponse
-    code: |-
-      // Captures a manifest for the Manifests folder to address. On an instance
-      // with no routes assigned this simply finds nothing, and those requests
-      // skip themselves.
-      if (pm.response.code === 200) {
-          const body = pm.response.json();
-          const rows = Array.isArray(body) ? body : (body.data || []);
-
-          if (rows.length) {
-              pm.environment.set("manifest_id", rows[0].id);
-          }
-      }
-    language: text/javascript
 
 order: 4500
