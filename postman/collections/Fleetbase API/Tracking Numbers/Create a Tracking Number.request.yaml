@@ -18,6 +18,27 @@ scripts:
       var json_response = pm.response.json();
       let cv = pm.environment;
       cv.set("tracking_number_id", json_response.id);
+
+      // The QR image encodes the tracking number's owner uuid, and that is what the
+      // /from-qr and capture-qr endpoints match on. A scanner reads it from the image; a
+      // collection run cannot, so a debug build returns the same value beside the PNG as
+      // qr_code_content. No image decoding, and no external package.
+      pm.test("Create a Tracking Number returns a QR image", function () {
+          pm.expect(json_response.qr_code, "qr_code missing").to.be.a('string').and.not.empty;
+          // base64 PNG: the signature bytes encode to this prefix.
+          pm.expect(json_response.qr_code, "qr_code is not a base64 PNG").to.match(/^iVBORw0KGgo/);
+      });
+
+      pm.test("Create a Tracking Number returns the QR content", function () {
+          pm.expect(
+              json_response.qr_code_content,
+              "qr_code_content missing — the API must run with debug enabled for this contract"
+          ).to.be.a('string').and.not.empty;
+      });
+
+      if (json_response.qr_code_content) {
+          cv.set("qr_code", json_response.qr_code_content);
+      }
     language: text/javascript
 examples: ./.resources/Create a Tracking Number.resources/examples
 order: 1000

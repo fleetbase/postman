@@ -12,4 +12,15 @@ body:
     {
       "token": "{{checkout_token}}"
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Complete Order Pickup and Get Order Receipt both address {{order_id}}, and this is
+      // the only request that creates a storefront order. Nothing set it.
+      var json_response = pm.response.json();
+
+      if (json_response && json_response.id) {
+          pm.environment.set("order_id", json_response.id);
+      }
+    language: text/javascript
 order: 3000

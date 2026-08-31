@@ -9,4 +9,41 @@ body:
       "code": "{{qr_code}}"
     }
 
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Fail loudly rather than sending "{{qr_code}}" as the code. An unresolved Postman
+      // variable is sent literally, so the endpoint would receive the placeholder text and
+      // answer for it — which reads as an API fault rather than a missing prerequisite.
+      const code = pm.environment.get("qr_code");
+      const unresolved = !code || /^\{\{.*\}\}$/.test(String(code));
+
+      if (unresolved) {
+          pm.test("qr_code is resolved before decoding", function () {
+              pm.expect.fail(
+                  "qr_code is unset or still a placeholder (" + code + "). " +
+                  "Create a Tracking Number must run first and return qr_code_content."
+              );
+          });
+
+          throw new Error("Aborting Decode Tracking Number QR: qr_code is not resolved.");
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      // The decoded value is the tracking number's owner uuid, so this must resolve back to
+      // the order the tracking number was created for.
+      pm.test("Decode Tracking Number QR resolves the owning resource", function () {
+          pm.expect(pm.response.code, "expected a 2xx").to.be.oneOf([200, 201]);
+
+          const json = pm.response.json();
+          pm.expect(json, "no resource returned").to.be.an('object');
+          pm.expect(json.id, "resolved resource has no id").to.be.a('string').and.not.empty;
+
+          const orderId = pm.environment.get("order_id");
+          if (orderId) {
+              pm.expect(json.id, "resolved a different resource than the tracking number's owner").to.eql(orderId);
+          }
+      });
+    language: text/javascript
 order: 1500

@@ -7,8 +7,22 @@ pathVariables:
   - key: id
     value: "{{order_id}}"
     description: (Required) The id of the order.
+queryParams:
+  waypoint: "{{current_waypoint_id}}"
 body:
   type: json
   content: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      // The response is the list of activities available from the order's current point in
+      // its flow. Update Order Activity applies one of them, so keep the first — that is
+      // what a driver app does when the operator taps the next step.
+      var json_response = pm.response.json();
+
+      if (Array.isArray(json_response) && json_response.length) {
+          pm.environment.set("next_activity", JSON.stringify(json_response[0]));
+      }
+    language: text/javascript
 examples: ./.resources/Get Order Next Activity.resources/examples
 order: 7000

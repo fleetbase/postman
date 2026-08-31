@@ -11,7 +11,7 @@ body:
   content: |-
     {
       "name": "{{customer_name}}",
-      "email": "{{customer_identity}}",
+      "email": "{{new_customer_identity}}",
       "code": "{{verification_code}}"
     }
 order: 7000

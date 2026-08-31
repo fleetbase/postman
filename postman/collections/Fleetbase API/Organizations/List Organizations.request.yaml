@@ -4,8 +4,19 @@ url: "{{base_url}}/{{namespace}}/organizations"
 method: GET
 # This endpoint sits behind the platform API token middleware rather than an
 # organization API credential, so the collection-level bearer answers 401 here.
-headers:
-  Authorization: Bearer {{platform_token}}
+#
+# Expressed as a request-level auth block, NOT as a raw Authorization header. A
+# manual header only overrides the collection's bearer on older Postman CLIs; on
+# 1.47.x the collection auth wins and this request went out with {{api_key}},
+# answering 401 "Invalid platform API token." Measured on the runner.
+#
+# The mapping form is load-bearing. `auth:` as a LIST is the collection-level
+# shape; used on a request it makes the request vanish from the collection and
+# aborts the run with "items were not found", with or without an id.
+auth:
+  type: bearer
+  credentials:
+    token: "{{platform_token}}"
 
 queryParams:
   limit: "10"
