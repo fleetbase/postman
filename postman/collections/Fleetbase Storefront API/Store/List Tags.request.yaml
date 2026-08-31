@@ -1,5 +1,6 @@
 $kind: http-request
-description: List Tags
+description: |-
+  Returns unique storefront tags for the authenticated context. Network keys aggregate tags across active member stores, while store keys return tags from the current store only.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/tags"
 method: GET
 order: 2800

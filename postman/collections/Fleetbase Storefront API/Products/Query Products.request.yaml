@@ -1,8 +1,13 @@
 $kind: http-request
 description: |-
-  Returns products available in the current storefront. Use pagination and filters to browse the catalog.
+  Returns published, available products for the authenticated store or network. With a network key, products are restricted to active network members and can be scoped to a member store or one of that store's categories.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
 method: GET
 queryParams:
+  query: ""
+  store: ""
+  category: ""
+  with_store: "true"
+  limit: ""
   offset: ""
 order: 1000
