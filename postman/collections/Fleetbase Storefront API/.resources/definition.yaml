@@ -19,7 +19,12 @@ scripts:
       // must answer 402) opts out of the 2xx expectation by setting `expected_status`
       // in its beforeRequest script. The error-payload check is skipped for it too —
       // the error body is exactly what such a request is asserting.
+      //
+      // The override is consumed here, immediately after being read. "Local" variables
+      // are scoped to the RUN, not the request — left set, one request's 402 override
+      // held every later request in the run against [402], failing ten healthy 200s.
       const expectedOverride = Number(pm.variables.get('expected_status')) || null;
+      pm.variables.unset('expected_status');
       const expected = expectedOverride
           ? [expectedOverride]
           : (pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204]);
