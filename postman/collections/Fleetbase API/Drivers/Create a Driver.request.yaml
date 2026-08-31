@@ -23,18 +23,21 @@ scripts:
       cv.set("driver_id", json_response.id);
       cv.set("driver_name", json_response.name);
 
-      // The email and phone are generated inline, so the response is the only
-      // place they can be read back. Without them the password and login
-      // requests below have no identity to use.
-      cv.set("driver_email", json_response.email);
-      cv.set("driver_phone", json_response.phone);
-      cv.set("driver_identity", json_response.email);
+      // The generated email and phone exist only in this response, and the
+      // password endpoints below need both an identity and a current password.
+      // Deliberately NOT driver_identity / driver_password / driver_phone:
+      // those name the driver the CI contract run seeds, which the driver
+      // login requests authenticate as. Overwriting them with this throwaway
+      // driver — deleted a few requests later — signs those requests in as
+      // an account that no longer exists.
+      cv.set("created_driver_email", json_response.email);
+      cv.set("created_driver_phone", json_response.phone);
 
-      // Tracks the password currently in force, so Change Driver Password can
-      // prove the old one and later requests still know what it is.
-      // pm.variables resolves across scopes; the seed is a collection variable,
-      // which pm.environment cannot see.
-      cv.set("driver_password", pm.variables.get("driver_seed_password"));
+      // Tracks the password currently in force for the created driver, so
+      // Change Driver Password can prove the old one.
+      // pm.variables resolves across scopes; the seed is a collection
+      // variable, which pm.environment cannot see.
+      cv.set("created_driver_password", pm.variables.get("driver_seed_password"));
     language: text/javascript
 examples: ./.resources/Create a Driver.resources/examples
 order: 1000

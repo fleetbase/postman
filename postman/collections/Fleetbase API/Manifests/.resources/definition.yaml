@@ -1,6 +1,8 @@
 $kind: collection
 description: |-
+  Manifests are produced by dispatch: `POST /orchestrator/commit` creates them from a plan. This folder is ordered after Orchestrator so it has one to address.
+
   A manifest is a driver's route: an order-agnostic sequence of stops which may span several orders, or none the driver has seen as an order.
 
   These endpoints are for the driver running the route. Creating, cancelling and deleting a manifest is dispatch work and is not part of the consumable API.
-order: 8500
+order: 8600
