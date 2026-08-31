@@ -1,9 +1,11 @@
 $kind: http-request
 description: |-
-  Updates a storefront customer through the legacy contact alias route. The request is handled by the same customer update controller as `/customers/{id}`.
+  Updates a storefront customer through the legacy contact alias route. The request is handled by the same customer update controller as `/customers/{id}` and carries the same authorization contract: it must be authenticated with the `Customer-Token` of the customer being updated.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/contacts/{{customer_id}}"
 method: PUT
 headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
   - key: Content-Type
     value: application/json
 body:

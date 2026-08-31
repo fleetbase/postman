@@ -1,0 +1,25 @@
+$kind: http-request
+description: |-
+  Initializes a cash (cash-on-delivery) pickup checkout. A pickup checkout with the cash gateway needs no delivery service quote, so the `service_quote` parameter is omitted. The response returns the checkout id and token; no gateway client data is prepared for cash.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
+method: GET
+queryParams:
+  gateway: "cash"
+  customer: "{{customer_id}}"
+  cart: "{{cart_id}}"
+  pickup: "true"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Capture checkout as order captures THIS checkout: cash needs no provider
+      // payment, so it is the one checkout in the run that capture can actually turn
+      // into an order. Saved under its own name so the stripe checkout's
+      // {{checkout_token}}/{{checkout_id}} stay intact for Get Checkout Status and
+      // the QPay callbacks.
+      var json_response = pm.response.json();
+
+      if (json_response && json_response.token) {
+          pm.environment.set("cash_checkout_token", json_response.token);
+      }
+    language: text/javascript
+order: 1100

@@ -14,7 +14,15 @@ scripts:
       // Status is asserted explicitly against a list. The obvious-looking
       // `pm.expect(pm.response).to.be.ok` is chai's truthiness check on an object and
       // is therefore true for every response, including a 400 — it asserts nothing.
-      const expected = pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204];
+      //
+      // A request whose CONTRACT is a refusal (e.g. capturing an unpaid Stripe checkout
+      // must answer 402) opts out of the 2xx expectation by setting `expected_status`
+      // in its beforeRequest script. The error-payload check is skipped for it too —
+      // the error body is exactly what such a request is asserting.
+      const expectedOverride = Number(pm.variables.get('expected_status')) || null;
+      const expected = expectedOverride
+          ? [expectedOverride]
+          : (pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204]);
 
       pm.test(`${pm.info.requestName} responds 2xx`, function () {
           pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
@@ -38,6 +46,7 @@ scripts:
           (Array.isArray(value) && value.length === 0);
 
       pm.test(`${pm.info.requestName} returns no error payload`, function () {
+          if (expectedOverride) { return; }
           let body;
           try { body = pm.response.json(); } catch (e) { return; }
           if (body === null || typeof body !== 'object') { return; }
