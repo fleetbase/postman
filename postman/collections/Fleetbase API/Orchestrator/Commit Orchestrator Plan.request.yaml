@@ -25,5 +25,19 @@ body:
         }
       ]
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      // Commit is what creates a manifest, and the id it returns is the only
+      // place the Manifests folder can get one — there is no endpoint that
+      // creates a manifest directly.
+      const json_response = pm.response.json();
+      const manifests = json_response.manifests || [];
+
+      if (manifests.length) {
+          pm.environment.set("manifest_id", manifests[0]);
+      }
+    language: text/javascript
+
 examples: ./.resources/Commit Orchestrator Plan.resources/examples
 order: 2000
