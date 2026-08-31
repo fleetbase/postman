@@ -40,6 +40,20 @@ variables:
   customer_phone: ""
   verification_code: ""
   push_token: ""
+  driver_identity: ""
+  driver_email: ""
+  driver_phone: ""
+  # Seeded on Create a Driver so the password endpoints have a known starting
+  # point; `driver_password` then tracks whatever is currently in force.
+  driver_seed_password: "contract-seed-password"
+  driver_password: ""
+  driver_new_password: "contract-changed-password"
+  # A reserved address (RFC 2606) that can never be delivered to. Requesting a
+  # reset answers the same way for an unknown identity as for a real one, so the
+  # endpoint is still exercised and no stranger receives a reset code.
+  driver_reset_identity: "driver-password-reset@example.com"
+  manifest_id: ""
+  manifest_stop_id: ""
 scripts:
   - type: http:afterResponse
     code: |

@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: gateway
+    type: string
+    description: "Payment gateway code — `cash` for a cash-on-delivery checkout."
+  - name: customer
+    type: string
+    description: "Customer ID associated with the request."
+  - name: cart
+    type: string
+    description: "Cart value for this checkout request."
+  - name: pickup
+    type: boolean
+    description: "Set true for a pickup order; a cash pickup checkout needs no service quote."

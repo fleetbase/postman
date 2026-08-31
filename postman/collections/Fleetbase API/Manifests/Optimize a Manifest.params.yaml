@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: latitude
+    type: number
+    required: false
+    description: The driver's current latitude. The walk starts here when both coordinates are given.
+  - name: longitude
+    type: number
+    required: false
+    description: The driver's current longitude.

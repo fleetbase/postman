@@ -11,7 +11,8 @@ body:
     {
       "name": "John Doe",
       "email": "{{$randomEmail}}",
-      "phone": "{{$randomPhoneNumber}}"
+      "phone": "{{$randomPhoneNumber}}",
+      "password": "{{driver_seed_password}}"
     }
 scripts:
   - type: afterResponse
@@ -21,6 +22,19 @@ scripts:
 
       cv.set("driver_id", json_response.id);
       cv.set("driver_name", json_response.name);
+
+      // The email and phone are generated inline, so the response is the only
+      // place they can be read back. Without them the password and login
+      // requests below have no identity to use.
+      cv.set("driver_email", json_response.email);
+      cv.set("driver_phone", json_response.phone);
+      cv.set("driver_identity", json_response.email);
+
+      // Tracks the password currently in force, so Change Driver Password can
+      // prove the old one and later requests still know what it is.
+      // pm.variables resolves across scopes; the seed is a collection variable,
+      // which pm.environment cannot see.
+      cv.set("driver_password", pm.variables.get("driver_seed_password"));
     language: text/javascript
 examples: ./.resources/Create a Driver.resources/examples
 order: 1000

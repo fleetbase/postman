@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  Lists the stores belonging to a network.
-
-  This endpoint requires a NETWORK session: authenticate with a network key rather than a store key. A store key is rejected with "Stores cannot have stores!".
+  Lists active member stores for the authenticated Network. This endpoint requires a network key; a store key is rejected. Results are network-scoped and can be searched, filtered, distance-ranked, and paginated.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stores"
 method: GET
 # A network key. The collection-level store key cannot reach this endpoint.
@@ -22,7 +20,16 @@ auth:
     token: "{{network_key}}"
 queryParams:
   query: ""
+  tagged: ""
+  category: ""
+  without_category: ""
+  ids: ""
+  exclude: ""
+  online: "true"
+  sort: ""
+  "location[latitude]": ""
+  "location[longitude]": ""
+  maximum_distance: ""
   limit: ""
   offset: ""
-  store: ""
 order: 2700

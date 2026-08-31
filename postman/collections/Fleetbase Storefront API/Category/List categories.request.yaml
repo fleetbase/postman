@@ -1,6 +1,12 @@
 $kind: http-request
 description: |-
-  Returns product categories available to the current storefront. Use this list to organize product browsing and filtering.
+  Returns product categories for a store key, network categories for a network key, or product categories for a selected network member store. Category and product expansion remains scoped to the authenticated storefront owner.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
+queryParams:
+  store: ""
+  parent: ""
+  parents_only: ""
+  with_products: ""
+  with_stores: ""
 order: 1000

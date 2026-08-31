@@ -1,0 +1,39 @@
+$kind: http-request
+name: "Update a Manifest Stop"
+description: |-
+  Marks a stop on a manifest as arrived, completed or skipped.
+
+  Status changes run through the manifest's own transitions rather than writing a column, so arrival and completion timestamps are recorded and a manifest completes itself when its last stop does.
+
+  Any other status is refused and changes nothing.
+url: "{{base_url}}/{{namespace}}/manifest-stops/:id"
+method: PATCH
+pathVariables:
+  - key: id
+    value: "{{manifest_stop_id}}"
+    description: (Required) The stop to update.
+
+body:
+  type: json
+  content: |-
+    {
+      "status": "arrived"
+    }
+
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Manifests are produced by dispatch — the consumable API deliberately
+      // cannot create one — so a fresh instance has none to address. Skipped
+      // rather than failed: the request documents the endpoint and runs for
+      // anyone whose instance has a manifest, and a missing fixture is not an
+      // endpoint fault.
+      const id = pm.environment.get("manifest_stop_id");
+      const unresolved = !id || /^\{\{.*\}\}$/.test(String(id));
+
+      if (unresolved && typeof pm.execution !== "undefined" && pm.execution.skipRequest) {
+          pm.execution.skipRequest();
+      }
+    language: text/javascript
+
+order: 3000

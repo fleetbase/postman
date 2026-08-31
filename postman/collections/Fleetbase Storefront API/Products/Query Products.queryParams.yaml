@@ -1,5 +1,20 @@
 $kind: params
 fields:
-  - name: offset
+  - name: query
     type: string
-    description: "Offset value for this products request."
+    description: "Search published products available through the current store or network."
+  - name: store
+    type: string
+    description: "Network member store public ID. Ignored for store-scoped keys."
+  - name: category
+    type: string
+    description: "Product category public ID belonging to the selected store scope."
+  - name: with_store
+    type: boolean
+    description: "Include the product's hydrated member store and media."
+  - name: limit
+    type: integer
+    description: "Maximum number of products to return."
+  - name: offset
+    type: integer
+    description: "Number of matching products to skip."

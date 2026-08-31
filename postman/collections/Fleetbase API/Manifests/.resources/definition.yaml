@@ -1,0 +1,6 @@
+$kind: collection
+description: |-
+  A manifest is a driver's route: an order-agnostic sequence of stops which may span several orders, or none the driver has seen as an order.
+
+  These endpoints are for the driver running the route. Creating, cancelling and deleting a manifest is dispatch work and is not part of the consumable API.
+order: 8500

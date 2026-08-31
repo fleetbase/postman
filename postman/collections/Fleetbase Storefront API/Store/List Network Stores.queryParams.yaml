@@ -2,13 +2,40 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: "Query value for this store request."
+    description: "Search member store names and other searchable store fields."
+  - name: tagged
+    type: string
+    description: "Comma-separated store tags; a store matching any supplied tag is returned."
+  - name: category
+    type: string
+    description: "Network category public ID assigned to a member store."
+  - name: without_category
+    type: boolean
+    description: "When true, return only member stores without a network category assignment."
+  - name: ids
+    type: string
+    description: "Comma-separated store public IDs to include."
+  - name: exclude
+    type: string
+    description: "Comma-separated store public IDs to exclude."
+  - name: online
+    type: boolean
+    description: "Filter by the store online state."
+  - name: sort
+    type: string
+    description: "Sort mode: highest_rated, lowest_rated, newest, oldest, popular, trending, or nearest."
+  - name: "location[latitude]"
+    type: number
+    description: "Customer latitude used by nearest sorting and distance filtering."
+  - name: "location[longitude]"
+    type: number
+    description: "Customer longitude used by nearest sorting and distance filtering."
+  - name: maximum_distance
+    type: number
+    description: "Maximum distance from location in meters. Stores without a valid location are omitted."
   - name: limit
-    type: string
-    description: "Limit value for this store request."
+    type: integer
+    description: "Maximum number of stores to return."
   - name: offset
-    type: string
-    description: "Offset value for this store request."
-  - name: store
-    type: string
-    description: "Store value for this store request."
+    type: integer
+    description: "Number of matching stores to skip."
