@@ -1,9 +1,11 @@
 $kind: http-request
 description: |-
-  Updates a storefront customer profile. The response returns the customer with the new values applied.
+  Updates a storefront customer profile. The request must be authenticated as the customer being updated: the `Customer-Token` identity is authoritative and a token belonging to a different customer is rejected with `403`. The response returns the customer with the new values applied.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{{customer_id}}"
 method: PUT
 headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
   - key: Content-Type
     value: application/json
 body:

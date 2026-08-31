@@ -1,0 +1,29 @@
+$kind: http-request
+description: |-
+  Documents the refusal contract for capturing a Stripe checkout whose PaymentIntent has not succeeded: the API answers `402` with `"Stripe payment has not been completed."` and creates no order. Client-supplied transaction details can never substitute for the provider's verified payment state.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{checkout_token}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // This request's contract IS the refusal — see the collection-level baseline
+      // script, which asserts this status instead of 2xx and skips the error-payload
+      // check when expected_status is set.
+      pm.variables.set('expected_status', 402);
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test('Capture without payment is refused with the Stripe contract error', function () {
+          pm.expect(pm.response.json().error).to.eql('Stripe payment has not been completed.');
+      });
+    language: text/javascript
+order: 3100
