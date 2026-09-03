@@ -8,5 +8,5 @@ scripts:
   - type: afterResponse
     language: text/javascript
     code: |
-      const body = pm.response.json(); pm.test("Vehicle lists attached Trailer", () => { pm.response.to.have.status(200); pm.expect(body.data.map(item => item.id)).to.include(pm.environment.get("trailer_id")); });
+      const body = pm.response.json(); pm.test("Vehicle lists attached Trailer", () => { pm.response.to.have.status(200); pm.expect(body.map(item => item.id)).to.include(pm.environment.get("trailer_id")); });
 order: 8000

@@ -8,5 +8,5 @@ scripts:
   - type: afterResponse
     language: text/javascript
     code: |
-      const body = pm.response.json(); pm.test("Detached history remains", () => { pm.response.to.have.status(200); const connection = body.data.find(item => item.id === pm.environment.get("trailer_connection_id")); pm.expect(connection).to.be.an("object"); pm.expect(connection.active).to.eql(false); pm.expect(connection.disconnected_at).to.be.ok; });
+      const body = pm.response.json(); pm.test("Detached history remains", () => { pm.response.to.have.status(200); const connection = body.find(item => item.id === pm.environment.get("trailer_connection_id")); pm.expect(connection).to.be.an("object"); pm.expect(connection.active).to.eql(false); pm.expect(connection.disconnected_at).to.be.ok; });
 order: 19000

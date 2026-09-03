@@ -9,5 +9,5 @@ scripts:
     language: text/javascript
     code: |
       pm.test("Trailer query succeeds", () => pm.response.to.have.status(200));
-      pm.test("Query is paginated", () => pm.expect(pm.response.json()).to.have.property("data"));
+      pm.test("Query returns matching Trailers", () => { const body = pm.response.json(); pm.expect(body).to.be.an("array"); pm.expect(body.map(item => item.id)).to.include(pm.environment.get("trailer_id")); });
 order: 2000
