@@ -1,0 +1,12 @@
+$kind: http-request
+description: List currently attached Trailers for a Vehicle.
+url: "{{base_url}}/{{namespace}}/vehicles/:id/trailers"
+method: GET
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{vehicle_id}}", description: Vehicle public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Vehicle lists attached Trailer", () => { pm.response.to.have.status(200); pm.expect(body.map(item => item.id)).to.include(pm.environment.get("trailer_id")); });
+order: 8000

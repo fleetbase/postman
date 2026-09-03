@@ -46,6 +46,15 @@ fields:
   - name: equipable
     type: string
     description: Public ID of the assigned resource, when loaded.
+  - name: equipable_type
+    type: string
+    description: Public attachment type such as `fleet-ops:vehicle` or `fleet-ops:trailer`.
+  - name: equipable_id
+    type: string
+    description: Public ID of the attached Vehicle or Trailer.
+  - name: equipable_name
+    type: string
+    description: Display name of the attached Vehicle or Trailer.
   - name: meta
     type: object
     description: Additional equipment metadata.

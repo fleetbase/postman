@@ -1,0 +1,18 @@
+$kind: http-request
+description: Create a first-class Trailer for the authenticated company.
+url: "{{base_url}}/{{namespace}}/trailers"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+body:
+  type: json
+  content: |
+    {"name":"Postman Reefer","code":"POSTMAN-TRL-001","type":"reefer","status":"available","plate_number":"PM-TR-001","payload_capacity":20000,"axle_count":2,"refrigerated":true,"measurement_system":"metric"}
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json();
+      pm.test("Trailer created", () => pm.expect(pm.response.code).to.be.oneOf([200, 201]));
+      pm.test("Trailer has public ID and stable fields", () => { pm.expect(body.id).to.match(/^trailer_/); pm.expect(body.type).to.eql("reefer"); pm.expect(body).to.not.have.property("uuid"); pm.expect(body).to.not.have.property("company_uuid"); });
+      pm.environment.set("trailer_id", body.id);
+order: 1000

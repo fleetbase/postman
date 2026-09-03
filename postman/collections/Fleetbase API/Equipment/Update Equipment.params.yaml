@@ -20,7 +20,7 @@ fields:
     description: File public ID for the equipment photo.
   - name: equipable_type
     type: string
-    description: Polymorphic resource type such as `fleet-ops:vehicle` or `fleet-ops:driver`.
+    description: Polymorphic resource type such as `fleet-ops:vehicle`, `fleet-ops:trailer`, or the existing `fleet-ops:driver` compatibility type.
   - name: equipable
     type: string
     description: Public ID of the resource to assign equipment to.

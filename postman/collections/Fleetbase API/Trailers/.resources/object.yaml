@@ -1,0 +1,33 @@
+$kind: object
+name: Trailer
+description: A first-class Trailer resource stored as an independently managed fleet asset.
+example: |
+  {
+    "id": "trailer_7YqM3KpL2n",
+    "name": "Reefer 12",
+    "code": "TRL-0012",
+    "type": "reefer",
+    "status": "available",
+    "plate_number": "TR-1200",
+    "attachment_state": "detached",
+    "connectivity_status": "never_connected",
+    "online": null,
+    "devices_count": 0,
+    "equipment_count": 0
+  }
+fields:
+  - { name: id, type: string, description: Public Trailer identifier with the `trailer_` prefix. }
+  - { name: name, type: string, description: Trailer display name. }
+  - { name: code, type: string, description: Company-scoped fleet code. }
+  - { name: type, type: string, description: Stable Trailer type value. }
+  - { name: status, type: string, description: Lifecycle state independent of attachment and connectivity. }
+  - { name: attachment_state, type: string, description: Derived attached or detached state. }
+  - { name: connectivity_status, type: string, description: Derived telemetry connectivity state. }
+  - { name: current_vehicle, type: object, description: Current towing Vehicle public identity when attached. }
+  - { name: current_connection, type: object, description: Effective-dated current towing connection. }
+  - { name: location, type: object, description: Latest direct Trailer coordinates. }
+  - { name: telematics, type: object, description: Normalized latest telemetry snapshot and provenance. }
+  - { name: devices_count, type: integer, description: Attached device count. }
+  - { name: equipment_count, type: integer, description: Attached equipment count. }
+  - { name: created_at, type: timestamp, description: Creation timestamp. }
+  - { name: updated_at, type: timestamp, description: Last update timestamp. }

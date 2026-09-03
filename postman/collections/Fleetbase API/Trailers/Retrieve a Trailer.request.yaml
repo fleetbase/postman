@@ -1,0 +1,12 @@
+$kind: http-request
+description: Retrieve one Trailer by public ID.
+url: "{{base_url}}/{{namespace}}/trailers/:id"
+method: GET
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer retrieved", () => { pm.response.to.have.status(200); pm.expect(body.id).to.eql(pm.environment.get("trailer_id")); });
+order: 3000

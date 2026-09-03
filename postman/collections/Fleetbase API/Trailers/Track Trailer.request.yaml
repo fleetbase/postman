@@ -1,0 +1,13 @@
+$kind: http-request
+description: Record a Trailer observation and create a Position.
+url: "{{base_url}}/{{namespace}}/trailers/:id/track"
+method: PATCH
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+body: { type: json, content: '{"latitude":40.7484,"longitude":-73.9857,"speed":35,"heading":90}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer tracking updates live state", () => { pm.response.to.have.status(200); pm.expect(body.location).to.be.an("object"); pm.expect(body.telematics.last_provider).to.eql("public_api"); });
+order: 14000

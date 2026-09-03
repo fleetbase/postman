@@ -1,0 +1,12 @@
+$kind: http-request
+description: Soft-delete a detached Trailer.
+url: "{{base_url}}/{{namespace}}/trailers/:id"
+method: DELETE
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      pm.test("Trailer deleted", () => pm.expect(pm.response.code).to.be.oneOf([200, 204])); pm.environment.unset("trailer_id"); pm.environment.unset("trailer_connection_id");
+order: 20000

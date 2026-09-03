@@ -1,0 +1,12 @@
+$kind: http-request
+description: Delete the lifecycle Equipment after detaching it.
+url: "{{base_url}}/{{namespace}}/equipment/:id"
+method: DELETE
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_equipment_id}}", description: Equipment public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      pm.test("Lifecycle Equipment deleted", () => pm.expect(pm.response.code).to.be.oneOf([200, 204])); pm.environment.unset("trailer_equipment_id");
+order: 17500

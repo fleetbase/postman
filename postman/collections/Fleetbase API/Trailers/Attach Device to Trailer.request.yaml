@@ -1,0 +1,13 @@
+$kind: http-request
+description: Attach a Device to a Trailer while preserving the legacy Vehicle attachment alias.
+url: "{{base_url}}/{{namespace}}/devices/:id/attach"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_device_id}}", description: Device public ID. }]
+body: { type: json, content: '{"attachable_type":"fleet-ops:trailer","attachable":"{{trailer_id}}"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); const device = body.device ?? body; pm.test("Device attached to Trailer", () => { pm.response.to.have.status(200); pm.expect(device.attachable_type).to.include("trailer"); pm.expect(device.attachable_id).to.eql(pm.environment.get("trailer_id")); });
+order: 13500

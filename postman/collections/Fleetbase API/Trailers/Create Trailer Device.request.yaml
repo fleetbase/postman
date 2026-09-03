@@ -1,0 +1,12 @@
+$kind: http-request
+description: Create a lifecycle telematics Device that will be attached to the Trailer and cleaned up by this folder.
+url: "{{base_url}}/{{namespace}}/devices"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+body: { type: json, content: '{"name":"Postman Trailer Tracker","device_id":"POSTMAN-TRL-TRACKER","type":"gps","provider":"manual"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Device created for Trailer lifecycle", () => { pm.expect(pm.response.code).to.be.oneOf([200, 201]); pm.expect(body.id).to.match(/^device_/); }); pm.environment.set("trailer_device_id", body.id);
+order: 13000

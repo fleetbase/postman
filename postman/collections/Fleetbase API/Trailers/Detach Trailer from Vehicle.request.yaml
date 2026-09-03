@@ -1,0 +1,13 @@
+$kind: http-request
+description: End the active towing connection while retaining history. Repeating detach is idempotent.
+url: "{{base_url}}/{{namespace}}/trailers/:id/detach"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+body: { type: json, content: '{"notes":"Postman lifecycle detach"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer detached", () => { pm.response.to.have.status(200); pm.expect(body.status).to.eql("ok"); if (body.connection) pm.expect(body.connection.active).to.eql(false); });
+order: 18000
