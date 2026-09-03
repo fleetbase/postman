@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - { name: query, type: string, description: Search Trailer identity fields. }
+  - { name: type, type: string, description: Filter by Trailer type. }
+  - { name: status, type: string, description: Filter by lifecycle status. }
+  - { name: attachment_state, type: enum, values: [attached, detached], description: Filter by derived towing state. }
+  - { name: connectivity_status, type: enum, values: [online, recently_offline, offline, never_connected], description: Filter by telemetry connectivity. }
+  - { name: vehicle, type: string, description: Filter by attached Vehicle public ID. }
+  - { name: limit, type: integer, description: Page size. }
+  - { name: page, type: integer, description: Page number. }
+  - { name: sort, type: string, description: Sort expression. }

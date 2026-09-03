@@ -1,0 +1,13 @@
+$kind: http-request
+description: Atomically reassign the lifecycle Equipment from Trailer to Vehicle.
+url: "{{base_url}}/{{namespace}}/equipment/:id/attach"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_equipment_id}}", description: Equipment public ID. }]
+body: { type: json, content: '{"attachable_type":"fleet-ops:vehicle","attachable":"{{vehicle_id}}"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Equipment reassigned to Vehicle", () => { pm.response.to.have.status(200); pm.expect(body.equipable_type).to.include("vehicle"); pm.expect(body.equipable_id).to.eql(pm.environment.get("vehicle_id")); });
+order: 12000

@@ -1,0 +1,7 @@
+$kind: params
+fields:
+  - { name: name, type: string, description: Updated display name. }
+  - { name: status, type: enum, values: [available, in_use, maintenance, out_of_service, retired], description: Lifecycle status. }
+  - { name: type, type: string, description: Stable Trailer type. }
+  - { name: plate_number, type: string, description: Registration plate. }
+  - { name: payload_capacity, type: number, description: Payload capacity. }

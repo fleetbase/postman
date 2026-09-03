@@ -1,0 +1,13 @@
+$kind: http-request
+description: Attach Equipment to a Trailer using the polymorphic public attachment contract.
+url: "{{base_url}}/{{namespace}}/equipment/:id/attach"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_equipment_id}}", description: Equipment public ID. }]
+body: { type: json, content: '{"attachable_type":"fleet-ops:trailer","attachable":"{{trailer_id}}"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Equipment attached to Trailer", () => { pm.response.to.have.status(200); pm.expect(body.equipable_type).to.include("trailer"); pm.expect(body.equipable_id).to.eql(pm.environment.get("trailer_id")); });
+order: 10000

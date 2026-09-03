@@ -2,4 +2,11 @@ $kind: params
 fields:
   - name: vehicle
     type: string
-    description: Vehicle public ID.
+    description: Legacy Vehicle public ID alias. Use `attachable_type` and `attachable` for new integrations.
+  - name: attachable_type
+    type: enum
+    values: ["fleet-ops:vehicle", "fleet-ops:trailer"]
+    description: Allowed resource type for the Device installation.
+  - name: attachable
+    type: string
+    description: Vehicle or Trailer public ID.

@@ -1,0 +1,12 @@
+$kind: http-request
+description: List complete effective-dated towing history for a Trailer.
+url: "{{base_url}}/{{namespace}}/trailers/:id/connections"
+method: GET
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Connection history contains active connection", () => { pm.response.to.have.status(200); pm.expect(body.data).to.be.an("array").and.not.empty; pm.expect(body.data[0].trailer.id).to.eql(pm.environment.get("trailer_id")); });
+order: 7000

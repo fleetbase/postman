@@ -1,0 +1,13 @@
+$kind: http-request
+description: Attach a detached Trailer to a Vehicle. Repeating the same attachment is idempotent; another active Vehicle returns 409.
+url: "{{base_url}}/{{namespace}}/trailers/:id/attach"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+body: { type: json, content: '{"vehicle":"{{vehicle_id}}","source":"manual","position":1}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer attached", () => { pm.response.to.have.status(200); pm.expect(body.relationship_type).to.eql("towing"); pm.expect(body.active).to.eql(true); pm.expect(body.vehicle.id).to.eql(pm.environment.get("vehicle_id")); }); pm.environment.set("trailer_connection_id", body.id);
+order: 6000

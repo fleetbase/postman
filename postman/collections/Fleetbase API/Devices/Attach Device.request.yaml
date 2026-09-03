@@ -1,12 +1,18 @@
 $kind: http-request
-description: "Attach this device to a vehicle."
+description: Attach this Device to a Vehicle or Trailer. The legacy `vehicle` field remains supported.
 url: "{{base_url}}/{{namespace}}/devices/{{device_id}}/attach"
 method: POST
 body:
   type: json
   content: |-
     {
-      "vehicle": "{{vehicle_id}}"
+      "attachable_type": "fleet-ops:vehicle",
+      "attachable": "{{vehicle_id}}"
     }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); const device = body.device ?? body; pm.test("Device attachment is polymorphic", () => { pm.response.to.have.status(200); pm.expect(device.attachable_type).to.be.oneOf(["fleet-ops:vehicle", "fleet-ops:trailer"]); });
 order: 6000
 examples: ./.resources/Attach Device.resources/examples

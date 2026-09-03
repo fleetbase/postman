@@ -1,0 +1,13 @@
+$kind: http-request
+description: Query and filter company-scoped Trailers.
+url: "{{base_url}}/{{namespace}}/trailers"
+method: GET
+headers: { Accept: application/json }
+queryParams: { query: Postman Reefer, limit: "25", sort: -created_at }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      pm.test("Trailer query succeeds", () => pm.response.to.have.status(200));
+      pm.test("Query is paginated", () => pm.expect(pm.response.json()).to.have.property("data"));
+order: 2000

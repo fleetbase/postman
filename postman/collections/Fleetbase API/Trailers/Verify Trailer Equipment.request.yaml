@@ -1,0 +1,12 @@
+$kind: http-request
+description: Verify the Trailer representation exposes attached Equipment.
+url: "{{base_url}}/{{namespace}}/trailers/:id"
+method: GET
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer exposes attached Equipment", () => { pm.response.to.have.status(200); pm.expect(body.equipment.map(item => item.id)).to.include(pm.environment.get("trailer_equipment_id")); });
+order: 11000
