@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets/:id/vehicles/:vehicle"
+  method: POST
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "fleet_4Mnp8Qx2Vz"
+    vehicle: "vehicle_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "fleet": "fleet_4Mnp8Qx2Vz",
+        "vehicle": "vehicle_7YqM3KpL2n",
+        "assigned": true
+      }
+order: 1000

@@ -2,7 +2,45 @@ $kind: params
 fields:
   - name: query
     type: string
-    description: Search term matched against vehicle fields.
+    description: Free-text search across the vehicle's searchable fields.
+  - name: internal_id
+    type: string
+    description: |-
+      Filter by the identifier the operator's own system uses. This is the lookup an importer keys on to decide whether a vehicle already exists.
+  - name: plate_number
+    type: string
+    description: Filter by licence plate number.
+  - name: vin
+    type: string
+    description: Filter by vehicle identification number.
+  - name: public_id
+    type: string
+    description: Filter by vehicle public ID (`vehicle_...`).
+  - name: display_name
+    type: string
+    description: Filter across year, make, model and plate number together.
+  - name: vehicle_make
+    type: string
+    description: Filter by manufacturer.
+  - name: vehicle_model
+    type: string
+    description: Filter by model.
+  - name: vehicle_year
+    type: string
+    description: Filter by model year.
+  - name: vendor
+    type: string
+    description: Filter by vendor, given as its public ID (`vendor_...`) or internal ID.
+  - name: driver
+    type: string
+    description: |-
+      Filter by assigned driver, given as its public ID (`driver_...`) or internal ID. Pass `unassigned` to return vehicles with no driver.
+  - name: fleet
+    type: string
+    description: Filter to the vehicles in a fleet, given as its public ID (`fleet_...`).
+  - name: assigned_fleet
+    type: string
+    description: Pass `false` to return vehicles that belong to no fleet.
   - name: limit
     type: integer
     description: Maximum number of vehicles to return.
@@ -12,6 +50,3 @@ fields:
   - name: sort
     type: string
     description: Sort expression for the vehicle query.
-  - name: vendor
-    type: string
-    description: Vendor ID used to filter vehicles assigned to a vendor.

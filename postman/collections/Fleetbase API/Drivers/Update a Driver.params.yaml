@@ -9,25 +9,42 @@ fields:
   - name: phone
     type: string
     description: Driver phone number.
-  - name: password
+  - name: timezone
     type: string
-    description: Optional password for the driver user account.
-  - name: vehicle
+    description: Timezone for the driver's user account.
+  - name: internal_id
     type: string
-    description: Vehicle ID to assign to the driver.
-  - name: vendor
+    description: |-
+      The identifier the operator's own system uses for this driver. Queryable through `?internal_id=`, which is how an importer decides whether a driver already exists.
+  - name: drivers_license_number
     type: string
-    description: Vendor ID to assign to the driver.
-  - name: job
-    type: string
-    description: Current order ID to assign to the driver.
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: Driver lifecycle status.
+    description: Driver licence number. Queryable through `?drivers_license_number=`.
+  - name: license_expiry
+    type: date
+    description: Date the driver's licence expires.
   - name: photo
     type: string
     description: File ID, upload reference, or resolvable file input for the driver photo.
+  - name: country
+    type: string
+    description: Two-letter country code.
+  - name: currency
+    type: string
+    description: Three-letter currency code.
+  - name: city
+    type: string
+    description: Driver city.
+  - name: online
+    type: boolean
+    default: false
+    description: Whether the driver is online.
+  - name: current_status
+    type: string
+    description: Free-form operational status, distinct from the lifecycle `status`.
+  - name: status
+    type: enum
+    values: ["active", "available", "inactive"]
+    description: Driver lifecycle status. `active` is accepted and stored as `available`.
   - name: location
     type: object
     description: Resolvable point used as the driver's current location.
@@ -37,6 +54,42 @@ fields:
   - name: longitude
     type: number
     description: Decimal longitude. Required with `latitude`.
+  - name: heading
+    type: number
+    description: Current heading in degrees.
+  - name: bearing
+    type: number
+    description: Current bearing.
+  - name: altitude
+    type: number
+    description: Current altitude.
+  - name: speed
+    type: number
+    description: Current speed.
   - name: meta
     type: object
     description: Additional driver metadata.
+  - name: skills
+    type: array of strings
+    description: Qualifications or certifications the driver holds, used for orchestrator assignment.
+  - name: max_travel_time
+    type: integer
+    description: Maximum driving time per route, in seconds.
+  - name: max_distance
+    type: integer
+    description: Maximum driving distance per route, in metres.
+  - name: time_window_start
+    type: string
+    description: Default shift start time, as `HH:MM`.
+  - name: time_window_end
+    type: string
+    description: Default shift end time, as `HH:MM`.
+  - name: vehicle
+    type: string
+    description: Vehicle public ID (`vehicle_...`) to assign to the driver. Send `null` to clear. Must belong to the authenticated organization.
+  - name: vendor
+    type: string
+    description: Vendor public ID (`vendor_...`) to assign to the driver. Send `null` to clear.
+  - name: job
+    type: string
+    description: Current order public ID (`order_...`) to assign to the driver. Send `null` to clear.

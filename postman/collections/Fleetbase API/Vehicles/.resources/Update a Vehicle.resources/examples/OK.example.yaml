@@ -5,7 +5,18 @@ request:
   headers:
     Accept: application/json
   pathVariables:
-    id: ""
+    id: "vehicle_7YqM3KpL2n"
+  body:
+    type: json
+    content: |-
+      {
+        "plate_number": "ABC123",
+        "status": "operational",
+        "odometer": 41250,
+        "color": "Silver",
+        "specs": { "doors": 4 },
+        "meta": { "depot": "south" }
+      }
 response:
   statusCode: 200
   statusText: OK
@@ -15,75 +26,22 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "name": "<string>",
-        "vin": "<string>",
-        "driver": "<string>",
-        "photo_url": "<string>",
-        "make": "<string>",
-        "model": "<string>",
-        "year": "<string>",
-        "trim": "<string>",
-        "type": "<string>",
-        "plate_number": "<string>",
-        "model_data": {
-          "0_to_100_kph": "<string>",
-          "body": "<string>",
-          "co2": "<string>",
-          "doors": "<number>",
-          "drive": "<string>",
-          "engine_bore_mm": "<string>",
-          "engine_cc": "<number>",
-          "engine_compression": "<string>",
-          "engine_cyl": "<number>",
-          "engine_fuel": "<string>",
-          "engine_position": "<string>",
-          "engine_power_ps": "<number>",
-          "engine_power_rpm": "<number>",
-          "engine_stroke_mm": "<string>",
-          "engine_torque_nm": "<number>",
-          "engine_torque_rpm": "<number>",
-          "engine_valves_per_cyl": "<number>",
-          "fuel_cap_l": "<number>",
-          "length_mm": "<number>",
-          "lkm_city": "<string>",
-          "lkm_hwy": "<string>",
-          "lkm_mixed": "<string>",
-          "make_display": "<string>",
-          "seats": "<number>",
-          "sold_in_us": "<number>",
-          "top_speed_kph": "<string>",
-          "transmission_type": "<string>",
-          "weight_kg": "<number>",
-          "wheelbase_mm": "<number>",
-          "width_mm": "<number>"
-        },
-        "vin_data": {
-          "make": "<string>",
-          "manufacturer": "<string>",
-          "plant_country": "<string>",
-          "product_type": "<string>",
-          "manufacturer_address": "<string>",
-          "check_digit": "<string>",
-          "model_year": "<string>",
-          "sequential_number": "<string>",
-          "model": "<string>",
-          "plant_city": "<string>",
-          "trim": "<string>",
-          "plant_state": "<string>",
-          "body": "<string>",
-          "number_of_doors": "<string>",
-          "transmission": "<string>",
-          "number_of_gears": "<string>",
-          "engine_displacement_ccm": "<number>",
-          "engine_model": "<string>",
-          "engine_power_kw": "<number>",
-          "series": "<string>",
-          "fuel_type_primary": "<string>",
-          "production_stopped": "<number>"
-        },
-        "status": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "id": "vehicle_7YqM3KpL2n",
+        "internal_id": "VEH-1001",
+        "name": "Depot Van",
+        "make": "Toyota",
+        "model": "Camry",
+        "year": "2023",
+        "plate_number": "ABC123",
+        "color": "Silver",
+        "status": "operational",
+        "online": false,
+        "odometer": 41250,
+        "odometer_unit": "km",
+        "specs": { "doors": 4 },
+        "meta": { "depot": "south" },
+        "vendor": "vendor_5Nq8Tz1Wm4",
+        "updated_at": "2026-05-07T09:12:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

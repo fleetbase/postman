@@ -1,37 +1,29 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/drivers?name=<string>&email=<string>&password=<string>&phone_number=<string>&phone_country_code=<string>&country=<string>&city=<string>&vehicle=<string>&status=<string>"
+  url: "{{base_url}}/{{namespace}}/drivers"
   method: POST
   headers:
     Accept: application/json
-  queryParams:
-    - key: name
-      value: <string>
-      description: (Required) The name of the driver.
-    - key: email
-      value: <string>
-      description: (Required) The email of the driver.
-    - key: password
-      value: <string>
-      description: (Required) The password the driver will use for authenticating Fleetbase Navigator.
-    - key: phone_number
-      value: <string>
-      description: (Required) The drivers phone number, this can also be used to authenticating Fleetbase Navigator.
-    - key: phone_country_code
-      value: <string>
-      description: (Required) The country code of the drivers phone number.
-    - key: country
-      value: <string>
-      description: "(Required) The 2 letter country code of the country the driver is operating in. Example: 'US' or 'DE'. All accepted values can be found on the Official ISO Website. Sending a country is always required."
-    - key: city
-      value: <string>
-      description: The city the driver is operating in.
-    - key: vehicle
-      value: <string>
-      description: An Vehicle object id that you want to assign to the driver.
-    - key: status
-      value: <string>
-      description: The drivers standing status. Can either be "active" or "inactive". Defaults to "active"
+  body:
+    type: json
+    content: |-
+      {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+15555550111",
+        "internal_id": "DRV-1001",
+        "drivers_license_number": "S1234567A",
+        "license_expiry": "2030-06-30",
+        "country": "SG",
+        "city": "Singapore",
+        "current_status": "on_duty",
+        "skills": ["hazmat"],
+        "max_travel_time": 28800,
+        "max_distance": 250000,
+        "time_window_start": "08:00",
+        "time_window_end": "18:00",
+        "meta": { "badge": "A12" }
+      }
 response:
   statusCode: 200
   statusText: OK
@@ -41,25 +33,42 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "current_job": "<string>",
-        "vehicle": "<string>",
-        "email": "<string>",
-        "phone_number": "<string>",
-        "phone_country_code": "<string>",
-        "signup_token_used": "<string>",
-        "drivers_license_number": "<string>",
-        "latitude": "<string>",
-        "longitude": "<string>",
-        "heading": "<string>",
-        "altitude": "<string>",
-        "speed": "<string>",
-        "country": "<string>",
-        "currency": "<string>",
-        "city": "<string>",
-        "online": "<number>",
-        "status": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "id": "driver_A1b2C3d4E5",
+        "user": "user_1A2b3C4d5E",
+        "internal_id": "DRV-1001",
+        "company": "company_6zV1KqN9pR",
+        "company_name": "Fleetbase",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+15555550111",
+        "timezone": "Asia/Singapore",
+        "drivers_license_number": "S1234567A",
+        "license_expiry": "2030-06-30",
+        "photo_url": null,
+        "avatar_url": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/driver-icons/moto-driver.png",
+        "vehicle_avatar": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/vehicle-icons/mini_bus.svg",
+        "vehicle_id": null,
+        "vendor_id": null,
+        "job_id": null,
+        "location": { "type": "Point", "coordinates": [0, 0] },
+        "heading": 0,
+        "bearing": null,
+        "altitude": 0,
+        "speed": 0,
+        "country": "SG",
+        "currency": "SGD",
+        "city": "Singapore",
+        "online": false,
+        "current_status": "on_duty",
+        "status": "available",
+        "token": null,
+        "skills": ["hazmat"],
+        "max_travel_time": 28800,
+        "max_distance": 250000,
+        "time_window_start": "08:00:00",
+        "time_window_end": "18:00:00",
+        "meta": { "badge": "A12" },
+        "updated_at": "2026-05-07T08:30:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

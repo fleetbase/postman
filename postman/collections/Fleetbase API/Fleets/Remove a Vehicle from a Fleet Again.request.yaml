@@ -1,0 +1,37 @@
+$kind: http-request
+description: |-
+  Removes a vehicle from a fleet. Both path parameters are public IDs.
+
+  This request repeats the removal above deliberately: removing a membership that is not there is a documented, successful no-op.
+url: "{{base_url}}/{{namespace}}/fleets/:id/vehicles/:vehicle"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{fleet_id}}"
+    description: (Required) The public id of the `Fleet`.
+  - key: vehicle
+    value: "{{fleet_vehicle_id}}"
+    description: (Required) The public id of the `Vehicle` to remove from the fleet.
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+
+      pm.test("Remove a Vehicle from a Fleet Again confirms the membership is gone", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.fleet, "fleet must be a public id").to.match(/^fleet_/);
+          pm.expect(json_response.vehicle, "vehicle must be a public id").to.match(/^vehicle_/);
+          pm.expect(json_response.assigned, "assigned must be false after a removal").to.be.false;
+      });
+
+      pm.test("Remove a Vehicle from a Fleet Again returns no internal uuids", function () {
+          ["fleet_uuid", "vehicle_uuid", "uuid"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
+examples: ./.resources/Remove a Vehicle from a Fleet Again.resources/examples
+order: 4150

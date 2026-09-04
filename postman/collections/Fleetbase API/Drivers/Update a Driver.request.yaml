@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Updates a driver's account fields, assignment, status, location, photo, or metadata.
+  Updates a driver's account fields, identity, assignment, operational state, location, photo, orchestrator constraints, or metadata.
+
+  `password` is deliberately not accepted here. Changing a password requires proving the old one and resetting it requires a code, neither of which a general `PUT` can express — use **Change Driver Password**, **Request Driver Password Reset** and **Reset Driver Password** instead.
+
+  Relationship inputs take public IDs and are resolved inside the authenticated organization. Sending `null` clears an assignment.
 url: "{{base_url}}/{{namespace}}/drivers/:id"
 method: PUT
 headers:
@@ -8,14 +12,62 @@ headers:
 pathVariables:
   - key: id
     value: "{{driver_id}}"
-    description: (Required) The id of the `Driver`.
+    description: (Required) The public id of the `Driver`.
 body:
   type: json
   content: |
     {
       "name": "John Doe",
       "email": "{{$randomEmail}}",
-      "phone": "{{$randomPhoneNumber}}"
+      "phone": "{{$randomPhoneNumber}}",
+      "internal_id": "DRV-1002",
+      "city": "Johor Bahru",
+      "current_status": "off_duty",
+      "meta": { "badge": "B34" }
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      // Keep the password-contract variables tracking this driver's identity.
+      cv.set("created_driver_email", json_response.email);
+      cv.set("created_driver_phone", json_response.phone);
+
+      pm.test("Update a Driver returns the persisted driver", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a driver public id").to.match(/^driver_/);
+      });
+
+      pm.test("Update a Driver persists every field that was sent", function () {
+          pm.expect(json_response.name).to.eql("John Doe");
+          pm.expect(json_response.internal_id).to.eql("DRV-1002");
+          pm.expect(json_response.city).to.eql("Johor Bahru");
+          pm.expect(json_response.current_status).to.eql("off_duty");
+          pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
+          pm.expect(json_response.meta.badge).to.eql("B34");
+      });
+
+      pm.test("Update a Driver reports assignments as public ids", function () {
+          // `vehicle`, `vendor` and `job` are written as public ids and read
+          // back as public ids. The vehicle created earlier in this run has
+          // already been deleted by the Vehicles folder, so the assignment
+          // itself is exercised by the Fleet-Ops contract suite rather than
+          // against a resource that no longer exists.
+          pm.expect(json_response).to.have.property("vehicle_id");
+          pm.expect(json_response).to.have.property("vendor_id");
+          if (json_response.vehicle_id) {
+              pm.expect(json_response.vehicle_id).to.match(/^vehicle_/);
+          }
+      });
+
+      pm.test("Update a Driver exposes no internal uuid columns", function () {
+          ["uuid", "public_id", "company_uuid", "user_uuid", "vehicle_uuid", "vendor_uuid", "current_job_uuid", "auth_token"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
 examples: ./.resources/Update a Driver.resources/examples
 order: 4000

@@ -1,7 +1,9 @@
 $kind: object
 name: Driver
 description: |-
-  A driver represents a FleetOps operator who can receive jobs, report location, register devices, and belong to fleets, vendors, vehicles, and organizations.
+  A driver represents a Fleet-Ops operator who can receive jobs, report location, register devices, and belong to fleets, vendors, vehicles, and organizations.
+
+  `email` and `phone` are optional: an operational driver record may have neither, in which case the driver cannot sign in to Navigator until credentials are supplied. Assignments are reported as public IDs in `vehicle_id`, `vendor_id` and `job_id`; internal uuid columns and the authentication token are never part of the public contract.
 example: |
   {
     "id": "driver_A1b2C3d4E5",
@@ -12,7 +14,12 @@ example: |
     "name": "Alex Driver",
     "email": "alex.driver@example.com",
     "phone": "+15555550111",
+    "timezone": "Asia/Singapore",
     "drivers_license_number": null,
+    "license_expiry": null,
+    "vehicle_id": null,
+    "vendor_id": null,
+    "job_id": null,
     "photo_url": null,
     "avatar_url": null,
     "vehicle_avatar": null,
@@ -27,8 +34,14 @@ example: |
     "currency": "SGD",
     "city": "Singapore",
     "online": false,
+    "current_status": null,
     "status": "active",
     "token": null,
+    "skills": null,
+    "max_travel_time": null,
+    "max_distance": null,
+    "time_window_start": null,
+    "time_window_end": null,
     "meta": {},
     "updated_at": "2026-05-07T08:30:00.000000Z",
     "created_at": "2026-05-07T08:30:00.000000Z"
@@ -118,3 +131,39 @@ fields:
   - name: created_at
     type: timestamp
     description: Timestamp when the driver was created.
+  - name: timezone
+    type: string
+    description: Timezone on the driver's linked user account.
+  - name: license_expiry
+    type: date
+    description: Date the driver's licence expires.
+  - name: vehicle_id
+    type: string
+    description: Public ID of the assigned vehicle, or `null`.
+  - name: vendor_id
+    type: string
+    description: Public ID of the assigned vendor, or `null`.
+  - name: job_id
+    type: string
+    description: Public ID of the driver's current order, or `null`.
+  - name: bearing
+    type: number
+    description: Current bearing.
+  - name: current_status
+    type: string
+    description: Free-form operational status, distinct from the lifecycle `status`.
+  - name: skills
+    type: array of strings
+    description: Qualifications or certifications the driver holds, used for orchestrator assignment.
+  - name: max_travel_time
+    type: integer
+    description: Maximum driving time per route, in seconds.
+  - name: max_distance
+    type: integer
+    description: Maximum driving distance per route, in metres.
+  - name: time_window_start
+    type: string
+    description: Default shift start time.
+  - name: time_window_end
+    type: string
+    description: Default shift end time.

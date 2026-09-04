@@ -1,24 +1,21 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/fleets/:id?name=<string>&service_area=<string>&task=<string>&status=<string>"
+  url: "{{base_url}}/{{namespace}}/fleets/:id"
   method: PUT
   headers:
     Accept: application/json
-  queryParams:
-    - key: name
-      value: <string>
-      description: The name of the fleet.
-    - key: service_area
-      value: <string>
-      description: The id of the ServiceArea you want to assign to the fleet.
-    - key: task
-      value: <string>
-      description: Specification of the fleet's misssion.
-    - key: status
-      value: <string>
-      description: 'The status of the fleet. Valid opetions: "active", "inactive", "disabled"'
   pathVariables:
-    id: ""
+    id: "fleet_4Mnp8Qx2Vz"
+  body:
+    type: json
+    content: |-
+      {
+          "name": "Haulers North",
+          "color": "#7C3AED",
+          "task": "Regional distribution",
+          "status": "active",
+          "service_area": "service_area_9Kp2Vx4Qm1"
+      }
 response:
   statusCode: 200
   statusText: OK
@@ -28,12 +25,17 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "service_area": "<string>",
-        "name": "<string>",
-        "task": "<string>",
-        "status": "<string>",
-        "created_at": "<string>",
-        "updated_at": "<string>"
+        "id": "fleet_4Mnp8Qx2Vz",
+        "name": "Haulers North",
+        "color": "#7C3AED",
+        "task": "Regional distribution",
+        "status": "active",
+        "photo_url": "https://s3.ap-northeast-2.amazonaws.com/fleetbase/public/default-fleet.png",
+        "service_area": "service_area_9Kp2Vx4Qm1",
+        "zone": null,
+        "vendor": null,
+        "parent_fleet": null,
+        "updated_at": "2026-05-07T09:12:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

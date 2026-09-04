@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Creates a vehicle for the current company. Send VIN, make/model fields, assignment fields, status, location, capacity, or orchestrator constraints as needed.
+  Creates a vehicle for the current organization.
+
+  Every safe business field the vehicle record holds is accepted: identity and description, odometer and measurement, body, capacity and dimensions, lifecycle and financing, regulatory and engine specifications, structured `specs` / `details` / `meta`, orchestrator constraints, and the vendor, driver, category and warranty relationships.
+
+  Relationships take public IDs (`vendor_...`, `driver_...`, `category_...`, `warranty_...`) and are resolved inside the authenticated organization; another organization's public ID is rejected exactly as a non-existent one is. Server-managed values — decoded `vin_data`, `telematics`, the generated `slug`, and every internal uuid column — are not accepted as input.
 url: "{{base_url}}/{{namespace}}/vehicles"
 method: POST
 headers:
@@ -9,14 +13,33 @@ body:
   type: json
   content: |
     {
+      "internal_id": "VEH-1001",
+      "name": "Depot Van",
+      "description": "City route van",
       "vin": "1GCGSBEA0G1111111",
       "year": 2023,
       "make": "Toyota",
       "model": "Camry",
       "trim": "SE",
+      "color": "White",
+      "type": "sedan",
       "plate_number": "ABC123",
       "status": "maintenance",
-      "online": false
+      "online": false,
+      "odometer": 41000,
+      "odometer_unit": "km",
+      "measurement_system": "metric",
+      "fuel_type": "diesel",
+      "seating_capacity": 5,
+      "payload_capacity": 1400,
+      "skills": ["tail_lift"],
+      "max_tasks": 40,
+      "time_window_start": "08:00",
+      "time_window_end": "18:00",
+      "return_to_depot": true,
+      "notes": "City route pool",
+      "meta": { "depot": "north" },
+      "vendor": "{{vendor_id}}"
     }
 scripts:
   - type: afterResponse
@@ -25,6 +48,64 @@ scripts:
       let cv = pm.environment;
       cv.set("vehicle_id", json_response.id);
       cv.set("vehicle_name", json_response.make);
+
+      pm.test("Create a Vehicle returns the persisted vehicle", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a vehicle public id").to.match(/^vehicle_/);
+      });
+
+      pm.test("Create a Vehicle persists the identity fields that were sent", function () {
+          pm.expect(json_response.internal_id).to.eql("VEH-1001");
+          pm.expect(json_response.name).to.eql("Depot Van");
+          pm.expect(json_response.description).to.eql("City route van");
+          pm.expect(json_response.vin).to.eql("1GCGSBEA0G1111111");
+          pm.expect(Number(json_response.year)).to.eql(2023);
+          pm.expect(json_response.make).to.eql("Toyota");
+          pm.expect(json_response.model).to.eql("Camry");
+          pm.expect(json_response.trim).to.eql("SE");
+          pm.expect(json_response.color).to.eql("White");
+          pm.expect(json_response.type).to.eql("sedan");
+          pm.expect(json_response.plate_number).to.eql("ABC123");
+      });
+
+      pm.test("Create a Vehicle persists the operational fields that were sent", function () {
+          // The odometer was accepted but discarded before this contract; a
+          // silent no-op is the worst possible answer to a mileage write.
+          pm.expect(Number(json_response.odometer), "odometer was not persisted").to.eql(41000);
+          pm.expect(json_response.odometer_unit).to.eql("km");
+          pm.expect(json_response.measurement_system).to.eql("metric");
+          pm.expect(json_response.fuel_type).to.eql("diesel");
+          pm.expect(Number(json_response.seating_capacity)).to.eql(5);
+          pm.expect(Number(json_response.payload_capacity)).to.eql(1400);
+          pm.expect(json_response.status).to.eql("maintenance");
+          pm.expect(json_response.online).to.eql(false);
+          pm.expect(json_response.notes).to.eql("City route pool");
+      });
+
+      pm.test("Create a Vehicle persists structured and orchestrator fields", function () {
+          pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
+          pm.expect(json_response.meta.depot).to.eql("north");
+          pm.expect(json_response.skills).to.be.an('array').that.includes("tail_lift");
+          pm.expect(Number(json_response.max_tasks)).to.eql(40);
+          pm.expect(String(json_response.time_window_start)).to.match(/^08:00/);
+          pm.expect(String(json_response.time_window_end)).to.match(/^18:00/);
+          pm.expect(json_response.return_to_depot).to.eql(true);
+      });
+
+      pm.test("Create a Vehicle resolves the vendor to a public id", function () {
+          const vendorId = pm.variables.get("vendor_id");
+          pm.expect(json_response).to.have.property("vendor");
+          if (vendorId) {
+              pm.expect(json_response.vendor).to.eql(vendorId);
+          }
+      });
+
+      pm.test("Create a Vehicle exposes no internal uuid columns", function () {
+          ["uuid", "public_id", "company_uuid", "vendor_uuid", "category_uuid", "warranty_uuid", "photo_uuid", "telematic_uuid", "_key"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
     language: text/javascript
 examples: ./.resources/Create a Vehicle.resources/examples
 order: 1000

@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/vehicles"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "make": "Toyota",
+        "vendor": "vendor_NotInThisOrg"
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "No vendor resource found for the identifier provided."
+      }
+order: 3000

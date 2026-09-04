@@ -1,5 +1,35 @@
 $kind: params
 fields:
+  - name: query
+    type: string
+    description: Free-text search across the fleet's name, task and public ID.
+  - name: name
+    type: string
+    description: Filter by fleet name.
+  - name: public_id
+    type: string
+    description: Filter by fleet public ID (`fleet_...`).
+  - name: status
+    type: string
+    description: Filter by fleet status. Accepts a comma-separated list.
+  - name: task
+    type: string
+    description: Filter by the fleet's task.
+  - name: parent_fleet
+    type: string
+    description: Filter to the subfleets of a parent fleet, given as its public ID (`fleet_...`).
+  - name: parents_only
+    type: boolean
+    description: Return only root fleets — those with no parent fleet.
+  - name: vendor
+    type: string
+    description: Filter by vendor, given as its public ID (`vendor_...`).
+  - name: service_area
+    type: string
+    description: Filter by service area, given as its public ID (`service_area_...`).
+  - name: zone
+    type: string
+    description: Filter by zone, given as its public ID (`zone_...`).
   - name: limit
     type: integer
     description: Maximum number of fleets to return.
@@ -11,4 +41,5 @@ fields:
     description: Sort expression for the fleet query.
   - name: with
     type: array of strings
-    description: Relationships to include in fleet responses.
+    description: |-
+      Relationships to include in fleet responses. A relationship named here is returned as a nested object; otherwise it is returned as the related resource's public ID.

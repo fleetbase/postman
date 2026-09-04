@@ -1,11 +1,46 @@
 $kind: params
 fields:
-  - name: id
-    type: string
-    description: Driver ID filter used by this request example.
   - name: query
     type: string
-    description: Search term matched against driver fields.
+    description: Free-text search across the driver's name, email, phone and licence number.
+  - name: name
+    type: string
+    description: Filter by the driver's name.
+  - name: internal_id
+    type: string
+    description: |-
+      Filter by the identifier the operator's own system uses. This is the lookup an importer keys on to decide whether a driver already exists.
+  - name: public_id
+    type: string
+    description: Filter by driver public ID (`driver_...`).
+  - name: drivers_license_number
+    type: string
+    description: Filter by driver licence number.
+  - name: phone
+    type: string
+    description: Filter by the phone number on the driver's linked user account.
+  - name: country
+    type: string
+    description: Filter by country code. Accepts a comma-separated list.
+  - name: status
+    type: string
+    description: Filter by driver status. Accepts a comma-separated list.
+  - name: vendor
+    type: string
+    description: Filter by vendor, given as its public ID (`vendor_...`).
+  - name: vehicle
+    type: string
+    description: |-
+      Filter by assigned vehicle, given as its public ID (`vehicle_...`) or internal ID. Pass `unassigned` to return drivers with no vehicle.
+  - name: fleet
+    type: string
+    description: Filter to the drivers in a fleet, given as its public ID (`fleet_...`).
+  - name: nearby
+    type: string
+    description: Coordinates or an address string to search near. Pair with `radius`.
+  - name: radius
+    type: integer
+    description: Search radius in metres, used with `nearby`.
   - name: limit
     type: integer
     description: Maximum number of drivers to return.
@@ -15,6 +50,3 @@ fields:
   - name: sort
     type: string
     description: Sort expression for the driver query.
-  - name: vendor
-    type: string
-    description: Vendor ID used to filter drivers assigned to a vendor.

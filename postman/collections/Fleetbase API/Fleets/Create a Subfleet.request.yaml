@@ -1,0 +1,52 @@
+$kind: http-request
+description: |-
+  Creates a fleet nested beneath another fleet by sending the parent's public ID in `parent_fleet`.
+
+  Hierarchies are validated on write: a fleet cannot be its own parent, and cannot be moved beneath one of its own subfleets. Both are answered with `422`. A parent belonging to another organization is answered with `404`, the same as a parent that does not exist.
+url: "{{base_url}}/{{namespace}}/fleets"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "Carpool",
+        "color": "#059669",
+        "task": "Employee transport",
+        "status": "active",
+        "parent_fleet": "{{parent_fleet_id}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("subfleet_id", json_response.id);
+
+      pm.test("Create a Subfleet returns the persisted subfleet", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a fleet public id").to.match(/^fleet_/);
+          pm.expect(json_response.name).to.eql("Carpool");
+      });
+
+      pm.test("Create a Subfleet resolves the parent to its public id", function () {
+          const parentFleetId = pm.variables.get("parent_fleet_id");
+          pm.expect(json_response.parent_fleet, "parent_fleet missing from the response").to.be.a('string');
+          pm.expect(json_response.parent_fleet, "parent_fleet must be a public id, never a uuid").to.match(/^fleet_/);
+          if (parentFleetId) {
+              pm.expect(json_response.parent_fleet).to.eql(parentFleetId);
+          }
+          pm.expect(json_response.id, "a fleet must not be its own parent").to.not.eql(json_response.parent_fleet);
+      });
+
+      pm.test("Create a Subfleet exposes no internal uuid columns", function () {
+          ["uuid", "public_id", "company_uuid", "parent_fleet_uuid"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
+examples: ./.resources/Create a Subfleet.resources/examples
+order: 1100

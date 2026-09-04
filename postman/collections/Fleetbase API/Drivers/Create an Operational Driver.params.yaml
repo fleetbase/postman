@@ -1,0 +1,15 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: Driver display name. The only required field.
+  - name: internal_id
+    type: string
+    description: The identifier the operator's own system uses for this driver.
+  - name: email
+    type: string
+    description: Optional. Omit it when the driver has no mailbox.
+  - name: phone
+    type: string
+    description: Optional. Omit it when the driver has no handset.

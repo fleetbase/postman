@@ -1,0 +1,20 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: Subfleet display name.
+  - name: parent_fleet
+    type: string
+    required: true
+    description: |-
+      Public ID (`fleet_...`) of the fleet this subfleet belongs to. A fleet may not name itself, and may not be placed beneath one of its own descendants.
+  - name: color
+    type: string
+    description: Display colour for the subfleet.
+  - name: task
+    type: string
+    description: Free-text description of what the subfleet is used for.
+  - name: status
+    type: string
+    description: Subfleet status.
