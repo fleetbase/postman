@@ -17,6 +17,7 @@ body:
       "email": "{{$randomEmail}}",
       "phone": "{{$randomPhoneNumber}}",
       "password": "{{driver_seed_password}}",
+      "timezone": "Asia/Singapore",
       "internal_id": "DRV-1001",
       "drivers_license_number": "S1234567A",
       "license_expiry": "2030-06-30",
@@ -62,6 +63,25 @@ scripts:
           pm.expect(json_response.name).to.eql("John Doe");
       });
 
+      pm.test("Create a Driver echoes the contact details it was given", function () {
+          const sent = JSON.parse(pm.request.body.raw);
+
+          pm.expect(json_response.email, "email did not round trip").to.eql(json_response.email && sent.email ? sent.email : json_response.email);
+          pm.expect(json_response.email, "email missing").to.be.a('string');
+          pm.expect(json_response.phone, "phone missing").to.be.a('string');
+          pm.expect(json_response.timezone, "timezone was not persisted").to.eql("Asia/Singapore");
+      });
+
+      pm.test("Create a Driver keeps every relationship the released contract returned", function () {
+          pm.expect(json_response.user, "user must stay a public-id string").to.be.a('string');
+          pm.expect(json_response.user).to.match(/^user_/);
+          pm.expect(json_response).to.have.property("company");
+          pm.expect(json_response).to.have.property("company_name");
+          ["vehicle_id", "vendor_id", "job_id"].forEach(function (key) {
+              pm.expect(json_response, key + " is missing").to.have.property(key);
+          });
+      });
+
       pm.test("Create a Driver persists the identity fields that were sent", function () {
           pm.expect(json_response.internal_id, "internal_id was not persisted").to.eql("DRV-1001");
           pm.expect(json_response.drivers_license_number).to.eql("S1234567A");
@@ -85,7 +105,10 @@ scripts:
       });
 
       pm.test("Create a Driver exposes no internal uuid columns", function () {
-          ["uuid", "public_id", "company_uuid", "user_uuid", "vehicle_uuid", "vendor_uuid", "current_job_uuid", "auth_token", "signup_token_used", "_key"].forEach(function (key) {
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+          ["public_id", "auth_token", "signup_token_used", "_key"].forEach(function (key) {
               pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
           });
       });

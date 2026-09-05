@@ -3,7 +3,7 @@ name: Vehicle
 description: |-
   A vehicle represents a trackable asset used for Fleet-Ops assignment, routing, and capacity planning. It stores vehicle identity, status, assignment, current position, capacity, dimensions, engine and regulatory specifications, financing, orchestrator constraints, and metadata.
 
-  Relationships are returned as the related resource's public ID; asking for one through `?with=` returns it as a nested object instead. Internal uuid columns are never part of the public contract.
+  Each relationship appears twice, and the two are separate keys. `<name>_id` is the related resource's public ID and is always present. `<name>` is the nested object and is returned only when the relationship was asked for through `?with=`; it is never a string. Internal uuid columns are never part of the public contract.
 example: |
   {
     "id": "vehicle_7YqM3KpL2n",
@@ -23,14 +23,17 @@ example: |
     "status": "operational",
     "online": false,
     "payload_capacity": 500,
+    "fuel_card_number": "FC-1001",
+    "driver_id": null,
+    "vendor_id": "vendor_5Nq8Tz1Wm4",
+    "category_id": null,
+    "warranty_id": null,
+    "photo_id": null,
     "skills": ["tail_lift"],
     "max_tasks": 40,
     "time_window_start": "08:00:00",
     "time_window_end": "18:00:00",
     "return_to_depot": true,
-    "vendor": "vendor_5Nq8Tz1Wm4",
-    "category": null,
-    "warranty": null,
     "location": {
       "latitude": 40.7484,
       "longitude": -73.9857
@@ -64,7 +67,8 @@ fields:
     description: Vehicle description.
   - name: driver
     type: object
-    description: Assigned driver, when loaded.
+    description: |-
+      The assigned driver, returned only when requested through `with=driver`. Never a string — read `driver_id` for the identifier.
   - name: devices
     type: array of objects
     description: Vehicle devices, when loaded.
@@ -101,6 +105,9 @@ fields:
   - name: call_sign
     type: string
     description: Vehicle call sign.
+  - name: fuel_card_number
+    type: string
+    description: Fuel card number assigned to the vehicle.
   - name: vin
     type: string
     description: Vehicle identification number.
@@ -205,16 +212,35 @@ fields:
   - name: meta
     type: object
     description: Additional vehicle metadata.
-  - name: vendor
+  - name: driver_id
+    type: string
+    description: Public ID of the assigned driver, or `null`. Always present.
+  - name: vendor_id
+    type: string
+    description: Public ID of the assigned vendor, or `null`. Always present.
+  - name: category_id
+    type: string
+    description: Public ID of the assigned category, or `null`. Always present.
+  - name: warranty_id
+    type: string
+    description: Public ID of the assigned warranty, or `null`. Always present.
+  - name: photo_id
     type: string
     description: |-
-      Public ID of the assigned vendor, or `null`. Returned as a nested object when requested through `with=vendor`.
+      Public ID of the vehicle photo file, or `null`. Always present. `photo_url` beside it is a convenience URL, and `avatar_url` is a separate display asset that is not a file reference.
+  - name: vendor
+    type: object
+    description: |-
+      The assigned vendor, returned only when requested through `with=vendor`. Never a string — read `vendor_id` for the identifier.
   - name: category
-    type: string
-    description: Public ID of the assigned category, or `null`.
+    type: object
+    description: The assigned category, returned only when requested through `with=category`.
   - name: warranty
-    type: string
-    description: Public ID of the assigned warranty, or `null`.
+    type: object
+    description: The assigned warranty, returned only when requested through `with=warranty`.
+  - name: photo
+    type: object
+    description: The vehicle photo file, returned only when requested through `with=photo`.
   - name: skills
     type: array of strings
     description: Capabilities the vehicle offers for orchestrator assignment.

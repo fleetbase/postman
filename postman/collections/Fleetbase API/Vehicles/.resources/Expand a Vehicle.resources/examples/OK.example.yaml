@@ -1,11 +1,15 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/vehicles/:id"
+  url: "{{base_url}}/{{namespace}}/vehicles/:id?with[]=vendor"
   method: GET
   headers:
     Accept: application/json
   pathVariables:
     id: "vehicle_7YqM3KpL2n"
+  queryParams:
+    - key: with[]
+      value: vendor
+      description: Expand the vendor relationship.
 response:
   statusCode: 200
   statusText: OK
@@ -37,6 +41,10 @@ response:
         "location": { "type": "Point", "coordinates": [-73.9857, 40.7484] },
         "driver_id": null,
         "vendor_id": "vendor_5Nq8Tz1Wm4",
+        "vendor": {
+          "id": "vendor_5Nq8Tz1Wm4",
+          "name": "Acme Logistics"
+        },
         "category_id": null,
         "warranty_id": null,
         "photo_id": null,

@@ -6,7 +6,7 @@ fields:
   - name: internal_id
     type: string
     description: |-
-      Filter by the identifier the operator's own system uses. This is the lookup an importer keys on to decide whether a vehicle already exists.
+      Filter by the identifier the operator's own system uses. **Exact match** on the public API: `VEH-10` returns only `VEH-10`, never `VEH-100`. That is what lets an importer use it to decide between update and create. (The Fleet-Ops console does a partial search on the same field; that behaviour is internal to the console and not part of this contract.)
   - name: plate_number
     type: string
     description: Filter by licence plate number.
@@ -15,7 +15,7 @@ fields:
     description: Filter by vehicle identification number.
   - name: public_id
     type: string
-    description: Filter by vehicle public ID (`vehicle_...`).
+    description: Filter by vehicle public ID (`vehicle_...`). Exact match.
   - name: display_name
     type: string
     description: Filter across year, make, model and plate number together.
@@ -50,3 +50,7 @@ fields:
   - name: sort
     type: string
     description: Sort expression for the vehicle query.
+  - name: with
+    type: array of strings
+    description: |-
+      Relationships to expand. Accepted as `?with=vendor`, `?with[]=vendor`, `?with[]=vendor&with[]=driver` and `?with=vendor,driver`; `expand` is an alias for all four. A relationship named here is additionally returned as a nested object — it never replaces or retypes the `<name>_id` identifier, which is always present. A name outside the supported set is ignored rather than rejected.

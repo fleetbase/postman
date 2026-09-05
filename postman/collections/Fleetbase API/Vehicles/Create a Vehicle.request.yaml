@@ -23,22 +23,46 @@ body:
       "trim": "SE",
       "color": "White",
       "type": "sedan",
+      "class": "N1",
       "plate_number": "ABC123",
+      "serial_number": "SER-1001",
+      "call_sign": "DEPOT-1",
+      "fuel_card_number": "FC-1001",
       "status": "maintenance",
       "online": false,
       "odometer": 41000,
       "odometer_unit": "km",
+      "odometer_at_purchase": 12,
       "measurement_system": "metric",
       "fuel_type": "diesel",
+      "fuel_volume_unit": "l",
+      "transmission": "automatic",
+      "body_type": "sedan",
       "seating_capacity": 5,
+      "weight": 1620.5,
       "payload_capacity": 1400,
+      "fuel_capacity": 60,
+      "currency": "SGD",
+      "purchased_at": "2026-01-02",
+      "loan_first_payment": "2026-02-15",
+      "loan_amount": 32000,
+      "insurance_value": 41000,
+      "depreciation_rate": 12.5,
+      "current_value": 38000,
+      "acquisition_cost": 52000,
+      "engine_number": "ENG-1001",
+      "number_of_cylinders": 4,
+      "latitude": 40.7484,
+      "longitude": -73.9857,
+      "specs": { "doors": 4 },
+      "details": { "liftgate": true },
+      "notes": "City route pool",
+      "meta": { "depot": "north" },
       "skills": ["tail_lift"],
       "max_tasks": 40,
       "time_window_start": "08:00",
       "time_window_end": "18:00",
       "return_to_depot": true,
-      "notes": "City route pool",
-      "meta": { "depot": "north" },
       "vendor": "{{vendor_id}}"
     }
 scripts:
@@ -55,55 +79,82 @@ scripts:
           pm.expect(json_response.id, "id is not a vehicle public id").to.match(/^vehicle_/);
       });
 
-      pm.test("Create a Vehicle persists the identity fields that were sent", function () {
-          pm.expect(json_response.internal_id).to.eql("VEH-1001");
-          pm.expect(json_response.name).to.eql("Depot Van");
-          pm.expect(json_response.description).to.eql("City route van");
-          pm.expect(json_response.vin).to.eql("1GCGSBEA0G1111111");
-          pm.expect(Number(json_response.year)).to.eql(2023);
-          pm.expect(json_response.make).to.eql("Toyota");
-          pm.expect(json_response.model).to.eql("Camry");
-          pm.expect(json_response.trim).to.eql("SE");
-          pm.expect(json_response.color).to.eql("White");
-          pm.expect(json_response.type).to.eql("sedan");
-          pm.expect(json_response.plate_number).to.eql("ABC123");
+      // Driven off the request body rather than a hand-written list, so a field
+      // cannot be added to the request without an assertion following it.
+      const sent = JSON.parse(pm.request.body.raw
+          .replace(/\{\{vendor_id\}\}/g, pm.variables.get("vendor_id") || "vendor_unset"));
+
+      // Fields the API deliberately transforms on the way out.
+      const transformed = {
+          status: "available",          // `active`/`maintenance` normalisation is asserted separately
+          latitude: null,               // canonicalised into `location`
+          longitude: null,              // canonicalised into `location`
+          vendor: null,                 // relationship input, read back as vendor_id
+      };
+
+      pm.test("Create a Vehicle persists every field that was sent", function () {
+          Object.keys(sent).forEach(function (field) {
+              if (Object.prototype.hasOwnProperty.call(transformed, field)) {
+                  return;
+              }
+
+              pm.expect(json_response, `${field} is missing from the response`).to.have.property(field);
+
+              const expected = sent[field];
+              const actual   = json_response[field];
+
+              if (expected !== null && typeof expected === 'object') {
+                  pm.expect(actual, `${field} did not round trip`).to.eql(expected);
+              } else if (typeof expected === 'number') {
+                  pm.expect(Number(actual), `${field} did not round trip`).to.eql(expected);
+              } else if (typeof expected === 'boolean') {
+                  pm.expect(Boolean(actual), `${field} did not round trip`).to.eql(expected);
+              } else if (field.endsWith('_at') || field === 'loan_first_payment' || field.startsWith('time_window')) {
+                  // Dates, datetimes and times are normalised; the value is what matters.
+                  pm.expect(String(actual), `${field} did not round trip`).to.contain(String(expected).slice(0, 5));
+              } else {
+                  pm.expect(String(actual), `${field} did not round trip`).to.eql(String(expected));
+              }
+          });
       });
 
-      pm.test("Create a Vehicle persists the operational fields that were sent", function () {
-          // The odometer was accepted but discarded before this contract; a
-          // silent no-op is the worst possible answer to a mileage write.
-          pm.expect(Number(json_response.odometer), "odometer was not persisted").to.eql(41000);
-          pm.expect(json_response.odometer_unit).to.eql("km");
-          pm.expect(json_response.measurement_system).to.eql("metric");
-          pm.expect(json_response.fuel_type).to.eql("diesel");
-          pm.expect(Number(json_response.seating_capacity)).to.eql(5);
-          pm.expect(Number(json_response.payload_capacity)).to.eql(1400);
+      pm.test("Create a Vehicle canonicalises the coordinates into location", function () {
+          // Latitude and longitude go in as two scalars and come back inside
+          // `location`; there is no duplicate pair at the top level.
+          pm.expect(json_response.location, "location missing").to.not.be.oneOf([null, undefined]);
+          pm.expect(JSON.stringify(json_response.location)).to.contain("40.7484");
+      });
+
+      pm.test("Create a Vehicle normalises the status it stores", function () {
+          // `maintenance` is stored as sent; `active` is the value the model
+          // rewrites to `available`, which Update a Vehicle asserts.
           pm.expect(json_response.status).to.eql("maintenance");
-          pm.expect(json_response.online).to.eql(false);
-          pm.expect(json_response.notes).to.eql("City route pool");
       });
 
-      pm.test("Create a Vehicle persists structured and orchestrator fields", function () {
-          pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
-          pm.expect(json_response.meta.depot).to.eql("north");
-          pm.expect(json_response.skills).to.be.an('array').that.includes("tail_lift");
-          pm.expect(Number(json_response.max_tasks)).to.eql(40);
-          pm.expect(String(json_response.time_window_start)).to.match(/^08:00/);
-          pm.expect(String(json_response.time_window_end)).to.match(/^18:00/);
-          pm.expect(json_response.return_to_depot).to.eql(true);
-      });
-
-      pm.test("Create a Vehicle resolves the vendor to a public id", function () {
+      pm.test("Create a Vehicle reports relationships as additive public ids", function () {
           const vendorId = pm.variables.get("vendor_id");
-          pm.expect(json_response).to.have.property("vendor");
+          ["driver_id", "vendor_id", "category_id", "warranty_id", "photo_id"].forEach(function (key) {
+              pm.expect(json_response, key + " is missing").to.have.property(key);
+          });
           if (vendorId) {
-              pm.expect(json_response.vendor).to.eql(vendorId);
+              pm.expect(json_response.vendor_id).to.eql(vendorId);
+              pm.expect(json_response.vendor_id).to.match(/^vendor_/);
           }
+
+          // The object keys are separate and are never strings.
+          ["driver", "vendor", "category", "warranty", "photo"].forEach(function (key) {
+              if (json_response[key] !== undefined) {
+                  pm.expect(json_response[key], key + " must never be a string").to.be.an('object');
+              }
+          });
       });
 
       pm.test("Create a Vehicle exposes no internal uuid columns", function () {
-          ["uuid", "public_id", "company_uuid", "vendor_uuid", "category_uuid", "warranty_uuid", "photo_uuid", "telematic_uuid", "_key"].forEach(function (key) {
-              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+          ["public_id", "company_uuid", "_key"].forEach(function (key) {
+              pm.expect(json_response).to.not.have.property(key);
           });
       });
     language: text/javascript

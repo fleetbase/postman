@@ -21,10 +21,11 @@ response:
         "task": "Long haul distribution",
         "status": "active",
         "photo_url": "https://s3.ap-northeast-2.amazonaws.com/fleetbase/public/default-fleet.png",
-        "service_area": "service_area_9Kp2Vx4Qm1",
-        "zone": null,
-        "vendor": null,
-        "parent_fleet": null,
+        "service_area_id": "service_area_9Kp2Vx4Qm1",
+        "zone_id": null,
+        "vendor_id": null,
+        "parent_fleet_id": null,
+        "photo_id": null,
         "updated_at": "2026-05-07T08:30:00.000000Z",
         "created_at": "2026-05-07T08:30:00.000000Z"
       }

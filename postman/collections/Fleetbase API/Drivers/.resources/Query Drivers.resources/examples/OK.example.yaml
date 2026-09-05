@@ -25,6 +25,8 @@ response:
           "id": "driver_A1b2C3d4E5",
           "user": "user_1A2b3C4d5E",
           "internal_id": "DRV-1001",
+          "company": "company_6zV1KqN9pR",
+          "company_name": "Fleetbase",
           "name": "John Doe",
           "email": "john.doe@example.com",
           "phone": "+15555550111",

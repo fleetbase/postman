@@ -3,7 +3,9 @@ name: Driver
 description: |-
   A driver represents a Fleet-Ops operator who can receive jobs, report location, register devices, and belong to fleets, vendors, vehicles, and organizations.
 
-  `email` and `phone` are optional: an operational driver record may have neither, in which case the driver cannot sign in to Navigator until credentials are supplied. Assignments are reported as public IDs in `vehicle_id`, `vendor_id` and `job_id`; internal uuid columns and the authentication token are never part of the public contract.
+  `email` and `phone` are optional: an operational driver record may have neither, in which case the driver cannot sign in to Navigator until credentials are supplied.
+
+  `user` and `company` are public-ID strings and have always been — Navigator interpolates `driver.user` straight into a socket channel name, so neither is ever expanded into an object. `vehicle`, `vendor` and `current_job` are objects on create, update and retrieve, which load them. The `vehicle_id`, `vendor_id` and `job_id` keys are additive identifiers beside those objects, not replacements for them. Internal uuid columns and the authentication token are never part of the public contract.
 example: |
   {
     "id": "driver_A1b2C3d4E5",
@@ -52,7 +54,8 @@ fields:
     description: Public driver identifier.
   - name: user
     type: string
-    description: Public user ID linked to the driver.
+    description: |-
+      Public user ID linked to the driver. Always a string, never an object — Navigator uses it directly as a chat participant identifier and as a socket channel name.
   - name: internal_id
     type: string
     description: Optional internal identifier.
@@ -82,13 +85,16 @@ fields:
     description: Driver avatar URL.
   - name: vehicle
     type: object
-    description: Assigned vehicle, when loaded.
+    description: |-
+      Assigned vehicle. Returned as an object by create, update and retrieve, which load it. Read `vehicle_id` for the identifier.
   - name: current_job
     type: object
-    description: Current order, when loaded.
+    description: |-
+      Current order. Returned as an object by create, update and retrieve, which load it. Read `job_id` for the identifier.
   - name: vendor
     type: object
-    description: Assigned vendor, when loaded.
+    description: |-
+      Assigned vendor. Returned as an object by create, update and retrieve, which load it. Read `vendor_id` for the identifier.
   - name: fleets
     type: array of objects
     description: Fleets the driver belongs to, when loaded.

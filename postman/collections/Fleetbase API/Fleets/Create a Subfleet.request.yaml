@@ -34,12 +34,16 @@ scripts:
 
       pm.test("Create a Subfleet resolves the parent to its public id", function () {
           const parentFleetId = pm.variables.get("parent_fleet_id");
-          pm.expect(json_response.parent_fleet, "parent_fleet missing from the response").to.be.a('string');
-          pm.expect(json_response.parent_fleet, "parent_fleet must be a public id, never a uuid").to.match(/^fleet_/);
+          pm.expect(json_response.parent_fleet_id, "parent_fleet_id missing from the response").to.be.a('string');
+          pm.expect(json_response.parent_fleet_id, "parent_fleet_id must be a public id, never a uuid").to.match(/^fleet_/);
           if (parentFleetId) {
-              pm.expect(json_response.parent_fleet).to.eql(parentFleetId);
+              pm.expect(json_response.parent_fleet_id).to.eql(parentFleetId);
           }
-          pm.expect(json_response.id, "a fleet must not be its own parent").to.not.eql(json_response.parent_fleet);
+          pm.expect(json_response.id, "a fleet must not be its own parent").to.not.eql(json_response.parent_fleet_id);
+
+          if (json_response.parent_fleet !== undefined) {
+              pm.expect(json_response.parent_fleet, "parent_fleet must never be a string").to.be.an('object');
+          }
       });
 
       pm.test("Create a Subfleet exposes no internal uuid columns", function () {

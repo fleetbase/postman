@@ -44,21 +44,34 @@ scripts:
           pm.expect(json_response.status).to.eql("active");
       });
 
-      pm.test("Create a Fleet resolves the service area to a public id", function () {
+      pm.test("Create a Fleet reports the service area as an additive public id", function () {
           const serviceAreaId = pm.variables.get("service_area_id");
-          pm.expect(json_response).to.have.property("service_area");
+          pm.expect(json_response, "service_area_id is the identifier field").to.have.property("service_area_id");
           if (serviceAreaId) {
-              pm.expect(json_response.service_area).to.eql(serviceAreaId);
+              pm.expect(json_response.service_area_id).to.eql(serviceAreaId);
+          }
+
+          // The identifier is a separate key. `service_area` is the nested
+          // object, returned only when it was asked for through `with`, and it
+          // is never a string — a property that changes type between calls
+          // breaks every consumer that dereferences it.
+          if (json_response.service_area !== undefined) {
+              pm.expect(json_response.service_area, "service_area must never be a string").to.be.an('object');
           }
       });
 
       pm.test("Create a Fleet is a root fleet when no parent was sent", function () {
-          pm.expect(json_response).to.have.property("parent_fleet");
-          pm.expect(json_response.parent_fleet, "a fleet created without a parent must have none").to.be.null;
+          pm.expect(json_response).to.have.property("parent_fleet_id");
+          pm.expect(json_response.parent_fleet_id, "a fleet created without a parent must have none").to.be.null;
       });
 
       pm.test("Create a Fleet exposes no internal uuid columns", function () {
-          ["uuid", "public_id", "company_uuid", "service_area_uuid", "zone_uuid", "vendor_uuid", "parent_fleet_uuid", "image_uuid", "_key"].forEach(function (key) {
+          // A sweep rather than a list: a column added later cannot slip out
+          // just because nobody remembered to name it here.
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+          ["public_id", "company_uuid", "_key"].forEach(function (key) {
               pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
           });
       });

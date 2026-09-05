@@ -21,6 +21,7 @@ body:
       "email": "{{$randomEmail}}",
       "phone": "{{$randomPhoneNumber}}",
       "internal_id": "DRV-1002",
+      "timezone": "Europe/Amsterdam",
       "city": "Johor Bahru",
       "current_status": "off_duty",
       "meta": { "badge": "B34" }
@@ -42,25 +43,57 @@ scripts:
       });
 
       pm.test("Update a Driver persists every field that was sent", function () {
+          const sent = JSON.parse(pm.request.body.raw);
+
           pm.expect(json_response.name).to.eql("John Doe");
           pm.expect(json_response.internal_id).to.eql("DRV-1002");
           pm.expect(json_response.city).to.eql("Johor Bahru");
           pm.expect(json_response.current_status).to.eql("off_duty");
           pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
           pm.expect(json_response.meta.badge).to.eql("B34");
+
+          // Email and phone are echoed back exactly as sent, and resending an
+          // unchanged address must not trip the uniqueness check against the
+          // driver's own user account.
+          pm.expect(json_response.email, "email did not round trip").to.eql(sent.email);
+          pm.expect(json_response.phone, "phone did not round trip").to.eql(sent.phone);
       });
 
-      pm.test("Update a Driver reports assignments as public ids", function () {
-          // `vehicle`, `vendor` and `job` are written as public ids and read
-          // back as public ids. The vehicle created earlier in this run has
-          // already been deleted by the Vehicles folder, so the assignment
-          // itself is exercised by the Fleet-Ops contract suite rather than
-          // against a resource that no longer exists.
-          pm.expect(json_response).to.have.property("vehicle_id");
-          pm.expect(json_response).to.have.property("vendor_id");
+      pm.test("Update a Driver persists the timezone", function () {
+          // The driver record has no timezone column — it belongs to the linked
+          // user — and the update used to copy only name, email and phone, so a
+          // timezone was accepted, answered 200, and dropped.
+          pm.expect(json_response.timezone, "timezone was not persisted").to.eql("Europe/Amsterdam");
+      });
+
+      pm.test("Update a Driver reports assignments as additive public ids", function () {
+          // The identifiers are new keys beside the released relationship
+          // objects, not replacements for them. The vehicle created earlier in
+          // this run has already been deleted by the Vehicles folder, so the
+          // assignment itself is exercised by the Fleet-Ops contract suite.
+          ["vehicle_id", "vendor_id", "job_id"].forEach(function (key) {
+              pm.expect(json_response, key + " is missing").to.have.property(key);
+          });
           if (json_response.vehicle_id) {
               pm.expect(json_response.vehicle_id).to.match(/^vehicle_/);
           }
+      });
+
+      pm.test("Update a Driver keeps every relationship the released contract returned", function () {
+          // Navigator interpolates `driver.user` straight into a socket channel
+          // name; an object there would subscribe it to `user.[object Object]`.
+          pm.expect(json_response.user, "user must stay a public-id string").to.be.a('string');
+          pm.expect(json_response.user).to.match(/^user_/);
+          pm.expect(json_response, "company must not be dropped").to.have.property("company");
+          pm.expect(json_response, "company_name must not be dropped").to.have.property("company_name");
+
+          // These endpoints load vehicle, vendor and currentJob, so when a
+          // driver has one it comes back as an object, without a `with`.
+          ["vehicle", "vendor", "current_job"].forEach(function (key) {
+              if (json_response[key] !== undefined && json_response[key] !== null) {
+                  pm.expect(json_response[key], key + " must never be a string").to.be.an('object');
+              }
+          });
       });
 
       pm.test("Update a Driver exposes no internal uuid columns", function () {

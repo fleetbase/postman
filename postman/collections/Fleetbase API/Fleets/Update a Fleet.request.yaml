@@ -39,15 +39,20 @@ scripts:
           pm.expect(json_response.status).to.eql("active");
       });
 
-      pm.test("Update a Fleet resolves relationships to public ids", function () {
+      pm.test("Update a Fleet resolves relationships to additive public ids", function () {
           const serviceAreaId = pm.variables.get("service_area_id");
-          pm.expect(json_response).to.have.property("service_area");
+          pm.expect(json_response).to.have.property("service_area_id");
           if (serviceAreaId) {
-              pm.expect(json_response.service_area).to.eql(serviceAreaId);
+              pm.expect(json_response.service_area_id).to.eql(serviceAreaId);
           }
-          if (json_response.parent_fleet !== null && json_response.parent_fleet !== undefined) {
-              pm.expect(json_response.parent_fleet, "parent_fleet must be a public id").to.match(/^fleet_/);
+          if (json_response.parent_fleet_id !== null) {
+              pm.expect(json_response.parent_fleet_id, "parent_fleet_id must be a public id").to.match(/^fleet_/);
           }
+          ["service_area", "zone", "vendor", "parent_fleet", "photo"].forEach(function (key) {
+              if (json_response[key] !== undefined) {
+                  pm.expect(json_response[key], key + " must never be a string").to.be.an('object');
+              }
+          });
       });
 
       pm.test("Update a Fleet exposes no internal uuid columns", function () {

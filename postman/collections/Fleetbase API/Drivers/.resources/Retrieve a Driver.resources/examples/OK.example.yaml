@@ -31,6 +31,14 @@ response:
         "vehicle_id": "vehicle_7YqM3KpL2n",
         "vendor_id": null,
         "job_id": null,
+        "vehicle": {
+          "id": "vehicle_7YqM3KpL2n",
+          "plate_number": "ABC123",
+          "make": "Toyota",
+          "model": "Camry"
+        },
+        "vendor": null,
+        "current_job": null,
         "location": { "type": "Point", "coordinates": [103.8198, 1.3521] },
         "heading": 0,
         "bearing": null,

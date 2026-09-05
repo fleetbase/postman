@@ -8,7 +8,7 @@ fields:
     description: Filter by fleet name.
   - name: public_id
     type: string
-    description: Filter by fleet public ID (`fleet_...`).
+    description: Filter by fleet public ID (`fleet_...`). Exact match.
   - name: status
     type: string
     description: Filter by fleet status. Accepts a comma-separated list.
@@ -42,4 +42,4 @@ fields:
   - name: with
     type: array of strings
     description: |-
-      Relationships to include in fleet responses. A relationship named here is returned as a nested object; otherwise it is returned as the related resource's public ID.
+      Relationships to expand: `service_area`, `zone`, `vendor`, `parent_fleet`, `photo`, `subfleets`, `drivers`, `vehicles`, and the nested `subfleets.drivers` / `subfleets.vehicles`. Accepted as `?with=vendor`, `?with[]=vendor`, `?with[]=vendor&with[]=driver` and `?with=vendor,driver`; `expand` is an alias for all four. Expanding adds the nested object — it never replaces or retypes the `<name>_id` identifier, which is always present. A name outside the supported set is ignored rather than rejected.
