@@ -1,0 +1,45 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/drivers"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "Yard Driver",
+        "internal_id": "DRV-7788"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "driver_Z9y8X7w6V5",
+        "user": "user_9K8j7H6g5F",
+        "internal_id": "DRV-7788",
+        "company": "company_6zV1KqN9pR",
+        "company_name": "Fleetbase",
+        "name": "Yard Driver",
+        "email": null,
+        "phone": null,
+        "drivers_license_number": null,
+        "license_expiry": null,
+        "vehicle_id": null,
+        "vendor_id": null,
+        "job_id": null,
+        "vehicle": null,
+        "vendor": null,
+        "current_job": null,
+        "online": false,
+        "status": "available",
+        "meta": {},
+        "updated_at": "2026-05-07T08:32:00.000000Z",
+        "created_at": "2026-05-07T08:32:00.000000Z"
+      }
+order: 1000

@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Updates a vehicle's identity, operational status, vendor assignment, location, capacity, or orchestrator constraints. Updating the VIN refreshes decoded VIN data.
+  Updates any safe vehicle field. Updating the VIN re-runs VIN decoding.
+
+  A partial update touches only the fields that are sent: omitting `online` leaves the vehicle's online state alone rather than taking it offline. Relationship inputs take public IDs and are resolved inside the authenticated organization; sending `null` clears the assignment, and sending an empty `driver` unassigns the current driver.
 url: "{{base_url}}/{{namespace}}/vehicles/:id"
 method: PUT
 headers:
@@ -8,16 +10,66 @@ headers:
 pathVariables:
   - key: id
     value: "{{vehicle_id}}"
-    description: (Required) The id of the `Vehicle`.
+    description: (Required) The public id of the `Vehicle`.
 body:
   type: json
   content: |
     {
         "plate_number": "ABC123",
         "status": "operational",
+        "odometer": 41250,
+        "color": "Silver",
+        "body_type": "sedan",
+        "transmission": "automatic",
+        "seating_capacity": 5,
+        "currency": "SGD",
+        "purchased_at": "2026-01-02",
+        "specs": { "doors": 4 },
+        "details": { "liftgate": true },
+        "meta": { "depot": "south" },
         "latitude": 40.7484,
         "longitude": -73.9857,
         "speed": 90
     }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+
+      pm.test("Update a Vehicle returns the persisted vehicle", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a vehicle public id").to.match(/^vehicle_/);
+      });
+
+      pm.test("Update a Vehicle persists every field that was sent", function () {
+          pm.expect(json_response.plate_number).to.eql("ABC123");
+          pm.expect(json_response.status).to.eql("operational");
+          pm.expect(Number(json_response.odometer)).to.eql(41250);
+          pm.expect(json_response.color).to.eql("Silver");
+          pm.expect(json_response.body_type).to.eql("sedan");
+          pm.expect(json_response.transmission).to.eql("automatic");
+          pm.expect(Number(json_response.seating_capacity)).to.eql(5);
+          pm.expect(json_response.currency).to.eql("SGD");
+          pm.expect(json_response.specs).to.be.an('object');
+          pm.expect(json_response.specs.doors).to.eql(4);
+          pm.expect(json_response.details.liftgate).to.eql(true);
+          pm.expect(json_response.meta.depot).to.eql("south");
+          pm.expect(Number(json_response.speed)).to.eql(90);
+      });
+
+      pm.test("Update a Vehicle leaves fields that were not sent alone", function () {
+          // `online` was not part of this request, so it must keep whatever
+          // value the vehicle already had rather than defaulting to false.
+          pm.expect(json_response).to.have.property("online");
+          pm.expect(json_response.make, "an unrelated field was cleared by a partial update").to.eql("Toyota");
+      });
+
+      pm.test("Update a Vehicle exposes no internal uuid columns", function () {
+          ["uuid", "public_id", "company_uuid", "vendor_uuid", "category_uuid", "warranty_uuid", "photo_uuid"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
 examples: ./.resources/Update a Vehicle.resources/examples
 order: 4000

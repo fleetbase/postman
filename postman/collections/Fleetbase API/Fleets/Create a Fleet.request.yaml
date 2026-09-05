@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Creates a fleet for grouping drivers and vehicles. Assign a service area when the fleet should be constrained to a specific operating area.
+  Creates a fleet for grouping drivers and vehicles.
+
+  Every safe fleet field is accepted: name, colour, task, status, and the service area, zone, vendor and parent fleet relationships. Relationships are given as public IDs (`service_area_...`, `zone_...`, `vendor_...`, `fleet_...`) and are resolved inside the authenticated organization — a public ID belonging to another organization is rejected exactly as a non-existent one is.
+
+  Omitting `parent_fleet` creates a root fleet. This request creates the parent used by **Create a Subfleet**.
 url: "{{base_url}}/{{namespace}}/fleets"
 method: POST
 headers:
@@ -10,6 +14,9 @@ body:
   content: |-
     {
         "name": "Haulers",
+        "color": "#2563EB",
+        "task": "Long haul distribution",
+        "status": "active",
         "service_area": "{{service_area_id}}"
     }
 scripts:
@@ -20,6 +27,54 @@ scripts:
 
       cv.set("fleet_id", json_response.id);
       cv.set("fleet_name", json_response.name);
+      // The subfleet request below parents itself to this fleet.
+      cv.set("parent_fleet_id", json_response.id);
+
+      pm.test("Create a Fleet returns the persisted fleet", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "no public id returned").to.be.a('string').and.not.empty;
+          pm.expect(json_response.id, "id is not a fleet public id").to.match(/^fleet_/);
+      });
+
+      pm.test("Create a Fleet persists every field that was sent", function () {
+          pm.expect(json_response.name).to.eql("Haulers");
+          pm.expect(json_response.color).to.eql("#2563EB");
+          pm.expect(json_response.task).to.eql("Long haul distribution");
+          pm.expect(json_response.status).to.eql("active");
+      });
+
+      pm.test("Create a Fleet reports the service area as an additive public id", function () {
+          const serviceAreaId = pm.variables.get("service_area_id");
+          pm.expect(json_response, "service_area_id is the identifier field").to.have.property("service_area_id");
+          if (serviceAreaId) {
+              pm.expect(json_response.service_area_id).to.eql(serviceAreaId);
+          }
+
+          // The identifier is a separate key. `service_area` is the nested
+          // object, returned only when it was asked for through `with`, and it
+          // is never a string — a property that changes type between calls
+          // breaks every consumer that dereferences it.
+          if (json_response.service_area !== undefined) {
+              pm.expect(json_response.service_area, "service_area must never be a string").to.be.an('object');
+          }
+      });
+
+      pm.test("Create a Fleet is a root fleet when no parent was sent", function () {
+          pm.expect(json_response).to.have.property("parent_fleet_id");
+          pm.expect(json_response.parent_fleet_id, "a fleet created without a parent must have none").to.be.null;
+      });
+
+      pm.test("Create a Fleet exposes no internal uuid columns", function () {
+          // A sweep rather than a list: a column added later cannot slip out
+          // just because nobody remembered to name it here.
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+          ["public_id", "company_uuid", "_key"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
     language: text/javascript
 examples: ./.resources/Create a Fleet.resources/examples
 order: 1000

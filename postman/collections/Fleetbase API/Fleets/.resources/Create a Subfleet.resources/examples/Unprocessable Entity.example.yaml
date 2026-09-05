@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets/fleet_4Mnp8Qx2Vz"
+  method: PUT
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "parent_fleet": "fleet_4Mnp8Qx2Vz"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "A fleet cannot be its own parent fleet."
+      }
+order: 2000

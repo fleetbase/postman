@@ -5,7 +5,7 @@ request:
   headers:
     Accept: application/json
   pathVariables:
-    id: ""
+    id: "driver_A1b2C3d4E5"
 response:
   statusCode: 200
   statusText: OK
@@ -15,25 +15,49 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "current_job": "<string>",
-        "vehicle": "<string>",
-        "email": "<string>",
-        "phone_number": "<string>",
-        "phone_country_code": "<string>",
-        "signup_token_used": "<string>",
-        "drivers_license_number": "<string>",
-        "latitude": "<string>",
-        "longitude": "<string>",
-        "heading": "<string>",
-        "altitude": "<string>",
-        "speed": "<string>",
-        "country": "<string>",
-        "currency": "<string>",
-        "city": "<string>",
-        "online": "<number>",
-        "status": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "id": "driver_A1b2C3d4E5",
+        "user": "user_1A2b3C4d5E",
+        "internal_id": "DRV-1002",
+        "company": "company_6zV1KqN9pR",
+        "company_name": "Fleetbase",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+15555550111",
+        "timezone": "Asia/Singapore",
+        "drivers_license_number": "S1234567A",
+        "license_expiry": "2030-06-30",
+        "photo_url": null,
+        "avatar_url": "https://flb-assets.s3-ap-southeast-1.amazonaws.com/static/driver-icons/moto-driver.png",
+        "vehicle_id": "vehicle_7YqM3KpL2n",
+        "vendor_id": null,
+        "job_id": null,
+        "vehicle": {
+          "id": "vehicle_7YqM3KpL2n",
+          "plate_number": "ABC123",
+          "make": "Toyota",
+          "model": "Camry"
+        },
+        "vendor": null,
+        "current_job": null,
+        "location": { "type": "Point", "coordinates": [103.8198, 1.3521] },
+        "heading": 0,
+        "bearing": null,
+        "altitude": 0,
+        "speed": 0,
+        "country": "SG",
+        "currency": "SGD",
+        "city": "Johor Bahru",
+        "online": false,
+        "current_status": "off_duty",
+        "status": "available",
+        "token": null,
+        "skills": ["hazmat"],
+        "max_travel_time": 28800,
+        "max_distance": 250000,
+        "time_window_start": "08:00:00",
+        "time_window_end": "18:00:00",
+        "meta": { "badge": "B34" },
+        "updated_at": "2026-05-07T09:12:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

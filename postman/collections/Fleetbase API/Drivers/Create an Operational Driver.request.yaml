@@ -1,0 +1,47 @@
+$kind: http-request
+description: |-
+  Creates a driver record for someone with no deliverable email address and no phone number — a subcontracted or yard-only driver, or a record imported from an operator's own system.
+
+  Only `name` is required. Nothing is invented to fill the gap: no placeholder address, no placeholder number, and no invitation or credential notification is sent, because there is nowhere to send one. The Driver-to-User relationship, the organization membership, the `driver` user type and the `Driver` role are all created exactly as they are for a credentialed driver.
+
+  **A driver created this way cannot sign in to Navigator until credentials are supplied.** Add an email address or phone number with `PUT /v1/drivers/{id}` when one becomes available.
+url: "{{base_url}}/{{namespace}}/drivers"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |
+    {
+      "name": "Yard Driver",
+      "internal_id": "DRV-7788"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      cv.set("operational_driver_id", json_response.id);
+
+      pm.test("Create an Operational Driver succeeds without credentials", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a driver public id").to.match(/^driver_/);
+          pm.expect(json_response.name).to.eql("Yard Driver");
+          pm.expect(json_response.internal_id).to.eql("DRV-7788");
+      });
+
+      pm.test("Create an Operational Driver invents no contact details", function () {
+          // A generated address would sit in the tenant's user table looking
+          // real, could be mailed to, and would block the genuine value later.
+          pm.expect(json_response.email, "an email address was generated").to.be.oneOf([null, ""]);
+          pm.expect(json_response.phone, "a phone number was generated").to.be.oneOf([null, ""]);
+      });
+
+      pm.test("Create an Operational Driver still links a user account", function () {
+          pm.expect(json_response.user, "the Driver-to-User relationship must be preserved").to.be.a('string').and.not.empty;
+      });
+    language: text/javascript
+examples: ./.resources/Create an Operational Driver.resources/examples
+order: 1100

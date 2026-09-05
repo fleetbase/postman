@@ -1,34 +1,28 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/vehicles?vin=<string>&driver=<string>&year=<string>&make=<string>&model=<string>&trim=<string>&plate_number=<string>&status=maintenance"
+  url: "{{base_url}}/{{namespace}}/vehicles"
   method: POST
   headers:
     Accept: application/json
-  queryParams:
-    - key: vin
-      value: <string>
-      description: (Required) The VIN (Vehicle Identification Number) of the vehicle.
-    - key: driver
-      value: <string>
-      description: The id of the Driver to be assigned to the vehicle.
-    - key: year
-      value: <string>
-      description: The year the vehicle was produced.
-    - key: make
-      value: <string>
-      description: The vehicle make.
-    - key: model
-      value: <string>
-      description: The vehicle model.
-    - key: trim
-      value: <string>
-      description: The trim of the vehicle.
-    - key: plate_number
-      value: <string>
-      description: The vehicle's plate number.
-    - key: status
-      value: maintenance
-      description: (Required) The status of the vehicle.
+  body:
+    type: json
+    content: |-
+      {
+        "internal_id": "VEH-1001",
+        "name": "Depot Van",
+        "vin": "1GCGSBEA0G1111111",
+        "year": 2023,
+        "make": "Toyota",
+        "model": "Camry",
+        "trim": "SE",
+        "plate_number": "ABC123",
+        "status": "maintenance",
+        "odometer": 41000,
+        "odometer_unit": "km",
+        "skills": ["tail_lift"],
+        "meta": { "depot": "north" },
+        "vendor": "vendor_5Nq8Tz1Wm4"
+      }
 response:
   statusCode: 201
   statusText: Created
@@ -38,19 +32,33 @@ response:
     type: json
     content: |-
       {
-        "id": "<string>",
-        "name": "<string>",
-        "vin": "<string>",
-        "driver": "<string>",
-        "photo_url": "<string>",
-        "make": "<string>",
-        "model": "<string>",
-        "year": "<string>",
-        "trim": "<string>",
-        "type": "<string>",
-        "plate_number": "<string>",
-        "status": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
+        "id": "vehicle_7YqM3KpL2n",
+        "internal_id": "VEH-1001",
+        "name": "Depot Van",
+        "vin": "1GCGSBEA0G1111111",
+        "photo_url": "https://s3.ap-southeast-1.amazonaws.com/flb-assets/static/vehicle-placeholder.png",
+        "make": "Toyota",
+        "model": "Camry",
+        "year": "2023",
+        "trim": "SE",
+        "type": "sedan",
+        "plate_number": "ABC123",
+        "status": "maintenance",
+        "online": false,
+        "odometer": 41000,
+        "odometer_unit": "km",
+        "skills": ["tail_lift"],
+        "max_tasks": null,
+        "time_window_start": null,
+        "time_window_end": null,
+        "return_to_depot": true,
+        "driver_id": null,
+        "vendor_id": "vendor_5Nq8Tz1Wm4",
+        "category_id": null,
+        "warranty_id": null,
+        "photo_id": null,
+        "meta": { "depot": "north" },
+        "updated_at": "2026-05-07T08:30:00.000000Z",
+        "created_at": "2026-05-07T08:30:00.000000Z"
       }
 order: 1000

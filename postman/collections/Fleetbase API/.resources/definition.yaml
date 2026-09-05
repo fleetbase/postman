@@ -57,6 +57,17 @@ variables:
   driver_password_reset_code: ""
   manifest_id: ""
   manifest_stop_id: ""
+  # Fleet hierarchy. The parent is the fleet created first; the subfleet is
+  # created beneath it and deleted before it.
+  parent_fleet_id: ""
+  subfleet_id: ""
+  # The Vehicles and Drivers folders delete their own resources before the
+  # Fleets folder runs, so the membership requests create — and clean up — a
+  # vehicle and a driver of their own.
+  fleet_vehicle_id: ""
+  fleet_driver_id: ""
+  # A driver created with neither an email address nor a phone number.
+  operational_driver_id: ""
 scripts:
   - type: http:afterResponse
     code: |

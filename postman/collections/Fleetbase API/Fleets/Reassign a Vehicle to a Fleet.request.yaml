@@ -1,0 +1,54 @@
+$kind: http-request
+description: |-
+  Adds a vehicle to a fleet. Both path parameters are public IDs; no internal uuid is accepted or returned.
+
+  This request repeats the assignment above deliberately: assignment is idempotent, so a second call answers exactly as the first did and produces one active membership, not two.
+url: "{{base_url}}/{{namespace}}/fleets/:id/vehicles/:vehicle"
+method: POST
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{fleet_id}}"
+    description: (Required) The public id of the `Fleet`.
+  - key: vehicle
+    value: "{{fleet_vehicle_id}}"
+    description: (Required) The public id of the `Vehicle` to add to the fleet.
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+
+      pm.test("Reassign a Vehicle to a Fleet confirms the membership", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.fleet, "fleet must be a public id").to.match(/^fleet_/);
+          pm.expect(json_response.vehicle, "vehicle must be a public id").to.match(/^vehicle_/);
+          pm.expect(json_response.assigned, "assigned must be true after an assignment").to.be.true;
+      });
+
+      pm.test("Reassign a Vehicle to a Fleet echoes the ids that were sent", function () {
+          const fleetId = pm.variables.get("fleet_id");
+          const subjectId = pm.variables.get("fleet_vehicle_id");
+          if (fleetId) {
+              pm.expect(json_response.fleet).to.eql(fleetId);
+          }
+          if (subjectId) {
+              pm.expect(json_response.vehicle).to.eql(subjectId);
+          }
+      });
+
+      pm.test("Reassign a Vehicle to a Fleet stays idempotent", function () {
+          // The response is identical to the first assignment: no duplicate
+          // membership is created and no error is raised.
+          pm.expect(json_response.assigned, "a repeated assignment must remain assigned").to.be.true;
+      });
+
+      pm.test("Reassign a Vehicle to a Fleet returns no internal uuids", function () {
+          ["fleet_uuid", "vehicle_uuid", "uuid"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
+examples: ./.resources/Reassign a Vehicle to a Fleet.resources/examples
+order: 3150

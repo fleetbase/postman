@@ -1,4 +1,21 @@
 $kind: collection
 description: |-
   Fleets group vehicles and drivers under an operating unit. Use fleets to organize capacity by team, region, or service area before assigning resources to orders.
+
+  Fleets can be nested: sending `parent_fleet` on create or update makes a fleet a subfleet of another. A fleet may not be its own parent, and may not be moved beneath one of its own descendants.
+
+  Membership is managed with four endpoints that all share one response shape:
+
+  ```
+  POST   /v1/fleets/{fleet}/vehicles/{vehicle}
+  DELETE /v1/fleets/{fleet}/vehicles/{vehicle}
+  POST   /v1/fleets/{fleet}/drivers/{driver}
+  DELETE /v1/fleets/{fleet}/drivers/{driver}
+  ```
+
+  ```json
+  { "fleet": "fleet_123", "vehicle": "vehicle_123", "assigned": true }
+  ```
+
+  Every parameter is a public ID. Assignment is idempotent, removal is a safe no-op, removing a membership never deletes the driver or vehicle, and neither operation changes a driver's current vehicle or its membership of any other fleet.
 order: 9000

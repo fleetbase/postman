@@ -3,6 +3,28 @@ fields:
   - name: name
     type: string
     description: Fleet display name.
+  - name: color
+    type: string
+    description: Display colour for the fleet.
+  - name: task
+    type: string
+    description: Free-text description of what the fleet is used for.
+  - name: status
+    type: string
+    description: Fleet status.
   - name: service_area
     type: string
-    description: Service area ID to assign to the fleet.
+    description: Service area public ID (`service_area_...`). Send `null` to clear the assignment.
+  - name: zone
+    type: string
+    description: Zone public ID (`zone_...`). Send `null` to clear the assignment.
+  - name: vendor
+    type: string
+    description: Vendor public ID (`vendor_...`). Send `null` to clear the assignment.
+  - name: parent_fleet
+    type: string
+    description: |-
+      Parent fleet public ID (`fleet_...`). Send `null` to promote the fleet back to a root fleet. A fleet may not be its own parent, and may not be moved beneath one of its own subfleets.
+  - name: photo
+    type: string
+    description: File public ID (`file_...`) to use as the fleet image.

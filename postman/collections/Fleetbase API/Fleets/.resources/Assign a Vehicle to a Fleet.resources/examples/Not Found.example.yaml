@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets/:id/vehicles/:vehicle"
+  method: POST
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "fleet_4Mnp8Qx2Vz"
+    vehicle: "vehicle_NotInThisOrg"
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "Fleet or vehicle resource not found."
+      }
+order: 2000
