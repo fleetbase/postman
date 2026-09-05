@@ -1,0 +1,40 @@
+$kind: http-request
+description: |-
+  Resends the driver's current email address and phone number unchanged.
+
+  Uniqueness is enforced on update against every other live user account, with the driver's own linked user ignored by uuid. Without that clause this request would fail against the driver's own address — which is why it exists.
+url: "{{base_url}}/{{namespace}}/drivers/:id"
+method: PUT
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{driver_id}}"
+    description: (Required) The public id of the `Driver`.
+body:
+  type: json
+  content: |
+    {
+      "email": "{{created_driver_email}}",
+      "phone": "{{created_driver_phone}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+
+      pm.test("An unchanged email and phone are accepted", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code} — the driver's own user must be ignored by the uniqueness rule`).to.be.oneOf([200]);
+          pm.expect(json_response.email).to.eql(pm.variables.get("created_driver_email"));
+          pm.expect(json_response.phone).to.eql(pm.variables.get("created_driver_phone"));
+      });
+
+      pm.test("The relationship contract is unchanged by the update", function () {
+          pm.expect(json_response.user, "user must stay a public-id string").to.be.a('string');
+          pm.expect(json_response).to.have.property("company");
+          ["vehicle_id", "vendor_id", "job_id"].forEach(function (key) {
+              pm.expect(json_response, key + " is missing").to.have.property(key);
+          });
+      });
+    language: text/javascript
+order: 4100

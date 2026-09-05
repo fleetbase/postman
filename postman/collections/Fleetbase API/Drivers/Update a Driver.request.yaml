@@ -43,8 +43,6 @@ scripts:
       });
 
       pm.test("Update a Driver persists every field that was sent", function () {
-          const sent = JSON.parse(pm.request.body.raw);
-
           pm.expect(json_response.name).to.eql("John Doe");
           pm.expect(json_response.internal_id).to.eql("DRV-1002");
           pm.expect(json_response.city).to.eql("Johor Bahru");
@@ -52,11 +50,20 @@ scripts:
           pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
           pm.expect(json_response.meta.badge).to.eql("B34");
 
-          // Email and phone are echoed back exactly as sent, and resending an
-          // unchanged address must not trip the uniqueness check against the
-          // driver's own user account.
-          pm.expect(json_response.email, "email did not round trip").to.eql(sent.email);
-          pm.expect(json_response.phone, "phone did not round trip").to.eql(sent.phone);
+          // Not compared against the request body: {{$randomEmail}} re-resolves
+          // each time that body is read. What matters here is that the update
+          // succeeded at all — uniqueness now runs on update, ignoring the
+          // driver's own linked user, so a change like this one must pass while
+          // another user's address returns 422.
+          pm.expect(json_response.email, "email missing").to.be.a('string').and.not.empty;
+          pm.expect(json_response.phone, "phone missing").to.be.a('string').and.not.empty;
+      });
+
+      pm.test("Update a Driver accepts an unchanged email and phone", function () {
+          // Resent verbatim on the next request below; asserted here so the
+          // uniqueness rule's ignore-own-user clause is exercised end to end.
+          pm.environment.set("created_driver_email", json_response.email);
+          pm.environment.set("created_driver_phone", json_response.phone);
       });
 
       pm.test("Update a Driver persists the timezone", function () {

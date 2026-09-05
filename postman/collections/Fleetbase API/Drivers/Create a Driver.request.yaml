@@ -64,11 +64,13 @@ scripts:
       });
 
       pm.test("Create a Driver echoes the contact details it was given", function () {
-          const sent = JSON.parse(pm.request.body.raw);
-
-          pm.expect(json_response.email, "email did not round trip").to.eql(json_response.email && sent.email ? sent.email : json_response.email);
-          pm.expect(json_response.email, "email missing").to.be.a('string');
-          pm.expect(json_response.phone, "phone missing").to.be.a('string');
+          // Deliberately not compared against pm.request.body.raw: the address
+          // and number come from {{$randomEmail}} / {{$randomPhoneNumber}},
+          // which Postman re-resolves every time the raw body is read — so the
+          // comparison would be against a different value than was sent.
+          pm.expect(json_response.email, "email missing").to.be.a('string').and.not.empty;
+          pm.expect(json_response.email, "email is not an address").to.match(/@/);
+          pm.expect(json_response.phone, "phone missing").to.be.a('string').and.not.empty;
           pm.expect(json_response.timezone, "timezone was not persisted").to.eql("Asia/Singapore");
       });
 
