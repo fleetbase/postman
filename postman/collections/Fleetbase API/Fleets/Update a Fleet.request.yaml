@@ -1,18 +1,65 @@
 $kind: http-request
 description: |-
-  Updates a fleet's name or assigned service area.
+  Updates any safe fleet field: name, colour, task, status, and the service area, zone, vendor and parent fleet relationships.
+
+  Relationship inputs take public IDs and are resolved inside the authenticated organization. Sending `null` for a relationship clears it — `"parent_fleet": null` promotes a subfleet back to a root fleet.
 url: "{{base_url}}/{{namespace}}/fleets/:id"
 method: PUT
 headers:
   Accept: application/json
 pathVariables:
-  id: "{{fleet_id}}"
+  - key: id
+    value: "{{fleet_id}}"
+    description: (Required) The public id of the `Fleet`.
 body:
   type: json
   content: |-
     {
-        "name": "Haulers",
+        "name": "Haulers North",
+        "color": "#7C3AED",
+        "task": "Regional distribution",
+        "status": "active",
         "service_area": "{{service_area_id}}"
     }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+
+      pm.test("Update a Fleet returns the persisted fleet", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a fleet public id").to.match(/^fleet_/);
+      });
+
+      pm.test("Update a Fleet persists every field that was sent", function () {
+          pm.expect(json_response.name).to.eql("Haulers North");
+          pm.expect(json_response.color).to.eql("#7C3AED");
+          pm.expect(json_response.task).to.eql("Regional distribution");
+          pm.expect(json_response.status).to.eql("active");
+      });
+
+      pm.test("Update a Fleet resolves relationships to additive public ids", function () {
+          const serviceAreaId = pm.variables.get("service_area_id");
+          pm.expect(json_response).to.have.property("service_area_id");
+          if (serviceAreaId) {
+              pm.expect(json_response.service_area_id).to.eql(serviceAreaId);
+          }
+          if (json_response.parent_fleet_id !== null) {
+              pm.expect(json_response.parent_fleet_id, "parent_fleet_id must be a public id").to.match(/^fleet_/);
+          }
+          ["service_area", "zone", "vendor", "parent_fleet", "photo"].forEach(function (key) {
+              if (json_response[key] !== undefined) {
+                  pm.expect(json_response[key], key + " must never be a string").to.be.an('object');
+              }
+          });
+      });
+
+      pm.test("Update a Fleet exposes no internal uuid columns", function () {
+          ["uuid", "public_id", "company_uuid", "service_area_uuid", "zone_uuid", "vendor_uuid", "parent_fleet_uuid", "image_uuid"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
+    language: text/javascript
 examples: ./.resources/Update a Fleet.resources/examples
 order: 4000

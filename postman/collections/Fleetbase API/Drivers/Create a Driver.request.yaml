@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Creates a driver profile and linked user account. Provide a unique email and phone number, then optionally assign a vehicle, vendor, current job, location, or photo.
+  Creates a driver profile and its linked user account.
+
+  Only `name` is required. `email` and `phone` are optional — an operational fleet record may legitimately have neither — but each is validated and required to be unique across users when it is supplied. No placeholder address or number is ever generated, and no invitation is sent when there is no deliverable contact method. A driver created without credentials cannot sign in to Navigator until credentials are added; see **Create an Operational Driver**.
+
+  Beyond the account fields the endpoint accepts the driver's identity (`internal_id`, `drivers_license_number`, `license_expiry`, `photo`), operational fields (`country`, `currency`, `city`, `online`, `current_status`, `status`, location and telemetry), structured `meta`, orchestrator constraints, and the `vehicle`, `vendor` and `job` relationships given as public IDs and resolved inside the authenticated organization.
 url: "{{base_url}}/{{namespace}}/drivers"
 method: POST
 headers:
@@ -12,7 +16,20 @@ body:
       "name": "John Doe",
       "email": "{{$randomEmail}}",
       "phone": "{{$randomPhoneNumber}}",
-      "password": "{{driver_seed_password}}"
+      "password": "{{driver_seed_password}}",
+      "timezone": "Asia/Singapore",
+      "internal_id": "DRV-1001",
+      "drivers_license_number": "S1234567A",
+      "license_expiry": "2030-06-30",
+      "country": "SG",
+      "city": "Singapore",
+      "current_status": "on_duty",
+      "skills": ["hazmat"],
+      "max_travel_time": 28800,
+      "max_distance": 250000,
+      "time_window_start": "08:00",
+      "time_window_end": "18:00",
+      "meta": { "badge": "A12" }
     }
 scripts:
   - type: afterResponse
@@ -38,6 +55,65 @@ scripts:
       // pm.variables resolves across scopes; the seed is a collection
       // variable, which pm.environment cannot see.
       cv.set("created_driver_password", pm.variables.get("driver_seed_password"));
+
+      pm.test("Create a Driver returns the persisted driver", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response, "response is not an object").to.be.an('object');
+          pm.expect(json_response.id, "id is not a driver public id").to.match(/^driver_/);
+          pm.expect(json_response.name).to.eql("John Doe");
+      });
+
+      pm.test("Create a Driver echoes the contact details it was given", function () {
+          // Deliberately not compared against pm.request.body.raw: the address
+          // and number come from {{$randomEmail}} / {{$randomPhoneNumber}},
+          // which Postman re-resolves every time the raw body is read — so the
+          // comparison would be against a different value than was sent.
+          pm.expect(json_response.email, "email missing").to.be.a('string').and.not.empty;
+          pm.expect(json_response.email, "email is not an address").to.match(/@/);
+          pm.expect(json_response.phone, "phone missing").to.be.a('string').and.not.empty;
+          pm.expect(json_response.timezone, "timezone was not persisted").to.eql("Asia/Singapore");
+      });
+
+      pm.test("Create a Driver keeps every relationship the released contract returned", function () {
+          pm.expect(json_response.user, "user must stay a public-id string").to.be.a('string');
+          pm.expect(json_response.user).to.match(/^user_/);
+          pm.expect(json_response).to.have.property("company");
+          pm.expect(json_response).to.have.property("company_name");
+          ["vehicle_id", "vendor_id", "job_id"].forEach(function (key) {
+              pm.expect(json_response, key + " is missing").to.have.property(key);
+          });
+      });
+
+      pm.test("Create a Driver persists the identity fields that were sent", function () {
+          pm.expect(json_response.internal_id, "internal_id was not persisted").to.eql("DRV-1001");
+          pm.expect(json_response.drivers_license_number).to.eql("S1234567A");
+          pm.expect(String(json_response.license_expiry)).to.match(/^2030-06-30/);
+          pm.expect(json_response.country).to.eql("SG");
+          pm.expect(json_response.city).to.eql("Singapore");
+      });
+
+      pm.test("Create a Driver persists meta and orchestrator constraints", function () {
+          // `meta` reached the model through a blocklist that dropped it, and
+          // the model itself spelled the fillable entry `meta,` — so it never
+          // persisted through the public API at all.
+          pm.expect(json_response.meta, "meta was not persisted").to.be.an('object');
+          pm.expect(json_response.meta.badge).to.eql("A12");
+          pm.expect(json_response.current_status).to.eql("on_duty");
+          pm.expect(json_response.skills).to.be.an('array').that.includes("hazmat");
+          pm.expect(Number(json_response.max_travel_time)).to.eql(28800);
+          pm.expect(Number(json_response.max_distance)).to.eql(250000);
+          pm.expect(String(json_response.time_window_start)).to.match(/^08:00/);
+          pm.expect(String(json_response.time_window_end)).to.match(/^18:00/);
+      });
+
+      pm.test("Create a Driver exposes no internal uuid columns", function () {
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+          ["public_id", "auth_token", "signup_token_used", "_key"].forEach(function (key) {
+              pm.expect(json_response, `internal column ${key} leaked into the public contract`).to.not.have.property(key);
+          });
+      });
     language: text/javascript
 examples: ./.resources/Create a Driver.resources/examples
 order: 1000

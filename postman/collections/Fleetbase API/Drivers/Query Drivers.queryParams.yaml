@@ -1,11 +1,46 @@
 $kind: params
 fields:
-  - name: id
-    type: string
-    description: Driver ID filter used by this request example.
   - name: query
     type: string
-    description: Search term matched against driver fields.
+    description: Free-text search across the driver's name, email, phone and licence number.
+  - name: name
+    type: string
+    description: Filter by the driver's name.
+  - name: internal_id
+    type: string
+    description: |-
+      Filter by the identifier the operator's own system uses. **Exact match** on the public API: `DRV-10` returns only `DRV-10`, never `DRV-100`. That is what lets an importer use it to decide between update and create. (The Fleet-Ops console does a partial search on the same field; that behaviour is internal to the console and not part of this contract.)
+  - name: public_id
+    type: string
+    description: Filter by driver public ID (`driver_...`). Exact match.
+  - name: drivers_license_number
+    type: string
+    description: Filter by driver licence number.
+  - name: phone
+    type: string
+    description: Filter by the phone number on the driver's linked user account.
+  - name: country
+    type: string
+    description: Filter by country code. Accepts a comma-separated list.
+  - name: status
+    type: string
+    description: Filter by driver status. Accepts a comma-separated list.
+  - name: vendor
+    type: string
+    description: Filter by vendor, given as its public ID (`vendor_...`).
+  - name: vehicle
+    type: string
+    description: |-
+      Filter by assigned vehicle, given as its public ID (`vehicle_...`) or internal ID. Pass `unassigned` to return drivers with no vehicle.
+  - name: fleet
+    type: string
+    description: Filter to the drivers in a fleet, given as its public ID (`fleet_...`).
+  - name: nearby
+    type: string
+    description: Coordinates or an address string to search near. Pair with `radius`.
+  - name: radius
+    type: integer
+    description: Search radius in metres, used with `nearby`.
   - name: limit
     type: integer
     description: Maximum number of drivers to return.
@@ -15,6 +50,7 @@ fields:
   - name: sort
     type: string
     description: Sort expression for the driver query.
-  - name: vendor
-    type: string
-    description: Vendor ID used to filter drivers assigned to a vendor.
+  - name: with
+    type: array of strings
+    description: |-
+      Relationships to expand. Accepted as `?with=vendor`, `?with[]=vendor`, `?with[]=vendor&with[]=driver` and `?with=vendor,driver`; `expand` is an alias for all four. A relationship named here is additionally returned as a nested object — it never replaces or retypes the `<name>_id` identifier, which is always present. A name outside the supported set is ignored rather than rejected.

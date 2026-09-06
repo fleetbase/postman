@@ -1,7 +1,9 @@
 $kind: object
 name: Vehicle
 description: |-
-  A vehicle represents a trackable asset used for FleetOps assignment, routing, and capacity planning. It stores vehicle identity, status, assignment, current position, capacity, orchestrator constraints, and metadata.
+  A vehicle represents a trackable asset used for Fleet-Ops assignment, routing, and capacity planning. It stores vehicle identity, status, assignment, current position, capacity, dimensions, engine and regulatory specifications, financing, orchestrator constraints, and metadata.
+
+  Each relationship appears twice, and the two are separate keys. `<name>_id` is the related resource's public ID and is always present. `<name>` is the nested object and is returned only when the relationship was asked for through `?with=`; it is never a string. Internal uuid columns are never part of the public contract.
 example: |
   {
     "id": "vehicle_7YqM3KpL2n",
@@ -21,6 +23,17 @@ example: |
     "status": "operational",
     "online": false,
     "payload_capacity": 500,
+    "fuel_card_number": "FC-1001",
+    "driver_id": null,
+    "vendor_id": "vendor_5Nq8Tz1Wm4",
+    "category_id": null,
+    "warranty_id": null,
+    "photo_id": null,
+    "skills": ["tail_lift"],
+    "max_tasks": 40,
+    "time_window_start": "08:00:00",
+    "time_window_end": "18:00:00",
+    "return_to_depot": true,
     "location": {
       "latitude": 40.7484,
       "longitude": -73.9857
@@ -54,7 +67,8 @@ fields:
     description: Vehicle description.
   - name: driver
     type: object
-    description: Assigned driver, when loaded.
+    description: |-
+      The assigned driver, returned only when requested through `with=driver`. Never a string — read `driver_id` for the identifier.
   - name: devices
     type: array of objects
     description: Vehicle devices, when loaded.
@@ -91,6 +105,9 @@ fields:
   - name: call_sign
     type: string
     description: Vehicle call sign.
+  - name: fuel_card_number
+    type: string
+    description: Fuel card number assigned to the vehicle.
   - name: vin
     type: string
     description: Vehicle identification number.
@@ -104,8 +121,10 @@ fields:
     type: object
     description: Additional vehicle detail data.
   - name: status
-    type: string
-    description: Vehicle operational status.
+    type: enum
+    values: ["active", "available", "in_use", "maintenance", "out_of_service", "reserved", "retired", "staging", "on_route", "idle", "cleaning", "awaiting_parts", "inspection_due", "inspection_failed", "accident", "compliance_hold", "stolen", "operational", "decommissioned"]
+    description: |-
+      Vehicle operational status. `active` is accepted on input and stored as `available`.
   - name: online
     type: boolean
     description: Whether the vehicle is online.
@@ -193,3 +212,176 @@ fields:
   - name: meta
     type: object
     description: Additional vehicle metadata.
+  - name: driver_id
+    type: string
+    description: Public ID of the assigned driver, or `null`. Always present.
+  - name: vendor_id
+    type: string
+    description: Public ID of the assigned vendor, or `null`. Always present.
+  - name: category_id
+    type: string
+    description: Public ID of the assigned category, or `null`. Always present.
+  - name: warranty_id
+    type: string
+    description: Public ID of the assigned warranty, or `null`. Always present.
+  - name: photo_id
+    type: string
+    description: |-
+      Public ID of the vehicle photo file, or `null`. Always present. `photo_url` beside it is a convenience URL, and `avatar_url` is a separate display asset that is not a file reference.
+  - name: vendor
+    type: object
+    description: |-
+      The assigned vendor, returned only when requested through `with=vendor`. Never a string — read `vendor_id` for the identifier.
+  - name: category
+    type: object
+    description: The assigned category, returned only when requested through `with=category`.
+  - name: warranty
+    type: object
+    description: The assigned warranty, returned only when requested through `with=warranty`.
+  - name: photo
+    type: object
+    description: The vehicle photo file, returned only when requested through `with=photo`.
+  - name: skills
+    type: array of strings
+    description: Capabilities the vehicle offers for orchestrator assignment.
+  - name: payload_capacity_volume
+    type: number
+    description: Payload volume capacity used by orchestrator assignment.
+  - name: payload_capacity_pallets
+    type: integer
+    description: Pallet capacity used by orchestrator assignment.
+  - name: payload_capacity_parcels
+    type: integer
+    description: Parcel capacity used by orchestrator assignment.
+  - name: max_tasks
+    type: integer
+    description: Maximum concurrent tasks for orchestrator assignment.
+  - name: time_window_start
+    type: string
+    description: Earliest time of day the vehicle is available.
+  - name: time_window_end
+    type: string
+    description: Latest time of day the vehicle is available.
+  - name: return_to_depot
+    type: boolean
+    description: Whether the vehicle should return to depot after assigned work.
+  - name: fuel_volume_unit
+    type: string
+    description: Unit for fuel volumes.
+  - name: odometer_at_purchase
+    type: number
+    description: Odometer reading at the time of purchase.
+  - name: transmission
+    type: string
+    description: Transmission type.
+  - name: body_type
+    type: string
+    description: Vehicle body type.
+  - name: body_sub_type
+    type: string
+    description: Vehicle body sub type.
+  - name: usage_type
+    type: string
+    description: How the vehicle is used.
+  - name: ownership_type
+    type: string
+    description: How the vehicle is held.
+  - name: cargo_volume
+    type: number
+    description: Cargo volume.
+  - name: passenger_volume
+    type: number
+    description: Passenger volume.
+  - name: interior_volume
+    type: number
+    description: Total interior volume.
+  - name: ground_clearance
+    type: number
+    description: Ground clearance.
+  - name: bed_length
+    type: number
+    description: Bed length.
+  - name: fuel_capacity
+    type: number
+    description: Fuel tank capacity.
+  - name: emission_standard
+    type: string
+    description: Emission standard the vehicle meets.
+  - name: dpf_equipped
+    type: boolean
+    description: Whether a diesel particulate filter is fitted.
+  - name: scr_equipped
+    type: boolean
+    description: Whether selective catalytic reduction is fitted.
+  - name: gvwr
+    type: number
+    description: Gross vehicle weight rating.
+  - name: gcwr
+    type: number
+    description: Gross combined weight rating.
+  - name: engine_number
+    type: string
+    description: Engine number.
+  - name: engine_make
+    type: string
+    description: Engine manufacturer.
+  - name: engine_model
+    type: string
+    description: Engine model.
+  - name: engine_family
+    type: string
+    description: Engine family.
+  - name: engine_configuration
+    type: string
+    description: Engine configuration.
+  - name: engine_size
+    type: number
+    description: Engine size.
+  - name: engine_displacement
+    type: number
+    description: Engine displacement.
+  - name: cylinder_arrangement
+    type: string
+    description: Cylinder arrangement.
+  - name: number_of_cylinders
+    type: integer
+    description: Number of cylinders.
+  - name: horsepower
+    type: number
+    description: Engine horsepower.
+  - name: horsepower_rpm
+    type: integer
+    description: RPM at which peak horsepower is produced.
+  - name: torque
+    type: number
+    description: Engine torque.
+  - name: torque_rpm
+    type: integer
+    description: RPM at which peak torque is produced.
+  - name: estimated_service_life_distance
+    type: integer
+    description: Estimated service life expressed as a distance.
+  - name: estimated_service_life_distance_unit
+    type: string
+    description: Unit for the estimated service life distance.
+  - name: estimated_service_life_months
+    type: integer
+    description: Estimated service life expressed in months.
+  - name: financing_status
+    type: string
+    description: Vehicle financing status.
+  - name: insurance_value
+    type: currency
+    description: Insured value.
+  - name: depreciation_rate
+    type: number
+    description: Depreciation rate.
+  - name: loan_amount
+    type: number
+    description: Loan principal.
+  - name: loan_number_of_payments
+    type: integer
+    description: Number of loan payments.
+  - name: loan_first_payment
+    type: date
+    description: Date of the first loan payment.

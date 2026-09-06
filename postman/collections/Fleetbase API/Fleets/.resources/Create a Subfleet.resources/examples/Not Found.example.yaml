@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "name": "Carpool",
+          "parent_fleet": "fleet_NotInThisOrg"
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "No parent fleet resource found for the identifier provided."
+      }
+order: 3000

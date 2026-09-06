@@ -1,13 +1,17 @@
 $kind: http-example
 request:
-  url: "{{base_url}}/{{namespace}}/drivers?id=<string>"
+  url: "{{base_url}}/{{namespace}}/drivers?internal_id=DRV-1001&limit=25"
   method: GET
   headers:
     Accept: application/json
   queryParams:
-    - key: id
-      value: <string>
-      description: The id of the driver you want to retrieve.
+    - key: internal_id
+      value: DRV-1001
+      description: |-
+        The identifier the operator's own system uses. This is the lookup that decides whether a driver already exists before one is created.
+    - key: limit
+      value: "25"
+      description: A limit on the number of objects to be returned.
 response:
   statusCode: 200
   statusText: OK
@@ -16,26 +20,29 @@ response:
   body:
     type: json
     content: |-
-      {
-        "id": "<string>",
-        "current_job": "<string>",
-        "vehicle": "<string>",
-        "email": "<string>",
-        "phone_number": "<string>",
-        "phone_country_code": "<string>",
-        "signup_token_used": "<string>",
-        "drivers_license_number": "<string>",
-        "latitude": "<string>",
-        "longitude": "<string>",
-        "heading": "<string>",
-        "altitude": "<string>",
-        "speed": "<string>",
-        "country": "<string>",
-        "currency": "<string>",
-        "city": "<string>",
-        "online": "<number>",
-        "status": "<string>",
-        "updated_at": "<string>",
-        "created_at": "<string>"
-      }
+      [
+        {
+          "id": "driver_A1b2C3d4E5",
+          "user": "user_1A2b3C4d5E",
+          "internal_id": "DRV-1001",
+          "company": "company_6zV1KqN9pR",
+          "company_name": "Fleetbase",
+          "name": "John Doe",
+          "email": "john.doe@example.com",
+          "phone": "+15555550111",
+          "drivers_license_number": "S1234567A",
+          "license_expiry": "2030-06-30",
+          "vehicle_id": null,
+          "vendor_id": null,
+          "job_id": null,
+          "country": "SG",
+          "city": "Singapore",
+          "online": false,
+          "current_status": "on_duty",
+          "status": "available",
+          "meta": { "badge": "A12" },
+          "updated_at": "2026-05-07T08:30:00.000000Z",
+          "created_at": "2026-05-07T08:30:00.000000Z"
+        }
+      ]
 order: 1000

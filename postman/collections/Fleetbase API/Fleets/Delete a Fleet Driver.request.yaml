@@ -1,0 +1,18 @@
+$kind: http-request
+description: Deletes the driver created for the fleet membership requests. Runs after every membership has been removed.
+url: "{{base_url}}/{{namespace}}/drivers/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{fleet_driver_id}}"
+    description: (Required) The public id of the `Driver`.
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Delete a Fleet Driver succeeds", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 204]);
+      });
+    language: text/javascript
+order: 4800

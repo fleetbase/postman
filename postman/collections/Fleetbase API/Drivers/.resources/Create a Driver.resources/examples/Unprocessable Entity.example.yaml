@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/drivers"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "John Doe",
+        "email": "not-an-email",
+        "phone": "+15555550111"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "errors": [
+          "The email address must be a valid email address.",
+          "The phone number has already been taken."
+        ]
+      }
+order: 2000

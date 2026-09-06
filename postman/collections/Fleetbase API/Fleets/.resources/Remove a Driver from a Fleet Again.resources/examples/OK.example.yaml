@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/fleets/:id/drivers/:driver"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    id: "fleet_4Mnp8Qx2Vz"
+    driver: "driver_7YqM3KpL2n"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "fleet": "fleet_4Mnp8Qx2Vz",
+        "driver": "driver_7YqM3KpL2n",
+        "assigned": false
+      }
+order: 1000

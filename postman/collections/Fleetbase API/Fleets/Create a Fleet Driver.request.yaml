@@ -1,0 +1,28 @@
+$kind: http-request
+description: |-
+  Creates a driver for the fleet membership requests to operate on.
+
+  The driver created in the **Drivers** folder is deleted before this folder runs, so the membership assertions need a resource of their own. It is removed again by **Delete a Fleet Driver** at the end of this folder.
+url: "{{base_url}}/{{namespace}}/drivers"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+        "name": "Fleet Membership Driver",
+        "internal_id": "DRV-FLT-0001"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      pm.environment.set("fleet_driver_id", json_response.id);
+
+      pm.test("Create a Fleet Driver returns a driver to assign", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(json_response.id, "id is not a driver public id").to.match(/^driver_/);
+      });
+    language: text/javascript
+order: 1300

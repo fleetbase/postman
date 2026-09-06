@@ -1,0 +1,21 @@
+$kind: http-request
+description: |-
+  Deletes the subfleet created by **Create a Subfleet**.
+
+  It runs before **Delete a Fleet** so the child is removed before its parent.
+url: "{{base_url}}/{{namespace}}/fleets/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{subfleet_id}}"
+    description: (Required) The public id of the subfleet.
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Delete a Subfleet succeeds", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 204]);
+      });
+    language: text/javascript
+order: 4900

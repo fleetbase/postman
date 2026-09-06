@@ -1,0 +1,28 @@
+$kind: http-request
+description: |-
+  The same expansion as **Expand a Vehicle**, sent in the scalar comma-separated form.
+
+  `?with=vendor,driver` must behave exactly as `?with[]=vendor&with[]=driver` does. This request exists so the two spellings are proven equivalent rather than assumed to be.
+url: "{{base_url}}/{{namespace}}/vehicles/:id?with=vendor"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{vehicle_id}}"
+    description: (Required) The public id of the `Vehicle`.
+queryParams:
+  with: vendor
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+
+      pm.test("with= produces the same expansion as with[]=", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response.vendor, "vendor was not expanded by the scalar form").to.be.an('object');
+          pm.expect(json_response.vendor_id).to.eql(json_response.vendor.id);
+      });
+    language: text/javascript
+examples: ./.resources/Expand a Vehicle.resources/examples
+order: 3200

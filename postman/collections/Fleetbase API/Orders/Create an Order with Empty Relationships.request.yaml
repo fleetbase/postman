@@ -1,0 +1,46 @@
+$kind: http-request
+description: |-
+  Creates an order while sending `driver` and `vehicle` as empty strings.
+
+  An empty relationship means "none", not "invalid": Fleetbase ignores the field and creates the order unassigned, exactly as if the key had been left out. This is the historical behaviour, and it matters because a client that serialises an unselected dropdown sends `""` rather than omitting the key.
+
+  Empty-string request values reach the API as null, and a null is a question with an answer — "there is no such record" — rather than a malformed request. This request exists so that answer stays a 2xx.
+url: "{{base_url}}/{{namespace}}/orders"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "pickup": "Singapore 018971",
+      "dropoff": "321 Orchard Rd, Singapore",
+      "driver": "",
+      "vehicle": ""
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+
+      pm.test("an empty relationship does not fail the request", function () {
+          // The regression this guards: an empty `driver` raised a TypeError and
+          // answered 500 instead of being ignored.
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(pm.response.code, "an empty relationship must never be a server error").to.not.eql(500);
+      });
+
+      pm.test("the order is created", function () {
+          pm.expect(json_response.id, "id is not an order public id").to.match(/^order_/);
+      });
+
+      pm.test("the empty relationships are ignored, not assigned", function () {
+          // Skipped assignment, so nothing is there to load or return.
+          pm.expect(json_response.driver_assigned).to.be.oneOf([undefined, null]);
+          pm.expect(json_response.vehicle_assigned).to.be.oneOf([undefined, null]);
+      });
+    language: text/javascript
+order: 1090

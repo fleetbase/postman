@@ -1,20 +1,22 @@
 $kind: object
 name: Fleet
 description: |-
-  A fleet groups drivers and vehicles for operational assignment. Fleets can be linked to service areas, zones, vendors, parent fleets, subfleets, drivers, and vehicles.
+  A fleet groups drivers and vehicles for operational assignment. Fleets can be linked to a service area, a zone, a vendor and a parent fleet, and can themselves hold subfleets, drivers and vehicles.
+
+  Each relationship appears twice, and the two are separate keys. `<name>_id` is the related resource's public ID and is always present. `<name>` is the nested object and is returned only when the relationship was asked for through `?with=`; it is never a string. Internal uuid columns are never part of the public contract.
 example: |
   {
     "id": "fleet_4Mnp8Qx2Vz",
     "name": "Haulers",
-    "task": null,
+    "color": "#2563EB",
+    "task": "Long haul distribution",
     "status": "active",
-    "service_area": null,
-    "zone": null,
-    "vendor": null,
-    "parent_fleet": null,
-    "subfleets": [],
-    "drivers": [],
-    "vehicles": [],
+    "photo_url": "https://s3.ap-northeast-2.amazonaws.com/fleetbase/public/default-fleet.png",
+    "service_area_id": "service_area_9Kp2Vx4Qm1",
+    "zone_id": null,
+    "vendor_id": null,
+    "parent_fleet_id": null,
+    "photo_id": null,
     "updated_at": "2026-05-07T08:30:00.000000Z",
     "created_at": "2026-05-07T08:30:00.000000Z"
   }
@@ -25,33 +27,58 @@ fields:
   - name: name
     type: string
     description: Fleet display name.
+  - name: color
+    type: string
+    description: Display colour for the fleet.
   - name: task
     type: string
     description: Task associated with the fleet.
   - name: status
     type: string
     description: Fleet status.
+  - name: photo_url
+    type: string
+    description: URL of the fleet image, or the default fleet image when none is set.
+  - name: service_area_id
+    type: string
+    description: Public ID of the assigned service area, or `null`. Always present.
+  - name: zone_id
+    type: string
+    description: Public ID of the assigned zone, or `null`. Always present.
+  - name: vendor_id
+    type: string
+    description: Public ID of the assigned vendor, or `null`. Always present.
+  - name: parent_fleet_id
+    type: string
+    description: Public ID of the parent fleet, or `null` for a root fleet. Always present.
+  - name: photo_id
+    type: string
+    description: Public ID of the fleet image file, or `null`. Always present.
   - name: service_area
     type: object
-    description: Service area assigned to the fleet, when loaded.
+    description: |-
+      The assigned service area, returned only when requested through `with=service_area`. Never a string — read `service_area_id` for the identifier.
   - name: zone
     type: object
-    description: Zone assigned to the fleet, when loaded.
+    description: The assigned zone, returned only when requested through `with=zone`.
   - name: vendor
     type: object
-    description: Vendor assigned to the fleet, when loaded.
+    description: The assigned vendor, returned only when requested through `with=vendor`.
   - name: parent_fleet
     type: object
-    description: Parent fleet, when loaded.
+    description: The parent fleet, returned only when requested through `with=parent_fleet`.
+  - name: photo
+    type: object
+    description: The fleet image file, returned only when requested through `with=photo`.
   - name: subfleets
     type: array of objects
-    description: Child fleets, when loaded.
+    description: Child fleets, when requested through `with=subfleets`.
   - name: drivers
     type: array of objects
-    description: Drivers assigned to the fleet, when loaded.
+    description: Drivers assigned to the fleet, when requested through `with=drivers`.
   - name: vehicles
     type: array of objects
-    description: Vehicles assigned to the fleet, when loaded.
+    description: Vehicles assigned to the fleet, when requested through `with=vehicles`.
   - name: updated_at
     type: timestamp
     description: Timestamp when the fleet was last updated.

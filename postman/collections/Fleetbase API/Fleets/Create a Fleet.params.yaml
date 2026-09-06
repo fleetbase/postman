@@ -4,6 +4,29 @@ fields:
     type: string
     required: true
     description: Fleet display name.
+  - name: color
+    type: string
+    description: Display colour for the fleet, for example a hex value such as `#2563EB`.
+  - name: task
+    type: string
+    description: Free-text description of what the fleet is used for.
+  - name: status
+    type: string
+    description: |-
+      Fleet status. The console offers `active`, `disabled` and `decommissioned`; the field is not a closed enum, so any short status string an integration already uses is accepted.
   - name: service_area
     type: string
-    description: Service area ID to assign to the fleet.
+    description: Service area public ID (`service_area_...`) to assign to the fleet. Must belong to the authenticated organization.
+  - name: zone
+    type: string
+    description: Zone public ID (`zone_...`) to assign to the fleet. Must belong to the authenticated organization.
+  - name: vendor
+    type: string
+    description: Vendor public ID (`vendor_...`) to assign to the fleet. Must belong to the authenticated organization.
+  - name: parent_fleet
+    type: string
+    description: |-
+      Parent fleet public ID (`fleet_...`), which makes the new fleet a subfleet. Omit it to create a root fleet. Must belong to the authenticated organization.
+  - name: photo
+    type: string
+    description: File public ID (`file_...`) to use as the fleet image.

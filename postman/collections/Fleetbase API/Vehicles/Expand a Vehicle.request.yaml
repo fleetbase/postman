@@ -1,0 +1,54 @@
+$kind: http-request
+description: |-
+  Retrieves a vehicle with its vendor expanded, using the array form of the expansion parameter.
+
+  Both `?with=vendor` and `?with[]=vendor` are accepted, as are `?with=vendor,driver` and the `expand` alias. Expansion is strictly additive: it adds the nested object and leaves `vendor_id` exactly as it was. A relationship name outside the supported set is ignored rather than rejected, so a client sending a relation this version does not have still gets its response.
+url: "{{base_url}}/{{namespace}}/vehicles/:id?with[]=vendor&with[]=not_a_relation"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "{{vehicle_id}}"
+    description: (Required) The public id of the `Vehicle`.
+queryParams:
+  - key: with[]
+    value: vendor
+  - key: with[]
+    value: not_a_relation
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+
+      pm.test("Expand a Vehicle returns the vehicle", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200]);
+          pm.expect(json_response.id, "id is not a vehicle public id").to.match(/^vehicle_/);
+      });
+
+      pm.test("with[] adds the nested object", function () {
+          pm.expect(json_response.vendor, "vendor was not expanded").to.be.an('object');
+          pm.expect(json_response.vendor.id, "the expanded vendor has no public id").to.match(/^vendor_/);
+      });
+
+      pm.test("expansion leaves the identifier untouched", function () {
+          // The identifier is present whether or not the object is, and it does
+          // not change when the object appears beside it.
+          pm.expect(json_response.vendor_id).to.eql(json_response.vendor.id);
+          pm.expect(json_response.vendor_id).to.match(/^vendor_/);
+      });
+
+      pm.test("an unsupported expansion is ignored, not an error", function () {
+          pm.expect(json_response).to.not.have.property("not_a_relation");
+          // A relation that was not asked for stays absent — never a string.
+          pm.expect(json_response.driver).to.be.oneOf([undefined, null]);
+      });
+
+      pm.test("Expand a Vehicle exposes no internal uuid columns", function () {
+          Object.keys(json_response).forEach(function (key) {
+              pm.expect(key, `${key} leaks an internal column`).to.not.match(/(^uuid$|_uuid$)/);
+          });
+      });
+    language: text/javascript
+examples: ./.resources/Expand a Vehicle.resources/examples
+order: 3100
