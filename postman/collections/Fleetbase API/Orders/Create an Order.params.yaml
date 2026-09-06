@@ -48,10 +48,10 @@ fields:
     description: Purchase rate ID to attach to the order.
   - name: driver
     type: string
-    description: Driver ID to assign to the order. Fleetbase also assigns the driver's vehicle when one is available.
+    description: Driver ID to assign to the order. Fleetbase also assigns the driver's vehicle when one is available. Optional — an empty string or `null` is treated as absent and leaves the order unassigned. A non-empty value is still subject to the existing driver ID validation.
   - name: vehicle
     type: string
-    description: Vehicle ID to assign to the order.
+    description: Vehicle ID to assign to the order. Optional — an empty string or `null` is treated as absent, and an ID that matches no vehicle is ignored rather than rejected.
   - name: facilitator
     type: string
     description: Contact, vendor, or integrated vendor ID responsible for facilitating the order.

@@ -10,10 +10,10 @@ fields:
     description: Service type this rate applies to.
   - name: service_area
     type: string
-    description: Service area ID this rate applies to.
+    description: Service area ID this rate applies to. Optional — an empty string or `null` is treated as absent rather than as an invalid service area.
   - name: zone
     type: string
-    description: Zone ID this rate applies to.
+    description: Zone ID this rate applies to. Optional — an empty string or `null` is treated as absent rather than as an invalid zone.
   - name: rate_calculation_method
     type: enum
     required: true

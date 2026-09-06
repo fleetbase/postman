@@ -1,0 +1,44 @@
+$kind: http-request
+description: |-
+  Creates a service rate while sending `service_area` and `zone` as empty strings.
+
+  Both relationships are optional, so an empty one reads as absent. Without that, the `exists` check runs against the null an empty string becomes and answers "The selected service area is invalid" for a field the caller simply left blank.
+
+  Does not overwrite `service_rate_id`; the canonical create owns that variable.
+url: "{{base_url}}/{{namespace}}/service-rates"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "service_name": "Empty Relationship Rate",
+      "service_type": "food_delivery",
+      "rate_calculation_method": "per_meter",
+      "currency": "USD",
+      "base_fee": 10.00,
+      "per_meter_unit": "km",
+      "per_meter_flat_rate_fee": 25,
+      "service_area": "",
+      "zone": "",
+      "duration_terms": "Standard",
+      "estimated_days": 3
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      pm.test("an empty optional relationship is not a validation error", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf([200, 201]);
+          pm.expect(pm.response.code, "an empty optional relationship must not be rejected").to.not.eql(422);
+      });
+
+      pm.test("the service rate is created", function () {
+          var json_response = pm.response.json();
+          pm.expect(json_response.id, "id is not a service rate public id").to.match(/^service_/);
+      });
+    language: text/javascript
+order: 1010
