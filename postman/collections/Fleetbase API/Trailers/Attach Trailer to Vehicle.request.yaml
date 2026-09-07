@@ -9,5 +9,5 @@ scripts:
   - type: afterResponse
     language: text/javascript
     code: |
-      const body = pm.response.json(); pm.test("Trailer attached", () => { pm.expect(pm.response.code).to.be.oneOf([200, 201]); pm.expect(body.relationship_type).to.eql("towing"); pm.expect(body.active).to.eql(true); pm.expect(body.vehicle.id).to.eql(pm.environment.get("vehicle_id")); }); pm.environment.set("trailer_connection_id", body.id);
+      const body = pm.response.json(); pm.test("Trailer attached", () => { pm.expect(pm.response.code).to.be.oneOf([200, 201]); pm.expect(body.relationship_type).to.eql("towing"); pm.expect(body.active).to.eql(true); pm.expect(body.vehicle.id).to.eql(pm.environment.get("vehicle_id")); pm.expect(body.vehicle_id).to.eql(pm.environment.get("vehicle_id")); pm.expect(body.trailer_id).to.eql(pm.environment.get("trailer_id")); pm.expect(body).to.not.have.property("connected_uuid"); }); pm.environment.set("trailer_connection_id", body.id);
 order: 6000

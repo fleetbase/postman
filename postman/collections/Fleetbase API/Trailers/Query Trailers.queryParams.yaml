@@ -6,6 +6,10 @@ fields:
   - { name: attachment_state, type: enum, values: [attached, detached], description: Filter by derived towing state. }
   - { name: connectivity_status, type: enum, values: [online, recently_offline, offline, never_connected], description: Filter by telemetry connectivity. }
   - { name: vehicle, type: string, description: Filter by attached Vehicle public ID. }
+  - { name: vendor, type: string, description: Filter by Vendor public ID. }
+  - { name: category, type: string, description: Filter by Category public ID. }
+  - { name: refrigerated, type: boolean, description: Filter temperature-controlled Trailers. }
+  - { name: with, type: string, description: "Comma-separated expansions: category, vendor, warranty, photo, positions." }
   - { name: limit, type: integer, description: Page size. }
   - { name: page, type: integer, description: Page number. }
   - { name: sort, type: string, description: Sort expression. }

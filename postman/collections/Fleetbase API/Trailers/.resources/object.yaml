@@ -23,10 +23,18 @@ fields:
   - { name: status, type: string, description: Lifecycle state independent of attachment and connectivity. }
   - { name: attachment_state, type: string, description: Derived attached or detached state. }
   - { name: connectivity_status, type: string, description: Derived telemetry connectivity state. }
+  - { name: category_id, type: string, description: Public ID of the assigned Category, or null. }
+  - { name: vendor_id, type: string, description: Public ID of the Vendor, or null. }
+  - { name: warranty_id, type: string, description: Public ID of the Warranty, or null. }
+  - { name: photo_id, type: string, description: Public ID of the photo File, or null. }
+  - { name: vehicle_id, type: string, description: Public ID of the current towing Vehicle, or null when detached. }
   - { name: current_vehicle, type: object, description: Current towing Vehicle public identity when attached. }
   - { name: current_connection, type: object, description: Effective-dated current towing connection. }
   - { name: location, type: object, description: Latest direct Trailer coordinates. }
-  - { name: telematics, type: object, description: Normalized latest telemetry snapshot and provenance. }
+  - { name: telematics, type: object, description: Normalized latest telemetry snapshot and provenance, without private identifiers. }
+  - { name: equipment, type: array, description: Equipment currently attached to the Trailer. }
+  - { name: devices, type: array, description: Devices currently attached to the Trailer. }
+  - { name: connections, type: array, description: Effective-dated towing connection history, newest first. }
   - { name: devices_count, type: integer, description: Attached device count. }
   - { name: equipment_count, type: integer, description: Attached equipment count. }
   - { name: created_at, type: timestamp, description: Creation timestamp. }

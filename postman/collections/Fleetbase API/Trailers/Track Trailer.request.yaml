@@ -9,5 +9,5 @@ scripts:
   - type: afterResponse
     language: text/javascript
     code: |
-      const body = pm.response.json(); pm.test("Trailer tracking updates live state", () => { pm.response.to.have.status(200); pm.expect(body.location).to.be.an("object"); pm.expect(body.telematics.last_provider).to.eql("public_api"); });
+      const body = pm.response.json(); pm.test("Trailer tracking updates live state", () => { pm.response.to.have.status(200); pm.expect(body.location).to.be.an("object"); pm.expect(body.telematics.last_provider).to.eql("public_api"); pm.expect(body.connectivity_status).to.eql("online"); pm.expect(body.location.coordinates).to.eql([-73.9857, 40.7484]); pm.expect(body.telematics).to.not.have.property("last_device_uuid"); });
 order: 14000
