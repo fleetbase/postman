@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - { name: name, type: string, required: true, description: Trailer display name. }
+  - { name: code, type: string, description: Company-scoped fleet code. }
+  - { name: type, type: enum, values: [dry_van, reefer, flatbed, step_deck, lowboy, tanker, bulk, dump, chassis, curtain_side, car_carrier, livestock, logging, dolly, specialty, other], description: Stable Trailer type. }
+  - { name: status, type: enum, values: [available, in_use, maintenance, out_of_service, retired], description: Lifecycle status. }
+  - { name: vin, type: string, description: Trailer VIN. }
+  - { name: plate_number, type: string, description: Registration plate. }
+  - { name: payload_capacity, type: number, description: Payload capacity in the selected measurement system. }
+  - { name: axle_count, type: integer, description: Axle count. }
+  - { name: refrigerated, type: boolean, description: Whether the Trailer is temperature controlled. }
+  - { name: measurement_system, type: enum, values: [metric, imperial], description: Measurement system for typed values. }

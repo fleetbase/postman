@@ -1,0 +1,12 @@
+$kind: http-request
+description: Create lifecycle Equipment that will be attached to the Trailer and cleaned up by this folder.
+url: "{{base_url}}/{{namespace}}/equipment"
+method: POST
+headers: { Accept: application/json, Content-Type: application/json }
+body: { type: json, content: '{"name":"Postman Trailer Sensor Bracket","code":"POSTMAN-TRL-EQ","type":"tool","status":"available"}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Equipment created for Trailer lifecycle", () => { pm.expect(pm.response.code).to.be.oneOf([200, 201]); pm.expect(body.id).to.match(/^equipment_/); }); pm.environment.set("trailer_equipment_id", body.id);
+order: 9000

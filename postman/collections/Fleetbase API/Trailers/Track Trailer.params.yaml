@@ -1,0 +1,9 @@
+$kind: params
+fields:
+  - { name: latitude, type: number, required: true, description: Observed latitude. }
+  - { name: longitude, type: number, required: true, description: Observed longitude. }
+  - { name: observed_at, type: timestamp, description: Source observation time used for stale-event protection. }
+  - { name: speed, type: number, description: Observed speed. }
+  - { name: heading, type: number, description: Observed heading. }
+  - { name: altitude, type: number, description: Observed altitude. }
+  - { name: odometer, type: number, description: Hubometer or odometer reading. }

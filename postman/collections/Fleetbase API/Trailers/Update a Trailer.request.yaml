@@ -1,0 +1,13 @@
+$kind: http-request
+description: Update a Trailer without allowing its asset discriminator to change.
+url: "{{base_url}}/{{namespace}}/trailers/:id"
+method: PUT
+headers: { Accept: application/json, Content-Type: application/json }
+pathVariables: [{ key: id, value: "{{trailer_id}}", description: Trailer public ID. }]
+body: { type: json, content: '{"name":"Postman Reefer Updated","status":"in_use","payload_capacity":21000}' }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); pm.test("Trailer updated", () => { pm.response.to.have.status(200); pm.expect(body.name).to.eql("Postman Reefer Updated"); pm.expect(body.status).to.eql("in_use"); });
+order: 4000

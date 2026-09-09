@@ -1,0 +1,12 @@
+$kind: http-request
+description: Delete the lifecycle Device after detaching it.
+url: "{{base_url}}/{{namespace}}/devices/:id"
+method: DELETE
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_device_id}}", description: Device public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      pm.test("Lifecycle Device deleted", () => pm.expect(pm.response.code).to.be.oneOf([200, 204])); pm.environment.unset("trailer_device_id");
+order: 17000

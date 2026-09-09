@@ -1,0 +1,4 @@
+$kind: params
+fields:
+  - { name: attachable_type, type: enum, values: ["fleet-ops:vehicle", "fleet-ops:trailer"], description: Allowed target resource type. }
+  - { name: attachable, type: string, description: Vehicle or Trailer public ID. }

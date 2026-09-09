@@ -1,0 +1,12 @@
+$kind: http-request
+description: Detach the lifecycle Device. Equipment is detached in the following request.
+url: "{{base_url}}/{{namespace}}/devices/:id/detach"
+method: POST
+headers: { Accept: application/json }
+pathVariables: [{ key: id, value: "{{trailer_device_id}}", description: Device public ID. }]
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |
+      const body = pm.response.json(); const device = body.device ?? body; pm.test("Device detached from Trailer", () => { pm.response.to.have.status(200); pm.expect(device.attachable_id).to.be.oneOf([null, undefined]); });
+order: 15000

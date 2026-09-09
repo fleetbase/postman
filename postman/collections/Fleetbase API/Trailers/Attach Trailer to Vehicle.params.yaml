@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - { name: vehicle, type: string, required: true, description: Vehicle public or documented internal ID. }
+  - { name: connected_at, type: timestamp, description: Effective connection time. }
+  - { name: source, type: string, description: Connection source such as manual. }
+  - { name: position, type: integer, description: Position in a multi-Trailer combination. }
