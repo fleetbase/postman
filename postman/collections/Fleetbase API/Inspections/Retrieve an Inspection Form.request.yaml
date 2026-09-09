@@ -1,0 +1,15 @@
+$kind: http-request
+name: "Retrieve an Inspection Form"
+description: |-
+  Retrieves one published inspection form with its checklist `items` and `settings`.
+
+  A form that is not published — a draft, or one that has been archived — answers 404, the same as one that does not exist: to a driver, a form that cannot be filled in is not there.
+url: "{{base_url}}/{{namespace}}/inspection-forms/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{inspection_form_id}}"
+    description: (Required) The inspection form to retrieve.
+
+
+order: 2000

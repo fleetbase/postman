@@ -1,0 +1,25 @@
+$kind: http-request
+name: "List Inspection Forms"
+description: |-
+  Lists the inspection forms the organisation has published, newest first. Draft and archived forms are never listed: a driver can only file against a published one.
+
+  Send `vehicle` to narrow the list to what applies to one vehicle — forms bound to that vehicle, and forms bound to nothing, which are the organisation-wide ones. Send `type` to narrow by form type, as one value or a comma separated list.
+url: "{{base_url}}/{{namespace}}/inspection-forms"
+method: GET
+queryParams:
+  vehicle: "{{vehicle_id}}"
+
+scripts:
+  - type: afterResponse
+    code: |-
+      // Forms are published from the console, not this API, so the first
+      // published form is what Retrieve an Inspection Form and Submit an
+      // Inspection address. A contract run has to seed one.
+      const forms = pm.response.json();
+
+      if (Array.isArray(forms) && forms.length) {
+          pm.environment.set("inspection_form_id", forms[0].id);
+      }
+    language: text/javascript
+
+order: 1000

@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Retrieve an Inspection"
+description: |-
+  Retrieves one inspection with its `item_results`, and the `issue` and `work_order` raised from any failed items.
+url: "{{base_url}}/{{namespace}}/inspections/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{inspection_id}}"
+    description: (Required) The inspection to retrieve.
+
+
+order: 5000

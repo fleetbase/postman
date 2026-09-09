@@ -1,0 +1,15 @@
+$kind: http-request
+name: "List Vehicle Inspections"
+description: |-
+  Lists a vehicle's inspection history, newest first — the same inspections List Inspections answers with `vehicle`, addressed the way the driver app holds them, from the vehicle's screen.
+
+  Narrow by `type`, `result` and `status`, each as one value or a comma separated list.
+url: "{{base_url}}/{{namespace}}/vehicles/:id/inspections"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{vehicle_id}}"
+    description: (Required) The vehicle whose inspections to list.
+
+
+order: 6000

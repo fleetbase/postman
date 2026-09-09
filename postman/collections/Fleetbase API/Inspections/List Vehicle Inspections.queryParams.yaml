@@ -1,0 +1,18 @@
+$kind: queryParams
+fields:
+  - name: type
+    type: string
+    required: false
+    description: Only inspections of these types, such as `dvir` or `pre_trip,post_trip`.
+  - name: result
+    type: string
+    required: false
+    description: "`passed` or `failed`."
+  - name: status
+    type: string
+    required: false
+    description: "`submitted`, `needs_review` or `resolved`."
+  - name: limit
+    type: integer
+    required: false
+    description: Maximum inspections to return. Defaults to 30.

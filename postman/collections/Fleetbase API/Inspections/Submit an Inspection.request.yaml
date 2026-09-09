@@ -1,0 +1,60 @@
+$kind: http-request
+name: "Submit an Inspection"
+description: |-
+  Files an inspection against a published form, as the driver app does at the end of a DVIR.
+
+  The body carries one entry in `item_results` per checklist item the driver answered, each with `passed` and optionally a status, severity, comments and photos. Photos are sent as base64 encoded images or as URLs to files already uploaded.
+
+  Without `vehicle` the inspection is recorded against the vehicle the driver is currently assigned to. Without `started_at` the inspection is taken to have started when it was filed.
+
+  The app queues a submit while offline and replays it later. Send an `Idempotency-Key` header with each attempt: a replay with a key already used by the same driver answers with the inspection the first attempt filed rather than filing a second one.
+
+  The response is the inspection with its `item_results`, and the `issue` and `work_order` the form's settings raised from any failed items.
+url: "{{base_url}}/{{namespace}}/inspections"
+method: POST
+headers:
+  Idempotency-Key: "{{$guid}}"
+body:
+  type: json
+  content: |-
+    {
+      "inspection_form": "{{inspection_form_id}}",
+      "driver": "{{driver_id}}",
+      "vehicle": "{{vehicle_id}}",
+      "started_at": "2026-09-09T07:10:00Z",
+      "odometer": 120400,
+      "engine_hours": 3100,
+      "location": {
+        "latitude": 1.3521,
+        "longitude": 103.8198
+      },
+      "item_results": [
+        {
+          "item_key": "brakes",
+          "label": "Brakes",
+          "category": "Safety",
+          "passed": false,
+          "severity": "critical",
+          "comments": "Pedal is soft.",
+          "photos": ["{{proof_photo_base64}}"]
+        },
+        {
+          "item_key": "lights",
+          "label": "Lights",
+          "category": "Safety",
+          "passed": true
+        }
+      ]
+    }
+
+scripts:
+  - type: afterResponse
+    code: |-
+      const json_response = pm.response.json();
+
+      if (json_response && json_response.id) {
+          pm.environment.set("inspection_id", json_response.id);
+      }
+    language: text/javascript
+
+order: 3000

@@ -1,0 +1,8 @@
+$kind: collection
+description: |-
+  Inspections are the driver's vehicle inspection reports — a DVIR filed before or after a trip against a form the organisation has published from the console.
+
+  These endpoints are for the driver filing the inspection: read the published forms, submit against one, and read back what was filed and what it produced. A failed item can raise an issue and open a work order, depending on how the form is configured; both come back on the submission.
+
+  Authoring and publishing forms, and reviewing or resolving submissions, is fleet management and is not part of the consumable API. The requests here need at least one published form in the organisation, which a contract run has to seed.
+order: 7750

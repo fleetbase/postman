@@ -1,0 +1,12 @@
+$kind: http-request
+name: "List Inspections"
+description: |-
+  Lists filed inspections, newest first.
+
+  Narrow by `driver` or `vehicle`, and by `type`, `result` and `status`, each as one value or a comma separated list. Defaults to a recent window rather than the organisation's whole history; use `limit` to widen it.
+url: "{{base_url}}/{{namespace}}/inspections"
+method: GET
+queryParams:
+  driver: "{{driver_id}}"
+
+order: 4000

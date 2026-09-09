@@ -1,0 +1,69 @@
+$kind: params
+fields:
+  - name: inspection_form
+    type: string
+    required: true
+    description: ID of the published inspection form being filed against.
+  - name: driver
+    type: string
+    required: true
+    description: ID of the driver filing the inspection.
+  - name: vehicle
+    type: string
+    required: false
+    description: ID of the vehicle inspected. Defaults to the vehicle the driver is assigned to.
+  - name: started_at
+    type: timestamp
+    required: false
+    description: When the driver began the inspection. Defaults to the time it is filed.
+  - name: odometer
+    type: integer
+    required: false
+    description: Odometer reading at the time of the inspection.
+  - name: engine_hours
+    type: integer
+    required: false
+    description: Engine hours at the time of the inspection.
+  - name: item_results
+    type: array of objects
+    required: true
+    description: One entry per checklist item answered. At least one is required.
+    fields:
+      - name: item_key
+        type: string
+        description: The form item's key.
+      - name: label
+        type: string
+        required: true
+        description: The item as shown to the driver.
+      - name: category
+        type: string
+        description: The item's category on the form.
+      - name: passed
+        type: boolean
+        required: true
+        description: Whether the item passed.
+      - name: status
+        type: string
+        description: "`passed` or `failed`. Derived from `passed` when omitted."
+      - name: severity
+        type: string
+        description: "Severity of a failure — `low`, `medium`, `high` or `critical`. Sets the priority of the issue and work order raised."
+      - name: comments
+        type: string
+        description: The driver's note on the item.
+      - name: photos
+        type: array
+        description: Photos of the item, each a base64 encoded image or a URL.
+  - name: location
+    type: object
+    required: false
+    description: Where the inspection was filed from, as `latitude` and `longitude`.
+  - name: signature
+    type: object
+    required: false
+    description: The driver's signature, as the app captured it.
+  - name: attachments
+    type: array
+    required: false
+    description: Additional files attached to the inspection.
