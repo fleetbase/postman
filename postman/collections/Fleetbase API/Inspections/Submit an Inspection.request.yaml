@@ -3,13 +3,17 @@ name: "Submit an Inspection"
 description: |-
   Files an inspection against a published form, as the driver app does at the end of a DVIR.
 
-  The body carries one entry in `item_results` per checklist item the driver answered, each with `passed` and optionally a status, severity, comments and photos. Photos are sent as base64 encoded images or as URLs to files already uploaded.
+  A form built from typed fields is answered with `custom_field_values`: one entry per field the driver answered, naming the field by the `id` the form read gave it, with a `value_type` and a `value`. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a meter is a number, a signature or a photo is base64. The server stores every photo and signature as a file and answers with `file:` references resolved, and mirrors each `pass-fail` answer into an `item_results` row, which is what issues, work orders and the vehicle's history are built from.
+
+  The first cut's flat `item_results` body is still accepted, for the tokenised public link and for older app builds. When both arrive the field values win and the duplicated results are ignored — which is exactly what the app sends, so one body works against either cut.
+
+  A failed `pass-fail` answer must carry whatever its field insists on: a form that sets `require_comment_on_fail` or `require_photo_on_fail` refuses the whole submission with a 422 rather than filing half an inspection.
 
   Without `vehicle` the inspection is recorded against the vehicle the driver is currently assigned to. Without `started_at` the inspection is taken to have started when it was filed.
 
   The app queues a submit while offline and replays it later. Send an `Idempotency-Key` header with each attempt: a replay with a key already used by the same driver answers with the inspection the first attempt filed rather than filing a second one.
 
-  The response is the inspection with its `item_results`, and the `issue` and `work_order` the form's settings raised from any failed items.
+  The response is the inspection with its `custom_field_values`, `item_results` and `files`, and the `issue` and `work_order` the form's settings raised from any failed items.
 url: "{{base_url}}/{{namespace}}/inspections"
 method: POST
 headers:
@@ -28,6 +32,7 @@ body:
         "latitude": 1.3521,
         "longitude": 103.8198
       },
+      "custom_field_values": [],
       "item_results": [
         {
           "item_key": "brakes",
@@ -48,6 +53,55 @@ body:
     }
 
 scripts:
+  - type: beforeRequest
+    code: |-
+      // The app sends both bodies and lets the server choose; so does this.
+      // `custom_field_values` is filled in from the fields Retrieve an
+      // Inspection Form chained, because a field is named by an id that only
+      // exists once the form has been read. A form that has not been rebuilt
+      // from the first cut has no fields to name, so the entry is left empty
+      // and the server files the flat `item_results` instead — which is what
+      // an older app build sends anyway.
+      const resolved = (key) => {
+          const value = pm.environment.get(key);
+          return value && !/^\{\{.*\}\}$/.test(String(value)) ? String(value) : null;
+      };
+
+      const passFail = resolved("inspection_pass_fail_field_id");
+      const meter = resolved("inspection_number_field_id");
+      const signature = resolved("inspection_signature_field_id");
+      const photo = resolved("proof_photo_base64");
+      const values = [];
+
+      if (passFail) {
+          values.push({
+              custom_field: passFail,
+              value_type: "object",
+              value: {
+                  passed: false,
+                  not_applicable: false,
+                  severity: "critical",
+                  comments: "Pedal is soft.",
+                  photos: photo ? [photo] : [],
+                  unsafe: true,
+              },
+          });
+      }
+
+      if (meter) {
+          values.push({ custom_field: meter, value_type: "number", value: 120400 });
+      }
+
+      if (signature && photo) {
+          values.push({ custom_field: signature, value_type: "file", value: photo });
+      }
+
+      const body = JSON.parse(pm.request.body.raw);
+      body.custom_field_values = values;
+      pm.request.body.update({ mode: "raw", raw: JSON.stringify(body, null, 2) });
+
+      pm.environment.set("inspection_submitted_field_values", String(values.length));
+    language: text/javascript
   - type: afterResponse
     code: |-
       const json_response = pm.response.json();
@@ -55,6 +109,38 @@ scripts:
       if (json_response && json_response.id) {
           pm.environment.set("inspection_id", json_response.id);
       }
+
+      pm.test("Submit an Inspection files the report", function () {
+          pm.expect(pm.response.code, "expected a 2xx").to.be.oneOf([200, 201]);
+          pm.expect(json_response, "no inspection returned").to.be.an("object");
+          pm.expect(json_response.id, "the filed inspection has no id").to.be.a("string").and.not.empty;
+          pm.expect(json_response.item_results, "no item results were derived").to.be.an("array");
+      });
+
+      pm.test("Answers filed as field values come back with their files resolved", function () {
+          const sent = Number(pm.environment.get("inspection_submitted_field_values") || 0);
+
+          if (!sent) {
+              pm.expect(json_response.item_results.length, "a flat submit files its results").to.be.above(0);
+              return;
+          }
+
+          pm.expect(json_response.custom_field_values, "no field values were answered").to.be.an("array");
+          pm.expect(json_response.custom_field_values.length, "fewer values than were sent").to.eql(sent);
+
+          json_response.custom_field_values.forEach((value) => {
+              pm.expect(value.custom_field, "a value that names no field").to.be.a("string").and.not.empty;
+
+              // A photo or signature is stored as a file and answered as one,
+              // never handed back as the base64 that was sent.
+              const photos = (value.value && Array.isArray(value.value.photos)) ? value.value.photos : [];
+              photos.forEach((file) => pm.expect(file, "a photo left unresolved").to.be.an("object").and.to.have.property("url"));
+
+              if (value.value_type === "file" && value.value) {
+                  pm.expect(value.value, "a signature left unresolved").to.be.an("object").and.to.have.property("url");
+              }
+          });
+      });
     language: text/javascript
 
 order: 3000

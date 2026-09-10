@@ -4,6 +4,8 @@ description: |-
   Lists filed inspections, newest first.
 
   Narrow by `driver` or `vehicle`, and by `type`, `result` and `status`, each as one value or a comma separated list. Defaults to a recent window rather than the organisation's whole history; use `limit` to widen it.
+
+  Each row carries the same shape Retrieve an Inspection answers with: the answers as `custom_field_values`, the `item_results` derived from them, and the `files` filed with the inspection.
 url: "{{base_url}}/{{namespace}}/inspections"
 method: GET
 queryParams:

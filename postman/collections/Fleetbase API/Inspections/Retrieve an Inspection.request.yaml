@@ -1,7 +1,7 @@
 $kind: http-request
 name: "Retrieve an Inspection"
 description: |-
-  Retrieves one inspection with its `item_results`, and the `issue` and `work_order` raised from any failed items.
+  Retrieves one inspection with everything it produced: `custom_field_values` — the driver's answers, each beside the field's `name`, `label` and `type`, with every photo and signature resolved to `{ id, url, filename, content_type }` — the `item_results` derived from the `pass-fail` answers, the `files` filed with it, and the `issue` and `work_order` raised from any failed items.
 url: "{{base_url}}/{{namespace}}/inspections/:id"
 method: GET
 pathVariables:

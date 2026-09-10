@@ -4,6 +4,8 @@ description: |-
   Lists a vehicle's inspection history, newest first — the same inspections List Inspections answers with `vehicle`, addressed the way the driver app holds them, from the vehicle's screen.
 
   Narrow by `type`, `result` and `status`, each as one value or a comma separated list.
+
+  Each row carries the answers as `custom_field_values`, the `item_results` derived from them, and the `files` filed with the inspection.
 url: "{{base_url}}/{{namespace}}/vehicles/:id/inspections"
 method: GET
 pathVariables:

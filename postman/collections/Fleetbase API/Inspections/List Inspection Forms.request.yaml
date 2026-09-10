@@ -3,6 +3,8 @@ name: "List Inspection Forms"
 description: |-
   Lists the inspection forms the organisation has published, newest first. Draft and archived forms are never listed: a driver can only file against a published one.
 
+  Each form carries its structure as `grouped_fields` — the groups of typed fields a driver fills in — so a list is enough to render a form picker without reading each one.
+
   Send `vehicle` to narrow the list to what applies to one vehicle — forms bound to that vehicle, and forms bound to nothing, which are the organisation-wide ones. Send `type` to narrow by form type, as one value or a comma separated list.
 url: "{{base_url}}/{{namespace}}/inspection-forms"
 method: GET
