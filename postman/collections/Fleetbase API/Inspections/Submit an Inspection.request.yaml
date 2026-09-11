@@ -18,6 +18,7 @@ url: "{{base_url}}/{{namespace}}/inspections"
 method: POST
 headers:
   Idempotency-Key: "{{$guid}}"
+  Accept: application/json
 body:
   type: json
   content: |-
@@ -98,7 +99,11 @@ scripts:
 
       const body = JSON.parse(pm.request.body.raw);
       body.custom_field_values = values;
-      pm.request.body.update({ mode: "raw", raw: JSON.stringify(body, null, 2) });
+      // update() replaces the body wholesale, including the raw language that
+      // made it JSON: without restating it the rewritten body went out as
+      // text/plain, the API parsed nothing, and refused every field as missing.
+      pm.request.body.update({ mode: "raw", raw: JSON.stringify(body, null, 2), options: { raw: { language: "json" } } });
+      pm.request.headers.upsert({ key: "Content-Type", value: "application/json" });
 
       pm.environment.set("inspection_submitted_field_values", String(values.length));
     language: text/javascript
