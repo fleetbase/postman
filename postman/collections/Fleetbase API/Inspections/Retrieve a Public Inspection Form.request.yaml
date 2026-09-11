@@ -9,7 +9,7 @@ description: |-
 
   A token that is missing, unknown, expired, revoked or — for a single-use link — already used answers 403 with an `error`. Reading the form does not spend a single-use link; submitting does.
 
-  Every link carries a six-digit PIN, generated with it and shared separately: shown in the console, or sent by email or SMS to the user the link is assigned to, else to the driver. The same PIN is asked for by all three public routes. Without it, every one answers 403 with `pin_required: true`; a wrong one answers the same with `attempts_left`, and the fifth wrong PIN locks the link, which then answers 403 with `locked: true` until a new link is generated. Links minted before PINs existed carry none and ask for none. A `pin` field is accepted too, but the header keeps the PIN out of URLs and the access logs that record them.
+  Every link carries a six-digit PIN, generated with it: shown in the console, or sent by email or SMS with the link to the user the link is assigned to, else to the driver. The PIN stops anyone who has the link alone. The same PIN is asked for by all three public routes. Without it, every one answers 403 with `pin_required: true`; a wrong one answers the same with `attempts_left`, and the fifth wrong PIN locks the link, which then answers 403 with `locked: true` until a new link is generated. Links minted before PINs existed carry none and ask for none. A `pin` field is accepted too, but the header keeps the PIN out of URLs and the access logs that record them.
 url: "{{base_url}}/public/inspections/forms/:id"
 method: GET
 # No auth block. The route is public and ignores Authorization, so the collection's
