@@ -1,0 +1,180 @@
+$kind: object
+name: Inspection
+description: |-
+  An inspection is one filed report against a published inspection form: the vehicle and driver it was filed for, the driver's answer to every field of the form, the pass/fail results derived from the `pass-fail` answers, the photos and signature filed with it, and the issue or work order the form's settings raised from any failed items.
+example: |
+  {
+    "id": "inspection_submission_4Mnp8Qx2Vz",
+    "form": { "id": "inspection_form_9Kd2Lm7Aq1", "name": "Pre-trip DVIR", "type": "dvir" },
+    "vehicle": { "id": "vehicle_7Hx3Pq9Rt2", "plate_number": "TRK-7" },
+    "driver": { "id": "driver_2Fb8Nc4Wm6", "name": "Dana Driver" },
+    "issue": null,
+    "work_order": null,
+    "custom_field_values": [
+      {
+        "custom_field": "0d2b7f1e-4a3c-4d5e-9f61-2c8b7a6d5e4f",
+        "name": "brakes",
+        "label": "Brakes",
+        "type": "pass-fail",
+        "value_type": "object",
+        "value": {
+          "passed": true,
+          "not_applicable": false,
+          "severity": null,
+          "comments": null,
+          "photos": [],
+          "unsafe": false
+        }
+      },
+      {
+        "custom_field": "7c1a9e42-6b8d-4f30-8a52-1d9f3b6c4e70",
+        "name": "odometer",
+        "label": "Odometer",
+        "type": "number",
+        "value_type": "number",
+        "value": 120400
+      },
+      {
+        "custom_field": "b8e5d3c1-2f74-4a96-bc08-5e1a7d2f9c63",
+        "name": "signature",
+        "label": "Sign here",
+        "type": "signature",
+        "value_type": "file",
+        "value": {
+          "id": "file_5Qw8Zt2Nb7",
+          "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
+          "filename": "lq8w1c0v9xk3.png",
+          "content_type": "image/png"
+        }
+      }
+    ],
+    "files": [
+      {
+        "id": "file_5Qw8Zt2Nb7",
+        "uuid": "3a6c9e21-7b4d-4f18-9c05-2d8e1f7a6b34",
+        "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
+        "original_filename": "lq8w1c0v9xk3.png",
+        "content_type": "image/png",
+        "type": "inspection_signature",
+        "caption": null,
+        "created_at": "2026-09-09T07:30:00.000000Z"
+      }
+    ],
+    "item_results": [
+      {
+        "id": "b3f0c4a2-1d6e-4c1a-9c2b-8e7f6a5d4c3b",
+        "item_key": "brakes",
+        "label": "Brakes",
+        "category": "Safety",
+        "status": "passed",
+        "severity": null,
+        "passed": true,
+        "comments": null,
+        "photos": [],
+        "meta": {},
+        "submission_id": "inspection_submission_4Mnp8Qx2Vz",
+        "updated_at": "2026-09-09T07:30:00.000000Z",
+        "created_at": "2026-09-09T07:30:00.000000Z"
+      }
+    ],
+    "type": "dvir",
+    "status": "submitted",
+    "result": "passed",
+    "source": "navigator",
+    "odometer": 120400,
+    "engine_hours": null,
+    "total_items": 1,
+    "failed_items": 0,
+    "location": { "latitude": 1.3521, "longitude": 103.8198 },
+    "signature": {},
+    "attachments": [],
+    "meta": {},
+    "form_name": "Pre-trip DVIR",
+    "vehicle_name": "Truck 7",
+    "driver_name": "Dana Driver",
+    "has_failures": false,
+    "started_at": "2026-09-09T07:10:00.000000Z",
+    "submitted_at": "2026-09-09T07:30:00.000000Z",
+    "resolved_at": null,
+    "updated_at": "2026-09-09T07:30:00.000000Z",
+    "created_at": "2026-09-09T07:30:00.000000Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: Public inspection identifier.
+  - name: form
+    type: object
+    description: The inspection form the report was filed against, when loaded.
+  - name: vehicle
+    type: object
+    description: The vehicle inspected, when loaded.
+  - name: driver
+    type: object
+    description: The driver who filed the inspection, when loaded.
+  - name: issue
+    type: object
+    description: The issue raised from the failed items, when the form asks for one and any item failed.
+  - name: work_order
+    type: object
+    description: The work order opened for the failed items, when the form asks for one and any item failed.
+  - name: custom_field_values
+    type: array of objects
+    description: The driver's answer to each field of the form — the field's `custom_field` id, `name`, `label`, `type` and `value_type` beside the `value`. A `pass-fail` value is an object of `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a photo or signature value is resolved to `{ id, url, filename, content_type }` rather than the base64 that was sent.
+  - name: files
+    type: array of objects
+    description: The photos and signatures filed with the inspection, however they arrived — inside the submit body, or dropped on the console's Photos panel.
+  - name: item_results
+    type: array of objects
+    description: One result per `pass-fail` answer, derived from `custom_field_values` — `item_key`, `label`, `category`, `status` (`passed`, `failed` or `not_applicable`), `severity`, `passed`, `comments` and `photos`. This is what issues, work orders and the vehicle's history are built from.
+  - name: type
+    type: string
+    description: Inspection type, taken from the form — `dvir`, `pre_trip`, `post_trip`, or a custom type.
+  - name: status
+    type: string
+    description: Lifecycle status — `submitted`, `needs_review` or `resolved`.
+  - name: result
+    type: string
+    description: "`passed` when every item passed, otherwise `failed`."
+  - name: source
+    type: string
+    description: How it was filed — `navigator` for the driver app, `public_link` for a tokenised link.
+  - name: odometer
+    type: number
+    description: Odometer reading at the time of the inspection.
+  - name: engine_hours
+    type: number
+    description: Engine hours at the time of the inspection.
+  - name: total_items
+    type: integer
+    description: Number of item results.
+  - name: failed_items
+    type: integer
+    description: Number of item results that did not pass.
+  - name: location
+    type: object
+    description: Where the inspection was filed from.
+  - name: signature
+    type: object
+    description: The driver's signature, as the app captured it.
+  - name: attachments
+    type: array
+    description: Additional files attached to the inspection.
+  - name: has_failures
+    type: boolean
+    description: Whether any item failed.
+  - name: started_at
+    type: timestamp
+    description: When the driver began the inspection.
+  - name: submitted_at
+    type: timestamp
+    description: When the inspection was filed.
+  - name: resolved_at
+    type: timestamp
+    description: When the failed items were resolved from the console, if they have been.
+  - name: updated_at
+    type: timestamp
+    description: Timestamp when the inspection was last updated.
+  - name: created_at
+    type: timestamp
+    description: Timestamp when the inspection was created.

@@ -1,0 +1,69 @@
+$kind: http-request
+name: "Retrieve an Inspection Form"
+description: |-
+  Retrieves one published inspection form with its structure and `settings`.
+
+  A form is groups of typed fields. `grouped_fields` is what a driver renders: one entry per group, in the order the builder laid them out, each with a `name`, a `meta.grid_size` and its `fields`. A field carries an `id`, a `name`, a `label`, a `type` — `pass-fail`, `input`, `textarea`, `number`, `select`, `radio-button`, `boolean`, `date-picker`, `date-time-input`, `file-upload` or `signature` — plus `required`, `options` and `meta`.
+
+  A `pass-fail` field's `meta` says what happens when it fails: the default `severity`, whether a photo or a comment is required, whether the defect takes the vehicle out of service (`unsafe_on_fail`), and any `instructions`. A `number` field's `meta` may name its `unit` and the `role` it plays, such as `odometer`.
+
+  The first cut's flat `items` checklist is still answered, read-only, for forms that have not been rebuilt; a form built from fields answers both, and `grouped_fields` is the one to render.
+
+  A form that is not published — a draft, or one that has been archived — answers 404, the same as one that does not exist: to a driver, a form that cannot be filled in is not there.
+url: "{{base_url}}/{{namespace}}/inspection-forms/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{inspection_form_id}}"
+    description: (Required) The inspection form to retrieve.
+
+scripts:
+  - type: afterResponse
+    code: |-
+      // Submit an Inspection answers this form, so the fields it will answer
+      // are chained from here by type. A form that has not been rebuilt from
+      // the first cut carries no fields; the ids are cleared rather than left
+      // pointing at a previous run's form, and the submit falls back to the
+      // flat `item_results` body on its own.
+      pm.test("Retrieve an Inspection Form answers a published form", function () {
+          pm.expect(pm.response.code, "expected a 2xx").to.be.oneOf([200, 201]);
+      });
+
+      const form = pm.response.json();
+      const groups = (form && Array.isArray(form.grouped_fields)) ? form.grouped_fields : [];
+      const fields = groups.reduce((all, group) => all.concat(Array.isArray(group.fields) ? group.fields : []), []);
+
+      const firstOfType = (type) => {
+          const field = fields.find((candidate) => candidate && candidate.type === type);
+          return field && field.id ? field.id : null;
+      };
+
+      const chain = {
+          inspection_pass_fail_field_id: firstOfType("pass-fail"),
+          inspection_number_field_id: firstOfType("number"),
+          inspection_signature_field_id: firstOfType("signature"),
+      };
+
+      Object.keys(chain).forEach((key) => {
+          if (chain[key]) {
+              pm.environment.set(key, chain[key]);
+          } else {
+              pm.environment.unset(key);
+          }
+      });
+
+      pm.test("A form built from fields answers grouped_fields", function () {
+          if (!groups.length) {
+              pm.expect(form, "a first-cut form still answers its checklist").to.have.property("items");
+              return;
+          }
+
+          pm.expect(fields.length, "a group with no fields in it").to.be.above(0);
+          fields.forEach((field) => {
+              pm.expect(field.id, "a field with no id cannot be answered").to.be.a("string").and.not.empty;
+              pm.expect(field.type, "a field with no type cannot be rendered").to.be.a("string").and.not.empty;
+          });
+      });
+    language: text/javascript
+
+order: 2000
