@@ -63,9 +63,10 @@ variables:
   inspection_id: ""
   # A public inspection link is minted from the console and only its hash can be
   # looked up, so the public inspection requests take the link's form and token
-  # from a contract run that seeds one.
+  # from a contract run that seeds one, with the PIN the link asks for.
   inspection_link_form_id: ""
   inspection_link_token: ""
+  inspection_link_pin: ""
   # Fleet hierarchy. The parent is the fleet created first; the subfleet is
   # created beneath it and deleted before it.
   parent_fleet_id: ""

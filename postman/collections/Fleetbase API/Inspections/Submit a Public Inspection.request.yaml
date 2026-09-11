@@ -3,13 +3,13 @@ name: "Submit a Public Inspection"
 description: |-
   Files an inspection through a public inspection link — what the public inspection page sends when whoever holds the link finishes the form.
 
-  Send the link's `token` in the query string. The body is answered the way Submit an Inspection answers a form built from typed fields: `custom_field_values`, one entry per field, naming the field by the `uuid` Retrieve a Public Inspection Form gave it, with a `value_type` and a `value`. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`. A `file-upload` or `signature` answer is `file:` followed by the id Upload a Public Inspection Photo returned. Anything else is plain text, a number, a boolean or a date. `odometer`, `engine_hours` and `signature` are optional.
+  Send the link's `token` in the query string and its PIN in the `X-Inspection-Pin` header, as Retrieve a Public Inspection Form describes. The body is answered the way Submit an Inspection answers a form built from typed fields: `custom_field_values`, one entry per field, naming the field by the `uuid` Retrieve a Public Inspection Form gave it, with a `value_type` and a `value`. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`. A `file-upload` or `signature` answer is `file:` followed by the id Upload a Public Inspection Photo returned. Anything else is plain text, a number, a boolean or a date. `odometer`, `engine_hours` and `signature` are optional.
 
-  The driver and vehicle are the ones the link was minted for; the body cannot name others.
+  The driver and vehicle are the ones the link was minted for; the body cannot name others. The submission is credited to the user the link is assigned to, or else to the driver's account, and the name given as `signature.name` is kept in its `meta` as `completed_by_name`, beside `pin_verified`.
 
   The response is `{ "message": "Inspection submitted.", "submission": { … } }`, the submission carrying what Retrieve an Inspection answers with.
 
-  A token that is missing, unknown, expired or revoked answers 403. A single-use link that has already been used answers 409. A `file:` reference to a file that was not uploaded through the same link answers 422, as does a body carrying only the first cut's flat `item_results`: a public link answers the form's fields.
+  A token that is missing, unknown, expired or revoked answers 403, as does a missing or wrong PIN or a link locked by too many wrong ones. A single-use link that has already been used answers 409. A `file:` reference to a file that was not uploaded through the same link answers 422, as does a body carrying only the first cut's flat `item_results`: a public link answers the form's fields.
 url: "{{base_url}}/public/inspections/forms/:id/submit"
 method: POST
 # No auth block — see Retrieve a Public Inspection Form. The inherited bearer is ignored.
@@ -17,6 +17,8 @@ pathVariables:
   - key: id
     value: "{{inspection_link_form_id}}"
     description: (Required) The published form the link was minted for.
+headers:
+  X-Inspection-Pin: "{{inspection_link_pin}}"
 queryParams:
   token: "{{inspection_link_token}}"
 body:
