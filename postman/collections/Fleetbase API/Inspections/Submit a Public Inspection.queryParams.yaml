@@ -1,0 +1,6 @@
+$kind: queryParams
+fields:
+  - name: token
+    type: string
+    required: true
+    description: The inspection link's token, as the link carries it. It is the only authorisation this route takes.

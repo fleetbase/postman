@@ -1,0 +1,127 @@
+$kind: http-request
+name: "Submit a Public Inspection"
+description: |-
+  Files an inspection through a public inspection link — what the public inspection page sends when whoever holds the link finishes the form.
+
+  Send the link's `token` in the query string. The body is answered the way Submit an Inspection answers a form built from typed fields: `custom_field_values`, one entry per field, naming the field by the `uuid` Retrieve a Public Inspection Form gave it, with a `value_type` and a `value`. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`. A `file-upload` or `signature` answer is `file:` followed by the id Upload a Public Inspection Photo returned. Anything else is plain text, a number, a boolean or a date. `odometer`, `engine_hours` and `signature` are optional.
+
+  The driver and vehicle are the ones the link was minted for; the body cannot name others.
+
+  The response is `{ "message": "Inspection submitted.", "submission": { … } }`, the submission carrying what Retrieve an Inspection answers with.
+
+  A token that is missing, unknown, expired or revoked answers 403. A single-use link that has already been used answers 409. A `file:` reference to a file that was not uploaded through the same link answers 422, as does a body carrying only the first cut's flat `item_results`: a public link answers the form's fields.
+url: "{{base_url}}/public/inspections/forms/:id/submit"
+method: POST
+# No auth block — see Retrieve a Public Inspection Form. The inherited bearer is ignored.
+pathVariables:
+  - key: id
+    value: "{{inspection_link_form_id}}"
+    description: (Required) The published form the link was minted for.
+queryParams:
+  token: "{{inspection_link_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "odometer": null,
+      "engine_hours": null,
+      "signature": null,
+      "custom_field_values": []
+    }
+
+scripts:
+  - type: beforeRequest
+    code: |-
+      // `custom_field_values` is filled in from the form Retrieve a Public
+      // Inspection Form chained, because a field is named by a uuid that only
+      // exists once the form has been read. Every field is answered, with a
+      // value that passes: a contract run proves the link files a report, not
+      // what a failed item raises — Submit an Inspection covers that.
+      //
+      // A file-upload or signature field is answered with the file Upload a
+      // Public Inspection Photo stored through the same link. With no file, or a
+      // select with no options, the field is left unanswered and a required one
+      // makes the server say so, rather than this script inventing a value.
+      let groups = [];
+      try {
+          groups = JSON.parse(pm.environment.get("public_inspection_form_fields") || "[]");
+      } catch (error) {
+          groups = [];
+      }
+
+      const fields = (Array.isArray(groups) ? groups : [])
+          .reduce((all, group) => all.concat(group && Array.isArray(group.fields) ? group.fields : []), []);
+
+      const fileId = pm.environment.get("public_inspection_file_id");
+      const now = new Date();
+      const today = now.toISOString().slice(0, 10);
+
+      const firstOption = (field) => {
+          const option = Array.isArray(field.options) ? field.options[0] : undefined;
+
+          if (option && typeof option === "object") {
+              return option.value !== undefined ? option.value : option.label;
+          }
+
+          return option;
+      };
+
+      const answer = (field) => {
+          switch (field.type) {
+              case "pass-fail":
+                  return {
+                      value_type: "object",
+                      value: {
+                          passed: true,
+                          not_applicable: false,
+                          severity: null,
+                          comments: "",
+                          photos: [],
+                          unsafe: false,
+                      },
+                  };
+              case "number":
+                  return { value_type: "number", value: 1 };
+              case "boolean":
+                  return { value_type: "boolean", value: true };
+              case "select":
+              case "radio-button": {
+                  const option = firstOption(field);
+                  return option === undefined || option === null ? null : { value_type: "text", value: option };
+              }
+              case "date-picker":
+                  return { value_type: "date", value: today };
+              case "date-time-input":
+                  return { value_type: "datetime", value: now.toISOString() };
+              case "file-upload":
+              case "signature":
+                  return fileId ? { value_type: "file", value: "file:" + fileId } : null;
+              default:
+                  // input, textarea and any text-like type added later.
+                  return { value_type: "text", value: "ok" };
+          }
+      };
+
+      const values = [];
+
+      fields.forEach((field) => {
+          const key = field && (field.uuid || field.id);
+          const given = key ? answer(field) : null;
+
+          if (given) {
+              values.push(Object.assign({ custom_field: key }, given));
+          }
+      });
+
+      const body = JSON.parse(pm.request.body.raw);
+      body.custom_field_values = values;
+      pm.request.body.update({ mode: "raw", raw: JSON.stringify(body, null, 2) });
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test("Submit a Public Inspection files the report", function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.eql(200);
+      });
+    language: text/javascript
+
+order: 9000

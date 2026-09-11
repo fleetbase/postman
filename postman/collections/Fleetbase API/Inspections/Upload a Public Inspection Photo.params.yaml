@@ -1,0 +1,15 @@
+$kind: params
+fields:
+  - name: file
+    type: string
+    required: true
+    description: "Multipart file upload. Must be an image — JPEG, PNG, WebP, GIF or HEIC — of at most 10 MB."
+  - name: type
+    type: enum
+    values: ["inspection_photo", "inspection_signature"]
+    required: false
+    description: "What the file is for. Defaults to `inspection_photo`."
+  - name: token
+    type: string
+    required: false
+    description: "The inspection link's token. Required here unless it is sent as `token` in the query string instead."

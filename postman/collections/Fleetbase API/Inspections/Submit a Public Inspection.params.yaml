@@ -1,0 +1,30 @@
+$kind: params
+fields:
+  - name: custom_field_values
+    type: array of objects
+    required: true
+    description: One entry per field answered, naming the field by the `uuid` Retrieve a Public Inspection Form gave it.
+    fields:
+      - name: custom_field
+        type: string
+        required: true
+        description: The field's `uuid`.
+      - name: value_type
+        type: string
+        description: "`object`, `file`, `text`, `number`, `boolean`, `date` or `datetime`."
+      - name: value
+        type: string
+        required: true
+        description: "A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`. A `file-upload` or `signature` answer is `file:` followed by the id of a file uploaded through the same link. Anything else is plain text, a number, a boolean or a date."
+  - name: odometer
+    type: integer
+    required: false
+    description: Odometer reading at the time of the inspection.
+  - name: engine_hours
+    type: integer
+    required: false
+    description: Engine hours at the time of the inspection.
+  - name: signature
+    type: object
+    required: false
+    description: The signer's signature, as the page captured it.

@@ -5,4 +5,6 @@ description: |-
   These endpoints are for the driver filing the inspection: read the published forms, submit against one, and read back what was filed and what it produced. A failed item can raise an issue and open a work order, depending on how the form is configured; both come back on the submission.
 
   Authoring and publishing forms, and reviewing or resolving submissions, is fleet management and is not part of the consumable API. The requests here need at least one published form in the organisation, which a contract run has to seed.
+
+  A form can also be filled in through a public inspection link, by someone with no Fleetbase account. A link is minted from the console for one form, and its token is the only authorisation the three public endpoints take — no API key. Retrieve a Public Inspection Form reads the form and who the link is for, Upload a Public Inspection Photo stores a photo or a signature through the link, and Submit a Public Inspection files the answers. They are mounted at the application root, under `/public/inspections/forms`, and are rate limited per IP address. A contract run has to seed a link and pass its form and token in.
 order: 7750
