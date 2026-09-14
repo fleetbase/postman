@@ -3,7 +3,7 @@ name: "Submit an Inspection"
 description: |-
   Files an inspection against a published form, as the driver app does at the end of a DVIR.
 
-  A form built from typed fields is answered with `custom_field_values`: one entry per field the driver answered, naming the field by the `id` the form read gave it, with a `value_type` and a `value`. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a meter is a number, a signature or a photo is base64. The server stores every photo and signature as a file and answers with `file:` references resolved, and mirrors each `pass-fail` answer into an `item_results` row, which is what issues, work orders and the vehicle's history are built from.
+  A form built from typed fields is answered with `answers`: one entry per field the driver answered, naming the `field` by the `id` the form read gave it, with a `value` and, optionally, a `value_type`. `custom_field_values` is the previous name for this and is still accepted. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a meter is a number, a signature or a photo is base64. The server stores every photo and signature as a file and answers with `file:` references resolved, and mirrors each `pass-fail` answer into an `item_results` row, which is what issues, work orders and the vehicle's history are built from.
 
   The first cut's flat `item_results` body is still accepted, for the tokenised public link and for older app builds. When both arrive the field values win and the duplicated results are ignored — which is exactly what the app sends, so one body works against either cut.
 
@@ -13,7 +13,7 @@ description: |-
 
   The app queues a submit while offline and replays it later. Send an `Idempotency-Key` header with each attempt: a replay with a key already used by the same driver answers with the inspection the first attempt filed rather than filing a second one.
 
-  The response is the inspection with its `custom_field_values`, `item_results` and `files`, and the `issue` and `work_order` the form's settings raised from any failed items.
+  The response is the inspection with its `answers`, `item_results` and `files`, and the `issue` and `work_order` the form's settings raised from any failed items.
 url: "{{base_url}}/{{namespace}}/inspections"
 method: POST
 headers:
@@ -33,7 +33,7 @@ body:
         "latitude": 1.3521,
         "longitude": 103.8198
       },
-      "custom_field_values": [],
+      "answers": [],
       "item_results": [
         {
           "item_key": "brakes",
@@ -57,7 +57,7 @@ scripts:
   - type: beforeRequest
     code: |-
       // The app sends both bodies and lets the server choose; so does this.
-      // `custom_field_values` is filled in from the fields Retrieve an
+      // `answers` is filled in from the fields Retrieve an
       // Inspection Form chained, because a field is named by an id that only
       // exists once the form has been read. A form that has not been rebuilt
       // from the first cut has no fields to name, so the entry is left empty
@@ -76,7 +76,7 @@ scripts:
 
       if (passFail) {
           values.push({
-              custom_field: passFail,
+              field: passFail,
               value_type: "object",
               value: {
                   passed: false,
@@ -90,15 +90,15 @@ scripts:
       }
 
       if (meter) {
-          values.push({ custom_field: meter, value_type: "number", value: 120400 });
+          values.push({ field: meter, value_type: "number", value: 120400 });
       }
 
       if (signature && photo) {
-          values.push({ custom_field: signature, value_type: "file", value: photo });
+          values.push({ field: signature, value_type: "file", value: photo });
       }
 
       const body = JSON.parse(pm.request.body.raw);
-      body.custom_field_values = values;
+      body.answers = values;
       // update() replaces the body wholesale, including the raw language that
       // made it JSON: without restating it the rewritten body went out as
       // text/plain, the API parsed nothing, and refused every field as missing.
@@ -130,18 +130,20 @@ scripts:
               return;
           }
 
-          pm.expect(json_response.custom_field_values, "no field values were answered").to.be.an("array");
-          pm.expect(json_response.custom_field_values.length, "fewer values than were sent").to.eql(sent);
+          pm.expect(json_response.answers, "no answers were recorded").to.be.an("array");
+          pm.expect(json_response.answers.length, "fewer answers than were sent").to.eql(sent);
 
-          json_response.custom_field_values.forEach((value) => {
-              pm.expect(value.custom_field, "a value that names no field").to.be.a("string").and.not.empty;
+          json_response.answers.forEach((value) => {
+              pm.expect(value.field, "an answer that names no field").to.be.a("string").and.not.empty;
 
               // A photo or signature is stored as a file and answered as one,
               // never handed back as the base64 that was sent.
               const photos = (value.value && Array.isArray(value.value.photos)) ? value.value.photos : [];
               photos.forEach((file) => pm.expect(file, "a photo left unresolved").to.be.an("object").and.to.have.property("url"));
 
-              if (value.value_type === "file" && value.value) {
+              // `value_type` describes storage and is not public; the
+              // field's own type is what says a value is a stored file.
+              if ((value.type === "signature" || value.type === "file-upload") && value.value) {
                   pm.expect(value.value, "a signature left unresolved").to.be.an("object").and.to.have.property("url");
               }
           });

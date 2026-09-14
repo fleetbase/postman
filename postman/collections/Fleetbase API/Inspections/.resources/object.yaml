@@ -10,13 +10,12 @@ example: |
     "driver": { "id": "driver_2Fb8Nc4Wm6", "name": "Dana Driver" },
     "issue": null,
     "work_order": null,
-    "custom_field_values": [
+    "answers": [
       {
-        "custom_field": "0d2b7f1e-4a3c-4d5e-9f61-2c8b7a6d5e4f",
+        "field": "custom_field_9f61c8b7a6",
         "name": "brakes",
         "label": "Brakes",
         "type": "pass-fail",
-        "value_type": "object",
         "value": {
           "passed": true,
           "not_applicable": false,
@@ -27,19 +26,17 @@ example: |
         }
       },
       {
-        "custom_field": "7c1a9e42-6b8d-4f30-8a52-1d9f3b6c4e70",
+        "field": "custom_field_8a521d9f3b",
         "name": "odometer",
         "label": "Odometer",
         "type": "number",
-        "value_type": "number",
         "value": 120400
       },
       {
-        "custom_field": "b8e5d3c1-2f74-4a96-bc08-5e1a7d2f9c63",
+        "field": "custom_field_bc085e1a7d",
         "name": "signature",
         "label": "Sign here",
         "type": "signature",
-        "value_type": "file",
         "value": {
           "id": "file_5Qw8Zt2Nb7",
           "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
@@ -118,15 +115,15 @@ fields:
   - name: work_order
     type: object
     description: The work order opened for the failed items, when the form asks for one and any item failed.
-  - name: custom_field_values
+  - name: answers
     type: array of objects
-    description: The driver's answer to each field of the form — the field's `custom_field` id, `name`, `label`, `type` and `value_type` beside the `value`. A `pass-fail` value is an object of `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a photo or signature value is resolved to `{ id, url, filename, content_type }` rather than the base64 that was sent.
+    description: The driver's answer to each field of the form — the `field` it answers, named by the same id the form gave it, beside the field's `name`, `label` and `type` and the `value`. A `pass-fail` value is an object of `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a photo or signature value is resolved to `{ id, url, filename, content_type }` rather than the base64 that was sent.
   - name: files
     type: array of objects
     description: The photos and signatures filed with the inspection, however they arrived — inside the submit body, or dropped on the console's Photos panel.
   - name: item_results
     type: array of objects
-    description: One result per `pass-fail` answer, derived from `custom_field_values` — `item_key`, `label`, `category`, `status` (`passed`, `failed` or `not_applicable`), `severity`, `passed`, `comments` and `photos`. This is what issues, work orders and the vehicle's history are built from.
+    description: One result per `pass-fail` answer, derived from the `answers` — `item_key`, `label`, `category`, `status` (`passed`, `failed` or `not_applicable`), `severity`, `passed`, `comments` and `photos`. This is what issues, work orders and the vehicle's history are built from.
   - name: type
     type: string
     description: Inspection type, taken from the form — `dvir`, `pre_trip`, `post_trip`, or a custom type.
