@@ -27,7 +27,7 @@ fields:
   - name: answers
     type: array of objects
     required: false
-    description: "One entry per field the driver answered. Required unless a flat `item_results` body is sent instead; when both arrive the answers win. `custom_field_values` is accepted as the previous name for this field."
+    description: "The body to send: one entry per field the driver answered, naming the field the form gave it. Required — unless you are targeting an older server with the flat `item_results` body instead, in which case the answers win if both arrive. `custom_field_values` is accepted as the previous name for this field."
     fields:
       - name: field
         type: string
@@ -44,7 +44,7 @@ fields:
   - name: item_results
     type: array of objects
     required: false
-    description: The first cut's flat checklist body, still accepted for older app builds and the tokenised public link. Required only when no `answers` are sent.
+    description: "The older shape, kept for older app builds and the tokenised public link: an entry per checklist item, named by an `item_key` of its own rather than naming a field of the form. Prefer `answers`; this is required only when none are sent."
     fields:
       - name: item_key
         type: string
