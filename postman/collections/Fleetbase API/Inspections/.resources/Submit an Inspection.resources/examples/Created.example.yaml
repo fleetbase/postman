@@ -1,0 +1,137 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/inspections"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "inspection_form": "inspection_form_9Kd2Lm7Aq1",
+        "driver": "driver_2Fb8Nc4Wm6",
+        "vehicle": "vehicle_7Hx3Pq9Rt2",
+        "started_at": "2026-09-09T07:10:00Z",
+        "odometer": 120400,
+        "engine_hours": 3100,
+        "location": { "latitude": 1.3521, "longitude": 103.8198 },
+        "answers": [
+          {
+            "field": "custom_field_9f61c8b7a6",
+            "value_type": "object",
+            "value": {
+              "passed": false,
+              "not_applicable": false,
+              "severity": "critical",
+              "comments": "Pedal is soft.",
+              "photos": ["iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="],
+              "unsafe": true
+            }
+          },
+          { "field": "custom_field_8a521d9f3b", "value_type": "number", "value": 120400 }
+        ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "inspection_submission_4Mnp8Qx2Vz",
+        "form": { "id": "inspection_form_9Kd2Lm7Aq1", "name": "Pre-trip DVIR", "type": "dvir" },
+        "vehicle": { "id": "vehicle_7Hx3Pq9Rt2", "plate_number": "TRK-7" },
+        "driver": { "id": "driver_2Fb8Nc4Wm6", "name": "Dana Driver" },
+        "issue": { "id": "issue_3Vb7Kd1Pq8", "status": "pending", "priority": "critical" },
+        "work_order": null,
+        "answers": [
+          {
+            "field": "custom_field_9f61c8b7a6",
+            "name": "brakes",
+            "label": "Brakes",
+            "type": "pass-fail",
+            "value": {
+              "passed": false,
+              "not_applicable": false,
+              "severity": "critical",
+              "comments": "Pedal is soft.",
+              "photos": [
+                {
+                  "id": "file_5Qw8Zt2Nb7",
+                  "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
+                  "filename": "lq8w1c0v9xk3.png",
+                  "content_type": "image/png"
+                }
+        ],
+              "unsafe": true
+            }
+          },
+          {
+            "field": "custom_field_8a521d9f3b",
+            "name": "odometer",
+            "label": "Odometer",
+            "type": "number",
+            "value": 120400
+          }
+        ],
+        "files": [
+          {
+            "id": "file_5Qw8Zt2Nb7",
+            "uuid": "3a6c9e21-7b4d-4f18-9c05-2d8e1f7a6b34",
+            "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
+            "original_filename": "lq8w1c0v9xk3.png",
+            "content_type": "image/png",
+            "type": "inspection_photo",
+            "caption": null,
+            "created_at": "2026-09-09T07:30:00.000000Z"
+          }
+        ],
+        "item_results": [
+          {
+            "id": "b3f0c4a2-1d6e-4c1a-9c2b-8e7f6a5d4c3b",
+            "item_key": "brakes",
+            "label": "Brakes",
+            "category": "Safety",
+            "status": "failed",
+            "severity": "critical",
+            "passed": false,
+            "comments": "Pedal is soft.",
+            "photos": [
+        {
+          "id": "file_5Qw8Zt2Nb7",
+          "url": "https://files.fleetbase.io/inspections/4Mnp8Qx2Vz/lq8w1c0v9xk3.png",
+          "filename": "lq8w1c0v9xk3.png",
+          "content_type": "image/png"
+        }
+      ],
+            "meta": { "not_applicable": false, "unsafe": true },
+            "submission_id": "inspection_submission_4Mnp8Qx2Vz",
+            "updated_at": "2026-09-09T07:30:00.000000Z",
+            "created_at": "2026-09-09T07:30:00.000000Z"
+          }
+        ],
+        "type": "dvir",
+        "status": "submitted",
+        "result": "failed",
+        "source": "navigator",
+        "odometer": 120400,
+        "engine_hours": 3100,
+        "total_items": 1,
+        "failed_items": 1,
+        "location": { "latitude": 1.3521, "longitude": 103.8198 },
+        "signature": {},
+        "attachments": [],
+        "meta": { "unsafe": true },
+        "form_name": "Pre-trip DVIR",
+        "vehicle_name": "Truck 7",
+        "driver_name": "Dana Driver",
+        "has_failures": true,
+        "started_at": "2026-09-09T07:10:00.000000Z",
+        "submitted_at": "2026-09-09T07:30:00.000000Z",
+        "resolved_at": null,
+        "updated_at": "2026-09-09T07:30:00.000000Z",
+        "created_at": "2026-09-09T07:30:00.000000Z"
+      }
+order: 1000

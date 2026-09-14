@@ -24,10 +24,27 @@ fields:
     type: integer
     required: false
     description: Engine hours at the time of the inspection.
+  - name: answers
+    type: array of objects
+    required: false
+    description: "One entry per field the driver answered. Required unless a flat `item_results` body is sent instead; when both arrive the answers win. `custom_field_values` is accepted as the previous name for this field."
+    fields:
+      - name: field
+        type: string
+        required: true
+        description: The field being answered, named by the `id` the form read gave it. Its `name` is accepted too.
+      - name: value
+        type: any
+        required: true
+        description: "The answer. A `pass-fail` field takes an object of `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a meter takes a number; a signature or photo takes a base64 encoded image or a URL; everything else takes its plain value."
+      - name: value_type
+        type: string
+        required: false
+        description: How to store the value — `object`, `number`, `boolean`, `text` or `file`. Derived from the field's own type when omitted.
   - name: item_results
     type: array of objects
-    required: true
-    description: One entry per checklist item answered. At least one is required.
+    required: false
+    description: The first cut's flat checklist body, still accepted for older app builds and the tokenised public link. Required only when no `answers` are sent.
     fields:
       - name: item_key
         type: string

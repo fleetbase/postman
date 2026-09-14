@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/inspections"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "inspection_form": "inspection_form_9Kd2Lm7Aq1",
+        "driver": "driver_2Fb8Nc4Wm6",
+        "answers": [
+          { "field": "custom_field_9f61c8b7a6", "value": { "passed": false, "severity": "critical" } }
+        ]
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Content
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "errors": [
+          "A comment is required when \"Brakes\" fails.",
+          "A photo is required when \"Brakes\" fails."
+        ]
+      }
+order: 2000
