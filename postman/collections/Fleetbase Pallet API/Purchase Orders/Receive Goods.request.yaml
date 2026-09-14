@@ -1,0 +1,18 @@
+$kind: http-request
+description: Receive stock against lines
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/purchase-orders/{{purchase_order_id}}/receive"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "items": [
+        { "id": "{{purchase_order_item_id}}", "quantity_received": 12 }
+      ]
+    }
+order: 1400

@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Variants are the individually stocked forms of a product — a size, a colour, a pack configuration.
+order: 1100

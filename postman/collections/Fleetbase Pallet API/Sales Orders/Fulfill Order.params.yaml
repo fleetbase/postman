@@ -1,0 +1,11 @@
+$kind: params
+fields:
+  - name: items
+    type: array of objects
+    description: "Lines to fulfill."
+  - name: items[].id
+    type: string
+    description: "Public id of the order line."
+  - name: items[].quantity_fulfilled
+    type: integer
+    description: "Units to fulfill. Insufficient stock rejects the whole request and moves nothing."

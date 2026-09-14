@@ -1,0 +1,36 @@
+$kind: object
+name: Supplier
+description: |-
+  A vendor Pallet purchases from.
+example: |
+  {
+    "id": "supplier_d4e5f6",
+    "object": "supplier",
+    "name": "Acme Supply Co",
+    "email": "ops@acme.example",
+    "phone": "+65 1234 5678",
+    "type": "vendor",
+    "status": "active",
+    "address": null,
+    "created_at": "2026-08-01T09:00:00Z",
+    "updated_at": "2026-08-01T09:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the supplier."
+  - name: name
+    type: string
+    description: "Supplier name."
+  - name: email
+    type: string
+    description: "Contact email."
+  - name: phone
+    type: string
+    description: "Contact phone number."
+  - name: status
+    type: string
+    description: "Supplier status."
+  - name: address
+    type: string
+    description: "Flattened address of the supplier's place, when one is set."

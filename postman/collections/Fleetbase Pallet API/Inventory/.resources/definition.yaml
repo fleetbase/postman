@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Stock levels, read only. Stock is a consequence of receipts, fulfilments, transfers and adjustments — move it through the operation that caused the movement.
+order: 1600

@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the stock product
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{stock_product_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9110

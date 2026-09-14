@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the stock transfer
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers/{{stock_transfer_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9010

@@ -1,0 +1,13 @@
+$kind: params
+fields:
+  - name: warehouse
+    type: string
+    required: true
+    description: "Public id of the warehouse."
+  - name: name
+    type: string
+    required: true
+    description: "Zone name."
+  - name: code
+    type: string
+    description: "Short code for the zone."

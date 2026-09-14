@@ -1,0 +1,26 @@
+$kind: http-request
+description: Create a second product for the stock-moving folders
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Pallet Wrap",
+      "sku": "WRP-{{$timestamp}}",
+      "unit_cost": 1.20
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{stock_product_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("stock_product_id", captured); }
+    language: text/javascript
+order: 1050

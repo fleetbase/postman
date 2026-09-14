@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the product variant
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/product-variants/{{variant_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9060

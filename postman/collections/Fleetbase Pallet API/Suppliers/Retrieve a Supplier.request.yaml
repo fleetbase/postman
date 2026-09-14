@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a supplier
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/suppliers/{{supplier_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

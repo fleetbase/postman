@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a warehouse
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouses/{{warehouse_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

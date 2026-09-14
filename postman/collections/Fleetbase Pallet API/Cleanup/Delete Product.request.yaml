@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the product
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{product_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9100
