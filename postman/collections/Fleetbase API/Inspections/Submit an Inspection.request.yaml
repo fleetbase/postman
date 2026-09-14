@@ -5,7 +5,9 @@ description: |-
 
   A form built from typed fields is answered with `answers`: one entry per field the driver answered, naming the `field` by the `id` the form read gave it, with a `value` and, optionally, a `value_type`. `custom_field_values` is the previous name for this and is still accepted. A `pass-fail` answer is an object — `passed`, `not_applicable`, `severity`, `comments`, `photos` and `unsafe`; a meter is a number, a signature or a photo is base64. The server stores every photo and signature as a file and answers with `file:` references resolved, and mirrors each `pass-fail` answer into an `item_results` row, which is what issues, work orders and the vehicle's history are built from.
 
-  The first cut's flat `item_results` body is still accepted, for the tokenised public link and for older app builds. When both arrive the field values win and the duplicated results are ignored — which is exactly what the app sends, so one body works against either cut.
+  The first cut's flat `item_results` body is still accepted, for the tokenised public link and for older app builds. It is the older shape: an entry per checklist item rather than per field, naming the item by an `item_key` of its own instead of naming a field of the form. Send `answers` unless you are targeting an older server.
+
+  This request deliberately sends both, which is what the app does: when both arrive the answers win and the duplicated results are ignored, so one body works against either cut.
 
   A failed `pass-fail` answer must carry whatever its field insists on: a form that sets `require_comment_on_fail` or `require_photo_on_fail` refuses the whole submission with a 422 rather than filing half an inspection.
 
@@ -33,7 +35,25 @@ body:
         "latitude": 1.3521,
         "longitude": 103.8198
       },
-      "answers": [],
+      "answers": [
+        {
+          "field": "{{inspection_pass_fail_field_id}}",
+          "value_type": "object",
+          "value": {
+            "passed": false,
+            "not_applicable": false,
+            "severity": "critical",
+            "comments": "Pedal is soft.",
+            "photos": ["{{proof_photo_base64}}"],
+            "unsafe": true
+          }
+        },
+        {
+          "field": "{{inspection_number_field_id}}",
+          "value_type": "number",
+          "value": 120400
+        }
+      ],
       "item_results": [
         {
           "item_key": "brakes",
