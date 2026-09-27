@@ -1,0 +1,102 @@
+$kind: object
+name: Promotion
+description: |-
+  A live, public promotion of the store (or, with a network key, of the network or one of its member stores). Money values are integers in the currency's minor unit, like cart subtotals. Promo codes are never included.
+example: |
+  {
+    "id": "promotion_7Hq2xL9",
+    "name": "Weekday lunch 20% off",
+    "description": "20% off mains, weekdays 11:00-14:00.",
+    "trigger": "automatic",
+    "type": "percentage",
+    "value": 20,
+    "max_discount_amount": 1000,
+    "currency": "USD",
+    "min_subtotal": 1500,
+    "min_items": null,
+    "applies_to": { "categories": ["category_uuid"] },
+    "bogo_config": null,
+    "first_order_only": false,
+    "usage_limit_per_customer": 1,
+    "stackable": false,
+    "starts_at": "2026-10-01T00:00:00Z",
+    "ends_at": "2026-12-31T23:59:59Z",
+    "schedule": [{ "days": [1, 2, 3, 4, 5], "start": "11:00", "end": "14:00" }],
+    "timezone": "America/New_York",
+    "image_url": "https://files.example.com/lunch.png",
+    "translations": null,
+    "created_at": "2026-09-26T09:30:00Z",
+    "updated_at": "2026-09-26T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the promotion."
+  - name: name
+    type: string
+    description: "Promotion name, also shown on applied discounts."
+  - name: description
+    type: string
+    description: "Optional details for customers."
+  - name: trigger
+    type: enum
+    values: ["automatic", "code"]
+    description: "`automatic` promotions apply to every eligible cart; `code` promotions need a promo code."
+  - name: type
+    type: enum
+    values: ["percentage", "fixed_amount", "free_delivery", "bogo"]
+    description: "How the discount is calculated."
+  - name: value
+    type: number
+    description: "Percent off for `percentage`, amount off (minor units) for `fixed_amount`."
+  - name: max_discount_amount
+    type: integer
+    description: "Maximum discount per order, in minor units."
+  - name: currency
+    type: string
+    description: "Currency of `fixed_amount` promotions."
+  - name: min_subtotal
+    type: integer
+    description: "Minimum spend on the targeted items, in minor units."
+  - name: min_items
+    type: integer
+    description: "Minimum number of targeted items."
+  - name: applies_to
+    type: object
+    description: "Targeting: `products`, `categories`, `stores`, `exclude_products` and `exclude_categories` identifier lists. Empty means the whole cart (of the owning store, for store promotions)."
+  - name: bogo_config
+    type: object
+    description: "For `bogo`: `buy_quantity`, `get_quantity` and `discount_percent` (100 means free). The cheapest units of each group are discounted."
+  - name: first_order_only
+    type: boolean
+    description: "Only customers who have never placed a storefront order can use it."
+  - name: usage_limit_per_customer
+    type: integer
+    description: "How many times one customer can use it."
+  - name: stackable
+    type: boolean
+    description: "Whether it combines with other stackable promotions."
+  - name: starts_at
+    type: timestamp
+    description: "When the promotion starts."
+  - name: ends_at
+    type: timestamp
+    description: "When the promotion ends."
+  - name: schedule
+    type: array of objects
+    description: "Optional weekly windows (`days` as ISO weekdays, `start`/`end` as HH:MM) in `timezone` when it applies."
+  - name: timezone
+    type: string
+    description: "Timezone of the schedule windows."
+  - name: image_url
+    type: string
+    description: "Promotion image."
+  - name: translations
+    type: object
+    description: "Translated content."
+  - name: created_at
+    type: timestamp
+    description: "Time the promotion was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the promotion was last updated."

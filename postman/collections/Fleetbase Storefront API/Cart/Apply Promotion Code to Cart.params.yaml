@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: code
+    type: string
+    required: true
+    description: "The promo code to apply."
+  - name: pickup
+    type: boolean
+    description: "Price the cart as a pickup order when validating the code."
+  - name: service_quote
+    type: string
+    description: "Delivery service quote public ID, for free delivery codes."

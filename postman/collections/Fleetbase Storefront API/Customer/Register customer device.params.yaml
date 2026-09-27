@@ -3,10 +3,16 @@ fields:
   - name: token
     type: string
     required: true
-    description: "Push notification device token."
+    description: "Push notification device token: the APNs device token on iOS, the FCM registration token on Android."
   - name: platform
-    type: string
-    description: "Device platform. `os` is also accepted as an alias."
+    type: enum
+    values: ["ios", "android"]
+    required: true
+    description: "Device platform, case insensitive. `os` is also accepted as an alias."
   - name: os
     type: string
     description: "Device platform alias used when `platform` is not provided."
+  - name: environment
+    type: enum
+    values: ["production", "sandbox"]
+    description: "Optional APNs environment that issued an iOS token (sandbox for development builds). When omitted the server tries production and falls back to sandbox. Stored only on Fleetbase versions that record device push metadata."

@@ -12,7 +12,8 @@ example: |
     "total_unique_items": 2,
     "items": [],
     "events": [],
-    "discount_code": null,
+    "discount_code": "SUMMER25",
+    "promo_codes": ["SUMMER25"],
     "expires_at": "2026-05-08T09:30:00Z",
     "created_at": "2026-05-07T09:30:00Z",
     "updated_at": "2026-05-07T09:30:00Z"
@@ -44,7 +45,10 @@ fields:
     description: "Cart event history."
   - name: discount_code
     type: string
-    description: "Discount code applied to the cart."
+    description: "Promo codes applied to the cart, comma separated. Prefer `promo_codes`."
+  - name: promo_codes
+    type: array of strings
+    description: "Promo codes applied to the cart with Apply Promotion Code to Cart. They are used automatically at checkout."
   - name: expires_at
     type: timestamp
     description: "Time the cart expires."

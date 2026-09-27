@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Registers a device token for the authenticated storefront customer. Use this to enable push notifications for the customer device.
+  Registers a push notification device token for the authenticated storefront customer. Call it whenever the app receives a new token or a different customer signs in: a token identifies one app install, so it always moves to the customer who registered it most recently. `platform` must be `ios` or `android` (case insensitive); the token is an APNs device token on iOS and an FCM registration token on Android. Returns `{ "status": "OK", "device": "<device public id>" }`, or `400` for a missing token or unsupported platform.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/register-device"
 method: POST
 headers:

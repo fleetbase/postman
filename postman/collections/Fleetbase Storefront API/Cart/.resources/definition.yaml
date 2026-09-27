@@ -1,4 +1,4 @@
 $kind: collection
 description: |-
-  Carts hold the products a storefront customer intends to purchase. Use cart endpoints to create or retrieve a cart, add or update line items, empty the cart, and prepare it for checkout.
+  Carts hold the products a storefront customer intends to purchase. Use cart endpoints to create or retrieve a cart, add or update line items, apply or preview promo codes and promotions, empty the cart, and prepare it for checkout.
 order: 1000

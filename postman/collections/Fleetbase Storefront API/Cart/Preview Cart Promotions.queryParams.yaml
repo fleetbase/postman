@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: pickup
+    type: boolean
+    description: "Price the cart as a pickup order (no delivery discounts)."
+  - name: service_quote
+    type: string
+    description: "Delivery service quote public ID, used to price free delivery promotions."

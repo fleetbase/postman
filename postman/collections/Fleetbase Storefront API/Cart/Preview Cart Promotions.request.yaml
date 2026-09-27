@@ -1,0 +1,24 @@
+$kind: http-request
+description: |-
+  Previews the discounts the cart currently qualifies for: the storefront's automatic promotions plus the promo codes applied to the cart. Pass `pickup` and `service_quote` so delivery discounts are priced. Customer rules (first order only, per-customer limits) are only checked when a `Customer-Token` is sent, and every rule is checked again at checkout.
+
+  Returns `{ "discount", "discount_subtotal", "discount_delivery", "applied": [...], "rejected": [...] }`. Each applied entry has `promotion`, `name`, `type`, `code`, `amount` and `delivery_amount` (minor units). Each rejected entry is `{ "code", "reason" }`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/promotions"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+queryParams:
+  pickup: "false"
+  service_quote: "{{service_quote_id}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Promotion preview carries the discount totals', function () {
+          var body = pm.response.json();
+          pm.expect(body.discount).to.be.a('number');
+          pm.expect(body.applied).to.be.an('array');
+          pm.expect(body.rejected).to.be.an('array');
+      });
+    language: text/javascript
+order: 1100

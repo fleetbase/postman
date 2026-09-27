@@ -14,6 +14,10 @@ example: |
       "checkout_id": "checkout_123",
       "storefront": "Acme Market",
       "total": 5150,
+      "discount": 500,
+      "promotions": [
+        { "promotion": "promotion_7Hq2xL9", "name": "Welcome $5 off", "type": "fixed_amount", "code": "WELCOME5", "amount": 500, "delivery_amount": 0 }
+      ],
       "currency": "USD"
     },
     "notes": null,
@@ -41,7 +45,7 @@ fields:
     description: "Customer associated with the order."
   - name: meta
     type: object
-    description: "Storefront checkout, payment, totals, and fulfillment metadata."
+    description: "Storefront checkout, payment, totals, and fulfillment metadata. `discount` is the total promotion discount (minor units) and `promotions` lists the applied promotions with their amounts; multi-store child orders carry their store's share of the item discount."
   - name: notes
     type: string
     description: "Order notes supplied during checkout capture."

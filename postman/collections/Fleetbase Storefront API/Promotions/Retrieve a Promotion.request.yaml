@@ -1,0 +1,16 @@
+$kind: http-request
+description: |-
+  Retrieves one live, public promotion of the storefront. Returns `404` for promotions that are not active, not public, outside their schedule, or owned by another storefront.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/promotions/{{promotion_id}}"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Addresses the first promotion returned by Query Promotions. A stack without
+      // promotions documents the not-found contract instead.
+      if (!pm.environment.get('promotion_id')) {
+          pm.variables.set('promotion_id', 'promotion_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 2000

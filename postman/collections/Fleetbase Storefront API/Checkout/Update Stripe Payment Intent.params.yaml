@@ -1,15 +1,29 @@
 $kind: params
 fields:
-  - name: name
+  - name: customer
     type: string
-    description: "Display name for the resource."
-  - name: description
+    required: true
+    description: "Customer public ID. When Customer-Token is present it must identify the authenticated customer."
+  - name: cart
     type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
+    required: true
+    description: "Cart public ID or unique identifier."
+  - name: payment_intent_id
     type: string
-    description: "Arbitrary metadata stored with the resource."
+    required: true
+    description: "Stripe PaymentIntent to update. `paymentIntent` and `paymentIntentId` are accepted aliases."
+  - name: service_quote
+    type: string
+    description: "Delivery service quote public ID. `serviceQuote` is an accepted alias."
+  - name: pickup
+    type: boolean
+    description: "Whether the order is a pickup order."
+  - name: tip
+    type: number
+    description: "Tip, as an amount or a percentage string such as `10%`."
+  - name: delivery_tip
+    type: number
+    description: "Delivery tip, as an amount or a percentage string. `deliveryTip` is an accepted alias."
+  - name: promo_codes
+    type: array of strings
+    description: "Promo codes to apply, as an array or a comma separated string. `promo_code` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."

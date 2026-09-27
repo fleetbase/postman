@@ -1,0 +1,48 @@
+$kind: object
+name: Notification
+description: |-
+  An inbox item. `type` identifies what the notification is about (for example `order_accepted`, `order_completed`, `promotional` or `campaign`), and `data` carries the identifiers the app needs to deep link. Recipient details are never included.
+example: |
+  {
+    "id": "0f4c9a52-8d3f-4a6e-9f0e-2b1f7f2f8c11",
+    "type": "order_completed",
+    "title": "Your order from Acme Market has been delivered",
+    "body": "Your order from Acme Market has been delivered, enjoy!",
+    "image": null,
+    "data": {
+      "order_id": "order_9Kx2mQ1",
+      "storefront_id": "store_3Xb9kL2",
+      "store_id": "store_3Xb9kL2"
+    },
+    "is_read": false,
+    "read_at": null,
+    "created_at": "2026-09-26T09:30:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Notification id (uuid)."
+  - name: type
+    type: string
+    description: "What the notification is about, e.g. `order_accepted`, `order_enroute`, `order_nearby`, `order_completed`, `order_canceled`, `order_ready`, `order_driver_assigned`, `promotional` or `campaign`."
+  - name: title
+    type: string
+    description: "Notification title."
+  - name: body
+    type: string
+    description: "Notification message."
+  - name: image
+    type: string
+    description: "Optional image URL."
+  - name: data
+    type: object
+    description: "Deep link data with null values removed, such as `order_id`, `store_id`, `network_id`, `promotion_id`, `campaign_id` and `action`/`action_id`/`action_url`."
+  - name: is_read
+    type: boolean
+    description: "Whether the customer has read the notification."
+  - name: read_at
+    type: timestamp
+    description: "When the notification was read."
+  - name: created_at
+    type: timestamp
+    description: "When the notification was created."

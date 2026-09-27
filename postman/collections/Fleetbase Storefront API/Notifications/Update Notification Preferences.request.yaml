@@ -1,0 +1,18 @@
+$kind: http-request
+description: |-
+  Updates the authenticated customer's notification preferences. Only the keys sent are changed; unknown keys are ignored. Returns the full preferences, or `400` when a value is not a boolean.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications/preferences"
+method: PUT
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "order_updates": true,
+      "promotions": true
+    }
+order: 8000

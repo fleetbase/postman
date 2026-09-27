@@ -1,0 +1,16 @@
+$kind: http-request
+description: |-
+  Returns `{ "count": n }`, the number of unread notifications for the authenticated customer in the current storefront. Use it for badges.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications/unread-count"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Unread count is a number', function () {
+          pm.expect(pm.response.json().count).to.be.a('number');
+      });
+    language: text/javascript
+order: 2000

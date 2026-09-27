@@ -1,0 +1,9 @@
+$kind: http-request
+description: |-
+  Returns the authenticated customer's notification preferences, `{ "order_updates": true, "promotions": true }` by default. `order_updates` controls push notifications about the customer's orders (the inbox copy is always kept); `promotions` controls promotional notifications and campaigns entirely.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications/preferences"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+order: 7000

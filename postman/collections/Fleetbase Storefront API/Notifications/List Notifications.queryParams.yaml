@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: unread
+    type: boolean
+    description: "Only return notifications that have not been read."
+  - name: type
+    type: string
+    description: "Only return notifications of this type, e.g. `order_completed` or `promotional`."
+  - name: limit
+    type: integer
+    description: "Maximum number of notifications to return. Defaults to 25, maximum 100."
+  - name: offset
+    type: integer
+    description: "Number of notifications to skip."

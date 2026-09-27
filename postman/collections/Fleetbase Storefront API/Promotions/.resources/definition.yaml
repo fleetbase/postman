@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Promotions are discounts a store or network offers at checkout: percentage or amount off, free delivery, or buy X get Y. They apply automatically or with a promo code. These endpoints list the storefront's live, public promotions ("deals") for the app. Codes are applied to carts with the Cart endpoints, and discounts are priced into the checkout amount.
+order: 5700

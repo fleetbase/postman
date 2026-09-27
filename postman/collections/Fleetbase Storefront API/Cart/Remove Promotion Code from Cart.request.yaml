@@ -1,0 +1,16 @@
+$kind: http-request
+description: |-
+  Removes a promo code from the cart and returns `{ "cart": Cart, "promotions": preview }`. Removing a code that is not on the cart is not an error.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/promo-code/{{promo_code}}"
+method: DELETE
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      if (!pm.environment.get('promo_code')) {
+          pm.variables.set('promo_code', 'NOT-A-REAL-CODE');
+      }
+    language: text/javascript
+order: 1300
