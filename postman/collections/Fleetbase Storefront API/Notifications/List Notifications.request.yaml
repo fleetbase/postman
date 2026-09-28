@@ -1,0 +1,28 @@
+$kind: http-request
+description: |-
+  Lists the authenticated customer's notifications for the current storefront, newest first. Filter with `unread` and `type`, and page with `limit` (default 25, maximum 100) and `offset`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+queryParams:
+  unread: "false"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Retrieve, Mark as Read and Delete address {{notification_id}}.
+      var json_response = pm.response.json();
+      var items = Array.isArray(json_response) ? json_response : (json_response && json_response.data) || [];
+
+      pm.test('List Notifications returns an array', function () {
+          pm.expect(items).to.be.an('array');
+      });
+
+      if (items.length) {
+          pm.environment.set('notification_id', items[0].id);
+      } else {
+          pm.environment.unset('notification_id');
+      }
+    language: text/javascript
+order: 1000

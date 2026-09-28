@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: store
+    type: string
+    description: "Network member store public ID, to only list that store's promotions. Ignored for store keys."

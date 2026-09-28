@@ -12,3 +12,6 @@ fields:
   - name: pickup
     type: boolean
     description: "Set true for a pickup order; a cash pickup checkout needs no service quote."
+  - name: promo_codes
+    type: array of strings
+    description: "Promo codes to apply, as an array or a comma separated string. `promo_code` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."

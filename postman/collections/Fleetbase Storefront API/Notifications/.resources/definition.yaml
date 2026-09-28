@@ -1,0 +1,6 @@
+$kind: collection
+description: |-
+  The authenticated customer's notification inbox. Order status updates, promotional messages and campaigns are stored here as well as sent by push, so the app can list them, show an unread badge and mark them as read. Every request needs the `Customer-Token` header. A customer only sees their own notifications, limited to the storefront app the request is made with: a store key sees that store's notifications, a network key sees the network's and its member stores'. Notifications that reference no storefront are shown in every app.
+
+  New notifications are also broadcast in realtime on the SocketCluster channel `contact.{customer uuid}` with the same shape as an inbox item.
+order: 4500

@@ -1,0 +1,26 @@
+$kind: http-request
+description: |-
+  Removes a push notification device token from the authenticated customer, typically on sign out, so the device stops receiving that customer's notifications. Returns `{ "status": "OK", "deleted": n }`; unregistering a token the customer does not have deletes nothing and is not an error.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/unregister-device"
+method: POST
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{device_token}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Register customer device uses {{device_token}}; fall back to a placeholder so
+      // the request still exercises the endpoint when none is configured.
+      if (!pm.environment.get('device_token')) {
+          pm.variables.set('device_token', 'postman-placeholder-device-token');
+      }
+    language: text/javascript
+order: 5100

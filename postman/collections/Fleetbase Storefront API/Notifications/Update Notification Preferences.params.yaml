@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: order_updates
+    type: boolean
+    description: "Receive push notifications about order status changes."
+  - name: promotions
+    type: boolean
+    description: "Receive promotional notifications and campaigns (push and inbox)."

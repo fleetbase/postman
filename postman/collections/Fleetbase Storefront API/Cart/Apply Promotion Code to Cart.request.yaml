@@ -1,0 +1,37 @@
+$kind: http-request
+description: |-
+  Applies a promo code to the cart after checking that it can be used on it. Codes are case insensitive. On success it returns `{ "cart": Cart, "promotions": preview }` (see Preview Cart Promotions) and stores the code in the cart's `promo_codes`; codes applied to a cart are used automatically at checkout.
+
+  A code that cannot be applied returns `400` with the reason, e.g. `Promotion code "SUMMER" cannot be applied (invalid_code).` and `"reason": "invalid_code"`. Reasons: `invalid_code`, `not_applicable`, `not_active`, `usage_limit_reached`, `customer_usage_limit_reached`, `budget_exhausted`, `currency_mismatch`, `first_order_only`, `min_subtotal`, `min_items`, `no_eligible_items`, `pickup_order`, `no_discount`. A code that is valid but loses to a better combination of promotions is kept on the cart and reported in `promotions.rejected` as `not_combinable`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/promo-code"
+method: POST
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "code": "{{promo_code}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Uses {{promo_code}} when the environment provides a real code. Without one it
+      // sends an unknown code, and the request documents the refusal contract.
+      if (!pm.environment.get('promo_code')) {
+          pm.variables.set('promo_code', 'NOT-A-REAL-CODE');
+          pm.variables.set('expected_status', 400);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 400) {
+          pm.test('An unusable code is refused with its reason', function () {
+              pm.expect(pm.response.json().error).to.include('cannot be applied');
+          });
+      }
+    language: text/javascript
+order: 1200

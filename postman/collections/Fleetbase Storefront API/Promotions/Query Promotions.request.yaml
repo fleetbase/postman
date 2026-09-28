@@ -1,0 +1,25 @@
+$kind: http-request
+description: |-
+  Lists the storefront's live, public promotions: active, inside their date range and weekly schedule. With a network key the network's promotions and those of its member stores are returned; pass `store` to only list one member store's.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/promotions"
+method: GET
+queryParams:
+  store: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      // Retrieve a Promotion addresses {{promotion_id}}.
+      var json_response = pm.response.json();
+      var items = Array.isArray(json_response) ? json_response : (json_response && json_response.data) || [];
+
+      pm.test('Query Promotions returns an array', function () {
+          pm.expect(items).to.be.an('array');
+      });
+
+      if (items.length) {
+          pm.environment.set('promotion_id', items[0].id);
+      } else {
+          pm.environment.unset('promotion_id');
+      }
+    language: text/javascript
+order: 1000

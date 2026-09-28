@@ -1,0 +1,9 @@
+$kind: http-request
+description: |-
+  Marks every unread notification of the authenticated customer in the current storefront as read. Returns `{ "status": "OK", "updated": n }`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications/read-all"
+method: PUT
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+order: 5000

@@ -1,0 +1,19 @@
+$kind: http-request
+description: |-
+  Marks one notification as read and returns it. Marking an already read notification keeps its original `read_at`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/notifications/{{notification_id}}/read"
+method: PUT
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Addresses the first notification returned by List Notifications. A fresh
+      // stack has none, so without one this documents the not-found contract.
+      if (!pm.environment.get('notification_id')) {
+          pm.variables.set('notification_id', 'missing-notification');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 4000
