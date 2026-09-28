@@ -1,0 +1,26 @@
+$kind: http-request
+description: Create a bin location
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/bin-locations"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "warehouse": "{{warehouse_id}}",
+      "zone": "{{zone_id}}",
+      "bin_number": "A-01-01"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{bin_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("bin_id", captured); }
+    language: text/javascript
+order: 1000

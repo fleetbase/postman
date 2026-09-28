@@ -1,0 +1,30 @@
+$kind: object
+name: Batch
+description: |-
+  A lot of stock received together.
+example: |
+  {
+    "id": "batch_t1u2v3",
+    "object": "batch",
+    "batch_number": "B-1001",
+    "product": "product_a1b2c3",
+    "product_name": "Steel Shelving Bracket",
+    "received_quantity": 40,
+    "manufacture_date_at": "2026-07-01T00:00:00Z",
+    "expiry_date_at": "2027-07-01T00:00:00Z",
+    "created_at": "2026-08-19T11:00:00Z",
+    "updated_at": "2026-08-19T11:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the batch."
+  - name: batch_number
+    type: string
+    description: "Lot number."
+  - name: received_quantity
+    type: integer
+    description: "Quantity the batch arrived with. Not the quantity still on hand — that is on the stock record."
+  - name: expiry_date_at
+    type: timestamp
+    description: "Expiry date for the lot."

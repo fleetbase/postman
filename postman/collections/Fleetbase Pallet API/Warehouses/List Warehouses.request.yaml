@@ -1,0 +1,8 @@
+$kind: http-request
+description: List warehouses
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouses"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1100

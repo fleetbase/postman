@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Teardown for a full collection run: removes the records the earlier folders created, in reverse order of creation. Deleting as you go would destroy fixtures the later folders still need.
+order: 9000

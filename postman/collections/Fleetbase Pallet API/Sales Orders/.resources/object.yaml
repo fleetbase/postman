@@ -1,0 +1,43 @@
+$kind: object
+name: Sales Order
+description: |-
+  An order placed by a customer, and the lines it consists of.
+example: |
+  {
+    "id": "sales_order_b1c2d3",
+    "object": "sales_order",
+    "status": "partial",
+    "customer": "contact_e4f5g6",
+    "customer_name": "Northwind Retail",
+    "warehouse": "warehouse_x1y2z3",
+    "reference_code": "SO-{{$timestamp}}",
+    "total_value": 90.00,
+    "items": [
+      {
+        "id": "soi_h7i8j9",
+        "object": "sales_order_item",
+        "product": "product_a1b2c3",
+        "sku": "SSB-{{$timestamp}}",
+        "quantity": 10,
+        "quantity_fulfilled": 4,
+        "outstanding_quantity": 6,
+        "unit_price": 9.00,
+        "status": "partial"
+      }
+    ],
+    "created_at": "2026-08-20T10:00:00Z",
+    "updated_at": "2026-08-20T15:00:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the order."
+  - name: status
+    type: string
+    description: "pending, partial, fulfilled or cancelled."
+  - name: customer
+    type: string
+    description: "Public id of the customer contact."
+  - name: items
+    type: array of objects
+    description: "Order lines, each with its outstanding quantity."

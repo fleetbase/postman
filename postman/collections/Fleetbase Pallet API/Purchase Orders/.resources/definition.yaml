@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Buying stock in. An order is created with its lines in one call, then received line by line. A receipt is capped at the line's outstanding quantity, so an over-receipt takes what is left rather than being rejected.
+order: 1800

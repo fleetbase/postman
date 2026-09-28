@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Bins are the addressable positions stock is put away into. A bin's zone must belong to the same warehouse as the bin.
+order: 1500

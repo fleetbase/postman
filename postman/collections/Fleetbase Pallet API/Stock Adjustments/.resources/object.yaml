@@ -1,0 +1,36 @@
+$kind: object
+name: Stock Adjustment
+description: |-
+  A recorded change to a stock level, with the quantity before and after.
+example: |
+  {
+    "id": "stock_adjustment_s1t2u3",
+    "object": "stock_adjustment",
+    "type": "add",
+    "reason": "Cycle count correction",
+    "product": "product_a1b2c3",
+    "warehouse": "warehouse_x1y2z3",
+    "inventory": "inventory_p7q8r9",
+    "quantity": 5,
+    "before_quantity": 113,
+    "after_quantity": 118,
+    "delta": 5,
+    "created_at": "2026-08-20T14:12:00Z",
+    "updated_at": "2026-08-20T14:12:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the adjustment."
+  - name: type
+    type: string
+    description: "One of add, remove or correction."
+  - name: before_quantity
+    type: integer
+    description: "Stock level before the adjustment."
+  - name: after_quantity
+    type: integer
+    description: "Stock level after the adjustment."
+  - name: delta
+    type: integer
+    description: "Signed change, so the direction does not have to be inferred from type."

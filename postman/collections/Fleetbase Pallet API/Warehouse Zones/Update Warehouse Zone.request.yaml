@@ -1,0 +1,16 @@
+$kind: http-request
+description: Update a zone
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouse-zones/{{zone_id}}"
+method: PUT
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Inbound Receiving"
+    }
+order: 1300

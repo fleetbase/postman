@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: product
+    type: string
+    description: "Public id of the product. Supply this or sku."
+  - name: sku
+    type: string
+    description: "SKU of the product, for callers integrating against their own catalogue."
+  - name: warehouse
+    type: string
+    description: "Narrow to one warehouse. Omit to aggregate across all of them."
+  - name: quantity
+    type: integer
+    description: "Quantity being asked about. Defaults to 1 and drives the available boolean."

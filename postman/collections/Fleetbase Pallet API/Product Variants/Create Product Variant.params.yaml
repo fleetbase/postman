@@ -1,0 +1,16 @@
+$kind: params
+fields:
+  - name: product
+    type: string
+    required: true
+    description: "Public id of the parent product. A product from another company is a 404."
+  - name: name
+    type: string
+    required: true
+    description: "Variant name."
+  - name: sku
+    type: string
+    description: "Stock keeping unit."
+  - name: option_values
+    type: object
+    description: "The option values that define this variant."

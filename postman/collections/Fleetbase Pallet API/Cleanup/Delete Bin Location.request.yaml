@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the bin location
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/bin-locations/{{bin_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9040

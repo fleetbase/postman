@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Moving stock between warehouses. The lifecycle is exposed as transitions rather than a settable status: shipping deducts from the source, receiving credits the destination, and cancelling an in-transit transfer restores what was shipped.
+order: 2000

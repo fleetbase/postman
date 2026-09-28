@@ -9,6 +9,7 @@ localResources:
     - ../postman/collections/Fleetbase Ledger API
     - ../postman/collections/Fleetbase Storefront API
     - ../postman/collections/Fleetbase Integrated Vendor Flow
+    - ../postman/collections/Fleetbase Pallet API
   environments:
     - ../postman/environments/local.environment.yaml
     - ../postman/environments/qa.environment.yaml

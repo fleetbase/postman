@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Suppliers are the vendors goods are purchased from. Purchase orders reference them.
+order: 1200

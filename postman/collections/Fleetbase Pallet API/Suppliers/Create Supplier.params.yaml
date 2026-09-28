@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Supplier name."
+  - name: email
+    type: string
+    description: "Contact email."
+  - name: phone
+    type: string
+    description: "Contact phone number."

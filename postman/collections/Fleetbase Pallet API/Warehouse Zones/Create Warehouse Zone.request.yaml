@@ -1,0 +1,26 @@
+$kind: http-request
+description: Create a zone in a warehouse
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouse-zones"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "warehouse": "{{warehouse_id}}",
+      "name": "Receiving",
+      "code": "RCV-{{$timestamp}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{zone_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("zone_id", captured); }
+    language: text/javascript
+order: 1000

@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  How stock moves outside an order — corrections, damage, shrinkage, found stock. An adjustment cannot be updated or deleted: correcting one means making another, which is why the history shows both.
+order: 1700

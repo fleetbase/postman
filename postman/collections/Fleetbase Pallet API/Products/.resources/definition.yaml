@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Products are the catalog items Pallet tracks stock for. Every stock record, order line and adjustment refers back to one.
+order: 1000

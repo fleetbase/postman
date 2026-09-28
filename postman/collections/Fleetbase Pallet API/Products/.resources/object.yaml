@@ -1,0 +1,82 @@
+$kind: object
+name: Product
+description: |-
+  A catalog item, with pricing, dimensions, tracking flags and aggregate stock figures.
+example: |
+  {
+    "id": "product_a1b2c3",
+    "object": "product",
+    "name": "Steel Shelving Bracket",
+    "sku": "SSB-{{$timestamp}}",
+    "barcode": "0123456789012",
+    "status": "active",
+    "currency": "USD",
+    "unit_cost": 4.50,
+    "unit_price": 9.00,
+    "has_variants": false,
+    "is_lot_tracked": false,
+    "is_perishable": false,
+    "reorder_point": 25,
+    "reorder_quantity": 100,
+    "total_stock": 118,
+    "available_stock": 112,
+    "reserved_stock": 6,
+    "is_out_of_stock": false,
+    "supplier": "supplier_d4e5f6",
+    "category": null,
+    "meta": {},
+    "created_at": "2026-08-01T09:30:00Z",
+    "updated_at": "2026-08-20T14:12:00Z"
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the product."
+  - name: object
+    type: string
+    description: "Always `product`."
+  - name: name
+    type: string
+    description: "Product name."
+  - name: sku
+    type: string
+    description: "Stock keeping unit."
+  - name: barcode
+    type: string
+    description: "Barcode value."
+  - name: status
+    type: string
+    description: "Product status."
+  - name: unit_cost
+    type: number
+    description: "Cost per unit."
+  - name: unit_price
+    type: number
+    description: "Sale price per unit."
+  - name: has_variants
+    type: boolean
+    description: "Whether the product is sold as variants."
+  - name: reorder_point
+    type: integer
+    description: "Level at or below which the product counts as low stock."
+  - name: total_stock
+    type: integer
+    description: "Units on hand across every warehouse."
+  - name: available_stock
+    type: integer
+    description: "On hand minus reserved."
+  - name: reserved_stock
+    type: integer
+    description: "Units held against open commitments."
+  - name: supplier
+    type: string
+    description: "Public id of the supplier, when one is set."
+  - name: meta
+    type: object
+    description: "Arbitrary metadata stored with the product."
+  - name: created_at
+    type: timestamp
+    description: "Time the product was created."
+  - name: updated_at
+    type: timestamp
+    description: "Time the product was last updated."

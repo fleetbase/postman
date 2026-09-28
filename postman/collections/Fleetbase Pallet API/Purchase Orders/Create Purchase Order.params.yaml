@@ -1,0 +1,23 @@
+$kind: params
+fields:
+  - name: supplier
+    type: string
+    description: "Public id of the supplier."
+  - name: warehouse
+    type: string
+    description: "Public id of the receiving warehouse."
+  - name: reference_code
+    type: string
+    description: "Your own reference for the order."
+  - name: items
+    type: array of objects
+    description: "Order lines. A line whose product does not resolve fails the whole request."
+  - name: items[].product
+    type: string
+    description: "Public id of the product being ordered."
+  - name: items[].quantity
+    type: integer
+    description: "Units ordered."
+  - name: items[].unit_price
+    type: number
+    description: "Price per unit."
