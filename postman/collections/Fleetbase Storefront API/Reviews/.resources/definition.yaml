@@ -1,4 +1,6 @@
 $kind: collection
 description: |-
-  Reviews capture customer ratings and feedback for storefront resources. Use review endpoints to create, retrieve, count, query, and remove customer feedback.
+  Reviews capture customer ratings and feedback for stores and products. Anyone can read a store's reviews and rating counts. Writing one is limited to verified purchases: the customer needs a completed order with the store (or containing the product) that they have not reviewed yet. Call Check Review Eligibility before offering "Write a review" so the app can explain why when it can't. Customers can delete their own reviews.
+
+  Reviews are public, so the reviewer is shown by first name and last initial only, without contact details.
 order: 9000

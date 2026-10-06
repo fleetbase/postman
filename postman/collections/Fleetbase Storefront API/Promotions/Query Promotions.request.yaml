@@ -1,10 +1,11 @@
 $kind: http-request
 description: |-
-  Lists the storefront's live, public promotions: active, inside their date range and weekly schedule. With a network key the network's promotions and those of its member stores are returned; pass `store` to only list one member store's.
+  Lists the storefront's live, public promotions: active, inside their date range and weekly schedule. Pass `include=scheduled` to also list active promotions that start later or are outside their weekly hours. With a network key the network's promotions and those of its member stores are returned; pass `store` to only list one member store's.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/promotions"
 method: GET
 queryParams:
   store: ""
+  include: ""
 scripts:
   - type: afterResponse
     code: |-

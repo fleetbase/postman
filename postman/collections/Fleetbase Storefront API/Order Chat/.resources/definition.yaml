@@ -1,0 +1,6 @@
+$kind: collection
+description: |-
+  Chat between a customer and the driver delivering their order. The chat opens when a driver is assigned and closes, read-only, once the order is completed, canceled or expired. Every request needs the `Customer-Token` header of the customer who placed the order.
+
+  New messages and read receipts are broadcast in realtime on the SocketCluster channel given by the chat's `channel` (`chat.{chat id}`) as `chat_message.*` and `chat_receipt.*` events. The driver's messages also reach the customer as `order_chat_message` notifications.
+order: 7500

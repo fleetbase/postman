@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves one live, public promotion of the storefront. Returns `404` for promotions that are not active, not public, outside their schedule, or owned by another storefront.
+  Retrieves one public promotion of the storefront, including ones that are scheduled or have ended, so a shared link still explains the offer; check `availability`. Returns `404` for promotions that are paused, not public, or owned by another storefront.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/promotions/{{promotion_id}}"
 method: GET
 scripts:

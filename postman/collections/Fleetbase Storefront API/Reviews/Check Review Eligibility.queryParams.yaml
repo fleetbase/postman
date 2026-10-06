@@ -1,0 +1,9 @@
+$kind: params
+fields:
+  - name: subject
+    type: string
+    required: true
+    description: "Public identifier of the store or product to review."
+  - name: order
+    type: string
+    description: "A specific completed order to review, e.g. from the order screen. Without it the most recent unreviewed completed order is used."

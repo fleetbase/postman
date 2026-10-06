@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: before
+    type: string
+    description: "Message ID; only messages sent before it are returned."
+  - name: limit
+    type: integer
+    description: "Maximum number of messages. Defaults to 30, maximum 100."

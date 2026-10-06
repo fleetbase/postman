@@ -1,0 +1,25 @@
+$kind: http-request
+description: |-
+  Whether the authenticated customer can review a store or product, and why not. Returns:
+
+  ```json
+  { "can_review": true, "reason": null, "message": null, "order": "order_9Ks2mP1", "review": null }
+  ```
+
+  `order` is the completed order the review will be attached to. When `can_review` is false, `reason` is one of `sign_in_required` (no customer token), `unsupported_subject`, `no_completed_order` (no completed order with the store, or containing the product) or `already_reviewed` (every completed order has been reviewed; `review` is the latest one), with a customer-facing `message`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/eligibility"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+queryParams:
+  subject: "{{store_id}}"
+  order: ""
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Eligibility says whether the customer can review', function () {
+          pm.expect(pm.response.json().can_review).to.be.a('boolean');
+      });
+    language: text/javascript
+order: 1500

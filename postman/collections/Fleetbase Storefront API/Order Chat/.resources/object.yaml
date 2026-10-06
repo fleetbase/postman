@@ -1,0 +1,54 @@
+$kind: object
+name: Order Chat
+description: |-
+  The chat for an order, with its participants and latest messages (oldest first). Messages are `{ id, content, sender: { id, role, name }, is_mine, attachments: [{ id, url, type }], read, created_at }`.
+example: |
+  {
+    "id": "chat_channel_5Nq8vR2",
+    "channel": "chat.chat_channel_5Nq8vR2",
+    "order": "order_9Ks2mP1",
+    "status": "open",
+    "me": "chat_participant_2Lm4kQ7",
+    "participants": [
+      { "id": "chat_participant_2Lm4kQ7", "role": "customer", "name": "Ada Buyer", "avatar_url": null, "is_online": true },
+      { "id": "chat_participant_7Rt3pW9", "role": "driver", "name": "Ravi Kumar", "avatar_url": "https://files.example.com/ravi.png", "is_online": true }
+    ],
+    "messages": [
+      {
+        "id": "chat_message_3Hk9mL2",
+        "content": "Picked up your order, about 8 minutes away.",
+        "sender": { "id": "chat_participant_7Rt3pW9", "role": "driver", "name": "Ravi Kumar" },
+        "is_mine": false,
+        "attachments": [],
+        "read": true,
+        "created_at": "2026-10-07T13:52:00Z"
+      }
+    ],
+    "unread_count": 0
+  }
+fields:
+  - name: id
+    type: string
+    description: "Public identifier of the chat."
+  - name: channel
+    type: string
+    description: "SocketCluster channel to subscribe to for live messages."
+  - name: order
+    type: string
+    description: "Public identifier of the order."
+  - name: status
+    type: enum
+    values: ["open", "closed"]
+    description: "`closed` once the order is completed, canceled or expired; messages can still be read."
+  - name: me
+    type: string
+    description: "The requesting customer's participant ID."
+  - name: participants
+    type: array of objects
+    description: "`id`, `role` (`customer` or `driver`), `name`, `avatar_url` and `is_online`."
+  - name: messages
+    type: array of objects
+    description: "The latest messages, oldest first."
+  - name: unread_count
+    type: integer
+    description: "Messages from the driver the customer has not read."

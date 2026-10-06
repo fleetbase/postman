@@ -70,7 +70,7 @@ fields:
     description: "Arbitrary metadata stored with the product."
   - name: addon_categories
     type: array of objects
-    description: "Addon categories available for the product."
+    description: "Addon categories available for the product: `id`, `name`, `description`, `is_required` (the customer must choose at least one), `max_selectable` (most add-ons that can be chosen, or null for no limit), `excluded_addons` and `addons`."
   - name: variants
     type: array of objects
     description: "Product variants and options."
