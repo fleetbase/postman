@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Lists the food trucks of the storefront: a store key returns that store's trucks; a network key returns the member stores' trucks and the network's own. Each truck includes its store, vehicle, zone, service area and catalogs.
+  Lists the food trucks of the storefront: a store key returns that store's trucks; a network key returns the active member stores' trucks and the network's own. Each truck includes its store, vehicle, zone, service area and catalogs.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/food-trucks"
 method: GET
 queryParams:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves one food truck. Only a truck of this storefront is found: the store's own, or for a network key a member store's or the network's. Any other truck returns `404`.
+  Retrieves one food truck. Only a truck of this storefront is found: the store's own, or for a network key an active member store's or the network's. Any other truck returns `404`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/food-trucks/{{food_truck_id}}"
 method: GET
 order: 2000
