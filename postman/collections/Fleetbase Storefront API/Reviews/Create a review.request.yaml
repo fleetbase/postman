@@ -31,7 +31,7 @@ scripts:
       var json_response = pm.response.json();
       if (pm.response.code === 403) {
           pm.test('An ineligible customer is told why', function () {
-              pm.expect(json_response.reason).to.be.oneOf(['sign_in_required', 'unsupported_subject', 'no_completed_order', 'already_reviewed']);
+              pm.expect(json_response.reason).to.be.oneOf(['sign_in_required', 'unsupported_subject', 'no_completed_order', 'already_reviewed', 'reviews_disabled']);
           });
       } else {
           pm.environment.set("review_id", json_response.id);

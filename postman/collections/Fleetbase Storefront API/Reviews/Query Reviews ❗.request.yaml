@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Lists a store's reviews. Send the customer token to have the customer's own review marked with `"is_mine": true`.
+  Lists a store's reviews (reviews of the store itself, not its products). Send the customer token to have the customer's own review marked with `"is_mine": true`. With a network key, pass `store`; without it the list is empty, and an unknown or non-member store returns `400`. When reviews are turned off, the list is empty.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews"
 method: GET
 headers:

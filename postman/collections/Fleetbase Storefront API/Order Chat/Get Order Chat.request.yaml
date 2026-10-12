@@ -1,8 +1,8 @@
 $kind: http-request
 description: |-
-  Returns the order's chat (see the Order Chat object) with its latest messages, opening it when a driver is assigned. Subscribe to `channel` for live messages.
+  Returns the order's chat (see the Order Chat object) with its latest 50 messages, oldest first, opening it when a driver is assigned. `unread_count` counts messages from others the customer hasn't read. Subscribe to `channel` for live messages.
 
-  Refusals: `401` without a customer token, `404` for an order not placed through this storefront, `403` for another customer's order, and `409` with `"reason": "driver_not_assigned"` before a driver is assigned.
+  Refusals: `401` without a customer token, `404` for an order not placed through this storefront, `403` for another customer's order, and `409` with `"reason": "driver_not_assigned"` when no driver is assigned yet (or the order finished without ever having a chat).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{chat_order_id}}/chat"
 method: GET
 headers:

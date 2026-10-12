@@ -52,7 +52,7 @@ fields:
   - name: availability
     type: enum
     values: ["live", "scheduled", "ended", "inactive"]
-    description: "`live` applies now; `scheduled` is active but outside its dates or weekly schedule; `ended` is past `ends_at` or ended; `inactive` is paused."
+    description: "`live` applies now; `scheduled` is active but outside its dates or weekly schedule; `ended` is past `ends_at` or ended. Paused promotions are not returned by the public API, so `inactive` doesn't appear here."
   - name: next_starts_at
     type: timestamp
     description: "For `scheduled` promotions, when it next starts applying (looking up to a week ahead). Null otherwise."

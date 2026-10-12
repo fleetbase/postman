@@ -18,11 +18,23 @@ example: |
     "is_bookable": false,
     "is_available": true,
     "tags": ["coffee"],
-    "status": "active",
+    "status": "published",
     "meta": {},
     "slug": "cold-brew",
     "translations": [],
-    "addon_categories": [],
+    "addon_categories": [
+      {
+        "id": "category_2Fd8kL1",
+        "name": "Extras",
+        "description": null,
+        "is_required": false,
+        "max_selectable": 2,
+        "excluded_addons": [],
+        "addons": [
+          { "id": "product_addon_5Gh7jK2", "name": "Oat milk", "description": null, "price": 80, "sale_price": null, "is_on_sale": false }
+        ]
+      }
+    ],
     "variants": [],
     "images": [],
     "videos": [],

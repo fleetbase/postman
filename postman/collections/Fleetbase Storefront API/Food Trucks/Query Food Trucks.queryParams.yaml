@@ -1,11 +1,11 @@
 $kind: params
 fields:
   - name: limit
-    type: string
-    description: "Limit value for this food trucks request."
+    type: integer
+    description: "Maximum number of trucks to return; `-1` returns all."
   - name: offset
-    type: string
-    description: "Offset value for this food trucks request."
+    type: integer
+    description: "Number of trucks to skip."
   - name: sort
     type: string
-    description: "Sort value for this food trucks request."
+    description: "Field to sort by; prefix with `-` for descending."

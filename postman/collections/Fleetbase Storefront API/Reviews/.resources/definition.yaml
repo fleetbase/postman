@@ -1,5 +1,7 @@
 $kind: collection
 description: |-
+  Reviews follow the store's or network's `reviews_enabled` option (on by default for a store, off by default for a network). When reviews are off, lists are empty, counts are 0, eligibility answers `reviews_disabled` and creating a review returns `403`.
+
   Reviews capture customer ratings and feedback for stores and products. Anyone can read a store's reviews and rating counts. Writing one is limited to verified purchases: the customer needs a completed order with the store (or containing the product) that they have not reviewed yet. Call Check Review Eligibility before offering "Write a review" so the app can explain why when it can't. Customers can delete their own reviews.
 
   Reviews are public, so the reviewer is shown by first name and last initial only, without contact details.

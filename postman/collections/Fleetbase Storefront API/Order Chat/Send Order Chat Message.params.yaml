@@ -5,4 +5,4 @@ fields:
     description: "Message text, up to 2000 characters. Required without `files`."
   - name: files
     type: array of objects
-    description: "Up to 4 photos, each `{ \"data\": base64, \"type\": \"image/jpeg\" }`. Required without `content`."
+    description: "Up to 4 photos, each `{ \"data\": base64, \"type\": \"image/jpeg\" }`. `data` and `type` are required for each file, and `type` must be an image type (`image/…`). Required without `content`. Invalid input returns `422`."

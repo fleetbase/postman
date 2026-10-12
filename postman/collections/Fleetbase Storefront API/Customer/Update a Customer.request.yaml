@@ -10,5 +10,8 @@ headers:
     value: application/json
 body:
   type: json
-  content: ""
+  content: |-
+    {
+      "name": "Jane Doe"
+    }
 order: 8000

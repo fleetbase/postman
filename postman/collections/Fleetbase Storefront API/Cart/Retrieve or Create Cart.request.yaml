@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves the current cart or creates a new cart when no cart identifier is supplied. Use the returned cart ID for subsequent cart operations.
+  Creates a new, anonymous open cart. To continue a device's cart, use `Retrieve a Cart` with the device's unique identifier instead. Use the returned cart ID for subsequent cart operations.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts"
 method: GET
 scripts:

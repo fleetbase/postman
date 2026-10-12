@@ -6,7 +6,7 @@ description: |-
   { "can_review": true, "reason": null, "message": null, "order": "order_9Ks2mP1", "review": null }
   ```
 
-  `order` is the completed order the review will be attached to. When `can_review` is false, `reason` is one of `sign_in_required` (no customer token), `unsupported_subject`, `no_completed_order` (no completed order with the store, or containing the product) or `already_reviewed` (every completed order has been reviewed; `review` is the latest one), with a customer-facing `message`.
+  `order` is the completed order the review will be attached to. When `can_review` is false, `reason` is one of `sign_in_required` (no customer token), `unsupported_subject`, `no_completed_order` (no completed order with the store, or containing the product) `already_reviewed` (every completed order has been reviewed; `review` is the latest one) or `reviews_disabled` (reviews are turned off for the store or network), with a customer-facing `message`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/eligibility"
 method: GET
 headers:

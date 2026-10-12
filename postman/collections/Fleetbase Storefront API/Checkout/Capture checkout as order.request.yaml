@@ -4,6 +4,8 @@ description: |-
 
   Stripe checkouts are captured only after Fleetbase retrieves the server-linked PaymentIntent and verifies that it succeeded and matches the checkout amount, currency, customer, and live/test mode. An incomplete payment returns `402`, a missing or mismatched PaymentIntent returns `422`, and a temporary Stripe verification failure returns `502`. Clients must confirm the PaymentIntent before calling this endpoint and must not send or trust a client-selected PaymentIntent ID during capture.
 
+  The order is built from the cart as it was when the checkout was created, so changing or clearing the cart afterwards doesn't change the order, and the cart is marked checked out. A cart with a bookable product or a scheduled line becomes a booking order (`meta.is_booking`, `meta.booking_at`). A Network checkout across several stores creates one order per store under a master order (`meta.is_master_order`, `meta.related_orders`); see `GET orders/{id}/stores`. The response is the order; its `meta` includes `discount`, `promotions`, `payment_status` and the booking fields.
+
   Because a contract run cannot complete a card payment, this example captures the cash pickup checkout created by `Before Cash Pickup Checkout`, which needs no provider payment; the unpaid Stripe checkout's `402` refusal is asserted by `Capture Stripe checkout without payment`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture"
 method: POST

@@ -2,16 +2,19 @@ $kind: params
 fields:
   - name: gateway
     type: string
-    description: "Payment gateway code — `cash` for a cash-on-delivery checkout."
+    required: true
+    description: "Payment gateway code: `cash` for a cash-on-delivery checkout."
   - name: customer
     type: string
-    description: "Customer ID associated with the request."
+    required: true
+    description: "Customer public ID. Must match the authenticated customer when `Customer-Token` is sent."
   - name: cart
     type: string
-    description: "Cart value for this checkout request."
+    required: true
+    description: "Cart public ID (`cart_…`)."
   - name: pickup
     type: boolean
     description: "Set true for a pickup order; a cash pickup checkout needs no service quote."
   - name: promo_codes
     type: array of strings
-    description: "Promo codes to apply, as an array or a comma separated string. `promo_code` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."
+    description: "Promo codes to apply, as an array or a comma separated string. `promo_code`, `promoCode` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."

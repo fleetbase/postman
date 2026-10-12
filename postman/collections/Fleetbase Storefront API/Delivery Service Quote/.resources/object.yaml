@@ -1,27 +1,55 @@
 $kind: object
 name: Delivery Service Quote
 description: |-
-  A delivery service quote prices delivery for a storefront cart and is consumed during checkout capture.
+  A delivery service quote prices delivery for a storefront cart and is used at checkout.
 example: |
   {
     "id": "service_quote_4fK2mQ8",
+    "service_rate": "service_rate_7Hq2xL9",
+    "service_rate_name": "Standard delivery",
+    "service_name": "Standard delivery",
+    "facilitator": null,
+    "request_id": "c2f1a7d4-2b8e-4c51-9d0a-6f3e1b2c4d5e",
     "amount": 950,
     "currency": "USD",
+    "items": [
+      { "amount": 950, "currency": "USD", "details": "Base fee and distance" }
+    ],
     "meta": {
       "origin": "place_123",
       "destination": "place_456"
-    }
+    },
+    "created_at": "2026-10-07T13:30:00Z",
+    "updated_at": "2026-10-07T13:30:00Z"
   }
 fields:
   - name: id
     type: string
     description: "Public identifier of the service quote."
+  - name: service_rate
+    type: string
+    description: "Service rate the quote was priced with."
+  - name: service_rate_name
+    type: string
+    description: "Name of the service rate."
+  - name: service_name
+    type: string
+    description: "Name of the delivery service."
+  - name: facilitator
+    type: string
+    description: "Integrated vendor that produced the quote, or null for the store's own rates."
+  - name: request_id
+    type: string
+    description: "Identifier of the quote request."
   - name: amount
     type: integer
-    description: "Quoted delivery amount."
+    description: "Quoted delivery amount in the currency's smallest unit."
   - name: currency
     type: currency
     description: "Quote currency code."
+  - name: items
+    type: array
+    description: "Line items that make up the quoted amount."
   - name: meta
     type: object
-    description: "Quote metadata, including origin and destination used by checkout."
+    description: "Origin and destination used for the quote. For a multi-store Network cart, `origin` is an array of place IDs."

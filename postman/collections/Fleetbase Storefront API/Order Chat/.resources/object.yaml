@@ -4,8 +4,8 @@ description: |-
   The chat for an order, with its participants and latest messages (oldest first). Messages are `{ id, content, sender: { id, role, name }, is_mine, attachments: [{ id, url, type }], read, created_at }`.
 example: |
   {
-    "id": "chat_channel_5Nq8vR2",
-    "channel": "chat.chat_channel_5Nq8vR2",
+    "id": "chat_5Nq8vR2",
+    "channel": "chat.chat_5Nq8vR2",
     "order": "order_9Ks2mP1",
     "status": "open",
     "me": "chat_participant_2Lm4kQ7",

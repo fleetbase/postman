@@ -5,4 +5,4 @@ fields:
     description: "Message ID; only messages sent before it are returned."
   - name: limit
     type: integer
-    description: "Maximum number of messages. Defaults to 30, maximum 100."
+    description: "Maximum number of messages. Defaults to 50; values above 100 are treated as 100."
