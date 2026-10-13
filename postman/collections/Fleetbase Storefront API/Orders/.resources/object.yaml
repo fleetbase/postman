@@ -14,7 +14,7 @@ example: |
         {
           "id": "entity_6Lp2wQ9",
           "name": "Cold Brew",
-          "meta": { "product_id": "product_9Lb2mQ1", "quantity": 2, "note": "No ice, please", "packed_at": "2026-10-13T09:41:00+00:00", "unavailable": false }
+          "meta": { "product_id": "product_9Lb2mQ1", "quantity": 2, "note": "No ice, please", "unavailable": false }
         },
         {
           "id": "entity_3Hd8vK5",
@@ -133,4 +133,4 @@ fields:
     description: "Set by `Request Address Change`: `{ status, message, place, address, at }`. `status` is `open` until the store updates the address (`resolved`) or dismisses the request (`dismissed`), which also adds `closed_at`; `place` and `address` are the saved place the customer suggested, or null."
   - name: payload.entities[].meta
     type: object
-    description: "Per item, besides the cart line data (`product_id`, `quantity`, ...): `note` (the store's note on the item), `packed_at` (when the store packed it), `unavailable` (the store marked it unavailable), `substitute_for` (the entity id this item replaces) and `added_by_edit` (added when the store edited the order)."
+    description: "Per item, besides the cart line data (`product_id`, `quantity`, ...): `note` (the store's note on the item), `unavailable` (the store marked it unavailable; every other item is taken as packed and delivered), `substitute_for` (the entity id this item replaces) and `added_by_edit` (added when the store edited the order)."
