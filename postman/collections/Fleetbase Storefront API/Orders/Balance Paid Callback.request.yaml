@@ -1,0 +1,24 @@
+$kind: http-request
+description: |-
+  QPay's callback for a balance invoice: when the store edits a paid order and the total goes up, the customer is sent a payment link for the balance (a QPay invoice, or a Stripe Payment Link), and QPay calls this URL when the invoice is paid. It needs no storefront key; Storefront builds the URL with the order's public id when it creates the invoice.
+
+  Storefront never trusts the callback itself: it asks the gateway what was paid against the order's open balance link. When the balance is paid it records the charge on the order's payment (`meta.payment`), closes the link and sends the customer the `order_balance_paid` notification. Stripe Payment Links have no callback; Storefront checks them every five minutes (`storefront:check-balance-payments`).
+
+  Response: `{ "status": "paid" }` when the balance was settled now, `{ "status": "pending" }` when nothing (more) is paid or the gateway can't be asked, and `404` with `{ "status": "unknown" }` for an unknown order. Calling it again after the balance is settled answers `pending`.
+
+  In a contract run this addresses `{{balance_order_id}}` when the environment sets one. Otherwise it addresses an unknown order and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/balance-paid"
+method: GET
+queryParams:
+  order: "{{balance_order_id}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // A contract run has no order with an open balance link: without one this asks about
+      // an order that doesn't exist and asserts the 404.
+      if (!pm.environment.get('balance_order_id')) {
+          pm.variables.set('balance_order_id', 'order_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 3000

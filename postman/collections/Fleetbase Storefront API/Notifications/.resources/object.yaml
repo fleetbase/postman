@@ -1,7 +1,7 @@
 $kind: object
 name: Notification
 description: |-
-  An inbox item. `type` identifies what the notification is about (for example `order_accepted`, `order_updated`, `order_completed`, `promotional` or `campaign`), and `data` carries the identifiers the app needs to deep link. Recipient details are never included.
+  An inbox item. `type` identifies what the notification is about (for example `order_accepted`, `order_updated`, `order_item_unavailable`, `order_completed`, `promotional` or `campaign`), and `data` carries the identifiers the app needs to deep link. Recipient details are never included.
 example: |
   {
     "id": "0f4c9a52-8d3f-4a6e-9f0e-2b1f7f2f8c11",
@@ -24,13 +24,13 @@ fields:
     description: "Notification id (uuid)."
   - name: type
     type: string
-    description: "What the notification is about, e.g. `order_accepted`, `order_enroute`, `order_nearby`, `order_completed`, `order_canceled`, `order_ready`, `order_driver_assigned`, `promotional` or `campaign`."
+    description: "What the notification is about, e.g. `order_accepted`, `order_enroute`, `order_nearby`, `order_completed`, `order_canceled`, `order_ready`, `order_driver_assigned`, `order_updated` (the store edited the order or moved a booking), `order_item_unavailable` (the store marked an item unavailable), `order_balance_paid` (a balance due was paid by its payment link), `promotional` or `campaign`."
   - name: title
     type: string
     description: "Notification title."
   - name: body
     type: string
-    description: "Notification message. For `order_updated` (the store edited the order) it says what changed and what that means for the customer's money: refunded, returned as store credit with the code to use, or a balance to pay with its payment link. For `order_canceled` it gives the store's reason, when there is one, and whether the payment was refunded or returned as store credit."
+    description: "Notification message. For `order_updated` (the store edited the order) it says what changed and what that means for the customer's money: refunded, returned as store credit with the code to use, or a balance to pay with its payment link. A booking that was only moved says when it is now, in the store's time (`Deep Clean is now Mon 19 Oct, 11:00 to 12:00.`). For `order_item_unavailable` it names the item and says the store will replace or remove it and adjust the total. For `order_balance_paid` it gives the amount received and anything still left to pay. For `order_canceled` it gives the store's reason, when there is one, and whether the payment was refunded or returned as store credit."
   - name: image
     type: string
     description: "Optional image URL."
