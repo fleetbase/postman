@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a comment by ID, including its author and any nested replies returned by the API resource.
+  Retrieves a comment by ID, including its author and any nested replies returned by the API resource. An internal comment returns `404` (`Comment resource not found.`), and internal replies are left out. Requires Core API with fleetbase/core-api#306 (release v1.6.69).
 url: "{{base_url}}/{{namespace}}/comments/:id"
 method: GET
 pathVariables:

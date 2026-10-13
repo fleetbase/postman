@@ -8,10 +8,30 @@ example: |
     "created_by": "user_8xP2L1d",
     "name": "Dispatch updates",
     "title": "Dispatch updates",
-    "last_message": null,
+    "last_message": {
+      "id": "chat_message_3Hk9mL2",
+      "chat_channel": "chat_channel_5VUl2v4",
+      "content": "Order updated: Drop-off changed to 8 Marina View",
+      "sender": null,
+      "system": true,
+      "meta": { "system": true, "kind": "order_updated" },
+      "attachments": [],
+      "receipts": [],
+      "updated_at": "2026-10-13T09:30:00Z",
+      "created_at": "2026-10-13T09:30:00Z"
+    },
     "slug": "dispatch-updates",
     "feed": [],
-    "participants": [],
+    "participants": [
+      {
+        "id": "chat_participant_2Lm4kQ7",
+        "name": "Ada Buyer",
+        "role": "customer",
+        "meta": { "role": "customer" },
+        "is_online": true,
+        "last_seen_at": "2026-10-13T09:29:00Z"
+      }
+    ],
     "meta": {},
     "updated_at": "2026-05-07T09:30:00Z",
     "created_at": "2026-05-07T09:30:00Z",
@@ -32,7 +52,7 @@ fields:
     description: "Display title for the channel."
   - name: last_message
     type: object
-    description: "Most recent chat message for the channel, when available."
+    description: "Most recent chat message for the channel, when available. Messages carry `system` (true for messages the system posts, such as `order_updated` or `address_change_requested`, read from `meta.system`) and `meta` (with `kind` for system messages). `sender` is the sending participant, or null for a message without one. Requires Core API with fleetbase/core-api#306 (release v1.6.69)."
   - name: unread_count
     type: integer
     description: "Unread message count for the current session user when session context is available."
@@ -44,10 +64,10 @@ fields:
     description: "Messages and feed entries returned for the channel."
   - name: participants
     type: array of objects
-    description: "Chat participants in the channel."
+    description: "Chat participants in the channel. Each participant has `role` and `meta`: `role` is read from `meta.role` and is `customer`, `driver`, `store` or `system` when one of those was recorded (order chats record it), else null; `meta` is the participant's metadata (an empty object when unset). Requires Core API with fleetbase/core-api#306 (release v1.6.69)."
   - name: meta
     type: object
-    description: "Arbitrary metadata stored with the channel."
+    description: "Arbitrary metadata stored with the channel. Storefront order chats carry `storefront_order_uuid`, `storefront_order_id`, `order_public_id` and `kind` (`group` for the customer and driver thread, `customer` for the customer and store thread)."
   - name: updated_at
     type: timestamp
     description: "Time the channel was last updated."
