@@ -8,4 +8,4 @@ fields:
   - name: identity
     type: string
     required: true
-    description: "Email address or phone number receiving the customer creation code."
+    description: "Email address or phone number receiving the customer creation code. Phone numbers must be valid mobile numbers in international format; an identity that already has an account is refused with `422`."

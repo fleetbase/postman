@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "sms",
+        "identity": "+15555550123"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "ok"
+      }
+order: 1000

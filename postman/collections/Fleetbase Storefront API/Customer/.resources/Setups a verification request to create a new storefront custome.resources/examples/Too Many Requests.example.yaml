@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "sms",
+        "identity": "+15555550123"
+      }
+response:
+  statusCode: 429
+  statusText: Too Many Requests
+  headers:
+    Content-Type: application/json
+    Retry-After: "60"
+  body:
+    type: json
+    content: |-
+      {
+        "errors": [
+          "Unable to send a verification code right now. Try again in a minute."
+        ]
+      }
+order: 3000

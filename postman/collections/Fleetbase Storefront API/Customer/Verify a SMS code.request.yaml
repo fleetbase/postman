@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Verifies a storefront SMS or creation code. The response includes the customer profile and auth token when verification succeeds.
+
+  A code verifies once. Each wrong guess counts against the newest code issued for the identity; after five the code locks and a new one must be requested. After ten wrong codes for the same identity within fifteen minutes, from any address, the endpoint returns `429` until the window passes.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-code"
 method: POST
 headers:

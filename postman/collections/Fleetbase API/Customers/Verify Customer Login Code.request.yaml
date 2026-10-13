@@ -2,6 +2,8 @@ $kind: http-request
 name: "Verify Customer Login Code"
 description: |-
   Verifies the SMS/email code from `Request Customer Login SMS` and returns the customer with a Sanctum `token`. When `for` is `fleetops_create_customer` this proxies to `Create a Customer`.
+
+  A code verifies once; each wrong guess counts against it and after five it locks, so a new code must be requested.
 url: "{{base_url}}/{{namespace}}/customers/verify-code"
 method: POST
 body:

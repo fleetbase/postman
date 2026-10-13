@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
+  method: POST
+  headers:
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "mode": "sms",
+        "identity": "+15555550123"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "errors": [
+          "An account already exists for this phone number. Sign in instead."
+        ]
+      }
+order: 2000
