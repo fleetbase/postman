@@ -5,7 +5,7 @@ description: |-
 
   Nothing is persisted until the code is verified: an identity with no account gets its code without a pending user record being created. Optionally include `name` so the verification message greets the customer by name.
 
-  SMS mode validates the phone number and passes every message through the platform's SMS guard, which bounds how many texts an API credential can send. Endpoints that send a text are limited to five requests a minute per caller; a text the guard refuses is returned as a generic send error.
+  SMS mode validates the phone number and passes every message through the platform's SMS guard, which bounds how many texts an API credential can send. Endpoints that send a text are limited to five requests a minute per caller. A refused text answers `422` (the number is invalid or cannot receive a text message), `429` with a `Retry-After` header (a cooldown on that number, or the organization's message budget) or `423` (text messages are paused).
 url: "{{base_url}}/{{namespace}}/customers/request-creation-code"
 method: POST
 body:
