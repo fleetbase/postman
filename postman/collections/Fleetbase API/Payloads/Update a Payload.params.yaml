@@ -14,7 +14,12 @@ fields:
     description: Replacement waypoint list. Sending route endpoint fields without waypoints removes existing waypoints.
   - name: entities
     type: array of objects
-    description: Replacement entities, packages, or items attached to the payload.
+    description: Entities, packages, or items for the payload. Appended to its entities, or with `entities_mode` `replace`, the payload's full list.
+  - name: entities_mode
+    type: enum
+    values: ["append", "replace"]
+    default: append
+    description: "`replace` (or `sync`) makes `entities` the payload's full list: entries with the `id` of one of the payload's entities update it, entries without one are created, and entities left out are deleted."
   - name: type
     type: string
     description: Payload type.
@@ -23,7 +28,7 @@ fields:
     description: Provider identifier associated with the payload.
   - name: cod_amount
     type: currency
-    description: Cash-on-delivery amount.
+    description: Cash-on-delivery amount. `0` is kept and clears the cash to collect.
   - name: cod_currency
     type: currency
     description: Three-letter currency code for `cod_amount`.

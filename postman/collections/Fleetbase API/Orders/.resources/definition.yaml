@@ -1,4 +1,16 @@
 $kind: collection
 description: |-
   Orders represent work to be planned, dispatched, tracked, and completed. Use order endpoints to create delivery or service jobs, assign resources, manage status, capture proof of delivery, and record activity.
+
+  ## Driver offers
+
+  Assigning a driver records an offer on the order (`offer`). The driver answers it with `Accept an Order` or `Decline an Order`; an offer that is not answered within the company setting `fleetops.offer_timeout_minutes` (default 5 minutes, `0` for never) is marked `expired` and dispatch is alerted (`driver_not_accepted`).
+
+  ## Realtime events
+
+  Order changes are broadcast on the socket channels below. Every event has the envelope `{ id, api_version, event, created_at, data }`. These events require Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
+
+  - `order.changed`: the order's route, items, contact, schedule, notes or amounts were edited after it was placed (through `Update an Order`, `Update a Payload`, the entity endpoints, the console or Storefront). Channels: `order.{public_id}` and `order.{uuid}`, `driver.{public_id}` and `driver.{uuid}` of the assigned driver, `customer.{public_id}` and `company.{uuid}`. Data: `{ id, changes, summary, dropoff: { id, address, location }, cod_amount, total, currency, changed_by, changed_at }`; `changes` lists the parts that changed (`pickup`, `dropoff`, `return`, `waypoints`, `items`, `schedule`, `contact`, `notes`, `cod_amount`, ...) and `summary` is one readable line. When the change concerns the driver, the assigned driver also gets an `order_changed` push.
+  - `order.driver_unassigned`: a driver was taken off the order (unassigned or replaced). Channels: `driver.{public_id}` and `driver.{uuid}` of the previous driver, and `company.{uuid}`. Data: `{ id, driver }`. The previous driver also gets an `order_unassigned` push, unless they declined the order themselves.
+  - `order.offer_accepted`, `order.offer_declined`, `order.offer_expired`: the driver offer was answered or ran out. Channels: `order.{public_id}`, `order.{uuid}` and `company.{uuid}`. Data: `{ id, driver, offer }`.
 order: 8000

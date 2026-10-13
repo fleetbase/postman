@@ -84,7 +84,16 @@ scripts:
       // started returning a document would still be caught.
       const contentType = pm.response.headers.get('Content-Type') || '';
       const isDocument  = /^(application\/pdf|image\/|application\/octet-stream|text\/csv)/i.test(contentType);
-      const expected    = pm.request.method === "POST" ? [200, 201, 202] : [200, 201, 202, 204];
+      // A request whose CONTRACT is a refusal opts out of the 2xx expectation by setting
+      // `expected_status` in its beforeRequest script (as the Storefront collection does),
+      // e.g. answering a driver offer when the run has no order offered to a driver. The
+      // override is consumed here: "local" variables are scoped to the RUN, so left set it
+      // would hold every later request against the same status.
+      const expectedOverride = Number(pm.variables.get("expected_status")) || null;
+      pm.variables.unset("expected_status");
+      const expected    = expectedOverride
+          ? [expectedOverride]
+          : (pm.request.method === "POST" ? [200, 201, 202] : [200, 201, 202, 204]);
 
       if (isDocument) {
           // Still asserted, not excused: a document response must carry actual bytes.

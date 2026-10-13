@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: driver
+    type: string
+    description: "Public ID of the driver accepting the order. Defaults to the driver profile of the authenticated user."

@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id/decline"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+  body:
+    type: json
+    content: |-
+      {
+        "driver": "driver_5Hk2Qp9Lm3"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Content
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "This order has already been started and cannot be declined."
+      }
+order: 2000

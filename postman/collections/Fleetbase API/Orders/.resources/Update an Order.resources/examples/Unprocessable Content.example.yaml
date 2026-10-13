@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/{{namespace}}/orders/:id"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    id: "order_7YqM3KpL2n"
+  body:
+    type: json
+    content: |-
+      {
+        "scheduled_at": "2026-10-13T15:00:00Z",
+        "payload": {
+          "entities_mode": "replace",
+          "entities": [
+            { "id": "entity_4Fr8Kq2Lp1", "name": "Cold Brew", "quantity": 3 }
+          ]
+        }
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Content
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": "Items cannot be changed once a driver has the order. The schedule cannot be changed once a driver has the order.",
+        "locked": {
+          "items": "Items cannot be changed once a driver has the order.",
+          "schedule": "The schedule cannot be changed once a driver has the order."
+        }
+      }
+order: 2000

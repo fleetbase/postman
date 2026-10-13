@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: driver
+    type: string
+    description: "Public ID of the driver declining the order. Defaults to the driver profile of the authenticated user."
+  - name: reason
+    type: string
+    description: "Why the driver declines, recorded on the offer and sent to dispatch. Trimmed to 1000 characters."

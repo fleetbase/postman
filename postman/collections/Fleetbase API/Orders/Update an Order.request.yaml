@@ -1,6 +1,19 @@
 $kind: http-request
 description: |-
   Updates an order and returns the updated order resource. You can update order metadata, notes, status, assignment fields, scheduling fields, proof-of-delivery settings, and payload details.
+
+  What can still change depends on the order's status. A change the status locks is refused with `422` and nothing is written: `{ "error": "...", "locked": { "<field>": "<reason>" } }`. The fields are `pickup`, `dropoff`, `return`, `waypoints`, `items` (the payload's entities), `schedule` (`scheduled_at`), `contact` (`customer`), `notes` and `cod_amount`:
+
+  - Open (`created`, `pending`, `accepted`, `confirmed`, `preparing`, or a custom status before dispatch): everything can change.
+  - Ready (`ready`, `pickup_ready`, `ready_for_pickup`): items can only be removed and the schedule can only move earlier; everything else can change.
+  - With a driver (dispatched, started, `enroute`, `driver_*` and similar, or a custom status after dispatch): the route (the driver is rerouted), contact, notes and `cod_amount` can change; items and schedule are locked.
+  - Finished (`completed`, `canceled`, `expired`, or the order config's complete or terminal activity): nothing can change.
+
+  Entities sent with the payload are appended by default. With `entities_mode` `replace` (at the top level or in `payload`), the list sent becomes the payload's full list: entries with an `id` of one of the payload's entities update it, entries without one are created, and entities left out are deleted. `cod_amount` is accepted at the top level or in `payload`, and `0` is kept (it clears the cash to collect). The order's current waypoint only moves when the route changed, so an order under way keeps its stop.
+
+  An edit that changes anything broadcasts the realtime event `order.changed` (see the Orders folder) and, when the change concerns the driver, sends the assigned driver an `order_changed` push.
+
+  The status guard, `entities_mode` and top-level `cod_amount` require Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
 url: "{{base_url}}/{{namespace}}/orders/:id"
 method: PUT
 pathVariables:

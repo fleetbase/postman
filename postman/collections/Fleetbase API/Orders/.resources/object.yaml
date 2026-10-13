@@ -43,6 +43,7 @@ example: |
     "distance": 0,
     "time": 0,
     "meta": {},
+    "offer": null,
     "dispatched_at": null,
     "started_at": null,
     "scheduled_at": null,
@@ -128,6 +129,9 @@ fields:
   - name: meta
     type: object
     description: Additional order metadata.
+  - name: offer
+    type: object
+    description: "The offer to the assigned driver, mirrored from `meta.offer`, or null: `{ driver, offered_at, expires_at, accepted_at, declined_at, status, reason }`. `status` is `offered`, `accepted`, `declined` or `expired`. An offer is recorded when a driver is assigned and expires after the company setting `fleetops.offer_timeout_minutes` (default 5; `0` never expires, `expires_at` null). An ad hoc driver who takes the order, or a driver who starts it, is recorded as accepted. `reason` is present when the driver gave one on decline. Also included in order webhook payloads. Requires Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72)."
   - name: dispatched_at
     type: timestamp
     description: Timestamp when the order was dispatched.
