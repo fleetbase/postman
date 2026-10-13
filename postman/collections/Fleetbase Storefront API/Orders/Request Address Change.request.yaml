@@ -1,0 +1,42 @@
+$kind: http-request
+description: |-
+  Tells the store that the order's drop-off address is wrong. The store sees an alert on the order, and the message is posted in the customer's chat with the store (a message with `kind` `address_change_requested`). The store then updates the address or dismisses the request. Requires the `Customer-Token` of the customer who placed the order.
+
+  Send a `message`, a `place` (one of the customer's saved places, see `customers/places`), or both. The request is recorded on the order as `meta.address_change_request`.
+
+  Response: `{ "status": "ok", "address_change_request": { "status": "open", "message", "place", "address", "at" } }`. `place` and `address` are the suggested saved place's id and address, or null.
+
+  Errors: `401` without a customer token; `404` for an order not placed through this storefront (`Order not found.`) or an unknown `place` (`Place not found.`); `403` for another customer's order; `409` with `"reason": "chat_unavailable"` when the chat with the store can't be opened (the customer has no user account, or the order finished without one); `422` when the order is completed, canceled or expired, or is a pickup order (`The address of this order can no longer change.`), and when `message` is longer than 1000 characters.
+
+  In a contract run this addresses `{{address_change_order_id}}` when the environment sets one (an open delivery order of the run's customer). Otherwise it addresses an unknown order and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{address_change_order_id}}/address-change-request"
+method: POST
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "message": "The building number is wrong, it's 18 not 81.",
+      "place": "{{place_id}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Needs an open delivery order of the run's customer, which a contract run doesn't
+      // create (its one captured order is a pickup). Without one it addresses an order
+      // that doesn't exist and asserts the 404 refusal instead.
+      if (!pm.environment.get('address_change_order_id')) {
+          pm.variables.set('address_change_order_id', 'order_missing');
+          pm.variables.set('expected_status', 404);
+      }
+
+      // `place` is optional: send none rather than an unresolved "{{place_id}}".
+      if (!pm.environment.get('place_id')) {
+          pm.request.body.update(JSON.stringify({ message: "The building number is wrong, it's 18 not 81." }, null, 2));
+      }
+    language: text/javascript
+order: 2500

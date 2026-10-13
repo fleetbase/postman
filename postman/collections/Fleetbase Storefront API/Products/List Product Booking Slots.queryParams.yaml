@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: date
+    type: string
+    required: true
+    description: "The day to list, `YYYY-MM-DD`, in the store's time zone."

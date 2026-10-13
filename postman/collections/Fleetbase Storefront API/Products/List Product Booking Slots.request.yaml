@@ -1,0 +1,31 @@
+$kind: http-request
+description: |-
+  Returns the times a bookable service can be booked on a day. Slots are the service's hours for that weekday (else the store's first location's hours), cut into slots of the service's length, each with how many places are left. Times are in the store's time zone (else the company's, else the server's). Bookings of the service take `quantity` places in their slot; canceled, expired and failed orders give their places back.
+
+  Response: `{ date, service: { duration_minutes, capacity, deposit_percent, travel_fee, provider_tag }, slots: [{ start, end, time, past, available, remaining, providers, capacity }] }`. `start` and `end` are ISO 8601 with the store's offset and `time` is the store's local `HH:mm`. `past` is true once the slot has started; `available` is true when the slot is still ahead and has places left; `remaining` (also reported as `providers`) is the places left out of `capacity`. `duration_minutes` defaults to 60 and `capacity` to 1. `deposit_percent` and `travel_fee` are reported as configured on the service but are not charged at checkout.
+
+  Book a slot by adding the service to the cart with its `start` as the line's `scheduled_at`. If a slot the service's hours define fills up before checkout, initializing the checkout returns `422` with `"code": "booking_slot_unavailable"`.
+
+  Errors: `404` (`Bookable service not found.`) when the product isn't bookable or isn't in this store or network; `422` when `date` is missing or not `YYYY-MM-DD`.
+
+  In a contract run this addresses `{{service_product_id}}` when the environment sets one (a bookable service with hours). Otherwise it addresses the run's product, which isn't bookable, and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{service_product_id}}/slots"
+method: GET
+queryParams:
+  date: "{{slot_date}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The day to list: the environment's {{slot_date}}, else today (UTC).
+      if (!pm.environment.get('slot_date')) {
+          pm.variables.set('slot_date', new Date().toISOString().slice(0, 10));
+      }
+
+      // A contract run has no bookable service unless the environment names one; the
+      // run's own product is a plain item, so the request documents the 404 instead.
+      if (!pm.environment.get('service_product_id')) {
+          pm.variables.set('service_product_id', pm.environment.get('product_id') || 'product_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 3500

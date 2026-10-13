@@ -1,7 +1,7 @@
 $kind: object
 name: Notification
 description: |-
-  An inbox item. `type` identifies what the notification is about (for example `order_accepted`, `order_completed`, `promotional` or `campaign`), and `data` carries the identifiers the app needs to deep link. Recipient details are never included.
+  An inbox item. `type` identifies what the notification is about (for example `order_accepted`, `order_updated`, `order_completed`, `promotional` or `campaign`), and `data` carries the identifiers the app needs to deep link. Recipient details are never included.
 example: |
   {
     "id": "0f4c9a52-8d3f-4a6e-9f0e-2b1f7f2f8c11",
@@ -30,7 +30,7 @@ fields:
     description: "Notification title."
   - name: body
     type: string
-    description: "Notification message."
+    description: "Notification message. For `order_updated` (the store edited the order) it says what changed and what that means for the customer's money: refunded, returned as store credit with the code to use, or a balance to pay with its payment link. For `order_canceled` it gives the store's reason, when there is one, and whether the payment was refunded or returned as store credit."
   - name: image
     type: string
     description: "Optional image URL."

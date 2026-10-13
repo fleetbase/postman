@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Initializes a cash (cash-on-delivery) pickup checkout. A pickup checkout with the cash gateway needs no delivery service quote, so the `service_quote` parameter is omitted. The response returns the checkout id and token; no gateway client data is prepared for cash.
+
+  Like every checkout, it holds stock for products that track inventory and can be refused with `422` `cart_items_unavailable` or `booking_slot_unavailable` (see `Before`).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
 queryParams:

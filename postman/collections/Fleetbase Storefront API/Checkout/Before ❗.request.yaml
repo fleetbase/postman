@@ -2,6 +2,11 @@ $kind: http-request
 description: |-
   Initializes a checkout preview for a cart, customer, gateway, and delivery or pickup option. The response prepares gateway-specific client data or a checkout token before the order is captured.
 
+  Stock and booked slots are checked when the checkout is created (cash, Stripe and QPay alike, and again when `Update Stripe Payment Intent` creates or re-prices a checkout). For products that track inventory, each line's quantity is held at the line's store location or food truck for 15 minutes and taken when the order is captured; an abandoned checkout gives it back. A refusal deletes the checkout:
+
+  - `422` `{ "errors": ["Some items in your cart are no longer available."], "code": "cart_items_unavailable", "items": [{ "id", "product_id", "name", "available" }] }` when a tracked product doesn't have enough stock at the line's location. `id` is the cart line and `available` is what is left to sell there.
+  - `422` `{ "errors": ["The time you picked for <service> was just booked. Please pick another time."], "code": "booking_slot_unavailable" }` when a booked service's slot (see `List Product Booking Slots`) has no places left.
+
   Promotions are priced when the checkout is created: automatic promotions and any promo codes (from `promo_codes` or applied to the cart) are subtracted from the amount charged, and each use is reserved for the checkout. A code that cannot be applied refuses the checkout with `400`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
