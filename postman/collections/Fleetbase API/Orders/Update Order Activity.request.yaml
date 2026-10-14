@@ -17,11 +17,11 @@ body:
 scripts:
   - type: beforeRequest
     code: |-
-      // Nothing to apply once Get Order Next Activity found the flow exhausted: the body
-      // would not be JSON, and the API refuses a completed order with 400 "Order is
-      // already completed." Skipped, not failed — see Get Order Next Activity.
-      if (pm.environment.get('order_flow_exhausted') || !pm.environment.get('next_activity')) {
-          pm.execution.skipRequest();
+      // Once Get Order Next Activity found the flow exhausted, the order is complete and
+      // the API refuses further activity with 400 "Order is already completed." — the
+      // documented answer, so the surplus passes of the contract run's cycle assert it.
+      if (pm.environment.get('order_flow_exhausted')) {
+          pm.variables.set('expected_status', 400);
       }
     language: text/javascript
   - type: afterResponse

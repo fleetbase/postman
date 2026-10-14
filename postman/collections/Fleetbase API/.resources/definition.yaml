@@ -84,7 +84,16 @@ scripts:
       // started returning a document would still be caught.
       const contentType = pm.response.headers.get('Content-Type') || '';
       const isDocument  = /^(application\/pdf|image\/|application\/octet-stream|text\/csv)/i.test(contentType);
-      const expected    = pm.request.method === "POST" ? [200, 201, 202] : [200, 201, 202, 204];
+
+      // A request whose documented answer is not 2xx (Update Order Activity on an order
+      // whose flow is already complete must answer 400) opts out of the 2xx expectation
+      // by setting `expected_status` in its own beforeRequest script. The variable is
+      // consumed here, so it never leaks into the next request.
+      const expectedOverride = Number(pm.variables.get('expected_status')) || null;
+      pm.variables.unset('expected_status');
+      const expected = expectedOverride
+          ? [expectedOverride]
+          : (pm.request.method === "POST" ? [200, 201, 202] : [200, 201, 202, 204]);
 
       if (isDocument) {
           // Still asserted, not excused: a document response must carry actual bytes.
