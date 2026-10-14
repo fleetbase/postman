@@ -18,8 +18,18 @@ queryParams:
 scripts:
   - type: afterResponse
     code: |-
+      var json_response = pm.response.json();
+
       pm.test('Eligibility says whether the customer can review', function () {
-          pm.expect(pm.response.json().can_review).to.be.a('boolean');
+          pm.expect(json_response.can_review).to.be.a('boolean');
       });
+
+      // Create a review documents the refusal unless the environment says the customer
+      // has a completed order to review, which is exactly what this answer settles.
+      if (json_response.can_review === true) {
+          pm.environment.set('review_eligible', 'true');
+      } else {
+          pm.environment.unset('review_eligible');
+      }
     language: text/javascript
 order: 1500

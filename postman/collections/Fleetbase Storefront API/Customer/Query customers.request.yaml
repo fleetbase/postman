@@ -1,6 +1,9 @@
 $kind: http-request
 description: |-
-  Returns storefront customers for the current company. Use query and pagination parameters to find matching customer records.
+  Returns the customer signed in with the `Customer-Token` header. A storefront key alone is refused with `401`: it does not list the company's customers.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers"
 method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
 order: 6000

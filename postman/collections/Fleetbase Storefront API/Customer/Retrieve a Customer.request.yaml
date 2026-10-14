@@ -1,6 +1,9 @@
 $kind: http-request
 description: |-
-  Retrieves a storefront customer by ID.
+  Retrieves a storefront customer by ID. Only the customer signed in with the `Customer-Token` header can be retrieved; a storefront key alone is refused with `401`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/{{customer_id}}"
 method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
 order: 3500
