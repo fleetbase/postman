@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Creates a Stripe SetupIntent for a storefront customer. The response includes Stripe client data for saving a payment method.
+  Creates a Stripe SetupIntent for a storefront customer, for saving a payment method.
+
+  Response: `{ setupIntent, clientSecret, defaultPaymentMethod, customerId }`. `defaultPaymentMethod` is null or `{ paymentMethodId, id, brand, last4, label, exp_month, exp_year, country, funding }`. Errors: `400` when Stripe is not set up or not configured correctly.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-setup-intent"
 method: POST
 headers:

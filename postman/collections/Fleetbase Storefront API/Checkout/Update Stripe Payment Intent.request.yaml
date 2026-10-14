@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Recalculates and updates an existing Stripe PaymentIntent for the current cart and checkout options. The response includes refreshed Stripe client data and a new checkout token.
+  Recalculates and updates an existing Stripe PaymentIntent for the current cart and checkout options, and returns refreshed Stripe client data (plus `socket_token` when socket authentication is enabled).
+
+  If a checkout is already linked to the PaymentIntent, it is updated in place: the response keeps the same `checkout` and `token`, and its promotion reservations are released and reserved again. A new checkout is created only when none is linked. Cash on delivery is not supported here.
+
+  Errors: `422` when the PaymentIntent belongs to another customer's checkout, `400` when the PaymentIntent can no longer be updated (its status is not `requires_payment_method`, `requires_confirmation`, `requires_action` or `processing`) or a promo code cannot be applied.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/stripe-update-payment-intent"
 method: PUT
 headers:

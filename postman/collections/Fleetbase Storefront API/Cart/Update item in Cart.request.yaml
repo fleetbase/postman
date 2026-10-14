@@ -3,6 +3,8 @@ description: |-
   Updates a line item already in the cart. Send any of `quantity`, `variants`,
   `addons` or `scheduled_at`; omitted fields are left unchanged. The response
   returns the updated cart.
+
+  `{lineItemId}` can also be the product ID of a line. The line keeps the price of the catalog it was added from.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/{{line_item_id}}"
 method: PUT
 headers:

@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  Removes all line items from a cart. The response returns the emptied cart resource.
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}/empty"
+  Clears the cart. A cart with items is marked `cleared` (its items are kept as a record) and the response is the device's open cart, a different cart, or a new one for an anonymous cart. Continue with the returned `id`. An already empty cart is returned unchanged.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}/empty"
 method: PUT
-pathVariables:
-  id: ""
 order: 5000

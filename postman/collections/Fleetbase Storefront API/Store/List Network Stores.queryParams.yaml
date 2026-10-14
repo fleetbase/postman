@@ -26,13 +26,13 @@ fields:
     description: "Sort mode: highest_rated, lowest_rated, newest, oldest, popular, trending, or nearest."
   - name: "location[latitude]"
     type: number
-    description: "Customer latitude used by nearest sorting and distance filtering."
+    description: "Customer latitude used by nearest sorting and distance filtering. A missing or invalid location (or 0,0) is ignored, and then `nearest` and `maximum_distance` have no effect."
   - name: "location[longitude]"
     type: number
     description: "Customer longitude used by nearest sorting and distance filtering."
   - name: maximum_distance
     type: number
-    description: "Maximum distance from location in meters. Stores without a valid location are omitted."
+    description: "Maximum distance from location in meters. Applies only with a valid `location`; each store then also has `distance` (meters)."
   - name: limit
     type: integer
     description: "Maximum number of stores to return."

@@ -1,16 +1,6 @@
 $kind: params
 fields:
-  - name: name
+  - name: customer
     type: string
     required: true
-    description: "Display name for the resource."
-  - name: description
-    type: string
-    description: "Human-readable description of the resource."
-  - name: status
-    type: enum
-    values: ["active", "inactive"]
-    description: "Lifecycle status to apply to the resource."
-  - name: meta
-    type: string
-    description: "Arbitrary metadata stored with the resource."
+    description: "Customer public ID. Must match the authenticated customer when `Customer-Token` is sent, otherwise `403`."

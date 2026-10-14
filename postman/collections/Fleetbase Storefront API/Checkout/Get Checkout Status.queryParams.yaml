@@ -2,7 +2,13 @@ $kind: params
 fields:
   - name: checkout
     type: string
-    description: "Checkout value for this checkout request."
+    required: true
+    description: "Public checkout ID (`chkt_…`)."
   - name: token
     type: string
-    description: "Token used to authenticate or capture the checkout."
+    required: true
+    description: "The checkout's token. Both values must belong to the same checkout."
+  - name: verify
+    type: boolean
+    default: false
+    description: "QPay only. Ask QPay for the payment state when no payment is recorded yet. Limited to once every 5 seconds per checkout; calls within that window answer from the database."

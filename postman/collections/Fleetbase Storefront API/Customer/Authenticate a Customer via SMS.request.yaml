@@ -1,8 +1,8 @@
 $kind: http-request
 description: |-
-  Starts SMS authentication for an existing storefront customer. The customer receives a verification code that `Verify a SMS code` exchanges for an auth token. The code expires after ten minutes and can be used once.
+  Starts SMS authentication for an existing storefront customer. A verification code is sent by SMS; if the text could not be sent (the store has no SMS provider configured, or the SMS guard refused it) and the customer has an email address on file, it is emailed instead. Exchange the code at `Verify a SMS code` (`customers/verify-code`) for an auth token. The code expires after ten minutes and can be used once.
 
-  `method` in the response says which channel carried the code: `sms`, or `email` when the text could not be sent (the store has no SMS provider configured, or the SMS guard refused it) and the customer has an email address on file. With no email to fall back to, the guard's refusal is returned as `429` or `423`.
+  `phone` is in E.164 format, with or without the leading `+` (no spaces or dashes). Response: `{ "status": "OK", "method": "sms" }`, or `"method": "email"` when the code was emailed. Errors (`400`): no customer with this phone, or the code could not be sent. With no email to fall back to, the guard's refusal is returned as `429` or `423`.
 
   Endpoints that send a text are limited to five requests a minute per storefront key and client address, and every message passes the platform's SMS guard. A refused send returns `429` with a `Retry-After` header (a cooldown on that number, or the store's message budget) or `423` (text messages are paused for the store).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-sms"

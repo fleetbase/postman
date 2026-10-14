@@ -1,8 +1,20 @@
 $kind: params
 fields:
-  - name: content
+  - name: subject
     type: string
-    description: "Text content for the comment or message."
+    required: true
+    description: "Public identifier of the store or product being reviewed."
+  - name: order
+    type: string
+    description: "The completed order being reviewed. Optional; the most recent unreviewed completed order is used without it."
   - name: rating
     type: integer
-    description: "Rating value for this reviews request."
+    required: true
+    description: "Rating from 1 to 5."
+  - name: content
+    type: string
+    required: true
+    description: "Review text, up to 2000 characters."
+  - name: files
+    type: array of objects
+    description: "Up to 4 photos or videos, each `{ \"data\": base64, \"type\": \"image/jpeg\" }`."
