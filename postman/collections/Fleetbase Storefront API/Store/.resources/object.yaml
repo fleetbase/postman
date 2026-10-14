@@ -13,6 +13,8 @@ example: |
     "tags": ["grocery"],
     "currency": "USD",
     "country": "US",
+    "timezone": "America/New_York",
+    "utc_offset": -240,
     "options": {},
     "logo_url": "https://files.example.com/logo.png",
     "backdrop_url": null,
@@ -53,6 +55,12 @@ fields:
   - name: country
     type: string
     description: "Country code derived from the store currency."
+  - name: timezone
+    type: string
+    description: "The store's IANA timezone (its company's when the store has none set). Store hours, booking slots and booked times are wall-clock times in this zone."
+  - name: utc_offset
+    type: integer
+    description: "The store's current offset from UTC in minutes, east positive (`480` for UTC+08:00, `-240` for UTC-04:00). Read store hours and booked times on the store's clock with it (`store time = UTC + utc_offset`) rather than the device's timezone; it changes when the store's zone changes daylight saving time."
   - name: options
     type: object
     description: "Public store options, such as `pickup_enabled`, `cod_enabled`, `tips_enabled`, `multi_cart_enabled`, `reviews_enabled` and `map_marker` (how the store is shown on maps: `store`, `warehouse` or `factory` icon, or `logo`)."

@@ -39,7 +39,7 @@ fields:
     description: "Number of unique cart line items."
   - name: items
     type: array of objects
-    description: "Cart line items."
+    description: "Cart line items. Each item's `store` gives the store it is bought from: `id`, `name`, `logo_url`, `backdrop_url`, `online`, `currency`, and its clock, `timezone` and `utc_offset` (minutes east of UTC), to show a booked item's `scheduled_at` in the store's time."
   - name: events
     type: array of objects
     description: "Cart event history."

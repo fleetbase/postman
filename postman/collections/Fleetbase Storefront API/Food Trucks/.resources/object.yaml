@@ -10,7 +10,9 @@ example: |
       "name": "Acme Market",
       "logo_url": "https://files.example.com/logo.png",
       "currency": "USD",
-      "options": { "map_marker": "store", "reviews_enabled": true }
+      "options": { "map_marker": "store", "reviews_enabled": true },
+      "timezone": "Asia/Singapore",
+      "utc_offset": 480
     },
     "vehicle": { "id": "vehicle_6Tq1nP8", "plate_number": "GBB-1006", "online": true },
     "service_area": { "id": "service_area_2Kd8mQ4", "name": "Singapore Central" },
@@ -56,7 +58,7 @@ fields:
     description: "Public identifier of the food truck."
   - name: store
     type: object
-    description: "The store the truck sells for: `id`, `name`, `logo_url`, `currency` and `options` (including `map_marker` and `reviews_enabled`)."
+    description: "The store the truck sells for: `id`, `name`, `logo_url`, `currency`, `options` (including `map_marker` and `reviews_enabled`), and its clock, `timezone` and `utc_offset` (minutes east of UTC), to read the truck's hours on."
   - name: network
     type: object
     description: "For a truck the network runs itself, the network: `id`, `name`, `logo_url`. Returned by Query Food Trucks only."
