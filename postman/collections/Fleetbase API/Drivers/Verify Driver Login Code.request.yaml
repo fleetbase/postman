@@ -1,6 +1,9 @@
 $kind: http-request
 name: "Verify Driver Login Code"
-description: "Verifies driver login code and returns a driver token."
+description: |-
+  Verifies the driver login code and returns a driver token.
+
+  A code verifies once; each wrong guess counts against it and after five it locks, so a new code must be requested.
 url: "{{base_url}}/{{namespace}}/drivers/verify-code"
 method: POST
 body:

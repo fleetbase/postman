@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Starts storefront account closure for the authenticated customer. Fleetbase sends a verification code to the linked phone number or email address.
+  Starts storefront account closure for the authenticated customer. Fleetbase sends a verification code to the linked phone number, or to the linked email address when the text could not be sent (no SMS provider configured, or the SMS guard refused it). The code expires after ten minutes and can be used once.
+
+  Endpoints that send a text are limited to five requests a minute per storefront key and client address, and every message passes the platform's SMS guard. A refused send returns `429` with a `Retry-After` header (a cooldown on that number, or the store's message budget) or `423` (text messages are paused for the store).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/account-closure"
 method: POST
 headers:

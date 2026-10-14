@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Sends a verification code to a new phone number for the authenticated storefront customer. Fleetbase rejects numbers already assigned to another user. Response: `{ "status": "ok" }`. For an app store review account (listed in `STOREFRONT_REVIEW_ACCOUNTS`, with `STOREFRONT_BYPASS_VERIFICATION_CODE` set), no SMS is sent and the response is `{ "status": "ok", "method": "bypass" }`.
+  Sends a verification code to a new phone number for the authenticated storefront customer. Returns `422` when the number is invalid, cannot receive a text message, or is already assigned to another account. Response: `{ "status": "ok" }`. The code expires after ten minutes and can be used once. For an app store review account (listed in `STOREFRONT_REVIEW_ACCOUNTS`, with `STOREFRONT_BYPASS_VERIFICATION_CODE` set), no SMS is sent and the response is `{ "status": "ok", "method": "bypass" }`.
+
+  Endpoints that send a text are limited to five requests a minute per storefront key and client address, and every message passes the platform's SMS guard. A refused send returns `429` with a `Retry-After` header (a cooldown on that number, or the store's message budget) or `423` (text messages are paused for the store).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
 method: POST
 headers:

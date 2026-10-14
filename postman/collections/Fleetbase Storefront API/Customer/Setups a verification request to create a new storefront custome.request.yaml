@@ -1,7 +1,11 @@
 $kind: http-request
 name: Setups a verification request to create a new storefront customer. ?
 description: |-
-  Sends a verification code for storefront customer creation. The code is required when creating the customer account.
+  Sends a verification code to start a storefront customer sign-up. The code is required when creating the customer account; it expires after ten minutes and can be used once.
+
+  Returns `422` when an account already exists for the identity (send the customer to sign in instead), or when the phone number is invalid or cannot receive a text message. Asking again for the same identity within sixty seconds returns `{ "status": "ok" }` without sending a second message, so a retry button is safe to offer.
+
+  Endpoints that send a text are limited to five requests a minute per storefront key and client address, and every message passes the platform's SMS guard. A refused send returns `429` with a `Retry-After` header (a cooldown on that number, or the store's message budget) or `423` (text messages are paused for the store).
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-creation-code"
 method: POST
 headers:

@@ -1,6 +1,9 @@
 $kind: http-request
 name: "Request Driver Login SMS"
-description: "Starts driver SMS verification login."
+description: |-
+  Starts driver SMS verification login. The driver receives a verification code that `Verify Driver Login Code` exchanges for a driver token. The code expires after ten minutes and can be used once.
+
+  `method` in the response says which channel carried the code: `sms`, or `email` when the text could not be sent (no SMS provider configured, or the platform's SMS guard refused it) and the driver has an email address. With no email to fall back to, a guard refusal is returned as `429` with `Retry-After` (cooldown or budget) or `423` (text messages paused). Limited to five requests a minute per caller.
 url: "{{base_url}}/{{namespace}}/drivers/login-with-sms"
 method: POST
 body:

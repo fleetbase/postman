@@ -11,8 +11,8 @@ fields:
   - name: name
     type: string
     required: false
-    description: Customer display name. When supplied, the verification email greets the customer by name and the pending user record is seeded with this value (avoids a "Pending Customer" placeholder).
+    description: Customer display name. When supplied, the verification message greets the customer by name (otherwise it addresses the identity).
   - name: phone
     type: string
     required: false
-    description: Phone number (E.164 recommended). Pre-seeded on the pending user record alongside the email identity.
+    description: Phone number (E.164 recommended) to carry alongside an email identity. Nothing is stored until `Create a Customer` verifies the code.

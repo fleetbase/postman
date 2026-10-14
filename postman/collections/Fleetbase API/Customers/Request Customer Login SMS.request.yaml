@@ -1,6 +1,9 @@
 $kind: http-request
 name: "Request Customer Login SMS"
-description: "Starts SMS-based passwordless login by sending a verification code to the customer's phone. Falls back to email if SMS delivery fails and an email is on file."
+description: |-
+  Starts SMS-based passwordless login by sending a verification code to the customer's phone. The code expires after ten minutes and can be used once.
+
+  `method` in the response says which channel carried the code: `sms`, or `email` when the text could not be sent (no SMS provider configured, or the platform's SMS guard refused it) and an email is on file. With no email to fall back to, a guard refusal is returned as `429` with `Retry-After` (cooldown or budget) or `423` (text messages paused). Limited to five requests a minute per caller.
 url: "{{base_url}}/{{namespace}}/customers/login-with-sms"
 method: POST
 body:

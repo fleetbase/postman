@@ -3,4 +3,4 @@ fields:
   - name: phone
     type: string
     required: true
-    description: "Phone number to verify for the authenticated customer."
+    description: "Phone number to verify for the authenticated customer, in international format. Must be a valid mobile number that is not assigned to another account."
