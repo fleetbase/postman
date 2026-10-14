@@ -13,16 +13,6 @@ body:
   type: json
   content: ""
 scripts:
-  - type: beforeRequest
-    code: |-
-      // A contract run cycles this request with Update Order Activity more times than an
-      // order can need, since how many activities a flow takes is not known up front. Once
-      // the flow is exhausted there is nothing left to look up, so the surplus passes are
-      // skipped rather than sent: a skipped request is neither a pass nor a failure.
-      if (pm.environment.get('order_flow_exhausted')) {
-          pm.execution.skipRequest();
-      }
-    language: text/javascript
   - type: afterResponse
     code: |-
       // The response is the list of activities available from the order's current point in
@@ -34,10 +24,14 @@ scripts:
           pm.environment.set("next_activity", JSON.stringify(json_response[0]));
       } else {
           // An empty list means the order has reached the end of its flow: applying the
-          // last activity completed it. Update Order Activity would now answer 400
-          // "Order is already completed.", so the cycle stops here.
+          // last activity completed it. A contract run cycles this request with Update
+          // Order Activity more times than an order can need, since how many activities
+          // a flow takes is not known up front; from here on Update Order Activity
+          // expects the 400 "Order is already completed." refusal. (A skipped request —
+          // pm.execution.skipRequest — is counted as an error by the Postman CLI, so the
+          // surplus passes are sent and asserted rather than skipped.) The last activity
+          // is kept so the body stays valid JSON.
           pm.environment.set("order_flow_exhausted", "true");
-          pm.environment.unset("next_activity");
       }
     language: text/javascript
 examples: ./.resources/Get Order Next Activity.resources/examples
