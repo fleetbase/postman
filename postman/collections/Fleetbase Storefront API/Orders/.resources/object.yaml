@@ -6,23 +6,81 @@ example: |
   {
     "id": "order_9Kx2mQ1",
     "public_id": "order_9Kx2mQ1",
-    "status": "created",
+    "status": "preparing",
     "type": "storefront",
-    "payload": null,
+    "payload": {
+      "id": "payload_4Rt7nB2",
+      "entities": [
+        {
+          "id": "entity_6Lp2wQ9",
+          "name": "Cold Brew",
+          "meta": { "product_id": "product_9Lb2mQ1", "quantity": 2, "note": "No ice, please", "unavailable": false }
+        },
+        {
+          "id": "entity_3Hd8vK5",
+          "name": "Iced Latte",
+          "meta": { "product_id": "product_7Qa1zX4", "quantity": 1, "substitute_for": "entity_8Wn5cT1", "added_by_edit": true }
+        }
+      ]
+    },
     "customer": null,
     "meta": {
       "checkout_id": "checkout_123",
       "storefront": "Acme Market",
-      "total": 5150,
+      "total": 4600,
       "discount": 500,
       "promotions": [
         { "promotion": "promotion_7Hq2xL9", "name": "Welcome $5 off", "type": "fixed_amount", "code": "WELCOME5", "amount": 500, "delivery_amount": 0 }
       ],
-      "currency": "USD"
+      "currency": "USD",
+      "gateway": "stripe",
+      "payment": {
+        "state": "partially_refunded",
+        "gateway": "stripe",
+        "method_label": "Card (Stripe)",
+        "total": 4600,
+        "amount_paid": 5150,
+        "amount_refunded": 550,
+        "amount_credited": 0,
+        "balance_due": 0,
+        "cod_amount": 0,
+        "currency": "USD",
+        "payment_link": null,
+        "store_credit_code": null,
+        "supports_partial_refund": true,
+        "adjustments": [
+          { "type": "refund", "amount": 550, "gateway": "stripe", "reference": "re_example123", "reason": "Iced Mocha was unavailable", "at": "2026-10-13T09:40:00+00:00" }
+        ]
+      },
+      "address_change_request": {
+        "status": "open",
+        "message": "Please deliver to my office instead.",
+        "place": "place_2Vb6nM8",
+        "address": "1 Raffles Place, Singapore 048616",
+        "at": "2026-10-13T09:45:00+00:00"
+      }
+    },
+    "payment": {
+      "state": "partially_refunded",
+      "gateway": "stripe",
+      "method_label": "Card (Stripe)",
+      "total": 4600,
+      "amount_paid": 5150,
+      "amount_refunded": 550,
+      "amount_credited": 0,
+      "balance_due": 0,
+      "cod_amount": 0,
+      "currency": "USD",
+      "payment_link": null,
+      "store_credit_code": null,
+      "supports_partial_refund": true,
+      "adjustments": [
+        { "type": "refund", "amount": 550, "gateway": "stripe", "reference": "re_example123", "reason": "Iced Mocha was unavailable", "at": "2026-10-13T09:40:00+00:00" }
+      ]
     },
     "notes": null,
-    "created_at": "2026-05-07T09:30:00Z",
-    "updated_at": "2026-05-07T09:30:00Z"
+    "created_at": "2026-10-13T09:30:00Z",
+    "updated_at": "2026-10-13T09:45:00Z"
   }
 fields:
   - name: id
@@ -55,3 +113,24 @@ fields:
   - name: updated_at
     type: timestamp
     description: "Time the order was last updated."
+  - name: payment
+    type: object
+    description: "The order's payment, computed when the order is returned (customer order lists). Same shape as `meta.payment`."
+  - name: meta.payment
+    type: object
+    description: "The order's payment as one picture, stored on the order and kept current by the server at capture, cash collection, edits and cancellation, so it is present whichever resource returns the order. `{ state, gateway, method_label, total, amount_paid, amount_refunded, amount_credited, balance_due, cod_amount, currency, payment_link, store_credit_code, supports_partial_refund, adjustments }`. `state` is `paid`, `to_collect` (cash on delivery not collected yet), `unpaid`, `refunded`, `partially_refunded` or `balance_due`. `payment_link` is the link to pay a balance due (Stripe Payment Link or QPay invoice); `store_credit_code` is the single-use code issued when a difference was returned as store credit. `adjustments` lists each change after checkout: `{ type, amount, gateway, reference, reason, at }` (and `by` when made by a store user), where `type` is `refund`, `store_credit`, `charge` or `cod_update`. Amounts are in the currency's smallest unit. A cash-on-delivery order stays `to_collect` with `amount_paid` 0 until it is completed."
+  - name: meta.booking
+    type: object
+    description: "Booking orders only: the booked slot `{ start, end, duration_minutes }` (ISO 8601), alongside `is_booking` and `booking_at`."
+  - name: meta.cancel_reason
+    type: string
+    description: "Why the store canceled the order, when it gave a reason."
+  - name: meta.tip_amount
+    type: integer
+    description: "Tip for the store, in the currency's smallest unit (`meta.delivery_tip_amount` for the driver's tip)."
+  - name: meta.address_change_request
+    type: object
+    description: "Set by `Request Address Change`: `{ status, message, place, address, at }`. `status` is `open` until the store updates the address (`resolved`) or dismisses the request (`dismissed`), which also adds `closed_at`; `place` and `address` are the saved place the customer suggested, or null."
+  - name: payload.entities[].meta
+    type: object
+    description: "Per item, besides the cart line data (`product_id`, `quantity`, ...): `note` (the store's note on the item), `unavailable` (the store marked it unavailable; every other item is taken as packed and delivered), `substitute_for` (the entity id this item replaces) and `added_by_edit` (added when the store edited the order)."

@@ -1,4 +1,8 @@
 $kind: collection
 description: |-
   Comments attach discussion to Fleetbase resources or reply to existing comments. Use comment endpoints to create threaded context around orders, files, operational records, and other subject models.
+
+  Comments are `internal` (notes for the organization's own users) or `customer` (may be shown to customers and drivers). The public API only returns customer-visible comments.
+
+  New comments are broadcast as the realtime event `comment.created` on `company.{uuid}` and, for customer-visible comments, on the subject's channels (`{subject type}.{public_id}` and `{subject type}.{uuid}`, e.g. `order.order_7YqM3KpL2n`). Payload: `{ id, event, created_at, subject_id, data }`, where `data` is the comment and `subject_id` the subject's public ID. Requires Core API with fleetbase/core-api#306 (release v1.6.69).
 order: 4000

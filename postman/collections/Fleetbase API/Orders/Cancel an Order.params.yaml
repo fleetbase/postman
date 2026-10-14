@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: reason
+    type: string
+    description: "Why the order is canceled. Recorded as the canceled status details and sent with the canceled notifications. Trimmed to 1000 characters."

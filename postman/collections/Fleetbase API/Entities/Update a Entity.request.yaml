@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Updates an entity's descriptive fields, payload assignment, destination, dimensions, weight, pricing, or metadata.
+
+  When the entity belongs to an order's payload, the order's status decides whether its items can still change: once a driver has the order, or the order is finished, items are locked; once it is ready, items can only be removed. A locked change returns `422` `{ "error": "...", "locked": { "items": "<reason>" } }`, and an accepted change broadcasts `order.changed`. Requires Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
 url: "{{base_url}}/{{namespace}}/entities/:id"
 method: PUT
 headers:

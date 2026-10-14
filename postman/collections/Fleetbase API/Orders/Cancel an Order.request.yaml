@@ -1,10 +1,21 @@
 $kind: http-request
-description: Cancels an order without deleting the order resource.
+description: |-
+  Cancels an order without deleting the order resource.
+
+  An optional `reason` (body or query string) becomes the details of the canceled tracking status and is sent with the canceled notifications: the assigned driver's push carries it as `reason`, so the Navigator app can show why the order was canceled. A reason is trimmed to 1000 characters. The `reason` requires Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72); earlier versions ignore it.
 url: "{{base_url}}/{{namespace}}/orders/:id/cancel"
 method: DELETE
+headers:
+  Content-Type: application/json
 pathVariables:
   - key: id
     value: "{{order_id}}"
     description: (Required) The id of the `Order`.
+body:
+  type: json
+  content: |-
+    {
+        "reason": "The customer asked to cancel."
+    }
 examples: .resources/Cancel an Order.resources/examples
 order: 13000

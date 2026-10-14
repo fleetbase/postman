@@ -1,4 +1,15 @@
 $kind: collection
 description: |-
   Orders represent work to be planned, dispatched, tracked, and completed. Use order endpoints to create delivery or service jobs, assign resources, manage status, capture proof of delivery, and record activity.
+
+  ## Ad hoc orders
+
+  A driver assigned to an order, by dispatch or auto-assign, has the order; there is nothing for the driver to accept. Only ad hoc orders (`adhoc: true`) are offered to drivers: dispatching one notifies the drivers within `adhoc_distance`, and Fleet-Ops notifies them again every minute until a driver takes it. The first driver to take it does so with `Start an Order`, sending their driver id as `assign`.
+
+  ## Realtime events
+
+  Order changes are broadcast on the socket channels below. Every event has the envelope `{ id, api_version, event, created_at, data }`. These events require Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
+
+  - `order.changed`: the order's route, items, contact, schedule, notes or amounts were edited after it was placed (through `Update an Order`, `Update a Payload`, the entity endpoints, the console or Storefront). Channels: `order.{public_id}` and `order.{uuid}`, `driver.{public_id}` and `driver.{uuid}` of the assigned driver, `customer.{public_id}` and `company.{uuid}`. Data: `{ id, changes, summary, dropoff: { id, address, location }, cod_amount, total, currency, changed_by, changed_at }`; `changes` lists the parts that changed (`pickup`, `dropoff`, `return`, `waypoints`, `items`, `schedule`, `contact`, `notes`, `cod_amount`, ...) and `summary` is one readable line. When the change concerns the driver, the assigned driver also gets an `order_changed` push.
+  - `order.driver_unassigned`: a driver was taken off the order (unassigned or replaced). Channels: `driver.{public_id}` and `driver.{uuid}` of the previous driver, and `company.{uuid}`. Data: `{ id, driver }`. The previous driver also gets an `order_unassigned` push.
 order: 8000

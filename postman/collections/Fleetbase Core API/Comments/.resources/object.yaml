@@ -7,7 +7,8 @@ example: |
     "id": "comment_8JVZr4q",
     "content": "Please confirm the delivery window.",
     "tags": [],
-    "meta": {},
+    "meta": { "visibility": "customer" },
+    "visibility": "customer",
     "author": {
       "id": "user_8xP2L1d",
       "name": "Alex Rivera"
@@ -31,12 +32,16 @@ fields:
   - name: meta
     type: object
     description: "Arbitrary metadata stored with the comment."
+  - name: visibility
+    type: enum
+    values: ["internal", "customer"]
+    description: "Who may see the comment, from `meta.visibility`: `internal` comments are notes for the organization's own users and never appear on the public API, `customer` comments may be shown to customers and drivers. A comment without a visibility is `customer`. Requires Core API with fleetbase/core-api#306 (release v1.6.69)."
   - name: author
     type: object
     description: "User that authored the comment."
   - name: replies
     type: array of objects
-    description: "Nested replies to the comment."
+    description: "Nested replies to the comment. On the public API, internal replies are left out."
   - name: editable
     type: boolean
     description: "Whether the current session user can edit the comment."

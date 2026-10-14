@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Creates an entity such as a parcel, package, or item. Attach it to a payload and optionally set a destination or waypoint within that payload route.
+
+  When the entity belongs to an order's payload, the order's status decides whether its items can still change: once a driver has the order, or the order is finished, items are locked; once it is ready, items can only be removed. A locked change returns `422` `{ "error": "...", "locked": { "items": "<reason>" } }`, and an accepted change broadcasts `order.changed`. Requires Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
 url: "{{base_url}}/{{namespace}}/entities"
 method: POST
 headers:

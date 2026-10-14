@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Creates a comment on a subject resource or as a reply to an existing comment. Provide either a subject reference or a parent comment ID with the comment content.
+
+  Set `visibility` to `internal` for a note only the organization's users should see, or `customer` for one customers and drivers may see (see the Comment object for the default). Internal comments are not returned by `Query Comments` or `Retrieve Comment`. Every new comment broadcasts the realtime event `comment.created` (see the Comments folder). Requires Core API with fleetbase/core-api#306 (release v1.6.69).
 url: "{{base_url}}/{{namespace}}/comments"
 method: POST
 body:

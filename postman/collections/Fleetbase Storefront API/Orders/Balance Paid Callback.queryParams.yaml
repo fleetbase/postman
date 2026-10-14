@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: order
+    type: string
+    description: "Public ID of the order whose balance invoice was paid. QPay may also POST it in the body; either works."

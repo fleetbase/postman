@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Sends a message to a chat channel as an existing chat participant. File IDs can be included to attach previously uploaded files to the message.
+
+  The response is the chat message, with `sender` (the participant, including its `role`), `system` and `meta` (see the Chat Channel object).
 url: "{{base_url}}/{{namespace}}/chat-channels/:id/send-message"
 method: POST
 pathVariables:

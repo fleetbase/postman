@@ -17,6 +17,17 @@ example: |
     "is_service": false,
     "is_bookable": false,
     "is_available": true,
+    "track_inventory": true,
+    "inventory": {
+      "tracked": true,
+      "in_stock": true,
+      "available_total": 3,
+      "low": true,
+      "locations": [
+        { "id": "inventory_4Kd9wP2", "location": "store_location_7Nx2bQ5", "location_type": "store_location", "quantity": 5, "reserved": 2, "available": 3, "low_stock_threshold": 5, "allow_backorder": false, "low": true }
+      ]
+    },
+    "in_stock": true,
     "tags": ["coffee"],
     "status": "published",
     "meta": {},
@@ -71,6 +82,15 @@ fields:
   - name: is_available
     type: boolean
     description: "Whether the product is available for purchase."
+  - name: track_inventory
+    type: boolean
+    description: "Whether the store tracks stock for this product. Off by default; products that don't track stock are never limited by it."
+  - name: inventory
+    type: object
+    description: "Stock as clients show it: `{ tracked, in_stock, available_total, low, locations }`. Untracked products return `{ \"tracked\": false, \"in_stock\": true, \"available_total\": null, \"low\": false, \"locations\": [] }`. Each location is `{ id, location, location_type, quantity, reserved, available, low_stock_threshold, allow_backorder, low }`: `location` is the store location or food truck public ID and `location_type` is `store_location` or `food_truck`; `quantity` is on hand, `reserved` is held by checkouts in progress (for 15 minutes), `available` is what can still be sold, and `low` is true while some stock is available but no more than `low_stock_threshold`. `in_stock` is true when any location has stock available or allows backorders."
+  - name: in_stock
+    type: boolean
+    description: "Whether the product can be sold now: false when `is_available` is false, or when it tracks stock and no location has any available (or allows backorders). Use it for out of stock labels; `inventory.available_total` for \"only N left\"."
   - name: tags
     type: array of strings
     description: "Product tags."

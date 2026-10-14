@@ -25,3 +25,7 @@ fields:
   - name: parent
     type: string
     description: "Public ID of the parent comment when creating a reply."
+  - name: visibility
+    type: enum
+    values: ["internal", "customer"]
+    description: "Who may see the comment; any other value returns `422`. Stored as `meta.visibility`. When omitted, a reply takes its parent's visibility, a comment on an order created through this API is `customer` (and `internal` when written from the console), and a comment on any other subject has none, which counts as `customer`. Requires Core API with fleetbase/core-api#306 (release v1.6.69)."

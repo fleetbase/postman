@@ -17,7 +17,15 @@ fields:
     description: Replacement waypoint list. When sent empty with route endpoint fields, existing waypoints are removed.
   - name: entities
     type: array of objects
-    description: Replacement entities for the order payload.
+    description: Entities for the order payload. Appended to the payload's entities, or with `entities_mode` `replace`, the payload's full list.
+  - name: entities_mode
+    type: enum
+    values: ["append", "replace"]
+    default: append
+    description: "`replace` (or `sync`) makes `entities` the payload's full list: entries with the `id` of one of the payload's entities update it, entries without one are created, and entities left out are deleted. Also read from `payload.entities_mode`."
+  - name: cod_amount
+    type: number
+    description: "Cash to collect on delivery, also accepted as `payload.cod_amount`. `0` clears it; a value that isn't numeric is ignored."
   - name: service_quote
     type: string
     description: Service quote ID to purchase and attach to the order.

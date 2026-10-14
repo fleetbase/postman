@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: message
+    type: string
+    description: "What is wrong with the address, up to 1000 characters."
+  - name: place
+    type: string
+    description: "Public ID of one of the customer's saved places to suggest as the new drop-off. An unknown place, or one that isn't the customer's, returns `404`."

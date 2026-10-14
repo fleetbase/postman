@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
   Updates a payload's route endpoints, waypoints, entities, cash-on-delivery settings, or metadata. The response returns the updated payload with route and entity data.
+
+  Entities are appended by default; with `entities_mode` `replace` the list sent becomes the payload's full list (entries with the `id` of one of its entities update it, entries without one are created, and entities left out are deleted). A `cod_amount` of `0` is kept, clearing the cash to collect; other empty values are ignored as before.
+
+  When the payload belongs to an order, the order's status decides what can still change, as for `Update an Order`: a locked change returns `422` `{ "error": "...", "locked": { "<field>": "<reason>" } }` and nothing is written, and an accepted change broadcasts `order.changed`. Requires Fleet-Ops with fleetbase/fleetops#394 (release v0.6.72).
 url: "{{base_url}}/{{namespace}}/payloads/:id"
 method: PUT
 pathVariables:

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Returns comments for the current organization. Use query parameters to filter, sort, and paginate the result set.
+  Returns comments for the current organization. Use query parameters to filter, sort, and paginate the result set. Internal comments (`visibility` `internal`) and internal replies are left out. Requires Core API with fleetbase/core-api#306 (release v1.6.69).
 url: "{{base_url}}/{{namespace}}/comments"
 method: GET
 queryParams:
