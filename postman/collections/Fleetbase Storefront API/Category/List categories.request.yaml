@@ -1,12 +1,10 @@
 $kind: http-request
 description: |-
   Returns product categories for a store key, network categories for a network key, or product categories for a selected network member store. Category and product expansion remains scoped to the authenticated storefront owner.
+
+  `parent`, `parents_only`, `with_products` and `with_stores` take effect whenever they're present, whatever their value; leave them out to turn them off.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/categories"
 method: GET
 queryParams:
   store: ""
-  parent: ""
-  parents_only: ""
-  with_products: ""
-  with_stores: ""
 order: 1000

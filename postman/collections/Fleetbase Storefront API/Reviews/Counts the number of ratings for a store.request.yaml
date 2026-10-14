@@ -1,5 +1,8 @@
 $kind: http-request
-description: Counts the number of ratings for a store
+description: |-
+  Counts the store's reviews by rating, as `{ "1": n, "2": n, "3": n, "4": n, "5": n }`. Only reviews of the store itself are counted. With a network key, pass `store`; without it the response is `[]`. When reviews are turned off, every count is 0.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/count"
 method: GET
+queryParams:
+  store: ""
 order: 3000

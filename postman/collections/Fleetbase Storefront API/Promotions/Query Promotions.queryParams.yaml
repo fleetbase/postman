@@ -3,3 +3,6 @@ fields:
   - name: store
     type: string
     description: "Network member store public ID, to only list that store's promotions. Ignored for store keys."
+  - name: include
+    type: string
+    description: "`scheduled` to also list active promotions that are outside their dates or weekly schedule right now (`availability: scheduled`), e.g. for an \"upcoming offers\" list."

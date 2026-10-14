@@ -1,0 +1,13 @@
+$kind: http-request
+description: |-
+  For a Network order placed across several stores (a master order), returns each store's part of the order: its status, items and amounts. Returns `{ "stores": [] }` for an order from a single store. Requires the `Customer-Token` of the customer who placed the order.
+
+  Response: `{ stores: [{ order, status, label, store: { id, name, logo_url, phone, address }, items: [{ id, name, quantity, subtotal, variants, addons, image_url }], subtotal, discount, tip, currency }] }`. `label` is the store order's current activity step. Amounts are in the currency's smallest unit.
+
+  Errors: `400` when the customer isn't authenticated, `404` for an unknown order, `403` for another customer's order.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{order_id}}/stores"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+order: 4000

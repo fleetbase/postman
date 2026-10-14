@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Verifies a storefront SMS or creation code. The response includes the customer profile and auth token when verification succeeds.
+  Verifies a code sent by SMS or email (sign-in or account creation). The response includes the customer profile and auth token when verification succeeds.
+
+  App store review accounts: when the server sets `STOREFRONT_BYPASS_VERIFICATION_CODE` and lists the identity in `STOREFRONT_REVIEW_ACCOUNTS`, that fixed code is accepted for those identities only, without sending a message.
+
+  Errors (`400`): no customer for the identity, or an invalid code.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/verify-code"
 method: POST
 headers:

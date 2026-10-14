@@ -1,4 +1,6 @@
 $kind: collection
 description: |-
+  With a network key, only active member stores are visible: suspended and pending (not yet approved) members are hidden from every storefront endpoint, and their products can't be quoted or checked out.
+
   Store endpoints describe the active storefront or network being browsed. Use them to retrieve store profile data, locations, payment gateways, tags, search results, and network store listings.
 order: 5000

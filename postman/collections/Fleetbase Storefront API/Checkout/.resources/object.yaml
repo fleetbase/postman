@@ -1,19 +1,30 @@
 $kind: object
 name: Checkout
 description: |-
-  A checkout token represents a prepared storefront checkout session for a cart, customer, gateway, and delivery or pickup option.
+  A checkout represents a prepared storefront checkout session for a cart, customer, gateway, and delivery or pickup option. The fields returned depend on the gateway.
+
+  Realtime updates are published on the channel `checkout.{checkout}` as `{ checkout, status, order, payment, error }`, where `status` is `pending`, `paid`, `completed` or `failed`. With socket authentication enabled, subscribe using `socket_token` (guests) or a customer socket token from `POST customers/socket-token`.
 example: |
   {
+    "checkout": "chkt_8Ty2nQ4",
     "token": "checkout-token",
     "paymentIntent": "pi_123",
     "clientSecret": "pi_123_secret_456",
     "ephemeralKey": "ek_test_123",
-    "customerId": "cus_123"
+    "customerId": "cus_123",
+    "socket_token": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "expires_in": 900,
+      "expires_at": "2026-10-12T10:15:00+00:00"
+    }
   }
 fields:
+  - name: checkout
+    type: string
+    description: "Public checkout ID (`chkt_…`). Use it with `checkouts/status` and the realtime channel `checkout.{checkout}`."
   - name: token
     type: string
-    description: "Checkout token used to capture the order."
+    description: "Checkout token used to capture the order and check its status."
   - name: paymentIntent
     type: string
     description: "Stripe PaymentIntent ID when using Stripe checkout."
@@ -28,7 +39,7 @@ fields:
     description: "Gateway customer ID."
   - name: invoice
     type: object
-    description: "QPay invoice payload when using QPay checkout."
-  - name: checkout
-    type: string
-    description: "Public checkout ID returned by QPay checkout initialization."
+    description: "QPay invoice payload (bank app links, QR) when using QPay checkout."
+  - name: socket_token
+    type: object
+    description: "Present when realtime socket authentication is enabled: `{ token, expires_in, expires_at }`, a short-lived token allowed to subscribe to `checkout.{checkout}`. Logged-in customers can use their own socket token instead."

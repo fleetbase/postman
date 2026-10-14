@@ -1,4 +1,6 @@
 $kind: collection
 description: |-
-  Food trucks expose mobile storefront availability backed by FleetOps vehicles, zones, and service areas. Use food truck endpoints to discover mobile vendors and their current operating state.
+  Food trucks expose mobile storefront availability backed by FleetOps vehicles, zones, and service areas. Use food truck endpoints to discover mobile vendors, where they are, whether they're online, and the catalogs (menus) they sell from.
+
+  A store key returns that store's trucks. A network key returns the trucks of the network's active member stores and the trucks the network runs itself.
 order: 5500

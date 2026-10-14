@@ -1,20 +1,24 @@
 $kind: object
 name: Promotion
 description: |-
-  A live, public promotion of the store (or, with a network key, of the network or one of its member stores). Money values are integers in the currency's minor unit, like cart subtotals. Promo codes are never included.
+  A live, public promotion of the store (or, with a network key, of the network or one of its member stores). Money values are integers in the currency's minor unit, like cart subtotals. `code` is a code customers can share (never a single-use or customer-specific one); `availability` and `next_starts_at` say whether it applies right now.
 example: |
   {
     "id": "promotion_7Hq2xL9",
     "name": "Weekday lunch 20% off",
     "description": "20% off mains, weekdays 11:00-14:00.",
     "trigger": "automatic",
+    "code": null,
+    "availability": "scheduled",
+    "next_starts_at": "2026-10-08T15:00:00Z",
+    "owner": { "type": "store", "id": "store_3Xb9kL2", "name": "Corner Bistro", "logo_url": "https://files.example.com/bistro.png" },
     "type": "percentage",
     "value": 20,
     "max_discount_amount": 1000,
     "currency": "USD",
     "min_subtotal": 1500,
     "min_items": null,
-    "applies_to": { "categories": ["category_uuid"] },
+    "applies_to": { "categories": ["category_8Lq2nT4"] },
     "bogo_config": null,
     "first_order_only": false,
     "usage_limit_per_customer": 1,
@@ -42,6 +46,19 @@ fields:
     type: enum
     values: ["automatic", "code"]
     description: "`automatic` promotions apply to every eligible cart; `code` promotions need a promo code."
+  - name: code
+    type: string
+    description: "For `code` promotions, an active promo code customers can share and enter in the cart. Null for automatic promotions and when only single-use or customer-specific codes exist."
+  - name: availability
+    type: enum
+    values: ["live", "scheduled", "ended", "inactive"]
+    description: "`live` applies now; `scheduled` is active but outside its dates or weekly schedule; `ended` is past `ends_at` or ended. Paused promotions are not returned by the public API, so `inactive` doesn't appear here."
+  - name: next_starts_at
+    type: timestamp
+    description: "For `scheduled` promotions, when it next starts applying (looking up to a week ahead). Null otherwise."
+  - name: owner
+    type: object
+    description: "Who runs it: `type` (`store` or `network`), `id`, `name` and `logo_url`."
   - name: type
     type: enum
     values: ["percentage", "fixed_amount", "free_delivery", "bogo"]
@@ -63,7 +80,7 @@ fields:
     description: "Minimum number of targeted items."
   - name: applies_to
     type: object
-    description: "Targeting: `products`, `categories`, `stores`, `exclude_products` and `exclude_categories` identifier lists. Empty means the whole cart (of the owning store, for store promotions)."
+    description: "Targeting: `products`, `categories`, `stores`, `exclude_products` and `exclude_categories` lists of public IDs. Empty means the whole cart (of the owning store, for store promotions)."
   - name: bogo_config
     type: object
     description: "For `bogo`: `buy_quantity`, `get_quantity` and `discount_percent` (100 means free). The cheapest units of each group are discounted."

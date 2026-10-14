@@ -14,4 +14,7 @@ fields:
     description: "Scheduled fulfillment time for the line item."
   - name: store_location
     type: string
-    description: "Public ID of a location belonging to the product's store. Network carts reject cross-store location substitution."
+    description: "Public ID of a location belonging to the product's store, or a food truck ID (`food_truck_…`) to order from that truck, which also sets the line's location. A location from another store returns `400`. Network carts reject cross-store location substitution."
+  - name: catalog
+    type: string
+    description: "Catalog public ID the product is ordered from (for example a food truck's menu). The catalog's price and availability apply; a product that's unavailable in the catalog returns `400`."

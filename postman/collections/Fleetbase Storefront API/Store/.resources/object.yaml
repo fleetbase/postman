@@ -55,7 +55,7 @@ fields:
     description: "Country code derived from the store currency."
   - name: options
     type: object
-    description: "Public store option values."
+    description: "Public store options, such as `pickup_enabled`, `cod_enabled`, `tips_enabled`, `multi_cart_enabled`, `reviews_enabled` and `map_marker` (how the store is shown on maps: `store`, `warehouse` or `factory` icon, or `logo`)."
   - name: logo_url
     type: string
     description: "Store logo URL."

@@ -1,0 +1,13 @@
+$kind: http-request
+description: |-
+  Returns the steps of an order's activity flow for a progress view: the steps already reached (with when), the current step, and the steps still to come. Requires the `Customer-Token` of the customer who placed the order.
+
+  Response: `{ order, order_config, status, canceled, completed, steps: [{ code, label, details, state, reached_at, complete }] }`. `state` is `done`, `current` or `upcoming`; once the order is completed, the current step is `done`. `order_config` (`{ id, key, name }`) and `status` can be null.
+
+  Errors: `400` when the customer isn't authenticated, `404` for an unknown order, `403` for another customer's order.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{order_id}}/activity-flow"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+order: 3000

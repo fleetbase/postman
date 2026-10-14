@@ -2,10 +2,12 @@ $kind: params
 fields:
   - name: checkout
     type: string
-    description: "Checkout value for this checkout request."
+    required: true
+    description: "Public checkout ID (`chkt_…`) the invoice was created for."
   - name: respond
     type: boolean
-    description: "Respond value for this checkout request."
+    description: "Return `{ checkout, payment, error }` as JSON instead of QPay's plain-text `SUCCESS`."
   - name: test
-    type: string
-    description: "Test value for this checkout request."
+    type: enum
+    values: ["success", "error"]
+    description: "Sandbox only. Simulate a paid (`success`) or unpaid (`error`) callback."

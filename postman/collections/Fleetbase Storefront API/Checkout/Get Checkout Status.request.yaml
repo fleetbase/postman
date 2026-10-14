@@ -1,9 +1,14 @@
 $kind: http-request
 description: |-
-  Returns the status of a checkout by checkout ID or token.
+  Returns the status of a checkout. The answer comes from the database: the payment is recorded the moment QPay's callback (or a `verify` check) confirms it.
+
+  Response: `{ status, checkout, payment, order }`. `status` is `completed` once an order exists, `paid` for a QPay payment that is recorded but has no order yet, and `pending` otherwise. `order` is the order, or null. `payment` is null, or for QPay the recorded payment `{ payment_id, payment_status, payment_amount, payment_currency, payment_date, payment_wallet, recorded_at }`. A payment counts only when QPay reports it `PAID` for at least the invoiced amount. If a recorded payment still has no order after 15 seconds, this call creates the order.
+
+  Errors: `400` without `checkout` and `token`, `404` when they don't match a checkout.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/status"
 method: GET
 queryParams:
   checkout: "{{checkout_id}}"
   token: "{{checkout_token}}"
+  verify: "false"
 order: 5000

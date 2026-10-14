@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Sends a verification code to a new phone number for the authenticated storefront customer. Fleetbase rejects numbers already assigned to another user.
+  Sends a verification code to a new phone number for the authenticated storefront customer. Fleetbase rejects numbers already assigned to another user. Response: `{ "status": "ok" }`. For an app store review account (listed in `STOREFRONT_REVIEW_ACCOUNTS`, with `STOREFRONT_BYPASS_VERIFICATION_CODE` set), no SMS is sent and the response is `{ "status": "ok", "method": "bypass" }`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/request-phone-verification"
 method: POST
 headers:

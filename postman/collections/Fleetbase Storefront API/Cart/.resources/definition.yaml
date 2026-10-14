@@ -1,4 +1,6 @@
 $kind: collection
 description: |-
   Carts hold the products a storefront customer intends to purchase. Use cart endpoints to create or retrieve a cart, add or update line items, apply or preview promo codes and promotions, empty the cart, and prepare it for checkout.
+
+  A cart is `open` while it's being shopped, `checked_out` once an order was placed from it, and `cleared` when the customer emptied it. Closed carts keep their items as a record, and every cart endpoint only works on open carts: an ID of a checked-out or cleared cart resolves to the device's open cart (a different ID), or a new one. Always continue with the `id` the response returns.
 order: 1000

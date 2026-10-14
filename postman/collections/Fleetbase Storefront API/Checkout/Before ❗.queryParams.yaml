@@ -2,28 +2,36 @@ $kind: params
 fields:
   - name: gateway
     type: string
-    description: "Payment gateway ID or code."
+    required: true
+    description: "Code of a payment gateway configured for the store or network (for example `stripe` or `qpay`), or `cash` for cash on delivery. Gateway IDs are not accepted."
   - name: customer
     type: string
-    description: "Customer public ID for guest checkout. When Customer-Token is present this value must identify the authenticated customer or checkout returns 403."
+    required: true
+    description: "Customer public ID. When `Customer-Token` is sent, it must identify the authenticated customer, otherwise the checkout is refused with `403`."
   - name: cart
     type: string
-    description: "Cart public ID or unique identifier. Network checkout validates member stores, online state, products, locations, currency consistency, and the network multi-cart policy before payment initialization."
+    required: true
+    description: "Cart public ID (`cart_…`). Only open carts are used: an ID of a cart that was already checked out or cleared resolves to the device's open cart. Network checkout validates member stores, online state, products, locations, currency consistency and the network multi-cart policy before payment initialization."
   - name: service_quote
     type: string
-    description: "Service quote ID used by the request."
-  - name: cash
-    type: boolean
-    description: "Cash value for this checkout request."
+    description: "Delivery service quote public ID. Required unless `pickup` is true. `serviceQuote` is an accepted alias."
   - name: pickup
     type: boolean
-    description: "Pickup address, place ID, or pickup payload for the order."
+    default: false
+    description: "Set to true for a pickup order. A pickup checkout needs no service quote and ignores `delivery_tip`."
+  - name: cash
+    type: boolean
+    default: false
+    description: "Set to true to pay cash on delivery. Same as `gateway=cash`."
   - name: tip
-    type: number
-    description: "Tip amount applied to the checkout."
+    type: string
+    description: "Store tip, as an amount in the currency's smallest unit or a percentage string such as `10%`."
   - name: delivery_tip
-    type: number
-    description: "Tip amount allocated to delivery."
+    type: string
+    description: "Driver tip, as an amount or a percentage string such as `10%`. Ignored for pickup. `deliveryTip` is an accepted alias."
   - name: promo_codes
     type: array of strings
-    description: "Promo codes to apply, as an array or a comma separated string. `promo_code` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."
+    description: "Promo codes to apply, as an array or a comma separated string. `promo_code`, `promoCode` and `discount_code` are accepted for a single code. Codes already applied to the cart are always included. The checkout is refused with `400` and `promotions.rejected[]` (`{ code, reason }`) when a code cannot be applied; the discount of the storefront's automatic promotions is applied without a code."
+  - name: ebarimt_registration_no
+    type: string
+    description: "QPay only. Company registration number for the e-barimt receipt. It is saved on the customer and sent as the receipt's receiver."
