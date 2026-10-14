@@ -16,6 +16,19 @@ body:
   content: |-
     {
       "mode": "email",
-      "identity": "{{customer_identity}}"
+      "identity": "{{creation_code_identity}}"
     }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The identity must not have an account yet. A contract run supplies one in
+      // creation_code_identity. Create a Customer's {{new_customer_identity}} will not do:
+      // the newest live code for an identity is the one that counts, and the code seeded
+      // for that identity has to stay the newest. Without one, the request is sent for the
+      // signed-in customer's own identity and documents the refusal instead.
+      if (!pm.environment.get('creation_code_identity')) {
+          pm.variables.set('creation_code_identity', pm.environment.get('customer_identity'));
+          pm.variables.set('expected_status', 422);
+      }
+    language: text/javascript
 order: 4000

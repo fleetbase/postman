@@ -15,6 +15,15 @@ body:
         "skip_dispatch": false
     }
 scripts:
+  - type: beforeRequest
+    code: |-
+      // Nothing to apply once Get Order Next Activity found the flow exhausted: the body
+      // would not be JSON, and the API refuses a completed order with 400 "Order is
+      // already completed." Skipped, not failed — see Get Order Next Activity.
+      if (pm.environment.get('order_flow_exhausted') || !pm.environment.get('next_activity')) {
+          pm.execution.skipRequest();
+      }
+    language: text/javascript
   - type: afterResponse
     code: |-
       // Applying an activity that completes the current stop advances the order to the

@@ -36,21 +36,22 @@ scripts:
       let cv = pm.environment;
       cv.set("order_id", json_response.id);
 
-      if (Array.isArray(json_response.payload.waypoints)) {
-          const randomWaypoint = getRandomElement(json_response.payload.waypoints);
-
-          if (randomWaypoint) {
-              cv.set('waypoint_id', randomWaypoint.id);
-          }
+      // Set Order Destination points the order at {{waypoint_id}}, and the activity cycle
+      // (Get Order Next Activity / Update Order Activity) then walks forward from there.
+      // It has to be the FIRST stop: a later one leaves every stop before it untouched,
+      // and Complete an Order refuses the order with "Not all waypoints completed". A
+      // random pick here passed or failed by luck.
+      if (Array.isArray(json_response.payload.waypoints) && json_response.payload.waypoints.length) {
+          const firstWaypoint = json_response.payload.waypoints
+              .slice()
+              .sort((a, b) => (a.order || 0) - (b.order || 0))[0];
+          cv.set('waypoint_id', firstWaypoint.id);
       }
 
-      function getRandomElement(arr) {
-          if (arr.length === 0) {
-              return undefined; // Return undefined if the array is empty
-          }
-          const randomIndex = Math.floor(Math.random() * arr.length);
-          return arr[randomIndex];
-      }
+      // A new order starts a new activity cycle, so forget that an earlier order's flow
+      // ran out.
+      cv.unset('order_flow_exhausted');
+      cv.unset('next_activity');
     language: text/javascript
 examples: ./.resources/Create an Order.resources/examples
 order: 1000
