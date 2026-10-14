@@ -8,6 +8,10 @@ description: |-
   - `422` `{ "errors": ["The time you picked for <service> was just booked. Please pick another time."], "code": "booking_slot_unavailable" }` when a booked service's slot (see `List Product Booking Slots`) has no places left.
 
   Promotions are priced when the checkout is created: automatic promotions and any promo codes (from `promo_codes` or applied to the cart) are subtracted from the amount charged, and each use is reserved for the checkout. A code that cannot be applied refuses the checkout with `400`.
+
+  The response depends on the gateway: cash returns `{ checkout, token }`, Stripe returns `{ paymentIntent, clientSecret, ephemeralKey, customerId, checkout, token }`, and QPay returns `{ invoice, checkout, token }`. When realtime socket authentication is enabled, every response also carries `socket_token`: a token scoped to the realtime channel `checkout.{checkout}`, which a guest uses to receive payment and order updates (see the Checkout object).
+
+  Errors: `403` when `customer` does not match the authenticated customer; `400` when no gateway is configured or a promo code cannot be applied; for Network carts, `422`/`403` when the cart is empty, has a store outside the network or offline, mixes stores without multi-store carts, has an unavailable product or location, or mixes currencies.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/before"
 method: GET
 queryParams:

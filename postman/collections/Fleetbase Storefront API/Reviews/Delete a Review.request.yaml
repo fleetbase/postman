@@ -1,5 +1,9 @@
 $kind: http-request
-description: Delete a Review
+description: |-
+  Deletes one of the authenticated customer's own reviews. Deleting another customer's review is refused with `403`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/reviews/{{review_id}}"
 method: DELETE
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
 order: 5000

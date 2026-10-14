@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Processes a QPay checkout callback. Fleetbase verifies the checkout and gateway, checks the QPay invoice payment state, and creates the order when payment is confirmed.
+  The callback QPay calls when an invoice is paid; it is public and needs no storefront key. Fleetbase looks up the checkout, asks QPay for the invoice's payments, and creates the order only when a payment is `PAID` for at least the invoiced amount (`NEW`, `FAILED`, `PARTIAL` and `REFUNDED` create nothing). The payment is recorded on the checkout and published to the realtime channel `checkout.{checkout}`, first as `paid`, then as `completed` with the order.
+
+  Response: without `respond`, always HTTP `200` with the plain-text body `SUCCESS`, as QPay requires, even when something failed. With `respond=1`: JSON `{ checkout, payment, error }`, where `error` is `CHECKOUT_ID_MISSING`, `CHECKOUT_SESSION_NOT_FOUND`, `GATEWAY_NOT_CONFIGURED`, `MISSING_INVOICE_ID` or `PAYMENT_NOT_PAID`.
+
+  In sandbox, `test=success` only publishes test data (no payment is recorded and no order is created) and `test=error` returns `PAYMENT_NOT_PAID`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/capture-qpay"
 method: POST
 headers:

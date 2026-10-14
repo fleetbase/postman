@@ -4,3 +4,6 @@ fields:
     type: string
     required: true
     description: "Verification code sent to the pending phone number."
+  - name: phone
+    type: string
+    description: "The phone number being verified. Needed for app store review accounts, whose fixed code sets this number directly."

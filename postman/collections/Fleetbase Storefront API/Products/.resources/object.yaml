@@ -29,11 +29,23 @@ example: |
     },
     "in_stock": true,
     "tags": ["coffee"],
-    "status": "active",
+    "status": "published",
     "meta": {},
     "slug": "cold-brew",
     "translations": [],
-    "addon_categories": [],
+    "addon_categories": [
+      {
+        "id": "category_2Fd8kL1",
+        "name": "Extras",
+        "description": null,
+        "is_required": false,
+        "max_selectable": 2,
+        "excluded_addons": [],
+        "addons": [
+          { "id": "product_addon_5Gh7jK2", "name": "Oat milk", "description": null, "price": 80, "sale_price": null, "is_on_sale": false }
+        ]
+      }
+    ],
     "variants": [],
     "images": [],
     "videos": [],
@@ -90,7 +102,7 @@ fields:
     description: "Arbitrary metadata stored with the product."
   - name: addon_categories
     type: array of objects
-    description: "Addon categories available for the product."
+    description: "Addon categories available for the product: `id`, `name`, `description`, `is_required` (the customer must choose at least one), `max_selectable` (most add-ons that can be chosen, or null for no limit), `excluded_addons` and `addons`."
   - name: variants
     type: array of objects
     description: "Product variants and options."

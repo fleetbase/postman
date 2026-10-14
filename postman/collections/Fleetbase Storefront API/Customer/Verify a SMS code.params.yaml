@@ -3,7 +3,7 @@ fields:
   - name: identity
     type: string
     required: true
-    description: "Customer email address or phone number being verified."
+    description: "Customer email address or phone number being verified. A phone number gets a leading `+` when it's missing."
   - name: code
     type: string
     required: true

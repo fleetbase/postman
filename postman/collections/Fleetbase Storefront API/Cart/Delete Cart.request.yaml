@@ -1,5 +1,6 @@
 $kind: http-request
-description: Delete Cart
+description: |-
+  Deletes an open cart and returns `[]`. The ID of a cart that was checked out or cleared resolves to the device's open cart, which is the one deleted.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}"
 method: DELETE
 order: 6000

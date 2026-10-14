@@ -1,0 +1,29 @@
+$kind: http-request
+description: |-
+  Sends a message to the driver and returns `{ "message": Message }`. Send `content`, `files` (photos), or both. The driver is notified and the message is broadcast on the chat channel. Once the order is finished the chat is read-only and sending returns `423` with `"reason": "chat_closed"`.
+
+  Refusals: `401` without a customer token, `404` for an order not placed through this storefront, `403` for another customer's order, and `409` with `"reason": "driver_not_assigned"` before a driver is assigned.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{chat_order_id}}/chat/messages"
+method: POST
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "content": "I'm in tower B, unit 08-112."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Uses {{chat_order_id}} when the environment has an order with a driver assigned.
+      // Otherwise it addresses {{order_id}} (no driver yet) and documents the 409 refusal.
+      if (!pm.environment.get('chat_order_id')) {
+          pm.variables.set('chat_order_id', pm.environment.get('order_id') || 'order_missing');
+          pm.variables.set('expected_status', pm.environment.get('order_id') ? 409 : 404);
+      }
+    language: text/javascript
+order: 3000

@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Returns orders that belong to the authenticated storefront customer. Use pagination and filters to browse the customer order history.
+
+  For a network key, a checkout across several stores appears once, as its master order (`meta.is_master_order`, `meta.related_orders`); the stores' own orders are left out. Use `GET orders/{id}/stores` for the per-store breakdown. Order `meta` can include `checkout_id`, `discount`, `promotions`, `payment_status`, `is_booking`, `booking_at` and `booking_has_items`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/orders"
 method: GET
 headers:

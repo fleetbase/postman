@@ -1,11 +1,14 @@
 $kind: params
 fields:
+  - name: store
+    type: string
+    description: "Store public ID. Required with a network key (the store must be a member); ignored with a store key."
   - name: limit
     type: string
-    description: "Limit value for this reviews request."
+    description: "Maximum number of reviews to return."
   - name: offset
     type: string
-    description: "Offset value for this reviews request."
+    description: "Number of reviews to skip."
   - name: sort
     type: string
-    description: "Sort value for this reviews request."
+    description: "`newest`, `oldest`, `highest` or `lowest`."

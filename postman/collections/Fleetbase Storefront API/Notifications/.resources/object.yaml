@@ -24,7 +24,7 @@ fields:
     description: "Notification id (uuid)."
   - name: type
     type: string
-    description: "What the notification is about, e.g. `order_accepted`, `order_enroute`, `order_nearby`, `order_completed`, `order_canceled`, `order_ready`, `order_driver_assigned`, `order_updated` (the store edited the order or moved a booking), `order_item_unavailable` (the store marked an item unavailable), `order_balance_paid` (a balance due was paid by its payment link), `promotional` or `campaign`."
+    description: "What the notification is about, e.g. `order_accepted`, `order_enroute`, `order_nearby`, `order_completed`, `order_canceled`, `order_ready`, `order_driver_assigned`, `order_activity`, `order_chat_message`, `order_updated` (the store edited the order or moved a booking), `order_item_unavailable` (the store marked an item unavailable), `order_balance_paid` (a balance due was paid by its payment link), `promotional` or `campaign`. `order_activity` covers order steps that have no notification of their own (and every step of a booking after it's requested); its title is the step's label. `order_chat_message` is a message from the driver (`data` has `order`, `order_id`, `chat_id`, `message_id`, `store_id`, `network_id`); it's always delivered, whatever the `order_updates` preference."
   - name: title
     type: string
     description: "Notification title."

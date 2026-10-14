@@ -6,7 +6,7 @@ fields:
     description: "Public checkout ID being confirmed by QPay."
   - name: respond
     type: boolean
-    description: "Whether Fleetbase should return the payment check payload in the HTTP response."
+    description: "Return `{ checkout, payment, error }` as JSON instead of QPay's plain-text `SUCCESS`."
   - name: test
     type: enum
     values: ["success", "error"]

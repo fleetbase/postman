@@ -103,7 +103,7 @@ fields:
     description: "Customer associated with the order."
   - name: meta
     type: object
-    description: "Storefront checkout, payment, totals, and fulfillment metadata. `discount` is the total promotion discount (minor units) and `promotions` lists the applied promotions with their amounts; multi-store child orders carry their store's share of the item discount."
+    description: "Storefront checkout, payment, totals, and fulfillment metadata. `discount` is the total promotion discount (minor units) and `promotions` lists the applied promotions with their amounts; multi-store child orders carry their store's share of the item discount. Also: `payment_status`, `subtotal`, `tip`; booking orders carry `is_booking`, `booking_at` (ISO 8601) and `booking_has_items`; a multi-store Network checkout creates a master order (`is_master_order`, `related_orders`) whose store orders carry `master_order_id`."
   - name: notes
     type: string
     description: "Order notes supplied during checkout capture."

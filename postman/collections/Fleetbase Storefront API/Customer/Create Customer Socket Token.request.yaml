@@ -1,0 +1,19 @@
+$kind: http-request
+description: |-
+  Creates a short-lived token for the authenticated customer to authenticate the realtime (SocketCluster) connection. With it the customer may subscribe to their storefront's channel, their own checkouts (`checkout.{id}`) and the chats they take part in (`chat.{id}`, see Order Chat). Fetch a new one before `expires_at`.
+
+  Response: `{ "token": "<JWT>", "expires_in": 900, "expires_at": "2026-10-12T10:15:00+00:00" }`. `expires_in` is in seconds (900 by default, at most 3600).
+
+  Errors: `404` when the server doesn't have socket authentication enabled (clients then connect anonymously), `401` without a valid `Customer-Token` or for a customer of another company.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/socket-token"
+method: POST
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {}
+order: 5150

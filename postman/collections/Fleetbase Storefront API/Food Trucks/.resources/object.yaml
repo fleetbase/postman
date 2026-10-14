@@ -5,12 +5,47 @@ description: |-
 example: |
   {
     "id": "food_truck_8Fq2mL1",
-    "vehicle": null,
-    "service_area": null,
-    "zone": null,
-    "catalogs": [],
-    "location": null,
-    "online": false,
+    "store": {
+      "id": "store_3Xb9kL2",
+      "name": "Acme Market",
+      "logo_url": "https://files.example.com/logo.png",
+      "currency": "USD",
+      "options": { "map_marker": "store", "reviews_enabled": true }
+    },
+    "vehicle": { "id": "vehicle_6Tq1nP8", "plate_number": "GBB-1006", "online": true },
+    "service_area": { "id": "service_area_2Kd8mQ4", "name": "Singapore Central" },
+    "zone": { "id": "zone_9Lx3vR7", "name": "CBD" },
+    "catalogs": [
+      {
+        "id": "catalog_4Hn8zB2",
+        "name": "Truck menu",
+        "description": null,
+        "status": "published",
+        "categories": [
+          {
+            "id": "category_7Pq2wE5",
+            "name": "Drinks",
+            "products": [
+              {
+                "id": "product_1Ab2Cd3",
+                "name": "Cold Brew",
+                "price": 450,
+                "sale_price": null,
+                "is_on_sale": false,
+                "is_available": true,
+                "store_price": 500,
+                "catalog_price": 450,
+                "catalog_available": null
+              }
+            ]
+          }
+        ],
+        "created_at": "2026-05-07T09:30:00Z",
+        "updated_at": "2026-05-07T09:30:00Z"
+      }
+    ],
+    "location": { "type": "Point", "coordinates": [103.8515, 1.2835] },
+    "online": true,
     "status": "active",
     "created_at": "2026-05-07T09:30:00Z",
     "updated_at": "2026-05-07T09:30:00Z"
@@ -19,6 +54,12 @@ fields:
   - name: id
     type: string
     description: "Public identifier of the food truck."
+  - name: store
+    type: object
+    description: "The store the truck sells for: `id`, `name`, `logo_url`, `currency` and `options` (including `map_marker` and `reviews_enabled`)."
+  - name: network
+    type: object
+    description: "For a truck the network runs itself, the network: `id`, `name`, `logo_url`. Returned by Query Food Trucks only."
   - name: vehicle
     type: object
     description: "FleetOps vehicle assigned to the food truck."
@@ -30,10 +71,10 @@ fields:
     description: "Zone assigned to the food truck."
   - name: catalogs
     type: array of objects
-    description: "Catalogs available for the food truck."
+    description: "Catalogs (menus) the truck sells from, each with `categories[].products[]`. A product's `price`, `is_on_sale` and `is_available` are the values for this catalog: a catalog price replaces the store price (and removes a sale price), and a catalog can mark a product unavailable. `store_price`, `catalog_price` and `catalog_available` show both sides. Pass the catalog's `id` as `catalog` when adding the product to a cart."
   - name: location
     type: object
-    description: "Current vehicle location."
+    description: "Current vehicle location, as a GeoJSON point."
   - name: online
     type: boolean
     description: "Whether the assigned vehicle is online."

@@ -1,6 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves a single storefront product by ID. The response includes product details, pricing, variants, and related catalog data when available.
+  Retrieves a single storefront product by ID, with its details, pricing, variants and add-on categories (`is_required`, `max_selectable`). With a network key, only published, available products of active member stores are found. A product outside the storefront returns `404`.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/products/{{product_id}}"
 method: GET
 order: 3000

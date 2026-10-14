@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
-  Starts SMS authentication for an existing storefront customer. The customer receives a verification code that can be exchanged for an auth token.
+  Starts phone authentication for an existing storefront customer. A verification code is sent by SMS; if the SMS can't be sent and the customer has an email address, it's emailed instead. Exchange the code at `customers/verify-code`.
+
+  `phone` is in E.164 format, with or without the leading `+` (no spaces or dashes). Response: `{ "status": "OK", "method": "sms" }`, or `"method": "email"` when the code was emailed. Errors (`400`): no customer with this phone, or the code could not be sent.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/login-with-sms"
 method: POST
 headers:

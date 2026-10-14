@@ -1,16 +1,27 @@
 $kind: object
 name: Review
 description: |-
-  A review stores a customer rating, written content, photos, and the reviewed subject.
+  A customer's rating and written review of a store or product, with optional photos. `verified` is true for reviews written from a completed order.
 example: |
   {
     "id": "review_2xK9mQ1",
     "subject_id": "store_3Xb9kL2",
+    "subject_type": "store",
+    "verified": true,
+    "is_mine": false,
     "rating": 5,
     "content": "Great pickup experience.",
-    "customer": null,
+    "customer": {
+      "id": "customer_8Jk2mP1",
+      "name": "Ada B.",
+      "photo_url": "https://files.example.com/ada.png",
+      "reviews_count": 3,
+      "uploads_count": 1
+    },
     "slug": "great-pickup-experience",
-    "photos": [],
+    "photos": [
+      { "id": "file_4Lm2nQ8", "filename": "pickup.jpg", "type": "image/jpeg", "caption": null, "url": "https://files.example.com/pickup.jpg" }
+    ],
     "created_at": "2026-05-07T09:30:00Z",
     "updated_at": "2026-05-07T09:30:00Z"
   }
@@ -20,22 +31,32 @@ fields:
     description: "Public identifier of the review."
   - name: subject_id
     type: string
-    description: "Identifier of the reviewed subject."
+    description: "Public identifier of the reviewed store or product."
+  - name: subject_type
+    type: enum
+    values: ["store", "product"]
+    description: "What was reviewed."
+  - name: verified
+    type: boolean
+    description: "Whether the review was written from a completed order (a verified purchase)."
+  - name: is_mine
+    type: boolean
+    description: "Whether the customer making the request wrote it. Only true when the request carries that customer's `Customer-Token`."
   - name: rating
     type: integer
-    description: "Numeric review rating."
+    description: "Rating from 1 to 5."
   - name: content
     type: string
     description: "Review text."
   - name: customer
     type: object
-    description: "Customer that created the review."
+    description: "The reviewer: `id`, `name` as first name and last initial (e.g. `Ada B.`), `photo_url`, `reviews_count` and `uploads_count`. Email and phone are never included."
   - name: slug
     type: string
     description: "URL-friendly review slug."
   - name: photos
     type: array of objects
-    description: "Photos attached to the review."
+    description: "Photos attached to the review: `id`, `filename`, `type`, `caption` and `url`."
   - name: created_at
     type: timestamp
     description: "Time the review was created."

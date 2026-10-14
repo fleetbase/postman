@@ -1,8 +1,6 @@
 $kind: http-request
 description: |-
-  Retrieves an existing cart by its unique identifier. If the cart is still active, the response includes its current line items and totals.
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{id}"
+  Retrieves an open cart by its public ID or by a unique identifier (such as a device ID). An unknown unique identifier creates a new cart with that identifier. The ID of a cart that was checked out or cleared resolves to the device's open cart, so the returned `id` can differ from the one requested.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/carts/{{cart_id}}"
 method: GET
-pathVariables:
-  id: ""
 order: 2000

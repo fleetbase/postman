@@ -1,6 +1,10 @@
 $kind: http-request
 description: |-
-  Returns a delivery service quote for the supplied cart, origin, and destination. Use the quote during checkout to include delivery pricing.
+  Returns a delivery service quote for the supplied cart, origin, and destination. Use the quote's `id` as `service_quote` at checkout to include delivery pricing. Returns a single quote, or an array with `all=1`.
+
+  For a multi-store Network cart the distance is summed leg by leg: from the farthest store, to the nearest next store, then to the customer.
+
+  Errors: `422` with `code: "cart_items_unavailable"` and `items: [{ id, product_id, name }]` when a product in the cart was deleted, made unavailable or unpublished, or a line's food truck or store location no longer exists (show it to the customer and send them back to the cart). `400` for a missing origin or destination, no service rates, or an unknown integrated vendor. `422` when a Network store location is not available in the network.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/service-quotes/from-cart"
 method: GET
 queryParams:

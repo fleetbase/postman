@@ -1,11 +1,30 @@
 $kind: params
 fields:
-  - name: origin
-    type: string
-    description: "Fallback store-location public ID, or comma-separated IDs for a multi-store cart. Cart line-item locations take precedence."
-  - name: destination
-    type: string
-    description: "Destination value for this delivery service quote request."
   - name: cart
     type: string
+    required: true
     description: "Cart public ID or unique identifier. Network cart origins must belong to the corresponding member stores."
+  - name: destination
+    type: string
+    required: true
+    description: "Where to deliver: a place ID, store location ID, vehicle ID, food truck ID, or a `lat,lng` pair."
+  - name: origin
+    type: string
+    description: "Where the delivery starts, in the same formats as `destination`. Required for a store key (a store location must belong to that store). For a network key it's optional: each cart line's store location is used, and `origin` (or comma-separated IDs) is only a fallback."
+  - name: facilitator
+    type: string
+    description: "Integrated vendor ID or provider to quote with instead of the store's own service rates."
+  - name: scheduled_at
+    type: timestamp
+    description: "Requested delivery time, forwarded to integrated vendors."
+  - name: service_type
+    type: string
+    description: "Service type, forwarded to integrated vendors."
+  - name: all
+    type: boolean
+    default: false
+    description: "Return every available quote as an array instead of the single best quote."
+  - name: is_route_optimized
+    type: boolean
+    default: true
+    description: "Whether the route through several stores is optimized when pricing a multi-store cart."

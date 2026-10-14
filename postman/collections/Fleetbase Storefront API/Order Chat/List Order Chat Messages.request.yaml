@@ -1,0 +1,24 @@
+$kind: http-request
+description: |-
+  Older messages of the order's chat, oldest first, as `{ "messages": [...] }`. Pass the oldest message you have as `before` to page back. A `before` that isn't in this chat returns `404`.
+
+  Refusals: `401` without a customer token, `404` for an order not placed through this storefront, `403` for another customer's order, and `409` with `"reason": "driver_not_assigned"` when no driver is assigned yet (or the order finished without ever having a chat).
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/orders/{{chat_order_id}}/chat/messages"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+queryParams:
+  before: ""
+  limit: "50"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Uses {{chat_order_id}} when the environment has an order with a driver assigned.
+      // Otherwise it addresses {{order_id}} (no driver yet) and documents the 409 refusal.
+      if (!pm.environment.get('chat_order_id')) {
+          pm.variables.set('chat_order_id', pm.environment.get('order_id') || 'order_missing');
+          pm.variables.set('expected_status', pm.environment.get('order_id') ? 409 : 404);
+      }
+    language: text/javascript
+order: 2000
