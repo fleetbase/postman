@@ -16,4 +16,26 @@ body:
   type: json
   content: |-
     {}
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Socket authentication is off by default, and off in production until its rollout
+      // reaches it; while it is off this endpoint answers 404 and clients connect
+      // anonymously. That is the contract asserted unless the environment declares
+      // socket_auth_enabled, in which case a token is expected.
+      if (!pm.environment.get('socket_auth_enabled')) {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.test('A socket token comes with its expiry', function () {
+              pm.expect(json_response.token, 'token missing').to.be.a('string').and.not.empty;
+              pm.expect(json_response.expires_in, 'expires_in missing').to.be.a('number');
+              pm.expect(json_response.expires_at, 'expires_at missing').to.be.a('string').and.not.empty;
+          });
+      }
+    language: text/javascript
 order: 5150
