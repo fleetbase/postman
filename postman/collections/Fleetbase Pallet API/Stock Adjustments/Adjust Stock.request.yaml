@@ -1,0 +1,28 @@
+$kind: http-request
+description: Adjust stock
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-adjustments"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "product": "{{stock_product_id}}",
+      "warehouse": "{{warehouse_id}}",
+      "type": "add",
+      "quantity": 50,
+      "reason": "Cycle count correction"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{stock_adjustment_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("stock_adjustment_id", captured); }
+    language: text/javascript
+order: 1000

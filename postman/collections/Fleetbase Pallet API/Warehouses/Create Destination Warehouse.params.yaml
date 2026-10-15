@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Warehouse name."

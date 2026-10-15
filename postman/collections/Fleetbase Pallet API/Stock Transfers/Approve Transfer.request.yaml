@@ -1,0 +1,8 @@
+$kind: http-request
+description: Approve a pending transfer
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/stock-transfers/{{stock_transfer_id}}/approve"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+order: 1300

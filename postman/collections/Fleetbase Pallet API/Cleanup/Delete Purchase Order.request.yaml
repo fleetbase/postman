@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the purchase order
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/purchase-orders/{{purchase_order_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9030

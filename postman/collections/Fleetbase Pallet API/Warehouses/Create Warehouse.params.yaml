@@ -1,0 +1,12 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Warehouse name."
+  - name: code
+    type: string
+    description: "Short code for the facility."
+  - name: capacity
+    type: number
+    description: "Storage capacity."
