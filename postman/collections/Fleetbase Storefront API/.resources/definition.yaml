@@ -17,7 +17,7 @@ description: |-
 
   When a request carries a `Customer-Token`, the language is also stored on that customer. Their order notifications (push, inbox and email) and order chat pushes are sent in it, including notifications sent later from the queue. A customer who has never sent the header gets English.
 
-  In this collection, set the `locale` variable (for example `mn`) to send `Accept-Language` with every request. Leave it empty to send none.
+  In the Postman collection, set the `locale` variable (for example `mn`) to send `Accept-Language` with every request. Leave it empty to send none.
 variables:
   storefront_key: ""
   customer_token: ""
