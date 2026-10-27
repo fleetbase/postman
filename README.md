@@ -59,6 +59,8 @@ Collection-level `api_prefix` values handle package routing while keeping shared
 - Storefront API uses `api_prefix=storefront`, producing `/storefront/{{namespace}}/...`.
 - Ledger API uses `api_prefix=ledger`, producing `/ledger/{{namespace}}/...` for wallet routes and `/ledger/public/...` or `/ledger/webhooks/...` for non-versioned public routes.
 
+Storefront API also has a `locale` variable. When it is set (for example `mn`), every request sends it as `Accept-Language`, and the API answers in that language. Leave it empty to get English.
+
 Do not commit real tokens, keys, IDs, cookies, exported Vault data, or production credentials.
 
 ## Format
