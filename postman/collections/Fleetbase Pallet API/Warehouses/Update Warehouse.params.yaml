@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: capacity
+    type: number
+    description: "Storage capacity."

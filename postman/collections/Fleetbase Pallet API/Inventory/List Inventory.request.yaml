@@ -1,0 +1,16 @@
+$kind: http-request
+description: List stock records
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/inventory"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{inventory_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body[0].id;
+      if (captured) { pm.environment.set("inventory_id", captured); }
+    language: text/javascript
+order: 1000

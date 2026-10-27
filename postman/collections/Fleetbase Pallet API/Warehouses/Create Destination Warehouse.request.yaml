@@ -1,0 +1,25 @@
+$kind: http-request
+description: Create a second warehouse, so transfers have a destination
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouses"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Johor Satellite",
+      "code": "JH-SAT-{{$timestamp}}"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{destination_warehouse_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("destination_warehouse_id", captured); }
+    language: text/javascript
+order: 1050

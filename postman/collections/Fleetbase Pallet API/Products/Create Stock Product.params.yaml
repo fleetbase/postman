@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Product name. Left variant-free: adjustments and transfers address a product directly, and the API rightly refuses an adjustment on a product that has variants without naming one."

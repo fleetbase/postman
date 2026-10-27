@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: "Product name."
+  - name: unit_price
+    type: number
+    description: "Sale price per unit."

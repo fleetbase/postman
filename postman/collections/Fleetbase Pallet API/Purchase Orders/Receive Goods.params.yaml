@@ -1,0 +1,17 @@
+$kind: params
+fields:
+  - name: items
+    type: array of objects
+    description: "Lines to receive against."
+  - name: items[].id
+    type: string
+    description: "Public id of the order line."
+  - name: items[].quantity_received
+    type: integer
+    description: "Units received. Capped at the line's outstanding quantity."
+  - name: items[].lot_number
+    type: string
+    description: "Lot number for the received stock."
+  - name: items[].expiry_date
+    type: timestamp
+    description: "Expiry date for the received stock."

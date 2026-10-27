@@ -1,0 +1,27 @@
+$kind: http-request
+description: Create a variant against a product
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/product-variants"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "product": "{{product_id}}",
+      "name": "Heavy Duty",
+      "sku": "SSB-HD-{{$timestamp}}",
+      "option_values": { "grade": "heavy-duty" }
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{variant_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("variant_id", captured); }
+    language: text/javascript
+order: 1000

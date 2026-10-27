@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: from_warehouse
+    type: string
+    required: true
+    description: "Public id of the source warehouse."
+  - name: to_warehouse
+    type: string
+    required: true
+    description: "Public id of the destination. Must differ from the source."
+  - name: items
+    type: array of objects
+    description: "Lines to move."
+  - name: items[].product
+    type: string
+    description: "Public id of the product being moved."
+  - name: items[].quantity
+    type: integer
+    description: "Units to move."
