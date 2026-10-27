@@ -1,4 +1,23 @@
 $kind: collection
+description: |-
+  Storefront and customer-facing commerce endpoints, used by the Storefront customer app and website.
+
+  # Authentication
+
+  Every request sends the store or network key (`store_...` or `network_...`) as a bearer token. Endpoints that act for a signed-in customer also send that customer's token in the `Customer-Token` header.
+
+  # Localization
+
+  Storefront v0.4.30 and later answer in the language of the `Accept-Language` request header. The supported languages are English (`en`), Mongolian (`mn`) and Ukrainian (`uk`).
+
+  - Regional codes match their language (`mn-MN` is `mn`, `en-US` is `en`), and quality values are honoured (`mn-MN,en;q=0.5`).
+  - An unsupported language gets English. A request without the header gets the server default, English.
+  - The language applies to human-readable text: `error` messages, validation messages, and SMS or email verification codes sent by the request.
+  - Status codes, error codes (such as `"code": "booking_slot_unavailable"`), response shapes and merchant content (store and product names) are not translated.
+
+  When a request carries a `Customer-Token`, the language is also stored on that customer. Their order notifications (push, inbox and email) and order chat pushes are sent in it, including notifications sent later from the queue. A customer who has never sent the header gets English.
+
+  In this collection, set the `locale` variable (for example `mn`) to send `Accept-Language` with every request. Leave it empty to send none.
 variables:
   storefront_key: ""
   customer_token: ""
@@ -6,7 +25,17 @@ variables:
   namespace: v1
   api_prefix: storefront
   api_key: ""
+  locale: ""
 scripts:
+  - type: http:beforeRequest
+    code: |
+      // Sends the collection's `locale` as Accept-Language, so the API answers in that
+      // language (en, mn or uk). Left empty, no header is sent and the API answers in English.
+      const locale = pm.variables.get('locale');
+      if (locale) {
+          pm.request.headers.upsert({ key: 'Accept-Language', value: locale });
+      }
+    language: text/javascript
   - type: http:afterResponse
     code: |
       // Baseline contract assertions, applied to every request in this collection.
