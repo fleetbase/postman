@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: phone
+    type: string
+    required: true
+    description: Phone number to text the code to (E.164 recommended). `identity` is accepted in its place. An email address is refused.

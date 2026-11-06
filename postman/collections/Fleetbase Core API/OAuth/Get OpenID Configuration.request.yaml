@@ -1,0 +1,19 @@
+$kind: http-request
+description: |-
+  OpenID Connect Discovery 1.0 metadata: the issuer and every endpoint an OAuth client library needs, cacheable for an hour.
+
+  Response includes `issuer` (`OAUTH_SERVER_ISSUER`, else `APP_URL`), `authorization_endpoint`, `token_endpoint`, `userinfo_endpoint`, `jwks_uri`, `revocation_endpoint`, `registration_endpoint` (only while dynamic registration is on), `scopes_supported` (core's and the installed extensions'), `response_types_supported: ["code"]`, `grant_types_supported: ["authorization_code", "refresh_token"]`, `code_challenge_methods_supported: ["S256"]`, `token_endpoint_auth_methods_supported: ["client_secret_basic", "client_secret_post", "none"]`, `id_token_signing_alg_values_supported: ["RS256"]`, `prompt_values_supported: ["login", "consent"]`, `claims_supported` and `authorization_response_iss_parameter_supported: true`. No authentication.
+url: "{{base_url}}/.well-known/openid-configuration"
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      var json_response = pm.response.json();
+      pm.test('Discovery names the token endpoint and PKCE S256', function () {
+          pm.expect(json_response.token_endpoint, 'token_endpoint missing').to.be.a('string').and.not.empty;
+          pm.expect(json_response.code_challenge_methods_supported).to.include('S256');
+      });
+    language: text/javascript
+order: 1000

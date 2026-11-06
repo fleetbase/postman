@@ -1,0 +1,27 @@
+$kind: http-request
+name: "Send a Customer Order Message"
+description: |-
+  Sends the driver of the customer's ride a chat message, always as the customer, and notifies the driver. Answers `201` with the message: `{ id, from: "rider", text, sent_at }`.
+
+  Errors: `422` for an empty message or one over 2000 characters (`Write a message of up to 2000 characters.`), for a ride that has ended (`This ride has ended.`), or before a driver is assigned (`You can message your driver once they accept.`); `404` (`Order not found.`) for an order that isn't the customer's. Limited to 30 requests a minute. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/messages"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "text": "I'm at the main entrance."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's customer order is never assigned a driver, so there is no
+      // chat yet and the documented answer is 422 "You can message your driver once
+      // they accept."
+      pm.variables.set('expected_status', 422);
+    language: text/javascript
+
+order: 15500

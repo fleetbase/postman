@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: software_id
+    type: string
+    required: true
+    description: "The software registering, one listed under `oauth-server.registration.software` on the server. Core lists `fleetbase-woocommerce` (Fleetbase for WooCommerce, scopes `organization:read api-key:create`). Anything else answers `400` `invalid_client_metadata`."
+  - name: redirect_uris
+    type: array
+    required: true
+    description: "Exactly one redirect URI: `https`, or `http` on a loopback address (which registers a development client), with no fragment. Otherwise `400` `invalid_redirect_uri`."

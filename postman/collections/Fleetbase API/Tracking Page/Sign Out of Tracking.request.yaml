@@ -1,0 +1,15 @@
+$kind: http-request
+name: "Sign Out of Tracking"
+description: |-
+  Signs this device out of the tracking page. With `number` it drops the device's grant for that one delivery and keeps the session; without it the whole device session ends and the `fb_track` cookie is cleared. Always answers `200` with `{ "status": "signed_out" }`, also for a device that had no session.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/session"
+method: DELETE
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+queryParams:
+  number: "{{tracking_number}}"
+order: 11000

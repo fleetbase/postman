@@ -1,0 +1,58 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: Label for the place (e.g. `Home`, `Work`).
+  - name: latitude
+    type: number
+    required: true
+    description: Latitude, -90 to 90.
+  - name: longitude
+    type: number
+    required: true
+    description: Longitude, -180 to 180.
+  - name: street1
+    type: string
+    required: false
+    description: Street address.
+  - name: street2
+    type: string
+    required: false
+    description: Second address line.
+  - name: city
+    type: string
+    required: false
+    description: City.
+  - name: province
+    type: string
+    required: false
+    description: Province or state.
+  - name: postal_code
+    type: string
+    required: false
+    description: Postal code.
+  - name: neighborhood
+    type: string
+    required: false
+    description: Neighborhood.
+  - name: district
+    type: string
+    required: false
+    description: District.
+  - name: building
+    type: string
+    required: false
+    description: Building.
+  - name: country
+    type: string
+    required: false
+    description: Two-letter country code.
+  - name: phone
+    type: string
+    required: false
+    description: Contact phone for the place.
+  - name: meta
+    type: object
+    required: false
+    description: Free-form metadata.

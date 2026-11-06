@@ -1,4 +1,6 @@
 $kind: collection
 description: |-
   Customer endpoints provide email/password + verification-code authentication and customer-scoped order management for FleetOps, without requiring the Storefront publishable key. All flows authenticate to a single Fleetbase company resolved from your `flb_live_…` API credential; per-customer requests additionally require the `Customer-Token` returned by signup/login.
+
+  Since Fleet-Ops v0.7.0 the folder also covers what a rider app needs: phone sign-in with one code for new and existing customers, saved places and address lookup, dispatching, canceling, tracking, chatting about, rating and sharing an order, the operator's ride settings, and account deletion. Requests that send a text share a limit of five a minute per caller.
 order: 5000

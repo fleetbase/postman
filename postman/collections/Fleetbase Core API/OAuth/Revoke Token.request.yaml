@@ -1,0 +1,41 @@
+$kind: http-request
+description: |-
+  Token revocation (RFC 7009). A refresh token disconnects the app: its whole grant is revoked, with every token from it. An access token revokes only that token. The `token_type_hint` parameter is not needed; the token is recognised either way. Tokens issued to another client are ignored. Send as `application/x-www-form-urlencoded`; client credentials go in the body as here or in HTTP Basic auth.
+
+  Answers `200` with an empty body whether or not the token was known, as RFC 7009 asks.
+
+  Errors: `401` `invalid_client` (with `WWW-Authenticate: Basic`) for unknown or turned-off clients or a wrong secret, `400` `invalid_request` without `token`. Throttled to 600 requests a minute.
+
+  This example revokes the access token, so the grant and refresh token keep working. Without `oauth_client_id` asserts the `401`, and without `oauth_access_token` the `400`.
+url: "{{base_url}}/oauth/revoke"
+method: POST
+auth:
+  type: noauth
+body:
+  type: urlencoded
+  content:
+    - key: token
+      value: "{{oauth_access_token}}"
+    - key: client_id
+      value: "{{oauth_client_id}}"
+    - key: client_secret
+      value: "{{oauth_client_secret}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      if (!pm.variables.get('oauth_client_id')) {
+          pm.variables.set('expected_status', 401);
+      } else if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 400);
+      } else {
+          // Success is an empty 200; declaring it lets the collection skip its JSON check.
+          pm.variables.set('expected_status', 200);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          pm.environment.unset('oauth_access_token');
+      }
+    language: text/javascript
+order: 15000

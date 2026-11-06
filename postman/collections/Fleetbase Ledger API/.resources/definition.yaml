@@ -1,10 +1,14 @@
 $kind: collection
-description: Public Ledger API endpoints for wallets, public invoice payment, and gateway webhooks.
+description: |-
+  Public Ledger API endpoints for wallets, customer invoices, public invoice payment, and gateway webhooks.
+
+  Wallet and customer invoice requests send the organization's API key (`api_key`) as a bearer token. Customer invoice requests also send the customer's token in the `Customer-Token` header (`customer_token`). Public invoice and webhook requests need neither.
 variables:
   base_url: ""
   namespace: v1
   api_prefix: ledger
   api_key: ""
+  customer_token: ""
 scripts:
   - type: http:afterResponse
     code: |
@@ -13,7 +17,20 @@ scripts:
       // Status is asserted explicitly against a list. The obvious-looking
       // `pm.expect(pm.response).to.be.ok` is chai's truthiness check on an object and
       // is therefore true for every response, including a 400 — it asserts nothing.
-      const expected = pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204];
+      //
+      // A request whose CONTRACT is a refusal (e.g. a customer invoice requested without a
+      // customer token must answer 401) opts out of the 2xx expectation by setting
+      // `expected_status` in its beforeRequest script. The error-payload check is skipped
+      // for it too — the error body is exactly what such a request is asserting.
+      //
+      // The override is consumed here, immediately after being read. "Local" variables
+      // are scoped to the RUN, not the request — left set, one request's override would
+      // hold every later request in the run against it.
+      const expectedOverride = Number(pm.variables.get('expected_status')) || null;
+      pm.variables.unset('expected_status');
+      const expected = expectedOverride
+          ? [expectedOverride]
+          : (pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204]);
 
       pm.test(`${pm.info.requestName} responds 2xx`, function () {
           pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
@@ -37,6 +54,7 @@ scripts:
           (Array.isArray(value) && value.length === 0);
 
       pm.test(`${pm.info.requestName} returns no error payload`, function () {
+          if (expectedOverride) { return; }
           let body;
           try { body = pm.response.json(); } catch (e) { return; }
           if (body === null || typeof body !== 'object') { return; }

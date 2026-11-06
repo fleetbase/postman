@@ -1,0 +1,24 @@
+$kind: collection
+description: |-
+  The API behind the public customer tracking page, where a customer follows a delivery with nothing but its tracking number. These routes sit at `/public/track/...` on the API host, outside `/v1`, and take no API key: the requests in this folder send no `Authorization` header unless they say otherwise. Every answer is JSON.
+
+  ## Access levels
+
+  - **Level 0, tracking number only.** `Look Up a Tracking Number` returns a coarse view: the company's branding, the delivery's stage, the date of the last update, the channels a one-time code can be sent on (masked, e.g. `•••• •• 4821`) and whether account sign-in is offered.
+  - **Level 1, a verified device.** `Send a Tracking Code` sends a one-time code, valid for ten minutes, to the email or phone on the customer's record; `Verify a Tracking Code` checks it. A correct code (or a rider's share link, `Redeem a Shared Tracking Link`) starts a device session for that one customer within that one order and returns the full view. The session is the `fb_track` cookie: HTTP-only, path `/`, the instance's session domain, `SameSite` from `fleetops.tracking.cookie_same_site` (default `lax`), and it lasts the company's `access.session_hours` (default 24, at most 168). Send the cookie back on later requests; Postman keeps it in its cookie jar for the run.
+  - **Level 2, a signed-in customer.** A request with `Authorization: Bearer <token>` of a signed-in customer user (Sanctum) whose contact is the delivery's customer gets the full view without a code. A token of a staff user of the owning company gets the customer's view too (`viewer: staff`). Any other token is ignored.
+
+  ## Not found
+
+  An unknown, malformed, opted-out or other-company number, and a lookup over the rate limit, all answer the same `404` (`{ "error": "...", "code": "not_found" }`), so a caller cannot tell them apart. Only the `tracking_number` column is matched, never an order id. A tracking number can belong to the order, to one stop or to one item; a stop's or item's number opens that stop's customer.
+
+  ## Company pages
+
+  `?org={slug}` on any route scopes it to that company's own tracking page (`org_page` enabled in its tracking page settings). Without it the shared page is used, which the instance and each company can switch off.
+
+  ## Limits
+
+  Applied inside the controller, per client IP: 30 lookups a minute; 10 code checks (and share redemptions) a minute; code sends are limited to one per 30 seconds and 3 per 15 minutes per customer, and 5 per 15 minutes per IP; 3 wrong codes pause that customer's codes for every device for 5 minutes; 3 problem reports an hour per order.
+
+  Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08). `Redeem a Shared Tracking Link` requires Fleet-Ops v0.7.0 and later.
+order: 17000

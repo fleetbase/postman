@@ -1,6 +1,9 @@
 $kind: http-request
 name: "Retrieve a Customer Order"
-description: "Fetches a single order by id, public id, or tracking number. Returns 404 if the order doesn't belong to the authenticated customer."
+description: |-
+  Fetches a single order by id, public id, or tracking number. Returns 404 if the order doesn't belong to the authenticated customer.
+
+  Since Fleet-Ops v0.7.0 each order is returned with rider fields on top of the standard Order: `fare` (`{ final, total, currency, estimate, distance, time, service, lines }` from the order's service quote, or `null`), `rating` (`{ stars, comment }` once rated, else `null`), `payment_method`, `paid_at` and `dispatch_outcome` (`no_driver_found` for a canceled ad hoc order that every offered driver declined or let expire, else `null`).
 url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}"
 method: GET
 headers:

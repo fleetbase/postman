@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Delete Authenticated Customer"
+description: |-
+  Deletes the authenticated customer's account: signs the linked user out everywhere, deletes their saved places, removes their name, email, phone, photo and metadata, and deletes the contact. A linked user who is only this company's customer is anonymised and deleted too; one with other roles or companies keeps their account. Past orders stay on the operator's books without the customer's details. Answers `{ "status": "deleted" }`.
+
+  Answers `422` (`Finish or cancel your ride before deleting your account.`) while the customer has a dispatched order that hasn't completed, been canceled or ended as a no-show. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/me"
+method: DELETE
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 17000

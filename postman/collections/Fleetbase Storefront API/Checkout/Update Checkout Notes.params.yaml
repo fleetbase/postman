@@ -1,0 +1,9 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: "The checkout's token, as returned by `Before ❗`. The checkout must belong to the store or network of the key."
+  - name: notes
+    type: string
+    description: "The customer's notes. Trimmed and cut to 2000 characters; empty or `null` clears them on the checkout. Anything other than text is refused with `422`."

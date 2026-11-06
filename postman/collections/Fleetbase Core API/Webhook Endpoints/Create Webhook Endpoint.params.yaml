@@ -1,0 +1,19 @@
+$kind: params
+fields:
+  - name: url
+    type: string
+    required: true
+    description: "Where events are sent. A public `http` or `https` URL of at most 2048 characters; `localhost`, `*.localhost`, `*.internal`, cloud metadata hosts and hosts that resolve to private or reserved addresses are refused with `422`."
+  - name: events
+    type: array
+    description: "Event names to send, e.g. `[\"order.created\", \"order.completed\"]`. Each must be an event the server registers, or the request answers `422` (`Unknown webhook event: …`). Omitted, null or empty, the endpoint receives every event."
+  - name: description
+    type: string
+    description: "Free text, at most 500 characters."
+  - name: version
+    type: string
+    description: "API version of the payloads, at most 32 characters. Defaults to the newest version the server lists."
+  - name: status
+    type: enum
+    values: ["enabled", "disabled"]
+    description: "Only `enabled` endpoints receive events. Defaults to `enabled`."

@@ -1,0 +1,20 @@
+$kind: http-request
+description: |-
+  Updates the fields sent (`url`, `events`, `description`, `version`, `status`); the others are kept. The environment (`mode`) and the signing secret never change here. Answers with the endpoint, without its secret.
+
+  Errors: `404` (`Webhook endpoint not found.`), `422` for invalid fields.
+url: "{{base_url}}/{{namespace}}/webhook-endpoints/:id"
+method: PUT
+pathVariables:
+  - key: id
+    value: "{{webhook_endpoint_id}}"
+
+body:
+  type: json
+  content: |-
+    {
+      "events": ["order.created", "order.dispatched", "order.completed"],
+      "description": "Postman example endpoint (updated)"
+    }
+
+order: 4000

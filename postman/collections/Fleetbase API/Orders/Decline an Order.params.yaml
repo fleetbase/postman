@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: driver
+    type: string
+    required: false
+    description: The declining driver's public id (`driver_…`). Used only when the request is not made as a signed-in driver of the order's company.

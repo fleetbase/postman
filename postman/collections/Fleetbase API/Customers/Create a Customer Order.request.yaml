@@ -2,6 +2,8 @@ $kind: http-request
 name: "Create a Customer Order"
 description: |-
   Creates an Order on behalf of the authenticated customer. Accepts the canonical Fleet-Ops Order create shape — the same fields as `POST /v1/orders` would accept from an operator. The customer's `uuid` is automatically attached as `orders.customer_uuid`; any client-supplied `customer` field is ignored. `status` is forced to `created` (customers cannot self-dispatch). The Order lands in the company resolved from the API credential.
+
+  Since Fleet-Ops v0.7.0: the order is ad hoc when its order config has `customer_orders_adhoc` set, so `Dispatch a Customer Order` can offer it to nearby drivers; a config that matches drivers by vehicle type (`match_vehicle_type`) requires a `service_quote`, whose service type becomes the order's `required_vehicle_type` (`422` `Choose a ride option first.` without one); a quote from another company or past its expiry answers `422` (`This fare has expired. Please get a new one.`); a `ride` order is refused with `402` (`Pay for your last trip before you book another.`) while one of the customer's completed card rides with a final fare is unpaid; and `payment_method` is stored on a payload built from this request. The response carries the rider fields described on `Retrieve a Customer Order`.
 url: "{{base_url}}/{{namespace}}/customers/orders"
 method: POST
 headers:
@@ -46,6 +48,11 @@ scripts:
 
       if (json_response && json_response.id) {
         cv.set("customer_order_id", json_response.id);
+      }
+
+      // Tracking Page requests look this order up by its tracking number.
+      if (json_response && json_response.tracking_number && json_response.tracking_number.tracking_number) {
+        cv.set("tracking_number", json_response.tracking_number.tracking_number);
       }
     language: text/javascript
 

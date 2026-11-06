@@ -1,0 +1,18 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: false
+    description: Label for the place.
+  - name: latitude
+    type: number
+    required: false
+    description: New latitude, sent with `longitude`.
+  - name: longitude
+    type: number
+    required: false
+    description: New longitude, sent with `latitude`.
+  - name: street1
+    type: string
+    required: false
+    description: Street address. `street2`, `city`, `province`, `postal_code`, `neighborhood`, `district`, `building`, `country`, `phone` and `meta` are accepted too.

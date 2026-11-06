@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: installation
+    type: string
+    description: "Optional. For an app serving many installations from one client (one Shopify app, many shops), the installation this key is for, e.g. `store.myshopify.com`; each installation gets its own key, named \"{app} ({installation})\". At most 190 characters, no control characters, or `400` `invalid_request`. Omitted or blank, the app has one key per organization."

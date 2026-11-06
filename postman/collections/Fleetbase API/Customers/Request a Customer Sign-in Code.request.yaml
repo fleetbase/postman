@@ -1,0 +1,20 @@
+$kind: http-request
+name: "Request a Customer Sign-in Code"
+description: |-
+  Texts a one-time code to a phone number without revealing whether it has an account: an existing customer gets a login code (as `Request Customer Login SMS` sends) and a new one gets a signup code (as `Request Customer Creation Code` sends with `mode: sms`). Both answer `200` with `{ "status": "ok" }`. Prove the code with `Verify Customer Login Code`, which returns the signed-in customer for an existing account or `{ "status": "new_customer" }` for a new number, whose signup then finishes with `Create a Customer`.
+
+  Takes `phone` (or `identity`); an email address or no number answers `400` (`A phone number is required.`). Every text passes through the platform's SMS guard: a refused text answers `422` (the number is invalid or cannot receive a text message), `429` with a `Retry-After` header (a cooldown on that number, or the organization's message budget) or `423` (text messages are paused). Limited to five requests a minute per caller, shared with the other endpoints that send a text.
+
+  Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/request-code"
+method: POST
+headers:
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "phone": "{{customer_phone}}"
+    }
+
+order: 4500

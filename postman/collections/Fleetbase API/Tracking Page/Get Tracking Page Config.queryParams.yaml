@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug. Returns that company's page branding; omit it for the shared page.

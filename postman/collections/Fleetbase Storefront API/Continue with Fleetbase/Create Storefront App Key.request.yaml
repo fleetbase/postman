@@ -1,0 +1,30 @@
+$kind: http-request
+description: |-
+  Returns the Fleetbase API key (`flb_live_…`) a Storefront app is built with, in the organization the access token is bound to. The first call creates a live key named `Storefront app (<app name>)` and answers `201`; later calls by the same app return that key with `200`. The key is listed under Developers → API Keys, where the organization can revoke it, after which the next call creates a new one. A key the app didn't create is never returned. Needs the `storefront:app-key` scope. No request body.
+
+  Response: `{ "api_key": { "id", "name", "key", "created", "created_at" } }`. `created` is true when this call created the key. Treat `key` as a secret.
+
+  Errors: `401` `invalid_token`, `403` `insufficient_scope` (see the folder description).
+url: "{{base_url}}/{{api_prefix}}/oauth/v1/app-key"
+method: POST
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Needs an access token from "Continue with Fleetbase", which a contract run doesn't
+      // obtain on its own. Without one this asserts the 401 invalid_token refusal.
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200 || pm.response.code === 201) {
+          var json_response = pm.response.json();
+          pm.test('An API key comes back, created only on 201', function () {
+              pm.expect(json_response.api_key, 'api_key missing').to.be.an('object');
+              pm.expect(json_response.api_key.key, 'key missing').to.be.a('string').and.not.empty;
+              pm.expect(json_response.api_key.created).to.eql(pm.response.code === 201);
+          });
+      }
+    language: text/javascript
+order: 2000

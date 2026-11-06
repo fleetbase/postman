@@ -1,0 +1,19 @@
+$kind: http-request
+name: "Geocode an Address for a Customer"
+description: |-
+  Looks up an address, or the address at a pair of coordinates, with the instance's geocoder and returns matching Places. Nothing is stored. Send `query`, or `latitude` and `longitude` (both with `query` to rank nearby matches first).
+
+  Answers `400` (`A query or coordinates are required.`) with neither. Returns an empty list when nothing matches or no geocoder is available.
+
+  Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/geocode"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+queryParams:
+  query: "Half Way Tree, Kingston"
+  latitude: ""
+  longitude: ""
+
+order: 12100

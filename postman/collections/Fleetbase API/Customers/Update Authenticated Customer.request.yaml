@@ -1,6 +1,9 @@
 $kind: http-request
 name: "Update Authenticated Customer"
-description: "Updates the authenticated customer's profile. Changes to `name`, `email`, and `phone` are mirrored onto the linked user so subsequent logins work."
+description: |-
+  Updates the authenticated customer's profile. Changes to `name`, `email`, and `phone` are mirrored onto the linked user so subsequent logins work.
+
+  Since Fleet-Ops v0.7.0, changing `phone` needs `phone_code`, the code `Request Customer Phone Change Code` texted to the new number; without a valid code, or when another account holds the number, the update answers `422` (`Changing your phone number needs a valid verification code.`). Sending the customer's current phone needs no code. The example leaves `phone` out for that reason.
 url: "{{base_url}}/{{namespace}}/customers/me"
 method: PUT
 headers:
@@ -11,7 +14,6 @@ body:
   content: |-
     {
       "name": "{{customer_name}}",
-      "phone": "{{customer_phone}}",
       "email": "{{customer_email}}"
     }
 

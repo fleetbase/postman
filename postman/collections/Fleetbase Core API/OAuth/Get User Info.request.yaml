@@ -1,0 +1,22 @@
+$kind: http-request
+description: |-
+  OpenID Connect UserInfo: the claims about the signed-in user that the token's scopes allow. Needs an access token with `openid`. `POST` works the same.
+
+  Response (`Cache-Control: no-store`): `sub` (the user's public ID, stable and never reused) always; `name`, `picture`, `zoneinfo`, `updated_at` with `profile`; `email`, `email_verified` with `email`; `org_id` and `org_name` (the organization the token is bound to) when an organization scope was granted.
+
+  Errors: `401` `invalid_token` (missing, expired or revoked token, a removed app, or a deactivated user), `403` `insufficient_scope` without `openid`. Throttled to 600 requests a minute. Without `oauth_access_token`, asserts the `401`.
+url: "{{base_url}}/oauth/userinfo"
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{oauth_access_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // An access token only exists after a browser sign-in (see Authorize).
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      }
+    language: text/javascript
+order: 8000

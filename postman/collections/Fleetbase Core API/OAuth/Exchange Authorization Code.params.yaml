@@ -1,0 +1,26 @@
+$kind: params
+fields:
+  - name: grant_type
+    type: enum
+    values: ["authorization_code"]
+    required: true
+    description: "`authorization_code`."
+  - name: code
+    type: string
+    required: true
+    description: "The `code` the browser brought back to the redirect URI. Valid for 10 minutes, once."
+  - name: redirect_uri
+    type: string
+    required: true
+    description: "The same redirect URI the authorization request used."
+  - name: client_id
+    type: string
+    required: true
+    description: "The app's client ID."
+  - name: client_secret
+    type: string
+    description: "The app's secret, for a confidential client. Leave it out (or empty) for a public client."
+  - name: code_verifier
+    type: string
+    required: true
+    description: "The PKCE verifier whose challenge the authorization request sent."

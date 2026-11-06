@@ -1,0 +1,32 @@
+$kind: http-request
+description: |-
+  Lists the stores and networks of the organization the access token is bound to, sorted by name (stores first, then networks), with the public key a Storefront app is built with. Nothing about customers, orders or payments is returned. Needs the `storefront:read` scope.
+
+  Response: `{ "storefronts": [{ "id", "type", "key", "name", "description", "currency", "timezone", "email", "phone", "website", "logo_url", "backdrop_url", "online", "pickup_enabled", "review_access_type" }] }`. `type` is `store` or `network`, `key` is the `store_…` or `network_…` key, and `review_access_type` is the type to use with core-api's App Review access endpoint.
+
+  Errors: `401` `invalid_token`, `403` `insufficient_scope` (see the folder description).
+url: "{{base_url}}/{{api_prefix}}/oauth/v1/storefronts"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Needs an access token from "Continue with Fleetbase", which a contract run doesn't
+      // obtain on its own. Without one this asserts the 401 invalid_token refusal.
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.test('Storefronts come back as a list with their keys', function () {
+              pm.expect(json_response.storefronts, 'storefronts missing').to.be.an('array');
+              json_response.storefronts.forEach(function (storefront) {
+                  pm.expect(storefront.type).to.be.oneOf(['store', 'network']);
+                  pm.expect(storefront.key, 'key missing').to.be.a('string').and.not.empty;
+              });
+          });
+      }
+    language: text/javascript
+order: 1000

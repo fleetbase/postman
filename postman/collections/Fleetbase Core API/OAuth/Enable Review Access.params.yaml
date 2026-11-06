@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: regenerate_code
+    type: boolean
+    description: "Replace the code with a new one, returned in this response."

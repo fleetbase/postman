@@ -1,0 +1,19 @@
+$kind: http-request
+name: "Get Tracking Page Config"
+description: |-
+  Returns the tracking page's branding and what it offers, before any lookup: `{ company, org, sign_in, session_hours }`. `company` is the branding block (`name`, `logo_url`, `accent`, `accent_dark`, `ink`, `support_phone`, `support_email`, `website`, `powered_by`, `theme`, `default_locale`, `locales`), `sign_in` says whether customer account sign-in is offered, and `session_hours` is how long a verified device keeps access.
+
+  Without `org` this is the shared page: it answers with the instance's branding, `org: null` and `session_hours: 24`, or `404` (`{ "error": "page_not_found" }`) when the instance has the shared page switched off. With `org` it is that company's own page, and answers `404` when no company has an enabled page at that slug.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/config"
+method: GET
+headers:
+  Accept: application/json
+# Public route outside /v1: no API key. Request-level auth as a mapping (see
+# Organizations/List Organizations for why it is a mapping, not a list).
+auth:
+  type: noauth
+queryParams:
+  org: ""
+order: 1000

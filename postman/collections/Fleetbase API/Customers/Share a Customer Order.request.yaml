@@ -1,0 +1,27 @@
+$kind: http-request
+name: "Share a Customer Order"
+description: |-
+  Returns a link the customer can send to someone they trust, who can then follow the ride live on the public tracking page without a code: `{ url, expires_at }`. `url` is the order's tracking page link with a `share` token added; the page redeems it with `Tracking Page/Redeem a Shared Tracking Link`. The token opens only this customer's view of this order and lasts 12 hours.
+
+  Errors: `422` (`This ride can no longer be shared.`) when the order has no tracking number or has ended (completed, canceled or a terminal activity); `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/share"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      // Tracking Page/Redeem a Shared Tracking Link redeems this token.
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+
+      if (json_response && json_response.url) {
+        var match = /[?&]share=([^&#]+)/.exec(json_response.url);
+        if (match) {
+          cv.set("tracking_share_token", decodeURIComponent(match[1]));
+        }
+      }
+    language: text/javascript
+
+order: 15600

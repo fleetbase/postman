@@ -1,7 +1,21 @@
 $kind: http-request
-description: Specific payment gateway given the id
-url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways/{id}"
+description: |-
+  Returns one payment gateway of the store or network the key belongs to, matched by its public ID or by its code (for example `stripe` or `cash`). Gateway credentials and configuration are never returned. Add `sandbox=1` to match only a sandbox gateway.
+
+  Response: the gateway, `{ "id", "name", "description", "logo_url", "code", "type", "sandbox", "return_url", "callback_url", "meta", "updated_at", "created_at" }`. Only `id`, `name`, `code`, `type`, `sandbox`, `return_url` and `callback_url` are loaded; the other fields are null.
+
+  An id or code the store doesn't have is not answered with `404`: the endpoint has no not-found check, and the request fails with a server error.
+
+  In a contract run this addresses `{{gateway_id}}` when the environment sets one, and otherwise the `stripe` code that `Before ❗` checks out with.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/gateways/{{gateway_id}}"
 method: GET
-pathVariables:
-  id: ""
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The route matches a public id OR a gateway code. Without a {{gateway_id}} it
+      // addresses the `stripe` code, the gateway the Checkout folder runs with.
+      if (!pm.environment.get('gateway_id')) {
+          pm.variables.set('gateway_id', 'stripe');
+      }
+    language: text/javascript
 order: 4000

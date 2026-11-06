@@ -1,0 +1,21 @@
+$kind: http-request
+name: "Request Customer Phone Change Code"
+description: |-
+  Texts a verification code to the number the authenticated customer wants to change to. Send it back as `phone_code` with the new `phone` on `Update Authenticated Customer`, which refuses a phone change without it. Answers `200` with `{ "status": "ok" }`, and answers the same without sending anything when another account already holds the number, so this can't be used to discover accounts; the update then refuses the change.
+
+  A missing `phone` answers `400`. The text passes through the platform's SMS guard: a refused text answers `422`, `429` with `Retry-After` or `423`, as for `Request Customer Creation Code`. Limited to five requests a minute per caller.
+
+  Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/me/phone-code"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "phone": "{{customer_phone}}"
+    }
+
+order: 9100

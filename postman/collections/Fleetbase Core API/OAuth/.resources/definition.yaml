@@ -1,0 +1,28 @@
+$kind: collection
+description: |-
+  "Continue with Fleetbase": Fleetbase as an OAuth 2.0 / OpenID Connect provider. A registered app signs people in with their Fleetbase account and, with their consent, acts on one organization they administer, for example to mint its own API key for that organization.
+
+  These routes are not under `{{namespace}}`: they sit at the root of the API (`{{base_url}}/oauth/...` and `{{base_url}}/.well-known/...`). They exist only while `oauth-server.enabled` is true (`OAUTH_SERVER_ENABLED`, on by default); turned off, every request here answers `404`.
+
+  ## Authentication
+
+  None of these requests use the API key. Discovery, JWKS, Authorize and Register are unauthenticated. Token and Revoke authenticate the app with its client credentials, sent here in the form body (`client_secret_post`; HTTP Basic, `client_secret_basic`, works too). A public client (one registered without a secret, such as every client from Register Client) sends only `client_id`, and sending a secret fails. The remaining requests take the user's access token as `Authorization: Bearer {{oauth_access_token}}`.
+
+  ## The flow
+
+  1. Register the app in the console (or with Register Client) with its exact redirect URI, and set `oauth_client_id`, `oauth_client_secret` (empty for a public client) and `oauth_redirect_uri` in your environment.
+  2. Send Authorize. It creates a PKCE verifier and challenge, and answers with a redirect to the console's consent screen; open its `Location` in a browser, sign in and approve. The browser lands on `oauth_redirect_uri` with `code`, `state` and `iss`.
+  3. Put that `code` in `oauth_code` and send Exchange Authorization Code. It saves `oauth_access_token` and `oauth_refresh_token`.
+  4. Call the resource endpoints, and Refresh Access Token when the access token expires.
+
+  ## Rules
+
+  - Only the authorization code grant, with PKCE `S256` for every client, and refresh tokens. Redirect URIs match exactly.
+  - Scopes: `openid` (sign in), `profile`, `email`, `organization:read`, `api-key:create`, plus scopes extensions register (Storefront: `storefront:read`, `storefront:review-access`, `storefront:app-key`). Asking for an organization scope makes the user pick an organization they administer, and every code and token is bound to it. An app can only ask for scopes it is registered for.
+  - Lifetimes by default: code 10 minutes, access token 1 hour, refresh token 30 days, ID token 1 hour. Codes are single-use; replaying one revokes the tokens it issued, and replaying a used refresh token revokes the whole grant.
+  - Tokens stop working when the user removes the app's access, is deactivated, or no longer administers the organization the app was given.
+  - Protected endpoints answer `401` (`invalid_token`) or `403` (`insufficient_scope`) with a `WWW-Authenticate: Bearer ...` challenge. OAuth errors are `{ "error", "error_description" }`.
+  - Throttles: Token and Revoke, and the access-token endpoints, 600 requests a minute; Register 10 a minute.
+
+  With the variables left empty, each request here asserts the refusal it gets without them (the error statuses above), so a contract run passes without a browser sign-in.
+order: 7000

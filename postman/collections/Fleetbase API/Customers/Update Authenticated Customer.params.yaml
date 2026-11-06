@@ -15,7 +15,11 @@ fields:
   - name: phone
     type: string
     required: false
-    description: New phone (E.164 recommended). Mirrored to the linked user.
+    description: New phone (E.164 recommended). Mirrored to the linked user. Since Fleet-Ops v0.7.0 a different number needs `phone_code`.
+  - name: phone_code
+    type: string
+    required: false
+    description: The code `Request Customer Phone Change Code` texted to the new `phone`. Required to change the phone number (Fleet-Ops v0.7.0 and later).
   - name: photo
     type: string
     required: false

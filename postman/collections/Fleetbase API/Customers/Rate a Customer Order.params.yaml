@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: stars
+    type: integer
+    required: true
+    description: A whole number from 1 to 5.
+  - name: comment
+    type: string
+    required: false
+    description: Optional comment, up to 1000 characters (longer text is cut).

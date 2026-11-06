@@ -1,0 +1,9 @@
+$kind: http-request
+description: |-
+  Lists the organization's webhook endpoints in the API key's environment, newest first, as a JSON array. Signing secrets are not included. There is no offset; the list is capped by `limit`.
+url: "{{base_url}}/{{namespace}}/webhook-endpoints"
+method: GET
+queryParams:
+  limit: "30"
+  url: "{{webhook_endpoint_url}}"
+order: 2000

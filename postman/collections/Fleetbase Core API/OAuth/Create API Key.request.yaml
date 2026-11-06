@@ -1,0 +1,28 @@
+$kind: http-request
+description: |-
+  Returns a live Fleetbase API key (`flb_live_…`) for this app in the token's organization: creates one named after the app (`201`), or returns the unexpired one this app created before for the same installation (`200`). A key someone else created is never returned. The key is always live, never test mode. It is listed under Developers → API Keys, and revoking the app's last grant in the organization expires it. Needs `api-key:create`.
+
+  Response (`Cache-Control: no-store`): `{ "api_key": { id, name, key, installation, created, created_at } }`.
+
+  Errors: `400` `invalid_request` for a bad `installation`, `401` `invalid_token`, `403` `insufficient_scope`. Throttled to 600 requests a minute. Without `oauth_access_token`, asserts the `401`.
+url: "{{base_url}}/oauth/v1/api-key"
+method: POST
+auth:
+  type: bearer
+  credentials:
+    token: "{{oauth_access_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "installation": "{{oauth_installation}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // An access token only exists after a browser sign-in (see Authorize).
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      }
+    language: text/javascript
+order: 10000

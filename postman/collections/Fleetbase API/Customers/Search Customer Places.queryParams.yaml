@@ -1,0 +1,18 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    required: false
+    description: Free-text search against the saved places and the geocoder.
+  - name: limit
+    type: integer
+    required: false
+    description: Maximum number of saved places (default 10, at most 50).
+  - name: latitude
+    type: number
+    required: false
+    description: Latitude to rank results by distance from.
+  - name: longitude
+    type: number
+    required: false
+    description: Longitude, with `latitude`.

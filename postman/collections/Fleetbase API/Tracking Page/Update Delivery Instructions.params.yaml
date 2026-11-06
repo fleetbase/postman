@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: text
+    type: string
+    required: false
+    description: The instructions for the driver, up to 500 characters (longer text is cut). Empty clears them.
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug (query string or body). Scopes the lookup to that company's own tracking page.

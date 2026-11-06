@@ -1,0 +1,19 @@
+$kind: http-request
+name: "Update a Customer Place"
+description: |-
+  Updates one of the authenticated customer's saved places and returns it. Takes the same fields as `Save a Customer Place`, all optional; send `latitude` and `longitude` together to move it (one without the other, or out-of-range values, answer `422`). A place that isn't this customer's answers `404` (`Place not found.`).
+
+  Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/places/{{customer_place_id}}"
+method: PUT
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "name": "Office"
+    }
+
+order: 12400

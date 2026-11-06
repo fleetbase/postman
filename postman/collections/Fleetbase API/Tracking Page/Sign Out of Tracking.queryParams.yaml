@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: number
+    type: string
+    required: false
+    description: A tracking number. Signs the device out of that delivery only; omit it to end the device session for every delivery.
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug. Scopes the `number` lookup to that company's own tracking page.

@@ -1,0 +1,10 @@
+$kind: http-request
+description: |-
+  Retrieves one webhook endpoint by its `id` (UUID), without its signing secret. Answers `404` (`Webhook endpoint not found.`) for an endpoint of another organization or of the other environment.
+url: "{{base_url}}/{{namespace}}/webhook-endpoints/:id"
+method: GET
+pathVariables:
+  - key: id
+    value: "{{webhook_endpoint_id}}"
+
+order: 3000

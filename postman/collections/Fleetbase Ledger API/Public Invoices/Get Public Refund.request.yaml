@@ -1,0 +1,22 @@
+$kind: http-request
+description: |-
+  Retrieves the public view of a refund, so the customer can claim it. Used for GNU Taler refunds, which the customer accepts in their wallet from a refund URI. No authentication. `{refund_id}` is the refund's public ID, UUID or gateway reference.
+
+  Response: `{ "refund": { "id", "amount", "currency", "status", "refund_status", "wallet_status", "taler_refund_uri", "qr_image", "qr_text", "gateway_transaction_id", "created_at", "processed_at", "refund_accepted_at", "refund_expires_at", "invoice", "company" } }`. `amount` is in the smallest currency unit, `taler_refund_uri` (also `qr_text`) is the URI to accept the refund with and `qr_image` a QR code of it, `invoice` is `{ id, number, status }` or null, and `company` is `{ name }`.
+
+  Errors: `404` `Gateway Transaction not found.` for an unknown refund, and `404` `{ "error": "This refund does not have a customer refund URI." }` for a refund the customer has nothing to claim for.
+
+  In a contract run this addresses `{{refund_id}}` when the environment sets one. Otherwise it addresses an unknown refund and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/public/refunds/{{refund_id}}"
+method: GET
+scripts:
+  - type: beforeRequest
+    code: |-
+      // A refund needs a paid invoice refunded through a gateway, which a contract run
+      // doesn't create. Without a {{refund_id}} this asserts the 404 refusal.
+      if (!pm.environment.get('refund_id')) {
+          pm.variables.set('refund_id', 'refund_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 4000

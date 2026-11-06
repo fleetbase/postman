@@ -1,0 +1,32 @@
+$kind: http-request
+name: "Verify a Tracking Code"
+description: |-
+  Checks the one-time code from `Send a Tracking Code`. Non-digits in `code` are ignored. A correct code is used up and gives this device a grant for that customer within that order: the answer is the full view (level 1, `viewer: verified`, `session.expires_at` set) and sets the `fb_track` cookie when the device has no session yet or its session would end sooner.
+
+  Errors: `422` (`{ "error": "invalid", "attempts_left" }`) for a wrong code; `410` (`{ "error": "expired" }`) when the code has expired or none was sent; `423` (`{ "error": "paused", "retry_after" }`) after the third wrong code, which pauses that customer's codes for every device for five minutes; `429` (`{ "error": "limited", "retry_after" }`) after 10 checks a minute from one IP; `404` (`code: not_found`) for a number this page can't show or one with no customer to verify as.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}/codes/verify"
+method: POST
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+body:
+  type: json
+  content: |-
+    {
+      "code": "{{tracking_code}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Send a Tracking Code sends nothing in the contract run (see there), so there
+      // is no code for this delivery and the documented answer is 410 expired. A run
+      // that supplies a real tracking_code expects the full view.
+      const code = pm.environment.get('tracking_code') || pm.variables.get('tracking_code');
+      if (!code) {
+          pm.variables.set('expected_status', 410);
+      }
+    language: text/javascript
+order: 4000

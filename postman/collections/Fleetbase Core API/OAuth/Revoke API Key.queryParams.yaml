@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: installation
+    type: string
+    description: "The installation whose key to expire, as sent to Create API Key. Omitted or blank, the app-wide key."

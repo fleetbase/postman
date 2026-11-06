@@ -1,6 +1,9 @@
 $kind: http-request
 name: "List Customer Orders"
-description: "Lists orders owned by the authenticated customer (scoped to `orders.customer_uuid`)."
+description: |-
+  Lists orders owned by the authenticated customer (scoped to `orders.customer_uuid`).
+
+  Since Fleet-Ops v0.7.0 each order is listed with rider fields on top of the standard Order: `fare` (`{ final, total, currency, estimate, distance, time, service, lines }` from the order's service quote, or `null`), `rating` (`{ stars, comment }` once rated, else `null`), `payment_method`, `paid_at` and `dispatch_outcome` (`no_driver_found` for a canceled ad hoc order that every offered driver declined or let expire, else `null`).
 url: "{{base_url}}/{{namespace}}/customers/orders"
 method: GET
 headers:

@@ -1,0 +1,32 @@
+$kind: http-request
+description: |-
+  Creates a webhook endpoint for the API key's organization, in the key's environment (`mode` is `test` for a `flb_test_` key and `live` otherwise). Answers `201` with the endpoint and its signing `secret`; this and `Rotate Webhook Endpoint Secret` are the only responses that include it.
+
+  Response: `{ id, url, events, description, version, mode, status, created_at, updated_at, secret }`. `id` is the endpoint's UUID.
+
+  Errors: `422` for a missing, malformed or non-public `url`, an unknown event or an invalid `status`; `403` when the request is not authenticated with an API key.
+
+  The example creates the endpoint `disabled`, so a contract run never sends events to it; leave `status` out to start receiving events right away.
+url: "{{base_url}}/{{namespace}}/webhook-endpoints"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "url": "{{webhook_endpoint_url}}",
+      "events": ["order.created", "order.completed"],
+      "description": "Postman example endpoint",
+      "status": "disabled"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      var json_response = pm.response.json();
+      let cv = pm.environment;
+      cv.set("webhook_endpoint_id", json_response.id);
+
+      pm.test('A new endpoint comes with its signing secret', function () {
+          pm.expect(json_response.secret, 'secret missing').to.be.a('string').and.match(/^whsec_/);
+      });
+    language: text/javascript
+order: 1000

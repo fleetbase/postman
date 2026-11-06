@@ -1,0 +1,24 @@
+$kind: http-request
+name: "Dispatch a Customer Order"
+description: |-
+  Requests a driver for one of the authenticated customer's orders and returns the order. An ad hoc order (`adhoc: true`, which customer orders are when their order config has `customer_orders_adhoc` set) is offered to nearby drivers; an order with a driver already assigned is dispatched to that driver.
+
+  Errors: `422` when the order was already dispatched (`Order has already been dispatched.`), is no longer `created` (`This order can no longer be dispatched.`), or is neither ad hoc nor assigned (`No driver is available for this order.`); `404` (`Order not found.`) for an order that isn't the customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/dispatch"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's customer order uses the transport config, which is not ad
+      // hoc, and no driver is assigned, so the documented answer is 422 "No driver is
+      // available for this order." An environment whose order config makes customer
+      // orders ad hoc declares customer_orders_adhoc and expects the dispatched order.
+      if (!pm.environment.get('customer_orders_adhoc')) {
+          pm.variables.set('expected_status', 422);
+      }
+    language: text/javascript
+
+order: 15700

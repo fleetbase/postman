@@ -1,0 +1,37 @@
+$kind: http-request
+description: |-
+  Dynamic client registration (RFC 7591), for software installed on many sites. A plugin running on each merchant's own domain cannot share one registered redirect URI, so each install registers a public PKCE client for its own redirect URI. No authentication.
+
+  Only `software_id` and `redirect_uris` are read; name, logo, website and scopes come from the server's listing for that software. The client is named "{software name} ({redirect host})" and is never marked official, so the consent screen shows which site is asking. Registering again with the same software and redirect URI returns the same client (`200` instead of `201`). A client that never gets a grant is pruned after `oauth-server.registration.unused_client_hours` (24 by default).
+
+  Response (`Cache-Control: no-store`): `{ client_id, client_id_issued_at, client_name, software_id, redirect_uris, grant_types, response_types: ["code"], token_endpoint_auth_method: "none", scope }`.
+
+  Errors: `404` `registration_disabled` while `oauth-server.registration.enabled` (`OAUTH_SERVER_REGISTRATION_ENABLED`) is off; `400` `invalid_client_metadata` for unlisted software or a registration Fleetbase turned off; `400` `invalid_redirect_uri`. Throttled to 10 requests a minute.
+
+  With `oauth_registration_redirect_uri` empty, a contract run asserts the `400` and registers nothing.
+url: "{{base_url}}/oauth/register"
+method: POST
+auth:
+  type: noauth
+body:
+  type: json
+  content: |-
+    {
+      "software_id": "fleetbase-woocommerce",
+      "redirect_uris": ["{{oauth_registration_redirect_uri}}"]
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      if (!pm.variables.get('oauth_registration_redirect_uri')) {
+          pm.variables.set('expected_status', 400);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200 || pm.response.code === 201) {
+          var json_response = pm.response.json();
+          pm.environment.set("oauth_registered_client_id", json_response.client_id);
+      }
+    language: text/javascript
+order: 4000

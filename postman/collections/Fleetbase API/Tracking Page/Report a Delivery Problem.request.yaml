@@ -1,0 +1,32 @@
+$kind: http-request
+name: "Report a Delivery Problem"
+description: |-
+  Emails the company's support address (the tracking page's `branding.support_email`) a problem the customer reports with this delivery. The message is trimmed to 1000 characters. Answers `202` with `{ "status": "sent" }`. Needs a verified device, a signed-in customer of the delivery or staff of the owning company.
+
+  Errors: `422` (`{ "error": "not_allowed" }`) when the company turned off problem reports (`visibility.report_problem`), has no support email set, or the message is empty; `429` (`{ "error": "limited" }`) after 3 reports an hour for this order from one IP; `404` (`code: not_found`) for a number this page can't show or a caller without access.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}/report"
+method: POST
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+body:
+  type: json
+  content: |-
+    {
+      "message": "The parcel arrived damaged."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // A report needs a support email on the company's tracking page, which is not set
+      // by default, so the documented answer for a contract run's company is 422
+      // not_allowed (and no email is sent). An environment declaring
+      // tracking_support_email_set expects 202.
+      if (!pm.environment.get('tracking_support_email_set')) {
+          pm.variables.set('expected_status', 422);
+      }
+    language: text/javascript
+order: 8000

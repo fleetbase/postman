@@ -1,0 +1,50 @@
+$kind: http-request
+description: |-
+  Exchanges an authorization code for tokens. Send as `application/x-www-form-urlencoded`; client credentials go in the body as here or in HTTP Basic auth.
+
+  Response (`Cache-Control: no-store`): `{ token_type: "Bearer", expires_in, access_token, refresh_token, scope, id_token }`. The access token is an RS256 JWT bound to the user, the app and, for organization scopes, the organization the user picked. `id_token` is present when `openid` was granted; it carries `iss`, `sub` (the user's public ID), `aud` (the client ID), `iat`, `exp`, `auth_time`, `nonce`, `at_hash`, and the `profile`, `email` and `org_id`/`org_name` claims the scopes allow.
+
+  Errors (`{ error, error_description }`): `400` `invalid_request` for a missing parameter, `400` `invalid_grant` for an expired, used or mismatched code, a wrong `code_verifier` or `redirect_uri`, or a grant that is no longer usable (the user removed the app, was deactivated, or no longer administers the organization); `401` `invalid_client` for bad client credentials. A replayed code also revokes the tokens it issued. Throttled to 600 requests a minute.
+
+  Saves `oauth_access_token` and `oauth_refresh_token`, and clears `oauth_code` either way. Without `oauth_code`, asserts the `400`.
+url: "{{base_url}}/oauth/token"
+method: POST
+auth:
+  type: noauth
+body:
+  type: urlencoded
+  content:
+    - key: grant_type
+      value: authorization_code
+    - key: code
+      value: "{{oauth_code}}"
+    - key: redirect_uri
+      value: "{{oauth_redirect_uri}}"
+    - key: client_id
+      value: "{{oauth_client_id}}"
+    - key: client_secret
+      value: "{{oauth_client_secret}}"
+    - key: code_verifier
+      value: "{{oauth_code_verifier}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // A code only exists after a browser sign-in (see Authorize).
+      if (!pm.variables.get('oauth_code')) {
+          pm.variables.set('expected_status', 400);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      // A code is single-use, and replaying one revokes the tokens it issued.
+      pm.environment.unset('oauth_code');
+
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.environment.set('oauth_access_token', json_response.access_token);
+          if (json_response.refresh_token) {
+              pm.environment.set('oauth_refresh_token', json_response.refresh_token);
+          }
+      }
+    language: text/javascript
+order: 6000

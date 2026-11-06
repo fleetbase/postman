@@ -1,0 +1,13 @@
+$kind: http-request
+name: "List Customer Order Messages"
+description: |-
+  Lists the chat between the customer and the driver of their ride, oldest first, at most the latest 200: `[{ id, from, text, sent_at }]`, where `from` is `rider` or `driver`. Empty until a driver is assigned. The chat is a core chat channel with just the two of them, which Navigator shows as the order's customer thread.
+
+  Answers `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/messages"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 15400

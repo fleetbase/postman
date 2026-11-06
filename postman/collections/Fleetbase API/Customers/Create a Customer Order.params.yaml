@@ -28,7 +28,11 @@ fields:
     type: string
     required: false
     description: |-
-      Optional ServiceQuote reference (uuid or `sqte_…` public_id) returned by `GET /v1/service-quotes`. When supplied, the controller resolves the quote via `ServiceQuote::resolveFromRequest` and consumes it via `$order->purchaseServiceQuote()` to lock the pricing onto the order's PurchaseRate (same behavior as `OrderController::create`).
+      Optional ServiceQuote reference (uuid or `sqte_…` public_id) returned by `GET /v1/service-quotes`. When supplied, the controller resolves the quote via `ServiceQuote::resolveFromRequest` and consumes it via `$order->purchaseServiceQuote()` to lock the pricing onto the order's PurchaseRate (same behavior as `OrderController::create`). Since Fleet-Ops v0.7.0 it is required when the order config matches drivers by vehicle type, and a quote that has expired or belongs to another company is refused with `422`.
+  - name: payment_method
+    type: string
+    required: false
+    description: How the customer will pay, `cash` or `card`. Stored on the payload when the payload is built from this request (inline `payload` object or `pickup`/`dropoff` fields), not on an existing payload passed by id. Fleet-Ops v0.7.0 and later.
   - name: payload
     type: string|object
     required: false

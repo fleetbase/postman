@@ -1,0 +1,27 @@
+$kind: http-request
+name: "Rate a Customer Order"
+description: |-
+  Rates the driver of a finished ride, once, from 1 to 5 stars with an optional comment. The rating counts towards the driver's average (`rating` on `Get Customer Order Driver`) and shows on the order as `rating`. Answers `{ "status": "rated" }`.
+
+  Errors: `422` for `stars` that isn't a whole number from 1 to 5 (`Rate from 1 to 5 stars.`) or an order that isn't completed with a driver (`Only a finished ride can be rated.`); `409` (`You already rated this ride.`); `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/rating"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "stars": 5,
+      "comment": "Friendly and on time."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's customer order is never completed, so the documented
+      // answer is 422 "Only a finished ride can be rated."
+      pm.variables.set('expected_status', 422);
+    language: text/javascript
+
+order: 15800

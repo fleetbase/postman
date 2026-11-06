@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug. Scopes the lookup to that company's own tracking page; a number from another company then answers `404`.

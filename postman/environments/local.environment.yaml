@@ -9,3 +9,48 @@ values:
   - key: api_key
     value: ''
     enabled: true
+  - key: webhook_endpoint_id
+    value: ''
+    enabled: true
+  - key: socket_auth_enabled
+    value: ''
+    enabled: true
+  - key: oauth_client_id
+    value: ''
+    enabled: true
+  - key: oauth_client_secret
+    value: ''
+    enabled: true
+  - key: oauth_redirect_uri
+    value: ''
+    enabled: true
+  - key: oauth_code
+    value: ''
+    enabled: true
+  - key: oauth_access_token
+    value: ''
+    enabled: true
+  - key: oauth_refresh_token
+    value: ''
+    enabled: true
+  - key: oauth_review_access_id
+    value: ''
+    enabled: true
+  - key: oauth_registration_redirect_uri
+    value: ''
+    enabled: true
+  - key: customer_orders_adhoc
+    value: ''
+    enabled: true
+  - key: adhoc_offer_driver_id
+    value: ''
+    enabled: true
+  - key: tracking_instructions_edit
+    value: ''
+    enabled: true
+  - key: tracking_support_email_set
+    value: ''
+    enabled: true
+  - key: tracking_account_signed_in
+    value: ''
+    enabled: true

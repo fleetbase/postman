@@ -1,0 +1,15 @@
+$kind: collection
+description: |-
+  Webhook endpoints are the URLs Fleetbase sends resource events to (`order.created`, `order.driver_assigned`, and the other events the installed extensions register). These endpoints let an integration, such as an e-commerce connector, register and manage its own webhook endpoints with an API key, without a console session.
+
+  An endpoint belongs to the API key's organization and to the key's environment: one created with a `flb_test_` key only receives test-mode events and is only listed for test keys, and the same for live. Creating and updating need an API key: with any other credential (for example a Sanctum user token) they answer `403`.
+
+  Each endpoint has its own signing secret (`whsec_` followed by 48 hex characters). The secret is returned only by `Create Webhook Endpoint` and `Rotate Webhook Endpoint Secret`; `Query`, `Retrieve` and `Update` never include it, so store it when you receive it.
+
+  Every delivery is a `POST` of the event JSON with two signatures:
+
+  - `X-Fleetbase-Signature: t=<unix time>,v1=<hex>`, where `<hex>` is the HMAC-SHA256 of `<t>.<raw request body>` keyed with the endpoint's signing secret. Recompute it over the raw body you received (never a re-encoded one), compare in constant time, and reject old timestamps to stop replays (Fleetbase's own verifier accepts 5 minutes).
+  - `Signature`, the legacy HMAC-SHA256 of the body keyed with the API key's secret. It is still sent for receivers that verify it.
+
+  A failing delivery is attempted up to 3 times, with exponential backoff. Requires Core API with the webhook endpoints API (October 2026).
+order: 5000
