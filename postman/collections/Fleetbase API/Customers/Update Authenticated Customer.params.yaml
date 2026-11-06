@@ -16,6 +16,10 @@ fields:
     type: string
     required: false
     description: New phone (E.164 recommended). Mirrored to the linked user.
+  - name: phone_code
+    type: string
+    required: false
+    description: Required when `phone` differs from the current number. The code sent by SMS to the new number. The change is refused when another account holds that number.
   - name: photo
     type: string
     required: false

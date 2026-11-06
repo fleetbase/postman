@@ -1,6 +1,6 @@
 $kind: http-request
 name: "Update Authenticated Customer"
-description: "Updates the authenticated customer's profile. Changes to `name`, `email`, and `phone` are mirrored onto the linked user so subsequent logins work."
+description: "Updates the authenticated customer's profile. Changes to `name`, `email`, and `phone` are mirrored onto the linked user so subsequent logins work. Changing to a different phone number needs `phone_code`, the code sent to that number, and is refused when another account holds it."
 url: "{{base_url}}/{{namespace}}/customers/me"
 method: PUT
 headers:
@@ -11,7 +11,7 @@ body:
   content: |-
     {
       "name": "{{customer_name}}",
-      "phone": "{{customer_phone}}",
+      "phone": "{{created_customer_phone}}",
       "email": "{{customer_email}}"
     }
 
