@@ -3,7 +3,9 @@ name: "Cancel a Customer Order"
 description: |-
   Cancels one of the authenticated customer's orders and returns it. An optional `reason` (trimmed to 1000 characters) is recorded as the cancellation reason, as on `Orders/Cancel an Order`.
 
-  Errors: `422` (`This order can no longer be canceled.`) for an order that is completed, already canceled or at a terminal activity; `404` (`Order not found.`) for an order that isn't the customer's. Fleet-Ops v0.7.0 and later.
+  Governed by the order config's `customer.cancellation` policy: customers may cancel while `enabled` is on (the default) and until the order reaches the `allowed_until` activity, when one is set (by default, any time before the order finishes).
+
+  Errors: `422` (`This order can no longer be canceled.`) for an order that is completed, already canceled or at a terminal activity, has reached the policy's `allowed_until` activity, or whose config doesn't let customers cancel; `404` (`Order not found.`) for an order that isn't the customer's. Fleet-Ops v0.7.0 and later.
 url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/cancel"
 method: POST
 headers:

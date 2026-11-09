@@ -85,7 +85,7 @@ fields:
     description: Files attached to the order.
   - name: purchase_rate
     type: object
-    description: Purchase rate attached to the order, when present.
+    description: Purchase rate attached to the order, when present. Since Fleet-Ops v0.7.0 it carries `service_name` (the quoted service rate's name) and `repriced` (`true` once the order config's `pricing.reprice_on_completion` policy priced the completed order again from its actual distance and time).
   - name: notes
     type: string
     description: Free-form notes attached to the order.
@@ -113,6 +113,15 @@ fields:
   - name: adhoc_distance
     type: integer
     description: Ad hoc dispatch distance in meters.
+  - name: dispatch_outcome
+    type: string
+    description: Ad hoc orders only. How offering the order to drivers ended, `no_driver_found` when every driver it was offered to declined or let the offer run out; `null` while it is open or once a driver took it. Fleet-Ops v0.7.0 and later.
+  - name: driver_rating
+    type: object
+    description: The customer's rating of the order's driver, `{ stars, comment }`, or `null` before one. Present when the rating was loaded (customer order endpoints). Fleet-Ops v0.7.0 and later.
+  - name: payment_status
+    type: string
+    description: The settlement status of the order's transaction (e.g. `paid` once its invoice is paid), or `null` without a transaction. Present when the transaction was loaded (customer order endpoints). Fleet-Ops v0.7.0 and later.
   - name: distance
     type: integer
     description: Preliminary route distance in meters.

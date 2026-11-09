@@ -1,9 +1,9 @@
 $kind: http-request
 name: "Send a Customer Order Message"
 description: |-
-  Sends the driver of the customer's ride a chat message, always as the customer, and notifies the driver. Answers `201` with the message: `{ id, from: "rider", text, sent_at }`.
+  Sends the driver of the customer's order a chat message, always as the customer, and notifies the driver. Answers `201` with the message: `{ id, from: "customer", text, sent_at }`.
 
-  Errors: `422` for an empty message or one over 2000 characters (`Write a message of up to 2000 characters.`), for a ride that has ended (`This ride has ended.`), or before a driver is assigned (`You can message your driver once they accept.`); `404` (`Order not found.`) for an order that isn't the customer's. Limited to 30 requests a minute. Fleet-Ops v0.7.0 and later.
+  Needs the order config's `customer.interactions.chat` policy: `403` (`Messaging the driver is not available for this order.`) while it is off, which is the default. Other errors: `422` for an empty message or one over 2000 characters (`Write a message of up to 2000 characters.`), for a chat that was closed (`This conversation has ended.`, e.g. by the config's `close_chat` trigger action once the order finished), or before a driver is assigned (`You can message the driver once one is assigned.`); `404` (`Order not found.`) for an order that isn't the customer's. Limited to 30 requests a minute. Fleet-Ops v0.7.0 and later.
 url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/messages"
 method: POST
 headers:
@@ -18,10 +18,12 @@ body:
 scripts:
   - type: beforeRequest
     code: |-
-      // The contract run's customer order is never assigned a driver, so there is no
-      // chat yet and the documented answer is 422 "You can message your driver once
-      // they accept."
-      pm.variables.set('expected_status', 422);
+      // The contract run's customer order is on the default transport config, whose
+      // customer.interactions.chat policy is off, so the documented answer is 403. An
+      // environment that declares customer_interactions_chat still has no driver on the
+      // order, so no chat is open yet: 422 "You can message the driver once one is
+      // assigned."
+      pm.variables.set('expected_status', pm.environment.get('customer_interactions_chat') ? 422 : 403);
     language: text/javascript
 
 order: 15500

@@ -1,4 +1,48 @@
 $kind: collection
 description: |-
-  An Order Config defines the activity flow that orders progress through (created → dispatched → enroute → completed, etc.). Each company has at least the system default `transport` config; bespoke configs can be defined for other operating models. Use these read-only endpoints to discover the configs available to the API credential's company and to drive UI such as status filters, activity labels, and progress timelines.
+  An Order Config defines how orders of one kind run: the activity flow they progress through (created → dispatched → enroute → completed, etc.), the policies that govern what customers and dispatch may do with them, the custom fields they carry, and the triggers that run on their events. Each company has at least the system default `transport` config; bespoke configs can be defined for other operating models (haulage, rental, parcel delivery, moving people and so on). Use these read-only endpoints to discover the configs available to the API credential's company and to drive UI such as order forms, status filters, activity labels, and progress timelines.
+
+  ## Policies
+
+  Since Fleet-Ops v0.7.0 every config has `policies`: settings, nested by policy key, that the API enforces for its orders. The response always carries every built-in policy with any setting the config leaves out filled in from its default, so a client can read `policies.customer.interactions.chat` without checking for it. Extensions can register policies of their own, which then appear under their key too. The built-in policies and their defaults:
+
+  - `dispatch.adhoc`: whether orders customers place are offered to nearby drivers, how, and what happens when nobody accepts.
+    - `customer_orders` (`false`): orders placed through `Customers/Create a Customer Order` are ad hoc.
+    - `strategy` (`null`): a registered offer strategy, `sequential` (one driver at a time) or `broadcast` (every nearby driver at once), or one an extension adds; `null` uses the company's dispatch settings.
+    - `offer_timeout` (`null`): seconds a driver has to accept a one-at-a-time offer; `null` uses the company's.
+    - `radius` (`null`): metres around the pickup to look for drivers (100 to 200000); `null` uses the order's or the company's.
+    - `on_exhausted` (`keep_open`): when every driver declined or let the offer run out, `keep_open` keeps the order open for the operator and `cancel` cancels it (the order's `dispatch_outcome` is then `no_driver_found`).
+  - `dispatch.matching`: which drivers the config's orders may go to.
+    - `vehicle_type` (`false`): the order needs a vehicle of the type of the service it was quoted for, so customer orders need a service quote.
+    - `exclude_busy_drivers` (`false`): drivers whose current order hasn't finished aren't offered another.
+  - `customer.ordering`: what a customer must give, and have settled, to place an order.
+    - `payment_methods` (`[]`): the payment methods a customer may choose (e.g. `["cash", "card"]`), stored on the order's payload; empty means the customer doesn't choose one.
+    - `require_quote` (`false`): the order must be placed with a service quote.
+    - `require_settlement` (`[]`): while an earlier order of this config paid by one of these methods is completed but its transaction isn't settled, the customer can't place another (`402`).
+  - `customer.cancellation`: whether, and until when, a customer may cancel their own order.
+    - `enabled` (`true`): customers may cancel.
+    - `allowed_until` (`null`): an activity code; once the order has reached it, the customer can no longer cancel. `null` means any time before the order finishes.
+  - `customer.interactions`: what a customer can do with the driver of their order. All off by default; the customer endpoints answer `403` while a setting is off.
+    - `chat` (`false`): message the driver (`Customers/List Customer Order Messages`, `Send a Customer Order Message`).
+    - `rating` (`false`): rate the driver once the order is completed (`Customers/Rate a Customer Order`).
+    - `share_tracking` (`false`): share a live tracking link (`Customers/Share a Customer Order`).
+  - `pricing`: how the price of the config's orders is settled.
+    - `reprice_on_completion` (`false`): price a completed order again from the distance and time it actually took, through the service rate it was quoted on (the order's `purchase_rate.repriced` is then `true`).
+    - `metering_starts_at` (`null`): the activity from which distance and time are measured; `null` means from when the order started.
+
+  ## Lifecycle
+
+  A config's lifecycle, set in the console, can name its `initial`, `completed` and `canceled` activities and further `terminal` ones, turn `dispatch` off for orders that are never dispatched, and turn on `strict_transitions`, under which an activity update must be one of the current activity's next steps. New orders start at the initial activity (`created` by default).
+
+  ## Custom fields
+
+  `custom_fields` lists the fields orders of the config carry, with what a form needs to ask for them: `{ name, label, type, component, options, required, default_value, help_text }`. Send their values when creating an order as `custom_fields: { name: value }` (`Orders/Create an Order`, `Customers/Create a Customer Order`); each field's own validation rules apply.
+
+  ## Triggers
+
+  A config can also run actions on its orders' events, configured in the console and not part of this public response. An activity's `actions` run when an order reaches that activity; the config's triggers run on order events: `order.created`, `order.completed`, `order.canceled`, `dispatch.offer_exhausted` (every driver an ad hoc order was offered to declined or let it run out) and `driver.approaching` (the assigned driver came within a distance of the pickup or dropoff). Each trigger names an action, its parameters and optional conditions. Built-in actions: `notify_customer`, `notify_driver` (push notifications whose text can use placeholders such as `{driver.first_name}`, `{customer.name}` or `{order.tracking_number}`), `open_chat`, `close_chat`, `set_meta` and `cancel`; extensions add their own, such as Ledger's `send_invoice`. Actions are queued, so they never hold up the change that fired them.
+
+  ## Templates
+
+  A config can be made from a template, which sets its flow, lifecycle, policies, triggers and custom fields in one go. The built-in templates are `transport` (the default every company gets) and `passenger` (on-demand orders booked by the customer, offered to nearby drivers one at a time, priced again from the actual distance and time, with chat, rating and tracking sharing on and a `passengers` custom field). Create one for a company with `php artisan fleetops:create-order-config {template} --company={company uuid or public id}` (add `--name=` to make a new, named config instead of the company's system config for the template; `--list` lists the templates). Extensions can register templates of their own.
 order: 8500

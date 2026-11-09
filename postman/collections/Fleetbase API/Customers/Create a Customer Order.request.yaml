@@ -1,9 +1,17 @@
 $kind: http-request
 name: "Create a Customer Order"
 description: |-
-  Creates an Order on behalf of the authenticated customer. Accepts the canonical Fleet-Ops Order create shape — the same fields as `POST /v1/orders` would accept from an operator. The customer's `uuid` is automatically attached as `orders.customer_uuid`; any client-supplied `customer` field is ignored. `status` is forced to `created` (customers cannot self-dispatch). The Order lands in the company resolved from the API credential.
+  Creates an Order on behalf of the authenticated customer. Accepts the canonical Fleet-Ops Order create shape — the same fields as `POST /v1/orders` would accept from an operator. The customer's `uuid` is automatically attached as `orders.customer_uuid`; any client-supplied `customer` field is ignored, and customers cannot set the status or dispatch the order themselves. The Order lands in the company resolved from the API credential and is returned as the standard Order resource (see `Retrieve a Customer Order`).
 
-  Since Fleet-Ops v0.7.0: the order is ad hoc when its order config has `customer_orders_adhoc` set, so `Dispatch a Customer Order` can offer it to nearby drivers; a config that matches drivers by vehicle type (`match_vehicle_type`) requires a `service_quote`, whose service type becomes the order's `required_vehicle_type` (`422` `Choose a ride option first.` without one); a quote from another company or past its expiry answers `422` (`This fare has expired. Please get a new one.`); a `ride` order is refused with `402` (`Pay for your last trip before you book another.`) while one of the customer's completed card rides with a final fare is unpaid; and `payment_method` is stored on a payload built from this request. The response carries the rider fields described on `Retrieve a Customer Order`.
+  Since Fleet-Ops v0.7.0 the order's config governs the rest:
+
+  - The status starts at the config lifecycle's initial activity (`created` unless the config says otherwise).
+  - The order is ad hoc when the config's `dispatch.adhoc.customer_orders` policy is on, so `Dispatch a Customer Order` offers it to nearby drivers.
+  - A `service_quote` is required when the config's `dispatch.matching.vehicle_type` or `customer.ordering.require_quote` policy is on. With `vehicle_type`, the quoted service's type becomes the order's `required_vehicle_type`.
+  - `payment_method` must be one of the config's `customer.ordering.payment_methods` when that list is set, and is stored on a payload built from this request.
+  - `custom_fields` (`{ name: value }`) are checked against each of the config's custom fields' rules and stored on the order.
+
+  Errors: `422` for a company with no order config (`No order config available for this company.`), a config the company doesn't let customers order (`Customers cannot place this type of order.`, the company's `fleet-ops.customer-enabled-order-configs` setting), a quote that has expired or belongs to another company (`This quote has expired. Please get a new one.`), a missing quote when one is required (`Choose a service quote for this order first.`), a payment method the config doesn't offer (`Choose a payment method: cash, card.`, listing the config's methods) and a custom field that fails its rules (the first validation message); `402` (`Settle your previous order before placing another.`) when the config's `customer.ordering.require_settlement` policy lists payment methods and one of the customer's completed orders of this config paid by one of them has a transaction that isn't settled.
 url: "{{base_url}}/{{namespace}}/customers/orders"
 method: POST
 headers:

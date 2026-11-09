@@ -39,7 +39,16 @@ values:
   - key: oauth_registration_redirect_uri
     value: ''
     enabled: true
-  - key: customer_orders_adhoc
+  - key: dispatch_adhoc_customer_orders
+    value: ''
+    enabled: true
+  - key: customer_interactions_chat
+    value: ''
+    enabled: true
+  - key: customer_interactions_rating
+    value: ''
+    enabled: true
+  - key: customer_interactions_share_tracking
     value: ''
     enabled: true
   - key: adhoc_offer_driver_id

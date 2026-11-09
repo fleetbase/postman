@@ -1,6 +1,8 @@
 $kind: collection
 description: |-
-  Customer invoice endpoints let a signed-in customer (for example a rider in a Fleet-Ops passenger app) find the Ledger invoice for their own order, then view and pay it through the Public Invoices endpoints. Ledger v0.1.0 and later.
+  Customer invoice endpoints let a signed-in customer of a customer app built on the Fleet-Ops customer API find the Ledger invoice for their own order, then view and pay it through the Public Invoices endpoints. Ledger v0.1.0 and later.
+
+  Paying the invoice settles the order's transaction, so the order then shows `payment_status: paid` on the Fleet-Ops customer order endpoints, and an order config's `customer.ordering.require_settlement` policy no longer holds back the customer's next order.
 
   Requests send the organization's API key as the bearer token and the customer's Fleet-Ops token in the `Customer-Token` header.
 order: 1500

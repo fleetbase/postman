@@ -21,11 +21,16 @@ body:
 scripts:
   - type: beforeRequest
     code: |-
-      // A report needs a support email on the company's tracking page, which is not set
-      // by default, so the documented answer for a contract run's company is 422
-      // not_allowed (and no email is sent). An environment declaring
-      // tracking_support_email_set expects 202.
-      if (!pm.environment.get('tracking_support_email_set')) {
+      // A report needs a verified device: the shared link (Redeem a Shared Tracking Link,
+      // with customer_interactions_share_tracking declared) or a real tracking_code.
+      // Without either the caller has no access and the documented answer is 404. With
+      // access, a report needs a support email on the company's tracking page, which is
+      // not set by default, so the answer is 422 not_allowed (and no email is sent). An
+      // environment declaring tracking_support_email_set as well expects 202.
+      const verified = pm.environment.get('customer_interactions_share_tracking') || pm.environment.get('tracking_code') || pm.variables.get('tracking_code');
+      if (!verified) {
+          pm.variables.set('expected_status', 404);
+      } else if (!pm.environment.get('tracking_support_email_set')) {
           pm.variables.set('expected_status', 422);
       }
     language: text/javascript

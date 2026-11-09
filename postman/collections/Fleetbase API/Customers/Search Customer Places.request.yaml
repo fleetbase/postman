@@ -1,7 +1,7 @@
 $kind: http-request
 name: "Search Customer Places"
 description: |-
-  Searches the authenticated customer's saved places and the geocoder together and returns Places, for an address picker. Only this customer's own saved places are searched; other customers' places, and unowned places from other customers' trips, are never returned. Geocoder results are not saved. Without `query` the saved places come back by name.
+  Searches the authenticated customer's saved places and the geocoder together and returns Places, for an address picker. Only this customer's own saved places are searched; other customers' places, and unowned places from other customers' orders, are never returned. Geocoder results are not saved. Without `query` the saved places come back by name.
 
   Fleet-Ops v0.7.0 and later.
 url: "{{base_url}}/{{namespace}}/customers/places/search"

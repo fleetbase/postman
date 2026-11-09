@@ -1,13 +1,24 @@
 $kind: http-request
 name: "List Customer Order Messages"
 description: |-
-  Lists the chat between the customer and the driver of their ride, oldest first, at most the latest 200: `[{ id, from, text, sent_at }]`, where `from` is `rider` or `driver`. Empty until a driver is assigned. The chat is a core chat channel with just the two of them, which Navigator shows as the order's customer thread.
+  Lists the chat between the customer and the driver of their order, oldest first, at most the latest 200: `[{ id, from, text, sent_at }]`, where `from` is `customer` or `driver`. Empty until a driver is assigned. The chat is a core chat channel with just the two of them, which Navigator shows as the order's customer thread.
 
-  Answers `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+  Needs the order config's `customer.interactions.chat` policy: `403` (`Messaging the driver is not available for this order.`) while it is off, which is the default. Answers `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
 url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/messages"
 method: GET
 headers:
   Accept: application/json
   Customer-Token: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's customer order is on the default transport config, whose
+      // customer.interactions.chat policy is off, so the documented answer is 403. An
+      // environment whose order config turns chat on declares
+      // customer_interactions_chat and expects the (empty) chat.
+      if (!pm.environment.get('customer_interactions_chat')) {
+          pm.variables.set('expected_status', 403);
+      }
+    language: text/javascript
 
 order: 15400

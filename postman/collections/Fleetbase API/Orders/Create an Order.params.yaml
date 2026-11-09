@@ -79,7 +79,7 @@ fields:
         description: Additional customer metadata.
   - name: dispatch
     type: boolean
-    description: When `true`, Fleetbase dispatches the order after it is created. Dispatch is skipped for integrated vendor orders.
+    description: When `true`, Fleetbase dispatches the order after it is created. Dispatch is skipped for integrated vendor orders and, since Fleet-Ops v0.7.0, for an order config whose lifecycle turns dispatch off.
   - name: adhoc
     type: boolean
     description: Marks the order as ad hoc.
@@ -97,10 +97,13 @@ fields:
     description: Date and time when the order should be scheduled.
   - name: status
     type: string
-    description: Initial order status. Defaults to `created` when omitted.
+    description: Initial order status. When omitted, the order starts at its config lifecycle's initial activity, `created` unless the config names another (Fleet-Ops v0.7.0 and later).
   - name: internal_id
     type: string
     description: Optional internal identifier for the order.
+  - name: custom_fields
+    type: object
+    description: Values for the order config's custom fields, as `{ name: value }` (see `custom_fields` on `Order Configs/Retrieve an Order Config`). A field is matched by its name, its label, or its label in snake case; values for fields the config doesn't have are ignored. When any value is sent, each field's own validation rules apply and every required field must be given (`422` otherwise). Fleet-Ops v0.7.0 and later.
   - name: meta
     type: object
     description: Additional order metadata.

@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Updates the current activity state for an order. The response returns the order with the latest workflow activity applied.
+
+  Since Fleet-Ops v0.7.0 the order's config decides whether the update is allowed (`OrderConfig::authorizeTransition()`), answering `422` for an order that has already finished (`This order has already finished.`, at a terminal activity of its config), an activity its config's strict transitions don't permit from the current one (`This activity is not a permitted next step for the order.`), `dispatched` on a config whose lifecycle turns dispatch off (`Orders of this type are not dispatched.`), and an activity that needs proof of delivery sent without `proof` (`Proof of delivery is required for this activity or must be explicitly bypassed.`). With strict transitions the config's own definition of the activity replaces the one sent. An order whose status is `completed` still answers `400` (`Order is already completed.`). Reaching an activity runs that activity's trigger actions.
 url: "{{base_url}}/{{namespace}}/orders/:id/update-activity"
 method: POST
 pathVariables:
