@@ -1,0 +1,40 @@
+$kind: http-request
+name: "Decline an Order"
+description: |-
+  Turns down an ad hoc order offered to a driver. The order is not offered to that driver again, and when offers go out one driver at a time it moves on to the next driver. Answers `{ "status": "declined", "order": "<order public id>" }`.
+
+  The driver is the signed-in driver of the order's company, or, for an API key that is not signed in as one, the driver named by `driver` (a `driver_…` public id) who works for the order's company directly or through their user.
+
+  Errors: `404` (`Order resource not found.`) for an unknown order; `404` (`Driver not found.`) when no such driver can be resolved; `409` (`This order is not offered to you.`) when the order isn't ad hoc or already has a driver, or, with one-at-a-time offers, when the driver has no open offer for it. With offers broadcast to every nearby driver, a decline is recorded whether or not the driver was notified.
+
+  Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/orders/:id/decline"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: id
+    value: "{{order_id}}"
+    description: (Required) The id of the ad hoc order to decline.
+body:
+  type: json
+  content: |-
+    {
+        "driver": "{{driver_id}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // In the contract run the Drivers folder has already deleted {{driver_id}}, and
+      // the order created above is not ad hoc, so the documented answer is 404 "Driver
+      // not found." (a resolvable driver would get 409 "This order is not offered to
+      // you."). An environment that seeds an open ad hoc offer declares
+      // adhoc_offer_driver_id and expects the decline to succeed.
+      const offered = pm.environment.get('adhoc_offer_driver_id');
+      if (offered) {
+          pm.variables.set('driver_id', offered);
+      } else {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 4500

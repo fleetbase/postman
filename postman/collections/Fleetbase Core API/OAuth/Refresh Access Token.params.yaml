@@ -1,0 +1,21 @@
+$kind: params
+fields:
+  - name: grant_type
+    type: enum
+    values: ["refresh_token"]
+    required: true
+    description: "`refresh_token`."
+  - name: refresh_token
+    type: string
+    required: true
+    description: "The latest refresh token. Each refresh returns a new one and retires the one sent."
+  - name: client_id
+    type: string
+    required: true
+    description: "The app's client ID."
+  - name: client_secret
+    type: string
+    description: "The app's secret, for a confidential client. Leave it out (or empty) for a public client."
+  - name: scope
+    type: string
+    description: "Optional; a narrower set of the granted scopes."

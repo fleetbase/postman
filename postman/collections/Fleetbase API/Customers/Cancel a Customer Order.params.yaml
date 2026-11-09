@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: reason
+    type: string
+    required: false
+    description: Why the customer canceled, up to 1000 characters.

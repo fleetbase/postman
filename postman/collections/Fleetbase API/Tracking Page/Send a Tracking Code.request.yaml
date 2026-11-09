@@ -1,0 +1,30 @@
+$kind: http-request
+name: "Send a Tracking Code"
+description: |-
+  Sends a one-time code to the customer's email or phone on record, so this device can unlock the full view with `Verify a Tracking Code`. `channel` must be one of the channels `Look Up a Tracking Number` listed in `verify.channels`; the code goes to the contact details stored on the delivery, never to an address the caller supplies. Sending a new code voids the earlier unused ones. The code expires after ten minutes.
+
+  Answers `202` with `{ channel, masked, expires_in, resend_after }` (seconds). Errors: `404` (`code: not_found`) for a number this page can't show; `422` (`{ "error": "channel_unavailable" }`) when the channel isn't available for this delivery; `429` (`{ "error": "cooldown" | "limited", "retry_after" }`) within 30 seconds of the last send, after 3 sends for this customer or 5 from this IP in 15 minutes; `423` (`{ "error": "paused", "retry_after" }`) while codes are paused after too many wrong ones.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}/codes"
+method: POST
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+body:
+  type: json
+  content: |-
+    {
+      "channel": "email"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run tracks the customer order from the Customers folder, whose
+      // customer Delete Authenticated Customer has erased by now: no email or phone
+      // is left on record, so no channel is available and the documented answer is
+      // 422 channel_unavailable. It also means the run sends nobody a code.
+      pm.variables.set('expected_status', 422);
+    language: text/javascript
+order: 3000

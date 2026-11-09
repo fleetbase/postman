@@ -1,0 +1,10 @@
+$kind: http-request
+description: |-
+  Deletes a webhook endpoint; it receives no further events. Answers `{ "id": "<id>", "deleted": true }`, or `404` (`Webhook endpoint not found.`).
+url: "{{base_url}}/{{namespace}}/webhook-endpoints/:id"
+method: DELETE
+pathVariables:
+  - key: id
+    value: "{{webhook_endpoint_id}}"
+
+order: 6000

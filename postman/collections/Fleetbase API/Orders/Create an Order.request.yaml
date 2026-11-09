@@ -3,6 +3,8 @@ description: |-
   Creates a new order for the current company. Provide an existing payload ID, an inline payload, a pickup/dropoff pair, or at least two waypoints; Fleetbase creates or attaches the payload before creating the order.
 
   You can assign a driver, vehicle, facilitator, customer, service quote, or schedule at creation time. When `dispatch` is true, Fleetbase dispatches the order after it is created unless the order belongs to an integrated vendor flow.
+
+  Since Fleet-Ops v0.7.0 the order config decides more of the order: without a `status` the order starts at the config lifecycle's initial activity (`created` unless the config says otherwise); `dispatch` is ignored for a config whose lifecycle turns dispatch off; and `custom_fields` (`{ name: value }`) are checked against the config's custom fields and stored on the order, answering `422` with the first validation message when a value fails a field's rules or a required field is missing.
 url: "{{base_url}}/{{namespace}}/orders"
 method: POST
 headers:

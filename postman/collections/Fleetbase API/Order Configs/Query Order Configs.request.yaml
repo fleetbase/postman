@@ -1,6 +1,7 @@
 $kind: http-request
 name: "Query Order Configs"
-description: "Lists OrderConfigs available to the company resolved from the API credential."
+description: |-
+  Lists OrderConfigs available to the company resolved from the API credential. Each config carries its activity `flow`, its resolved `policies` (every built-in policy with defaults filled in) and its `custom_fields`; see the folder description for each policy setting. Configs a company makes from a template (`transport`, `passenger`) are listed like any other.
 url: "{{base_url}}/{{namespace}}/order-configs"
 method: GET
 headers:

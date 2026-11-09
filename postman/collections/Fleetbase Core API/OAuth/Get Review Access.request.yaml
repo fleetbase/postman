@@ -1,0 +1,38 @@
+$kind: http-request
+description: |-
+  App Review sign-in status for something the token's organization owns. App stores reject apps their reviewers can't sign in to, so an owner can turn on a review phone number with a 6-digit code for, e.g., one Storefront store.
+
+  `type` is an App Review type an extension registers, and the scope covering it is checked here: Storefront's `storefront-store` and `storefront-network` need `storefront:review-access`. `id` is the subject's public ID or UUID, in the token's organization.
+
+  Response (`Cache-Control: no-store`): `{ "review_access": { type, enabled, phone, phone_display, has_code, code_generated_at, enabled_at } }`. The code is never returned here.
+
+  Errors: `404` `not_found` for an unknown type or nothing with that id in the organization, `403` `insufficient_scope`, `401` `invalid_token`. Throttled to 600 requests a minute. Without `oauth_access_token` asserts the `401`, and without `oauth_review_access_id` the `404`.
+url: "{{base_url}}/oauth/v1/review-access/:type/:id"
+method: GET
+pathVariables:
+  - key: type
+    value: "{{oauth_review_access_type}}"
+  - key: id
+    value: "{{oauth_review_access_id}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{oauth_access_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Without an id the path has an empty segment and no route matches, so address a
+      // placeholder instead: the token is then checked (401 without one) and the
+      // placeholder answers the not-found contract. It is a run-wide local variable, so
+      // the next review-access request sees it and follows.
+      const missing = ['', undefined, null, 'review_access_missing'].includes(pm.variables.get('oauth_review_access_id'));
+      if (missing) {
+          pm.variables.set('oauth_review_access_id', 'review_access_missing');
+      }
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      } else if (missing) {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 11000

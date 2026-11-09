@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: channel
+    type: string
+    required: true
+    description: Where to send the code. One of `sms` or `email`, and one of the channels the lookup listed in `verify.channels`.
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug (query string or body). Scopes the lookup to that company's own tracking page.

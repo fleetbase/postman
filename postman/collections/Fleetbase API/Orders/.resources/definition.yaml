@@ -4,7 +4,7 @@ description: |-
 
   ## Ad hoc orders
 
-  A driver assigned to an order, by dispatch or auto-assign, has the order; there is nothing for the driver to accept. Only ad hoc orders (`adhoc: true`) are offered to drivers: dispatching one notifies the drivers within `adhoc_distance`, and Fleet-Ops notifies them again every minute until a driver takes it. The first driver to take it does so with `Start an Order`, sending their driver id as `assign`.
+  A driver assigned to an order, by dispatch or auto-assign, has the order; there is nothing for the driver to accept. Only ad hoc orders (`adhoc: true`) are offered to drivers: dispatching one notifies the drivers within `adhoc_distance`, and Fleet-Ops notifies them again every minute until a driver takes it. The first driver to take it does so with `Start an Order`, sending their driver id as `assign`. Since Fleet-Ops v0.7.0 a driver can turn an offer down with `Decline an Order`; it is not offered to them again, and when the order's dispatch offers it to one driver at a time it moves on to the next. How offers go out (strategy, offer timeout, radius) and what happens when nobody accepts (keep the order open or cancel it, with `dispatch_outcome: no_driver_found`) comes from the order config's `dispatch.adhoc` policy; see `Order Configs`.
 
   ## Realtime events
 

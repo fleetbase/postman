@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Get Customer Order Driver"
+description: |-
+  Returns the driver and vehicle assigned to one of the customer's orders, so the customer can recognise them: `{ driver: { name, photo_url, location, rating }, vehicle: { make, model, color, plate_number } }`. `rating` is the driver's average rating, or `null` before any. The driver's contact details are never included. Both are `null` until a driver is assigned; `vehicle` is the order's assigned vehicle, else the driver's own, else `null`.
+
+  Answers `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/driver"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 15100

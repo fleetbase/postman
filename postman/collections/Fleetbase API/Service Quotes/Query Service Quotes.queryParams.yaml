@@ -3,3 +3,6 @@ fields:
   - name: payload
     type: string
     description: "Payload ID or embedded payload object associated with the resource."
+  - name: availability
+    type: boolean
+    description: With a pickup given as coordinates, adds to each quote `seating_capacity` (the largest seating capacity among the company's vehicles of the quoted service type) and `pickup_eta` (seconds until the nearest available driver for that vehicle type could reach the pickup, a straight-line estimate); each is `null` when there is no such vehicle or driver. Fleet-Ops v0.7.0 and later.

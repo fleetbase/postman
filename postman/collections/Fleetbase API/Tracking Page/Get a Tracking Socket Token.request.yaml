@@ -1,0 +1,25 @@
+$kind: http-request
+name: "Get a Tracking Socket Token"
+description: |-
+  Issues a socket token that lets this page subscribe to live updates for this customer's part of the delivery, signed with the instance's socket auth key. Needs a verified device, a signed-in customer of the delivery or staff of the owning company.
+
+  Answers `404` (`code: not_found`) for a number this page can't show, a caller without access, a delivery with no customer, or when socket authentication is off on the instance (off by default), in which case the page has no live channel and polls instead.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}/socket-token"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Socket authentication is off by default, and while it is off this endpoint
+      // answers 404. That is the contract asserted unless the environment declares
+      // socket_auth_enabled (as Storefront's Create Customer Socket Token does).
+      if (!pm.environment.get('socket_auth_enabled')) {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 9000

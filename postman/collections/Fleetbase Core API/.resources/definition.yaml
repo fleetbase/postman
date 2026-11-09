@@ -4,6 +4,33 @@ variables:
   base_url: ""
   namespace: v1
   api_key: ""
+  # Webhook Endpoints: the endpoint Create Webhook Endpoint makes is created disabled,
+  # so a contract run never sends events to this address, and deleted at the end.
+  webhook_endpoint_url: "https://example.com/webhooks/fleetbase"
+  # Socket: set socket_auth_enabled in the environment when the stack has socket
+  # authentication on; otherwise Create Socket Token asserts the 404 it answers.
+  # OAuth ("Continue with Fleetbase"). An app registered in the console (or through
+  # Register Client) and the redirect URI registered for it. Never commit real values;
+  # set them in your environment. Empty, every OAuth request asserts the refusal it
+  # gets without them, so a contract run passes without a browser sign-in.
+  oauth_client_id: ""
+  oauth_client_secret: ""
+  oauth_redirect_uri: ""
+  oauth_scope: "openid profile email organization:read api-key:create"
+  # Paste the `code` from the redirect after Authorize; Exchange Authorization Code
+  # clears it, since a code is single-use and a replayed one revokes its tokens.
+  # Written by Authorize: the PKCE verifier Exchange Authorization Code sends, and the
+  # state to compare with the one the redirect brings back.
+  oauth_code_verifier: ""
+  oauth_state: ""
+  oauth_code: ""
+  oauth_access_token: ""
+  oauth_refresh_token: ""
+  oauth_installation: ""
+  oauth_registration_redirect_uri: ""
+  oauth_registered_client_id: ""
+  oauth_review_access_type: "storefront-store"
+  oauth_review_access_id: ""
 scripts:
   - type: http:afterResponse
     code: |
@@ -12,7 +39,19 @@ scripts:
       // Status is asserted explicitly against a list. The obvious-looking
       // `pm.expect(pm.response).to.be.ok` is chai's truthiness check on an object and
       // is therefore true for every response, including a 400 — it asserts nothing.
-      const expected = pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204];
+      //
+      // A request whose CONTRACT is not a plain 2xx JSON answer (an OAuth error, the
+      // /oauth/authorize redirect, the empty 200 of /oauth/revoke) opts out by setting
+      // `expected_status` in its beforeRequest script, the same convention as the Fleet-Ops
+      // and Storefront collections. The error-payload check is skipped for it, since the
+      // error body is what such a request asserts. The override is consumed here: local
+      // variables live for the whole run, so a left-over value would hold every later
+      // request to it.
+      const expectedOverride = Number(pm.variables.get('expected_status')) || null;
+      pm.variables.unset('expected_status');
+      const expected = expectedOverride
+          ? [expectedOverride]
+          : (pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204]);
 
       pm.test(`${pm.info.requestName} responds 2xx`, function () {
           pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
@@ -24,7 +63,23 @@ scripts:
       // endpoint that started returning a file would still be caught.
       const isFileDownload = (pm.response.headers.get('Content-Disposition') || '').includes('attachment');
 
-      if (isFileDownload) {
+      // No body is the contract for a 204, and for a redirect or an empty answer that the
+      // request declared with `expected_status`. Anything else must still be JSON.
+      const isRedirect = pm.response.code >= 300 && pm.response.code < 400;
+      const isEmptyBody = (pm.response.text() || '') === '';
+      const hasNoBody = pm.response.code === 204 || (expectedOverride !== null && (isRedirect || isEmptyBody));
+
+      if (hasNoBody) {
+          if (isRedirect) {
+              pm.test(`${pm.info.requestName} redirects`, function () {
+                  pm.expect(pm.response.headers.get('Location') || '', 'redirect has no Location').to.not.be.empty;
+              });
+          } else {
+              pm.test(`${pm.info.requestName} answers without a body`, function () {
+                  pm.expect(isEmptyBody, 'expected an empty body').to.be.true;
+              });
+          }
+      } else if (isFileDownload) {
           pm.test(`${pm.info.requestName} streams a file body`, function () {
               pm.expect(pm.response.responseSize, 'download returned an empty body').to.be.above(0);
               pm.expect(pm.response.headers.get('Content-Type') || '', 'download declared no content type').to.not.be.empty;
@@ -49,6 +104,7 @@ scripts:
           (Array.isArray(value) && value.length === 0);
 
       pm.test(`${pm.info.requestName} returns no error payload`, function () {
+          if (expectedOverride) { return; }
           let body;
           try { body = pm.response.json(); } catch (e) { return; }
           if (body === null || typeof body !== 'object') { return; }

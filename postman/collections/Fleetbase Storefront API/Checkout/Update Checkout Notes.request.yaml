@@ -1,0 +1,45 @@
+$kind: http-request
+description: |-
+  Sets the customer's notes on a checkout, for example delivery instructions typed after the payment was started. The notes go on the order when the checkout is captured. If the order already exists (QPay's callback can place it before the app sends the notes) and has no notes yet, the order takes them too. Storefront v0.4.27 and later.
+
+  Notes are trimmed and cut to 2000 characters. Empty or `null` notes clear them on the checkout, and leave an existing order's notes as they are.
+
+  Response: `{ "checkout": "chkt_…", "notes": "Leave it at the gate." }`. `notes` is what was stored, or null.
+
+  Errors: `400` without a `token` (`Missing checkout token.`); `422` when `notes` is not text (`Notes must be text.`); `404` when the token doesn't match a checkout of the store or network the key belongs to (`Checkout session not found.`).
+
+  In a contract run this uses the `{{checkout_token}}` that `Before ❗` sets. Without one it sends an unknown token and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/checkouts/notes"
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{checkout_token}}",
+      "notes": "Leave it at the gate."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // {{checkout_token}} comes from `Before ❗`. Without it (a run of this folder alone,
+      // or a failed Before) the request addresses an unknown checkout and asserts the
+      // 404 refusal instead.
+      if (!pm.environment.get('checkout_token')) {
+          pm.variables.set('checkout_token', 'checkout_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.test('The stored notes come back with the checkout', function () {
+              pm.expect(json_response.checkout, 'checkout missing').to.be.a('string').and.not.empty;
+              pm.expect(json_response.notes).to.eql('Leave it at the gate.');
+          });
+      }
+    language: text/javascript
+order: 5500

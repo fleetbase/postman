@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: The `share` value from the link `Share a Customer Order` returned, `{expiry}.{signature}`.
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug (query string or body). Scopes the lookup to that company's own tracking page.

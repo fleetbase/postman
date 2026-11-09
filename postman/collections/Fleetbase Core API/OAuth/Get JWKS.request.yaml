@@ -1,0 +1,8 @@
+$kind: http-request
+description: |-
+  The public key that signs access tokens and ID tokens (RS256), as a JSON Web Key Set: `{ "keys": [ { "kty": "RSA", "kid", ... } ] }`. Match a token's `kid` header to verify it locally. Cacheable for an hour. No authentication.
+url: "{{base_url}}/oauth/jwks"
+method: GET
+auth:
+  type: noauth
+order: 3000

@@ -1,0 +1,18 @@
+$kind: collection
+description: |-
+  Endpoints for apps that let a Fleetbase user "Continue with Fleetbase" (core-api's OAuth 2.0 provider, core-api v1.6.74 and later) to set up a Storefront app. Storefront v0.4.30 and later.
+
+  These requests do not use the store or network key. They send the OAuth access token the app received for the user as a bearer token (`{{oauth_access_token}}`), and act only on the organization that token is bound to. Each endpoint needs its own scope, granted by the user and allowed in the app's registration. The routes are under `storefront/oauth/v1/`, not `storefront/v1/`, and are only registered when core-api provides the OAuth provider; on an older core-api they answer `404`.
+
+  Token errors follow RFC 6750, with a `WWW-Authenticate` challenge and the body `{ "error", "error_description" }`: `401` `invalid_token` when the token is missing, invalid, expired or revoked, its app is disabled, or the user no longer administers the organization; `403` `insufficient_scope` when the token lacks the endpoint's scope. Requests are limited to 600 a minute (`429`). Responses carry `Cache-Control: no-store`.
+
+  App Review sign-in for stores and networks (scope `storefront:review-access`) is core-api's `GET`, `PUT` and `DELETE` `oauth/v1/review-access/{type}/{id}`.
+
+  In a contract run without `oauth_access_token`, each request asserts the `401` refusal.
+order: 9500
+auth:
+  - id: 3f6b2d81-9c4e-4a7f-b015-6e2d8c9a4f13
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{oauth_access_token}}"

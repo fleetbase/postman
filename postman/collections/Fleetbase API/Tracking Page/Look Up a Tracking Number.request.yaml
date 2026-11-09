@@ -1,0 +1,17 @@
+$kind: http-request
+name: "Look Up a Tracking Number"
+description: |-
+  Looks up a delivery by its tracking number and returns the view this caller may see.
+
+  With the tracking number alone the answer is level 0: `{ level: 0, tracking_number, company, stage, last_update_on, verify: { channels }, sign_in }`. `stage` and `last_update_on` are left `null` when the company hides them from the public; `verify.channels` lists the code channels on file, each `{ type: "sms" | "email", masked }`, and is empty when there is no customer to verify as or no usable contact details.
+
+  A device holding a grant for this delivery (the `fb_track` cookie from `Verify a Tracking Code` or `Redeem a Shared Tracking Link`) gets level 1, and a signed-in customer of the delivery (bearer token) gets level 2. The full view adds `viewer` (`verified`, `account` or `staff`), `status { code, delayed, confidence }`, `scheduled_at`, `time_window`, `route`, `stops`, `focus_stop`, `eta`, `timeline`, `driver { name, vehicle, online }`, `location`, `map`, `items`, `proofs`, `instructions { text, editable }`, `actions { report, driver_contact }`, `session { expires_at }` and `stale_after`; what is shown follows the company's tracking page visibility settings.
+
+  Unknown, malformed, opted-out and other-company numbers, and lookups over 30 a minute from one IP, all answer `404` with `code: not_found`. No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+order: 2000

@@ -1,0 +1,41 @@
+$kind: http-request
+description: |-
+  Creates a token for the realtime connection, for the credential that authenticates this request:
+
+  - An API key (the collection's bearer): a token for that credential, bound to its organization, in test mode for a `flb_test_` key.
+  - A Sanctum user token (`Authorization: Bearer <token>` from a user sign-in): the principal an extension claims for that user (FleetOps' Navigator app gets a driver token) or else a token for the user in their current organization.
+
+  Response: `{ "token": "<JWT>", "expires_in": 900, "expires_at": "2026-10-12T10:15:00+00:00" }`. `expires_in` is in seconds (900 by default; an administrator can set it, up to 3600). Fetch a new one before `expires_at`.
+
+  Errors: `404` when socket authentication is off (see the Socket folder), `401` without a valid credential.
+url: "{{base_url}}/{{namespace}}/socket/token"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {}
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Socket authentication is off by default; while it is off this endpoint answers 404
+      // and clients connect anonymously. That is the contract asserted unless the
+      // environment declares socket_auth_enabled, in which case a token is expected.
+      if (!pm.environment.get('socket_auth_enabled')) {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.test('A socket token comes with its expiry', function () {
+              pm.expect(json_response.token, 'token missing').to.be.a('string').and.not.empty;
+              pm.expect(json_response.expires_in, 'expires_in missing').to.be.a('number');
+              pm.expect(json_response.expires_at, 'expires_at missing').to.be.a('string').and.not.empty;
+          });
+      }
+    language: text/javascript
+order: 1000

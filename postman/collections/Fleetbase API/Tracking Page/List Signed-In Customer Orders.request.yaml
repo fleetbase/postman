@@ -1,0 +1,30 @@
+$kind: http-request
+name: "List Signed-In Customer Orders"
+description: |-
+  Lists the signed-in customer's deliveries, newest first, at most 50: `{ orders: [{ tracking_number, title, status, stage, updated_at }] }`. Each row carries the tracking number that opens the customer's own part of it (the order's number for their own orders, their stop's number where they are a stop's customer); `title` is the name of the first item. Orders without a tracking number are left out.
+
+  Authenticate with `Authorization: Bearer <token>` of a customer user: a customer-portal session token, or the `token` a Fleet-Ops customer login returns (`customer_token`). Answers `401` (`{ "error": "unauthenticated" }`) without one, for a user that is not a customer, or for a customer with no contacts.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/account/orders"
+method: GET
+headers:
+  Accept: application/json
+# A customer user's Sanctum token, not the organization API key. Request-level
+# auth as a mapping (see Organizations/List Organizations).
+auth:
+  type: bearer
+  credentials:
+    token: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Delete Authenticated Customer revoked the contract run's customer token at the
+      // end of the Customers folder, so the documented answer here is 401
+      // unauthenticated. A run that keeps a live customer_token (set
+      // tracking_account_signed_in) expects the list.
+      if (!pm.environment.get('tracking_account_signed_in')) {
+          pm.variables.set('expected_status', 401);
+      }
+    language: text/javascript
+order: 10000

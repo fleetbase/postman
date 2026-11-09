@@ -1,0 +1,18 @@
+$kind: params
+fields:
+  - name: url
+    type: string
+    description: "New destination; the same rules as on create."
+  - name: events
+    type: array
+    description: "Replaces the event list. Null or empty sends every event."
+  - name: description
+    type: string
+    description: "Free text, at most 500 characters."
+  - name: version
+    type: string
+    description: "API version of the payloads, at most 32 characters."
+  - name: status
+    type: enum
+    values: ["enabled", "disabled"]
+    description: "Turn deliveries on or off."

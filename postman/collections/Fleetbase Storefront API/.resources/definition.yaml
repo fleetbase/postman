@@ -4,7 +4,7 @@ description: |-
 
   # Authentication
 
-  Every request sends the store or network key (`store_...` or `network_...`) as a bearer token. Endpoints that act for a signed-in customer also send that customer's token in the `Customer-Token` header.
+  Every request sends the store or network key (`store_...` or `network_...`) as a bearer token. Endpoints that act for a signed-in customer also send that customer's token in the `Customer-Token` header. The "Continue with Fleetbase" requests are the exception: they send a Fleetbase OAuth access token (`oauth_access_token`) instead of the key.
 
   # Localization
 
@@ -26,6 +26,7 @@ variables:
   api_prefix: storefront
   api_key: ""
   locale: ""
+  oauth_access_token: ""
 scripts:
   - type: http:beforeRequest
     code: |

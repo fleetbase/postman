@@ -1,0 +1,40 @@
+$kind: params
+fields:
+  - name: response_type
+    type: enum
+    values: ["code"]
+    required: true
+    description: "Only `code`."
+  - name: client_id
+    type: string
+    required: true
+    description: "The app's client ID."
+  - name: redirect_uri
+    type: string
+    required: true
+    description: "Exactly one of the app's registered redirect URIs."
+  - name: scope
+    type: string
+    required: true
+    description: "Space-separated scopes, at least one, each registered for the app."
+  - name: state
+    type: string
+    description: "Opaque value returned to the redirect URI unchanged; check it there."
+  - name: code_challenge
+    type: string
+    required: true
+    description: "PKCE challenge: base64url SHA-256 of the code verifier. The pre-request script makes one."
+  - name: code_challenge_method
+    type: enum
+    values: ["S256"]
+    required: true
+    description: "Only `S256`."
+  - name: nonce
+    type: string
+    description: "Copied into the ID token. At most 255 characters."
+  - name: prompt
+    type: string
+    description: "`login` makes a user signed in more than 5 minutes ago sign in again; `consent` always shows the consent screen. `none` is not supported."
+  - name: max_age
+    type: integer
+    description: "Maximum seconds since the user signed in; older sessions sign in again."

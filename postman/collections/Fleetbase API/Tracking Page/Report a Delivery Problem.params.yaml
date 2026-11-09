@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: message
+    type: string
+    required: true
+    description: What went wrong, up to 1000 characters (longer text is cut).
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug (query string or body). Scopes the lookup to that company's own tracking page.

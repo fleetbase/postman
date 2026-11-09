@@ -1,0 +1,8 @@
+$kind: http-request
+description: |-
+  RFC 8414 authorization server metadata. The same document as Get OpenID Configuration, for OAuth 2.0 clients that look here. No authentication.
+url: "{{base_url}}/.well-known/oauth-authorization-server"
+method: GET
+auth:
+  type: noauth
+order: 2000

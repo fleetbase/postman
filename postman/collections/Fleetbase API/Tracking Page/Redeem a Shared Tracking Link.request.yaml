@@ -1,0 +1,34 @@
+$kind: http-request
+name: "Redeem a Shared Tracking Link"
+description: |-
+  Opens a link a customer shared with `Share a Customer Order` (available when the order config's `customer.interactions.share_tracking` policy is on), so the person they sent it to can follow the order live without a code. The page passes on the link's `share` query value as `token`. A valid token gives this device the customer's view exactly as a verified code would: the answer is the full view (level 1, `viewer: verified`) and sets the `fb_track` cookie.
+
+  The token is signed for that one order and customer and lasts 12 hours from when it was made. Errors: `422` (`{ "error": "invalid" }`) for a token that is malformed, expired or for another order or customer; `404` (`code: not_found`) for a number this page can't show; `429` (`{ "error": "limited", "retry_after" }`) after 10 code checks or redemptions a minute from one IP.
+
+  No API key; see the folder description. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/public/track/{{tracking_number}}/share"
+method: POST
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+body:
+  type: json
+  content: |-
+    {
+      "token": "{{tracking_share_token}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Share a Customer Order answers 403 in a contract run (the transport config's
+      // customer.interactions.share_tracking policy is off), so there is no token to
+      // redeem and the documented answer is 422 invalid. An environment declaring
+      // customer_interactions_share_tracking redeems the token Share a Customer Order
+      // set and expects the full view.
+      if (!pm.environment.get('customer_interactions_share_tracking')) {
+          pm.variables.set('tracking_share_token', '');
+          pm.variables.set('expected_status', 422);
+      }
+    language: text/javascript
+order: 5000

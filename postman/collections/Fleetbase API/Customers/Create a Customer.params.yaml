@@ -14,8 +14,8 @@ fields:
     description: Customer display name.
   - name: password
     type: string
-    required: true
-    description: Account password (minimum 8 characters).
+    required: false
+    description: Account password (minimum 8 characters). Optional since Fleet-Ops v0.7.0, so a customer who signs in with a texted code can sign up without one; earlier versions require it.
   - name: email
     type: string
     required: false

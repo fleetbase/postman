@@ -1,0 +1,13 @@
+$kind: params
+fields:
+  - name: token
+    type: string
+    required: true
+    description: "An access token or a refresh token issued to this client."
+  - name: client_id
+    type: string
+    required: true
+    description: "The app's client ID."
+  - name: client_secret
+    type: string
+    description: "The app's secret, for a confidential client. Leave it out (or empty) for a public client."

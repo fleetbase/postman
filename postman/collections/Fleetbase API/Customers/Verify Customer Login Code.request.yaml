@@ -3,6 +3,8 @@ name: "Verify Customer Login Code"
 description: |-
   Verifies the SMS/email code from `Request Customer Login SMS` and returns the customer with a Sanctum `token`. When `for` is `fleetops_create_customer` this proxies to `Create a Customer`.
 
+  Since Fleet-Ops v0.7.0, a correct signup code sent by `Request a Customer Sign-in Code` to a number with no account answers `{ "status": "new_customer" }` and stays valid: finish the signup with `Create a Customer` using the same `identity` and `code`. A wrong code answers `Invalid verification code.`
+
   A code verifies once; each wrong guess counts against it and after five it locks, so a new code must be requested.
 url: "{{base_url}}/{{namespace}}/customers/verify-code"
 method: POST

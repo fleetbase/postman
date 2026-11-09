@@ -1,0 +1,29 @@
+$kind: http-request
+name: "Rate a Customer Order"
+description: |-
+  Rates the driver of a completed order, once, from 1 to 5 stars with an optional comment. The rating counts towards the driver's average (`rating` on `Get Customer Order Driver`) and shows on the order as `driver_rating`. Answers `{ "status": "rated" }`.
+
+  Needs the order config's `customer.interactions.rating` policy: `403` (`Rating the driver is not available for this order.`) while it is off, which is the default. Other errors: `422` for `stars` that isn't a whole number from 1 to 5 (`Rate from 1 to 5 stars.`) or an order that isn't at its config's completed activity with a driver (`Only a completed order can be rated.`); `409` (`You already rated this order.`); `404` (`Order not found.`) for an order that isn't the authenticated customer's. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/rating"
+method: POST
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "stars": 5,
+      "comment": "Friendly and on time."
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's customer order is on the default transport config, whose
+      // customer.interactions.rating policy is off, so the documented answer is 403. An
+      // environment that declares customer_interactions_rating still has an order that is
+      // never completed: 422 "Only a completed order can be rated."
+      pm.variables.set('expected_status', pm.environment.get('customer_interactions_rating') ? 422 : 403);
+    language: text/javascript
+
+order: 15800

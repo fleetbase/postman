@@ -1,0 +1,8 @@
+$kind: collection
+description: |-
+  Short-lived tokens that authenticate a realtime (SocketCluster) connection. A client sends the token when it connects; the socket server then asks Fleetbase, channel by channel, whether that token may subscribe.
+
+  Socket authentication is off unless the server has `SOCKETCLUSTER_AUTH_KEY` set (at least 32 characters) and it is switched on, with `SOCKETCLUSTER_AUTH_ENABLED=true` or by an administrator in the console. While it is off the token endpoints answer `404` (`{"error": "Not Found"}`), which clients read as "connect anonymously".
+
+  Not in this collection: `POST v1/socket/system-token`, which mints a 5-minute token that may subscribe to any channel; it only accepts the platform API token, not an organization's API key.
+order: 6000

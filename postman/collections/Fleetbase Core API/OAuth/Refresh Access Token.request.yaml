@@ -1,0 +1,40 @@
+$kind: http-request
+description: |-
+  Swaps a refresh token for a new access token and a new refresh token (the one sent is retired). The grant and organization are checked again on every refresh. The response has the same shape as Exchange Authorization Code, including a new `id_token` when `openid` was granted.
+
+  Errors: `400` `invalid_request` or `invalid_grant` (unknown, expired or revoked refresh token, or a grant that is no longer usable); `401` `invalid_client`. Replaying a refresh token that was already used revokes the whole grant. Throttled to 600 requests a minute.
+
+  Saves the new `oauth_access_token` and `oauth_refresh_token`. Without `oauth_refresh_token`, asserts the `400`.
+url: "{{base_url}}/oauth/token"
+method: POST
+auth:
+  type: noauth
+body:
+  type: urlencoded
+  content:
+    - key: grant_type
+      value: refresh_token
+    - key: refresh_token
+      value: "{{oauth_refresh_token}}"
+    - key: client_id
+      value: "{{oauth_client_id}}"
+    - key: client_secret
+      value: "{{oauth_client_secret}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      if (!pm.variables.get('oauth_refresh_token')) {
+          pm.variables.set('expected_status', 400);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.environment.set('oauth_access_token', json_response.access_token);
+          if (json_response.refresh_token) {
+              pm.environment.set('oauth_refresh_token', json_response.refresh_token);
+          }
+      }
+    language: text/javascript
+order: 7000

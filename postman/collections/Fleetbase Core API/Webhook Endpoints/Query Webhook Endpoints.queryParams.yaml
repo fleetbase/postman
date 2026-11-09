@@ -1,0 +1,8 @@
+$kind: params
+fields:
+  - name: limit
+    type: integer
+    description: "Maximum number of endpoints to return, from 1 to 100. Defaults to 30."
+  - name: url
+    type: string
+    description: "Only return endpoints with exactly this URL, e.g. to find the endpoint an integration registered before."

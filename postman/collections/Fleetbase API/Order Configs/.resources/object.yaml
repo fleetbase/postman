@@ -104,6 +104,19 @@ example: |
         "require_pod": false
       }
     },
+    "policies": {
+      "dispatch": {
+        "adhoc": { "customer_orders": false, "strategy": null, "offer_timeout": null, "radius": null, "on_exhausted": "keep_open" },
+        "matching": { "vehicle_type": false, "exclude_busy_drivers": false }
+      },
+      "customer": {
+        "ordering": { "payment_methods": [], "require_quote": false, "require_settlement": [] },
+        "cancellation": { "enabled": true, "allowed_until": null },
+        "interactions": { "chat": false, "rating": false, "share_tracking": false }
+      },
+      "pricing": { "reprice_on_completion": false, "metering_starts_at": null }
+    },
+    "custom_fields": [],
     "created_at": "2026-04-01T10:00:00.000000Z",
     "updated_at": "2026-04-01T10:00:00.000000Z"
   }
@@ -191,6 +204,14 @@ fields:
       - name: internalId
         type: string
         description: UUID assigned by the order-config editor to identify this activity instance. Stable across edits and unrelated to the public `id`.
+  - name: policies
+    type: object
+    description: |-
+      Every policy setting for the config's orders, nested by policy key (`dispatch.adhoc`, `dispatch.matching`, `customer.ordering`, `customer.cancellation`, `customer.interactions`, `pricing`, plus any an extension registers), with each setting the config leaves out filled in from its default. The folder description lists each setting and its default. Fleet-Ops v0.7.0 and later.
+  - name: custom_fields
+    type: array of objects
+    description: |-
+      The custom fields orders of the config carry: `{ name, label, type, component, options, required, default_value, help_text }`. Send their values on order create as `custom_fields: { name: value }`. Fleet-Ops v0.7.0 and later.
   - name: created_at
     type: timestamp
     description: When the config was created.

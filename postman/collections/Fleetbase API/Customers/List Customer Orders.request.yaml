@@ -1,6 +1,9 @@
 $kind: http-request
 name: "List Customer Orders"
-description: "Lists orders owned by the authenticated customer (scoped to `orders.customer_uuid`)."
+description: |-
+  Lists orders owned by the authenticated customer (scoped to `orders.customer_uuid`).
+
+  Since Fleet-Ops v0.7.0 orders come back as the standard Order resource, with the customer-relevant parts loaded: `payload.payment_method` (how the customer chose to pay), `purchase_rate` (the price locked from the service quote, with `service_name`, `amount`, `currency` and `repriced`: `true` once the config's `pricing.reprice_on_completion` policy priced the completed order again from its actual distance and time), `payment_status` (the settlement status of the order's transaction, e.g. `paid` once its invoice is paid, or `null` without a transaction), `driver_rating` (`{ stars, comment }` once the customer rated the driver, else `null`) and, for an ad hoc order, `dispatch_outcome` (`no_driver_found` when every driver it was offered to declined or let the offer run out, else `null`).
 url: "{{base_url}}/{{namespace}}/customers/orders"
 method: GET
 headers:

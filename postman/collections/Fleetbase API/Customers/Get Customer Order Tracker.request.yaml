@@ -1,0 +1,13 @@
+$kind: http-request
+name: "Get Customer Order Tracker"
+description: |-
+  Returns live tracking data for one of the authenticated customer's orders: the same tracker payload as `Orders/Get Order Tracker` (progress, ETA, route and driver position), scoped to the customer's own order.
+
+  Optional query parameters `provider`, `fallbacks` and `traffic_enabled` are passed to the tracker. Answers `404` (`Order not found.`) for an order that isn't the customer's and `503` (`Unable to track this order.`) when tracking data can't be built. Fleet-Ops v0.7.0 and later.
+url: "{{base_url}}/{{namespace}}/customers/orders/{{customer_order_id}}/tracker"
+method: GET
+headers:
+  Accept: application/json
+  Customer-Token: "{{customer_token}}"
+
+order: 15200

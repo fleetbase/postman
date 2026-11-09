@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: query
+    type: string
+    required: false
+    description: Address or place name to look up. Required unless `latitude` and `longitude` are sent.
+  - name: latitude
+    type: number
+    required: false
+    description: Latitude to reverse-geocode, or to rank results by distance when sent with `query`.
+  - name: longitude
+    type: number
+    required: false
+    description: Longitude, with `latitude`.

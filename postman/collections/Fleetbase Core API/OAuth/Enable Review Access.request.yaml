@@ -1,0 +1,42 @@
+$kind: http-request
+description: |-
+  Turns App Review sign-in on for the subject (see Get Review Access for `type`, `id` and scopes). Answers with the status; it includes the 6-digit `code` only when this call created it (the first time access is turned on, or with `regenerate_code`). The code can never be read back, so store it then.
+
+  Response (`Cache-Control: no-store`): `{ "review_access": { type, enabled, phone, phone_display, has_code, code_generated_at, enabled_at, code? } }`.
+
+  Errors: as Get Review Access.
+url: "{{base_url}}/oauth/v1/review-access/:type/:id"
+method: PUT
+pathVariables:
+  - key: type
+    value: "{{oauth_review_access_type}}"
+  - key: id
+    value: "{{oauth_review_access_id}}"
+auth:
+  type: bearer
+  credentials:
+    token: "{{oauth_access_token}}"
+body:
+  type: json
+  content: |-
+    {
+      "regenerate_code": false
+    }
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Without an id the path has an empty segment and no route matches, so address a
+      // placeholder instead: the token is then checked (401 without one) and the
+      // placeholder answers the not-found contract. It is a run-wide local variable, so
+      // the next review-access request sees it and follows.
+      const missing = ['', undefined, null, 'review_access_missing'].includes(pm.variables.get('oauth_review_access_id'));
+      if (missing) {
+          pm.variables.set('oauth_review_access_id', 'review_access_missing');
+      }
+      if (!pm.variables.get('oauth_access_token')) {
+          pm.variables.set('expected_status', 401);
+      } else if (missing) {
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 12000

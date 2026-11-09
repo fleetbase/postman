@@ -1,0 +1,6 @@
+$kind: params
+fields:
+  - name: phone
+    type: string
+    required: true
+    description: The new phone number (E.164 recommended).

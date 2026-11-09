@@ -2,6 +2,8 @@ $kind: http-request
 name: "Retrieve an Order Config"
 description: |-
   Fetches a single OrderConfig. The `{id}` segment accepts any identifier supported by `OrderConfig::resolveFromIdentifier` — `uuid`, `public_id`, `namespace`, or short `key`. Use `transport` to retrieve the system default flow.
+
+  Since Fleet-Ops v0.7.0 the config also carries `policies` (every policy setting for its orders, with defaults filled in, e.g. `policies.customer.ordering.payment_methods` or `policies.customer.interactions.chat`) and `custom_fields` (the fields an order form should ask for). A customer app reads these to know what to offer: which payment methods, whether a quote is needed, whether the customer may cancel, chat, rate or share tracking. The config's `triggers` are configured in the console and are not part of the public response. See the folder description for each policy setting and its default.
 url: "{{base_url}}/{{namespace}}/order-configs/{{order_config_id}}"
 method: GET
 headers:

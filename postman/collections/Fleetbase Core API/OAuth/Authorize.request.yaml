@@ -1,0 +1,46 @@
+$kind: http-request
+description: |-
+  Where an app sends the user's browser to "Continue with Fleetbase". This is a browser redirect, not an API call: the request is checked and the answer is always a `302`.
+
+  - Valid: a redirect to the console's consent screen (`/oauth/authorize` on the console) with the same query. The user signs in there (with the console's two-factor rules), picks an organization when an organization scope is asked for, and approves. The browser then lands on `redirect_uri` with `code`, `state` and `iss` (RFC 9207). Consent is skipped for a sign-in-only request the user approved before, unless `prompt=consent`.
+  - An unknown or turned-off client, or a redirect URI not registered for it: a redirect to the console page showing `error` and `error_description`; never to the redirect URI.
+  - Any other problem (`unsupported_response_type`, missing PKCE, `invalid_scope`, `prompt=none` as `interaction_required`, a bad `nonce` or `max_age`), or the user declining (`access_denied`): a redirect to `redirect_uri` with `error`, `error_description`, `state` and `iss`.
+
+  The pre-request script creates a PKCE code verifier (saved as `oauth_code_verifier` for Exchange Authorization Code), its `S256` challenge, and a random `state` and `nonce`. Redirects are not followed, so open the response's `Location` in a browser to continue. No authentication.
+url: "{{base_url}}/oauth/authorize"
+method: GET
+auth:
+  type: noauth
+settings:
+  followRedirects: false
+queryParams:
+  response_type: "code"
+  client_id: "{{oauth_client_id}}"
+  redirect_uri: "{{oauth_redirect_uri}}"
+  scope: "{{oauth_scope}}"
+  state: "{{oauth_state}}"
+  code_challenge: "{{oauth_code_challenge}}"
+  code_challenge_method: "S256"
+  nonce: "{{oauth_nonce}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // PKCE (RFC 7636): a fresh verifier per authorization, kept for the token exchange,
+      // and its S256 challenge sent here.
+      const CryptoJS = require('crypto-js');
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+      const random = (length) => Array.from({ length }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join('');
+      const base64url = (words) => CryptoJS.enc.Base64.stringify(words).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+      const verifier = random(64);
+      pm.environment.set('oauth_code_verifier', verifier);
+      pm.variables.set('oauth_code_challenge', base64url(CryptoJS.SHA256(verifier)));
+      pm.environment.set('oauth_state', random(32));
+      pm.variables.set('oauth_nonce', random(32));
+
+      // Always a redirect: to the consent screen, to the console's error page for an
+      // unknown client (which is what a contract run without oauth_client_id gets), or
+      // back to the app with an error.
+      pm.variables.set('expected_status', 302);
+    language: text/javascript
+order: 5000

@@ -72,6 +72,16 @@ variables:
   fleet_driver_id: ""
   # A driver created with neither an email address nor a phone number.
   operational_driver_id: ""
+  # Tracking Page. tracking_number is the customer order's (Create a Customer
+  # Order sets it) and tracking_share_token comes from Share a Customer Order,
+  # which only answers with a link when the environment declares
+  # customer_interactions_share_tracking. tracking_code and tracking_proof_id
+  # stay empty in a contract run, whose requests then assert the documented
+  # refusals.
+  tracking_number: ""
+  tracking_share_token: ""
+  tracking_code: ""
+  tracking_proof_id: ""
 scripts:
   - type: http:afterResponse
     code: |

@@ -1,0 +1,45 @@
+$kind: http-request
+description: |-
+  Returns the invoice for one of the signed-in customer's Fleet-Ops orders, so their app can show what is owed and pay it through the Public Invoices endpoints (`Get Public Invoice`, `List Public Invoice Gateways`, `Pay Public Invoice`) with the returned `id`. Ledger v0.1.0 and later.
+
+  `{id}` is the order's public ID. The order must belong to the API key's organization and to the customer of the `Customer-Token`. The invoice is the order's newest one that is not `draft`, `void` or `cancelled`/`canceled`.
+
+  Response: `{ "invoice": { "id", "status", "total_amount", "balance", "currency", "payment_url" } }`, or `{ "invoice": null }` when the order has no such invoice (yet). `id` is the invoice public ID, amounts are in the smallest currency unit, and `payment_url` is the hosted invoice page in the console where the customer picks how to pay.
+
+  Once the invoice is paid, Ledger settles the order's transaction: the Fleet-Ops order's `payment_status` becomes `paid` (`Customers/Retrieve a Customer Order` in the Fleetbase API collection).
+
+  Errors: `401` without a valid API key, or without a valid `Customer-Token` (`Customer token is missing or invalid.`); `403` when the customer belongs to another organization (`Customer does not belong to this company.`); `404` `{ "error": "Order not found." }` for an unknown order, an order of another organization, or another customer's order.
+
+  In a contract run this addresses `{{order_id}}` when the environment sets one (an order of the run's customer). Without a customer token it asserts the `401`; with one but no order, it addresses an unknown order and asserts the `404`.
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/orders/{{order_id}}/invoice"
+method: GET
+headers:
+  - key: Customer-Token
+    value: "{{customer_token}}"
+scripts:
+  - type: beforeRequest
+    code: |-
+      // Needs a customer token and one of that customer's orders, which a contract run
+      // doesn't create in this collection. Without a token this asserts the 401; with a
+      // token but no order it addresses an unknown order and asserts the 404.
+      if (!pm.variables.get('api_key') || !pm.variables.get('customer_token')) {
+          pm.variables.set('expected_status', 401);
+      } else if (!pm.environment.get('order_id')) {
+          pm.variables.set('order_id', 'order_missing');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+          var json_response = pm.response.json();
+          pm.test('The order invoice, or null, comes back', function () {
+              pm.expect(json_response).to.have.property('invoice');
+              if (json_response.invoice) {
+                  pm.expect(json_response.invoice.id, 'id missing').to.be.a('string').and.not.empty;
+                  pm.expect(json_response.invoice.payment_url, 'payment_url missing').to.be.a('string').and.not.empty;
+              }
+          });
+      }
+    language: text/javascript
+order: 1000

@@ -1,0 +1,33 @@
+$kind: http-request
+name: "Get a Proof of Delivery"
+description: |-
+  Returns one proof of delivery listed in the full view's `proofs`, as `{ url, type }`: `url` is the stored file's URL, or a `data:` URL when the proof was captured inline; `type` is `photo`, `signature` or `scan`. Only proofs of this customer's own completed stops and items are available, and photos and signatures follow the company's `visibility.pod_photo` and `visibility.pod_signature` settings. Needs a verified device, a signed-in customer of the delivery or staff of the owning company.
+
+  Errors: `404` with `code: not_found` for a number this page can't show or a caller without access, and `404` (`{ "error": "not_found" }`) for a proof id that isn't one of this customer's.
+
+  No API key; see the folder description. Requires Fleet-Ops with the public tracking page (on `main` since 2026-10-08).
+url: "{{base_url}}/public/track/{{tracking_number}}/proofs/:id"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: noauth
+pathVariables:
+  - key: id
+    value: "{{tracking_proof_id}}"
+    description: (Required) A proof id (`proof_…`) from the full view's `proofs`.
+scripts:
+  - type: beforeRequest
+    code: |-
+      // The contract run's delivery is canceled before it is completed, so it has no
+      // proof of delivery to open: the documented answer is 404. Without a
+      // tracking_proof_id the request names a proof id that cannot exist, so it reaches
+      // the controller instead of an unmatched route. A run that supplies a
+      // tracking_proof_id for a completed delivery expects the proof.
+      const proof = pm.environment.get('tracking_proof_id') || pm.variables.get('tracking_proof_id');
+      if (!proof) {
+          pm.variables.set('tracking_proof_id', 'proof_none');
+          pm.variables.set('expected_status', 404);
+      }
+    language: text/javascript
+order: 7000

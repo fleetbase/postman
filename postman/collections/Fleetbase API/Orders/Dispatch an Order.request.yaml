@@ -1,6 +1,8 @@
 $kind: http-request
 description: |-
   Dispatches an order to an assigned or eligible driver. The response returns the order after dispatch state has been applied.
+
+  Errors: `400` when no driver is assigned to a non ad hoc order (`No driver assigned to dispatch!`), when the order was already dispatched (`Order has already been dispatched!`), and, since Fleet-Ops v0.7.0, for an order whose config's lifecycle turns dispatch off (`Orders of this type are not dispatched.`). An ad hoc order is offered to nearby drivers as its config's `dispatch.adhoc` policy says.
 url: "{{base_url}}/{{namespace}}/orders/:id/dispatch"
 method: PATCH
 pathVariables:

@@ -1,0 +1,10 @@
+$kind: params
+fields:
+  - name: code
+    type: string
+    required: true
+    description: The one-time code that was sent. Spaces and other non-digits are ignored.
+  - name: org
+    type: string
+    required: false
+    description: A company page's slug (query string or body). Scopes the lookup to that company's own tracking page.
