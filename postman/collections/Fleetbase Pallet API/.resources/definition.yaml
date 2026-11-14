@@ -1,0 +1,50 @@
+$kind: collection
+variables:
+  base_url: ""
+  namespace: v1
+  api_prefix: pallet
+  api_key: ""
+scripts:
+  - type: http:afterResponse
+    code: |
+      // Baseline contract assertions for every request in this collection.
+      //
+      // Status is checked against an explicit list. `pm.expect(pm.response).to.be.ok`
+      // is chai's truthiness check on an object, so it passes for a 400 too and
+      // asserts nothing.
+      const expected = pm.request.method === 'POST' ? [200, 201, 202] : [200, 201, 202, 204];
+
+      pm.test(`${pm.info.requestName} responds 2xx`, function () {
+          pm.expect(pm.response.code, `got HTTP ${pm.response.code}`).to.be.oneOf(expected);
+      });
+
+      pm.test(`${pm.info.requestName} returns a JSON body`, function () {
+          pm.expect(pm.response.headers.get('Content-Type') || '').to.include('json');
+          pm.expect(() => pm.response.json(), 'body is not parseable JSON').to.not.throw();
+      });
+
+      // The Pallet consumable API reports failure as {"error": "..."}, so a 2xx
+      // carrying one is still a failure.
+      pm.test(`${pm.info.requestName} returns no error payload`, function () {
+          let body;
+          try { body = pm.response.json(); } catch (e) { return; }
+          if (body === null || typeof body !== 'object') { return; }
+          pm.expect(body.error === null || body.error === undefined,
+              `response carries an "error": ${JSON.stringify(body.error)}`).to.be.true;
+      });
+
+      // Public ids are the addressing scheme; a uuid in a response body means an
+      // internal identifier leaked into the consumable representation.
+      pm.test(`${pm.info.requestName} exposes no internal uuids`, function () {
+          let body;
+          try { body = pm.response.json(); } catch (e) { return; }
+          const keys = JSON.stringify(body).match(/"[a-z_]*uuid"/g) || [];
+          pm.expect(keys, `response carries uuid keys: ${keys.join(', ')}`).to.be.empty;
+      });
+    language: text/javascript
+auth:
+  - id: 1be408ef-ea43-4cff-962a-fa7d6b7d7fbc
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{api_key}}"

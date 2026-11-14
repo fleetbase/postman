@@ -1,0 +1,14 @@
+$kind: params
+fields:
+  - name: limit
+    type: integer
+    description: "Maximum records to return. Capped at 100, defaults to 30."
+  - name: offset
+    type: integer
+    description: "Records to skip before returning results."
+  - name: page
+    type: integer
+    description: "Page number, used in place of offset."
+  - name: sort
+    type: string
+    description: "Column to sort by, prefixed with - for descending."

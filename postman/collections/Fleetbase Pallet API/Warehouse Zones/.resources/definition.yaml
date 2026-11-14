@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Zones divide a warehouse into areas — receiving, bulk, cold storage. Bin locations sit inside them.
+order: 1400

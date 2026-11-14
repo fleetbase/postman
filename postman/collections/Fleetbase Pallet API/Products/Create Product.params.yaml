@@ -1,0 +1,27 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    required: true
+    description: "Product name."
+  - name: sku
+    type: string
+    description: "Stock keeping unit."
+  - name: barcode
+    type: string
+    description: "Barcode value."
+  - name: unit_cost
+    type: number
+    description: "Cost per unit."
+  - name: unit_price
+    type: number
+    description: "Sale price per unit."
+  - name: reorder_point
+    type: integer
+    description: "Level at or below which the product counts as low stock."
+  - name: supplier
+    type: string
+    description: "Public id of the supplier to attach. A supplier that does not resolve is a 404."
+  - name: category
+    type: string
+    description: "Public id of the category to attach."

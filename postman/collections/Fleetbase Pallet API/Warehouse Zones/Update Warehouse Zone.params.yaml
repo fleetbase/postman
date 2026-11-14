@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: name
+    type: string
+    description: "Zone name."

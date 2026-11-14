@@ -1,0 +1,5 @@
+$kind: params
+fields:
+  - name: reference_code
+    type: string
+    description: "Your own reference for the order."

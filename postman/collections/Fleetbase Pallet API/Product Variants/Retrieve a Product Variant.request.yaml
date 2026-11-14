@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a variant
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/product-variants/{{variant_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

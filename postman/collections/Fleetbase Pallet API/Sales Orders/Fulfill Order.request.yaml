@@ -1,0 +1,18 @@
+$kind: http-request
+description: Fulfill lines, deducting stock
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/sales-orders/{{sales_order_id}}/fulfill"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "items": [
+        { "id": "{{sales_order_item_id}}", "quantity_fulfilled": 4 }
+      ]
+    }
+order: 1400

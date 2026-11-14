@@ -1,0 +1,16 @@
+$kind: http-request
+description: Update a purchase order
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/purchase-orders/{{purchase_order_id}}"
+method: PUT
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "reference_code": "PO-1001-REV"
+    }
+order: 1300

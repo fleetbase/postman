@@ -1,0 +1,28 @@
+$kind: http-request
+description: Create an order with its lines
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/sales-orders"
+method: POST
+headers:
+  - key: Accept
+    value: application/json
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "warehouse": "{{warehouse_id}}",
+      "reference_code": "SO-{{$timestamp}}",
+      "items": [
+        { "product": "{{product_id}}", "quantity": 10, "unit_price": 9.00 }
+      ]
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      // Later requests address {{sales_order_id}}; nothing else sets it.
+      const body = pm.response.json();
+      const captured = body.id;
+      if (captured) { pm.environment.set("sales_order_id", captured); }
+    language: text/javascript
+order: 1000

@@ -1,0 +1,8 @@
+$kind: http-request
+description: How much of a product can be committed right now
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/inventory/availability?product={{stock_product_id}}&quantity=10"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1100

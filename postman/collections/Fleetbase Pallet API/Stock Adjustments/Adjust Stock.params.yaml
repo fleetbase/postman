@@ -1,0 +1,24 @@
+$kind: params
+fields:
+  - name: product
+    type: string
+    required: true
+    description: "Public id of the product."
+  - name: warehouse
+    type: string
+    required: true
+    description: "Public id of the warehouse."
+  - name: variant
+    type: string
+    description: "Public id of the variant. Required when the product has variants."
+  - name: type
+    type: string
+    required: true
+    description: "add, remove or correction. An add against an unstocked product creates the stock record."
+  - name: quantity
+    type: integer
+    required: true
+    description: "Units to adjust by. Must be greater than zero."
+  - name: reason
+    type: string
+    description: "Why the adjustment was made."

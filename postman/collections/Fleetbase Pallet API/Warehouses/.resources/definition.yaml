@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Warehouses are the facilities stock is held in. Every stock record belongs to one.
+order: 1300

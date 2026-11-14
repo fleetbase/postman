@@ -1,0 +1,8 @@
+$kind: http-request
+description: remove the supplier
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/suppliers/{{supplier_id}}"
+method: DELETE
+headers:
+  - key: Accept
+    value: application/json
+order: 9090

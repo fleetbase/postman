@@ -1,0 +1,17 @@
+type: collection
+name: Pallet API
+version: 1.0.0
+description: Legacy single-file placeholder. The editable Postman Local Mode collection lives at postman/collections/Fleetbase Pallet API.
+auth:
+  type: bearer
+  bearer:
+    - key: token
+      value: "{{api_key}}"
+      type: string
+variables:
+  - key: base_url
+    value: "{{base_url}}"
+  - key: namespace
+    value: "{{namespace}}"
+  - key: api_prefix
+    value: pallet

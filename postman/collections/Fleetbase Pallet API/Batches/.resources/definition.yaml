@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  Received lots, read only. A batch is produced by receiving stock, so one authored here would describe a lot that never arrived.
+order: 2100

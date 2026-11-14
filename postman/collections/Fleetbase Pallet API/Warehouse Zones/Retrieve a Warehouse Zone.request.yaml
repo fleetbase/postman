@@ -1,0 +1,8 @@
+$kind: http-request
+description: Retrieve a zone
+url: "{{base_url}}/{{api_prefix}}/{{namespace}}/warehouse-zones/{{zone_id}}"
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+order: 1200

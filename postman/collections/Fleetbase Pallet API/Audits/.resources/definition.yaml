@@ -1,0 +1,4 @@
+$kind: collection
+description: |-
+  The operational audit trail, read only. Entries are written by the system as operations happen; one a consumer could author would not be a record of anything.
+order: 2200

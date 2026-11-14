@@ -1,0 +1,13 @@
+$kind: params
+fields:
+  - name: warehouse
+    type: string
+    required: true
+    description: "Public id of the warehouse."
+  - name: zone
+    type: string
+    description: "Public id of a zone in that same warehouse. A zone from elsewhere is a 404."
+  - name: bin_number
+    type: string
+    required: true
+    description: "Human-readable bin address."
