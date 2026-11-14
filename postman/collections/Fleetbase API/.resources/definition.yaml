@@ -38,7 +38,6 @@ variables:
   customer_name: ""
   customer_password: ""
   customer_phone: ""
-  created_customer_phone: ""
   verification_code: ""
   push_token: ""
   # Deliberately NOT declaring driver_identity / driver_password / driver_phone:

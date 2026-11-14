@@ -31,9 +31,6 @@ scripts:
       if (json_response && json_response.id) {
         cv.set("customer_id", json_response.id);
         cv.set("customer_name", json_response.name);
-        // The number this account was created with. Update Authenticated Customer sends it back,
-        // because changing to another number needs a code sent to that number.
-        cv.set("created_customer_phone", json_response.phone);
         if (json_response.token) {
           cv.set("customer_token", json_response.token);
         }
