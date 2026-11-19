@@ -1,6 +1,15 @@
 $kind: http-request
 description: |-
-  Registers a push notification device token for the authenticated storefront customer. Call it whenever the app receives a new token or a different customer signs in: a token identifies one app install, so it always moves to the customer who registered it most recently. `platform` must be `ios` or `android` (case insensitive); the token is an APNs device token on iOS and an FCM registration token on Android. Returns `{ "status": "OK", "device": "<device public id>" }`, or `400` for a missing token or unsupported platform.
+  Registers a push notification device token for the authenticated storefront customer. Call it whenever the app receives a new token or a different customer signs in: a token identifies one app install, so it always moves to the customer who registered it most recently. `platform` must be `ios` or `android` (case insensitive). The token is the one the app's push service issued: an APNs device token on iOS, or an FCM registration token on Android (and on iOS when the app gets its tokens from Firebase).
+
+  The device is linked to the push app of the store or network whose key the request uses, so it gets pushes sent with that store's or network's own Apple and Firebase settings (Storefront → Settings → Push notifications). If the store or network has no push app yet, the device is kept and gets pushes once one is set up.
+
+  Optional fields:
+  - `push_app`: a push app key (`push_app_…`) of the same organization, for an app that should use another push app's settings. A key from a notification channel that was moved into a push app (`noty_channel_…`) also works. A key that isn't found falls back to the store's or network's own push app.
+  - `push_provider`: `apns` or `fcm`, the service that issued the token. Send `fcm` from an iOS app that gets its token from Firebase. Left out, it's worked out from the token.
+  - `environment`: `production` or `sandbox`, the APNs environment of the iOS build. Left out, production is tried first, then sandbox, unless the push app is set to one.
+
+  Returns `{ "status": "OK", "device": "<device public id>" }`, or `400` for a missing token or unsupported platform.
 url: "{{base_url}}/{{api_prefix}}/{{namespace}}/customers/register-device"
 method: POST
 headers:
